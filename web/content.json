@@ -1,0 +1,572 @@
+{
+  "parties": [
+    {
+      "name": "Coalición Agenda Ciudadana (ADN)",
+      "logo_url": "/assets/political-flags/coalicionagendaciudadana.webp",
+      "presidential_candidate": {
+        "name": "Claudia Dobles Camargo",
+        "first_vice_president": "Andrea Centeno Rodríguez",
+        "second_vice_president": "Luis Felipe Arauz Cavallini"
+      },
+      "ideology": "Socialdemocracia progresista (centroizquierda)",
+      "values": [
+        "Ética y transparencia en el gobierno",
+        "Justicia social y Estado de bienestar",
+        "Desarrollo sostenible y protección ambiental",
+        "Participación ciudadana inclusiva"
+      ],
+      "stances": {
+        "education": "Promueve una educación pública de calidad y con equidad, fortaleciendo la inversión en infraestructura educativa y tecnología, y fomentando la formación en habilidades para la vida y el trabajo.",
+        "economy": "Propone un modelo socioeconómico sostenible con responsabilidad fiscal: apoyo al emprendimiento y la innovación, pero con un Estado activo que combata la corrupción y garantice programas sociales para reducir la desigualdad.",
+        "environment": "Defiende la agenda de descarbonización y el desarrollo verde. Impulsa políticas para las energías renovables, el transporte limpio y la protección de la biodiversidad, continuando iniciativas como el Plan Nacional de Descarbonización."
+      },
+      "official_links": {
+        "website": "https://www.somosadncr.com",
+        "facebook": "https://www.facebook.com/somosadncr"
+      },
+      "accent_color": "#F7B500"
+    },
+    {
+      "name": "Partido Alianza Costa Rica Primero (CR1)",
+      "logo_url": "/assets/political-flags/alianzacostaricaprimero.webp",
+      "presidential_candidate": {
+        "name": "Douglas Caamaño Quirós",
+        "first_vice_president": "Lissa Ivannia Freckleton Owens",
+        "second_vice_president": "Carlos Moya Bonilla"
+      },
+      "ideology": "Socialdemocracia (centroizquierda)",
+      "values": [
+        "Oportunidades económicas con justicia social",
+        "Transparencia y lucha contra la corrupción",
+        "Solidaridad y mejora del bienestar social",
+        "Nacionalismo constructivo y unidad nacional"
+      ],
+      "stances": {
+        "education": "Aboga por fortalecer la educación pública para reducir brechas sociales, con énfasis en formación técnica y en valores cívicos. Busca modernizar currículos y apoyar a docentes para mejorar la calidad educativa en todo el país.",
+        "economy": "Plantea un Estado activo en la economía que incentive la creación de empleo y la inversión regional. Promueve una economía de mercado regulada para asegurar protección social, apoyando a PYMEs y programas de alivio a la pobreza.",
+        "environment": "Apoya la protección ambiental como parte del bien común. Favorece proyectos de energía limpia y manejo responsable de recursos naturales, integrándolos al desarrollo económico regional y buscando equilibrio entre crecimiento y sostenibilidad."
+      },
+      "official_links": {
+        "website": "https://costaricaprimero.org",
+        "facebook": "https://www.facebook.com/partidocostaricaprimero"
+      },
+      "accent_color": "#FF69B4"
+    },
+    {
+      "name": "Partido Aquí Costa Rica Manda (ACRM)",
+      "logo_url": "/assets/political-flags/aquicostaricamanda.webp",
+      "presidential_candidate": {
+        "name": "Ronny Castillo González",
+        "first_vice_president": "Hazel María Arias Mata",
+        "second_vice_president": "William Martín Anderson Lewis"
+      },
+      "ideology": "Populismo de derecha (nacionalista)",
+      "values": [
+        "Soberanía nacional y orgullo patrio",
+        "Gobierno fuerte y mano dura contra la corrupción",
+        "Defensa de los intereses del pueblo sobre las élites",
+        "Orden, seguridad ciudadana y desarrollo económico práctico"
+      ],
+      "stances": {
+        "education": "Propone reformas educativas enfocadas en disciplinas prácticas y formación técnica para el empleo. Plantea depurar la administración educativa para asegurar que los recursos lleguen a las aulas, con énfasis en disciplina y valores cívicos.",
+        "economy": "Defiende políticas pro-desarrollo que eliminen trabas burocráticas e impulsen la inversión. Prioriza proyectos de infraestructura y apoyo a sectores productivos locales, con un discurso de “Costa Rica primero” y tolerancia cero a la corrupción en el gasto público.",
+        "environment": "Reconoce la importancia del medio ambiente, pero enfatiza el aprovechamiento responsable de los recursos naturales para generar empleo. Busca equilibrar protección ambiental con proyectos productivos, apoyando la energía limpia siempre que no frene el crecimiento económico."
+      },
+      "official_links": {
+        "website": "https://acrm.cr",
+        "facebook": "https://www.facebook.com/partidoacrm"
+      },
+      "accent_color": "#0057B8"
+    },
+    {
+      "name": "Partido Avanza",
+      "logo_url": "/assets/political-flags/avanza.webp",
+      "presidential_candidate": {
+        "name": "José Miguel Aguilar Berrocal",
+        "first_vice_president": "Evita Arguedas Maklouf",
+        "second_vice_president": "Marcela Ortiz Bonilla"
+      },
+      "ideology": "Liberalismo clásico (libre mercado)",
+      "values": [
+        "Libertad económica y emprendimiento",
+        "Estado pequeño y eficiente",
+        "Responsabilidad individual e innovación",
+        "Seguridad ciudadana desde un enfoque liberal"
+      ],
+      "stances": {
+        "education": "Aboga por mejorar la educación mediante competencia y opciones: incentivos a la excelencia en escuelas públicas, alianzas público-privadas y libertad de elección educativa. Plantea modernizar la educación con énfasis en tecnología y habilidades emprendedoras.",
+        "economy": "Promueve un mercado libre con mínima intervención estatal. Propone reducir impuestos y trámites para facilitar los negocios, atraer inversión privada y generar empleo, bajo la premisa de que la prosperidad llega al reducir el tamaño del Estado y empoderar al sector productivo.",
+        "environment": "Plantea abordar lo ambiental mediante innovación y mercado: incentivos a empresas verdes y tecnologías limpias, evitando regulaciones excesivas. Favorece soluciones privadas como créditos de carbono y energías renovables competitivas para equilibrar crecimiento económico y sostenibilidad."
+      },
+      "official_links": {
+        "website": "https://www.avanzacr.net",
+        "facebook": "https://www.facebook.com/PartidoAvanzaCR"
+      },
+      "accent_color": "#0074A8"
+    },
+    {
+      "name": "Partido Centro Democrático y Social (CDS)",
+      "logo_url": "/assets/political-flags/centrodemocraticoysocial.webp",
+      "presidential_candidate": {
+        "name": "Ana Virginia Calzada Miranda",
+        "first_vice_president": "Oldemar Rodríguez Rojas",
+        "second_vice_president": "Heilen Díaz Gutiérrez"
+      },
+      "ideology": "Socialconservadurismo humanista (democracia cristiana)",
+      "values": [
+        "Dignidad humana y bien común",
+        "Solidaridad social y justicia con base en valores cristianos",
+        "Subsidiariedad: Estado al servicio de las comunidades",
+        "Ética pública, honestidad y desarrollo integral de la familia"
+      ],
+      "stances": {
+        "education": "Defiende una educación de calidad fundada en valores éticos y humanistas. Propone fortalecer la enseñanza cívica y moral, apoyar la educación dual (académica-técnica) y colaborar con instituciones religiosas y comunitarias para mejorar la formación integral.",
+        "economy": "Aboga por una economía social de mercado: iniciativa privada con responsabilidad social. Promueve políticas proempresa y emprendimiento, pero con guía estatal para proteger a sectores vulnerables y corregir desigualdades, con transparencia en la gestión pública.",
+        "environment": "Considera el cuidado de la creación como un deber moral. Favorece políticas que concilien desarrollo con conservación, como prácticas agrícolas sostenibles, protección de cuencas hidrográficas y educación ambiental comunitaria, enfatizando corresponsabilidad de ciudadanos, empresas y Estado."
+      },
+      "official_links": {
+        "facebook": "https://www.facebook.com/centrodemocraticoysocial"
+      },
+      "accent_color": "#8B4513"
+    },
+    {
+      "name": "Partido De la Clase Trabajadora (PT)",
+      "logo_url": "/assets/political-flags/delaclasetrabajadora.webp",
+      "presidential_candidate": {
+        "name": "David Hernández Brenes",
+        "first_vice_president": "Yeimy María Castro Valverde",
+        "second_vice_president": "Obeth Morales Barquero"
+      },
+      "ideology": "Socialismo revolucionario (trotskismo)",
+      "values": [
+        "Emancipación de la clase trabajadora y justicia obrera",
+        "Igualdad económica radical",
+        "Antiimperialismo y solidaridad internacional de los trabajadores",
+        "Democracia obrera y participación sindical"
+      ],
+      "stances": {
+        "education": "Propone educación pública gratuita en todos los niveles, financiada plenamente por el Estado. Prioriza una educación crítica y popular, vinculada a las necesidades de la clase trabajadora, con énfasis en historia social, organización comunitaria y empoderamiento estudiantil.",
+        "economy": "Aboga por una economía planificada por y para el pueblo trabajador. Plantea nacionalizar sectores estratégicos bajo control democrático de trabajadores, eliminar privilegios de élites capitalistas, subir salarios y reducir la jornada laboral sin reducción salarial.",
+        "environment": "Considera el capitalismo responsable de la crisis climática. Propone una transición ecológica dirigida por trabajadores: nacionalizar empresas contaminantes para reorientarlas hacia producción limpia, prohibir proyectos extractivistas dañinos y garantizar justicia ambiental para comunidades marginadas."
+      },
+      "official_links": {
+        "website": "https://ptcostarica.org",
+        "facebook": "https://www.facebook.com/ptcostarica"
+      },
+      "accent_color": "#DC143C"
+    },
+    {
+      "name": "Partido Esperanza Nacional (PEN)",
+      "logo_url": "/assets/political-flags/esperanzanacional.webp",
+      "presidential_candidate": {
+        "name": "Claudio Alpízar Otoya",
+        "first_vice_president": "Andrés Castillo Saborío",
+        "second_vice_president": "Nora Elena González Chacón"
+      },
+      "ideology": "Conservadurismo progresista (centro)",
+      "values": [
+        "Desarrollo social con orden y estabilidad",
+        "Ética, transparencia y renovación de la política",
+        "Equilibrio entre tradición y progreso",
+        "Solidaridad, paz social y participación ciudadana"
+      ],
+      "stances": {
+        "education": "Plantea una mejora educativa que combine valores tradicionales (familia, comunidad) con actualización curricular. Impulsa habilidades blandas, civismo y emprendedurismo, con becas y acceso para que ningún joven quede fuera por motivos económicos.",
+        "economy": "Promueve una economía mixta: apoya la empresa privada y la inversión, pero con guía estatal para asegurar distribución justa de oportunidades. Busca atraer inversión en sectores estratégicos (tecnología, turismo sostenible) mientras fortalece programas sociales.",
+        "environment": "Mantiene un compromiso con el ambiente integrado al desarrollo. Apoya energía limpia y turismo ecológico, con alianzas público-privadas para proteger parques nacionales y cuencas, y educación ambiental, bajo un discurso optimista de esperanza en un futuro verde."
+      },
+      "official_links": {
+        "website": "https://esperanzanacional.cr",
+        "facebook": "https://www.facebook.com/PartidoEsperanzaNacional"
+      },
+      "accent_color": "#2E8B57"
+    },
+    {
+      "name": "Partido Esperanza y Libertad (PEL)",
+      "logo_url": "/assets/political-flags/esperanzaylibertad.webp",
+      "presidential_candidate": {
+        "name": "Marco David Rodríguez Badilla",
+        "first_vice_president": "Carlos Francisco Palacios Franco",
+        "second_vice_president": "Karla Fabiola Romero Cruz"
+      },
+      "ideology": "Humanismo cristiano (centroderecha)",
+      "values": [
+        "Defensa de la dignidad humana y los derechos fundamentales",
+        "Familia como núcleo de la sociedad",
+        "Solidaridad y ayuda comunitaria",
+        "Libertad con responsabilidad y fe"
+      ],
+      "stances": {
+        "education": "Promueve una educación con principios y valores humanistas, con énfasis en familia y comunidad. Defiende la libertad de educación, incluyendo centros de inspiración religiosa, y busca mejorar la calidad educativa en zonas rurales.",
+        "economy": "Aboga por una economía humanista: ni un Estado omnipresente ni un mercado sin rostro social. Favorece la empresa privada responsable, cooperativas y emprendimientos familiares, con intervención estatal cuando sea necesario para proteger a los más débiles.",
+        "environment": "Considera la protección de la creación como un deber ético. Impulsa proyectos de reforestación comunitaria, educación ambiental desde iglesias y organizaciones civiles, y medidas locales contra la contaminación, bajo un enfoque de desarrollo sostenible."
+      },
+      "official_links": {
+        "website": "https://www.esperanzaylibertad.com",
+        "facebook": "https://www.facebook.com/p/Partido-Esperanza-y-Libertad-100094280552557"
+      },
+      "accent_color": "#FFA500"
+    },
+    {
+      "name": "Partido Frente Amplio (FA)",
+      "logo_url": "/assets/political-flags/frenteamplio.webp",
+      "presidential_candidate": {
+        "name": "Ariel Robles Barrantes",
+        "first_vice_president": "Margarita Salas Guzmán",
+        "second_vice_president": "Guillermo Arroyo Muñoz"
+      },
+      "ideology": "Socialismo democrático progresista",
+      "values": [
+        "Justicia social e igualdad",
+        "Derechos humanos y solidaridad con grupos vulnerables",
+        "Ecologismo y desarrollo sostenible",
+        "Participación popular y ética en la política"
+      ],
+      "stances": {
+        "education": "Propone fortalecer y expandir la educación pública gratuita y de calidad a todos los niveles, con énfasis en equidad. Defiende un mayor presupuesto educativo, becas para estudiantes de bajos recursos y una educación inclusiva con perspectiva de género y derechos humanos.",
+        "economy": "Plantea un modelo económico solidario y redistributivo. Incluye aumentar impuestos a grandes empresas y fortunas para financiar programas sociales, fortalecer empresas públicas estratégicas y apoyar cooperativas y economía social, oponiéndose a privatizaciones.",
+        "environment": "Defiende con firmeza la protección ambiental y la lucha contra el cambio climático. Se opone a la explotación petrolera y a la minería a cielo abierto, promueve energías renovables, movilidad eléctrica y derechos de la naturaleza, junto con el respeto a pueblos indígenas."
+      },
+      "official_links": {
+        "website": "https://www.frenteamplio.org",
+        "facebook": "https://www.facebook.com/frenteamplioCRICA"
+      },
+      "accent_color": "#F5C800"
+    },
+    {
+      "name": "Partido Integración Nacional (PIN)",
+      "logo_url": "/assets/political-flags/integracionnacional.webp",
+      "presidential_candidate": {
+        "name": "Luis Amador Jiménez",
+        "first_vice_president": "Jorge Mario Borbón Rojas",
+        "second_vice_president": "Katya Berdugo Ulate"
+      },
+      "ideology": "Partido atrapalotodo (ideología variada)",
+      "values": [
+        "Participación ciudadana amplia (integración de diversos sectores)",
+        "Pragmatismo en la búsqueda del bien común",
+        "Salud y calidad de vida como prioridades",
+        "Transparencia y lucha contra la corrupción"
+      ],
+      "stances": {
+        "education": "Busca mejorar la educación escuchando a docentes, padres y estudiantes. Apoyaría una modernización curricular enfocada en ciencia y tecnología sin descuidar materias humanísticas, y programas complementarios de salud y deporte escolar.",
+        "economy": "Tiene un enfoque flexible: adopta propuestas de distintas corrientes siempre que beneficien al país. Podría respaldar incentivos a la pequeña empresa y al agro, así como inversión extranjera en infraestructura, con especial énfasis en fortalecer la salud pública.",
+        "environment": "Reconoce la importancia del medio ambiente pero con enfoque pragmático. Apoya proyectos ambientales que mejoren la calidad de vida (control de contaminación, reforestación para evitar desastres), privilegiando soluciones dialogadas con comunidades."
+      },
+      "official_links": {
+        "facebook": "https://www.facebook.com/PartidoIntegracionNacional"
+      },
+      "accent_color": "#4169E1"
+    },
+    {
+      "name": "Partido Justicia Social Costarricense (PJSC)",
+      "logo_url": "/assets/political-flags/justiciasocialcostarricense.webp",
+      "presidential_candidate": {
+        "name": "Walter Rubén Hernández Juárez",
+        "first_vice_president": "Shirley González Mora",
+        "second_vice_president": "Eduardo Rojas Murillo"
+      },
+      "ideology": "Socialdemocracia (centroizquierda)",
+      "values": [
+        "Justicia social y reducción de las desigualdades",
+        "Ética, transparencia y participación ciudadana",
+        "Defensa del Estado social de derecho",
+        "Inclusión y derechos para poblaciones vulnerables"
+      ],
+      "stances": {
+        "education": "Propone robustecer la educación pública, asegurando recursos para escuelas en zonas rurales y urbano-marginales. Busca inculcar valores cívicos y solidaridad, y apoya la educación técnica y vocacional ligada a la creación de empleo local.",
+        "economy": "Defiende un modelo económico con rostro humano: crecimiento con fuerte componente de justicia social. Apoya cooperativas, pymes y emprendimientos sociales con crédito blando y asistencia técnica, y una política fiscal más progresiva.",
+        "environment": "Considera el medio ambiente sano como parte de la justicia social intergeneracional. Impulsa iniciativas locales de reforestación, protección de fuentes de agua y agricultura sostenible, con énfasis en comunidades vulnerables."
+      },
+      "official_links": {
+        "facebook": "https://www.facebook.com/JusticiaSocialCostarricense"
+      },
+      "accent_color": "#B22222"
+    },
+    {
+      "name": "Partido Liberación Nacional (PLN)",
+      "logo_url": "/assets/political-flags/liberacionnacional.jpg",
+      "presidential_candidate": {
+        "name": "Álvaro Ramos Chaves",
+        "first_vice_president": "Karen Segura Fernández",
+        "second_vice_president": "Xinia María Chaves Quirós"
+      },
+      "ideology": "Socialdemocracia (centro)",
+      "values": [
+        "Solidaridad y justicia social",
+        "Desarrollo económico con rostro humano",
+        "Institucionalidad democrática y paz social",
+        "Protección ambiental progresista"
+      ],
+      "stances": {
+        "education": "Propone continuar y mejorar el legado liberacionista en educación pública: más inversión en infraestructura escolar, capacitación docente y programas como comedores y becas, con énfasis en educación técnica, inglés y habilidades digitales.",
+        "economy": "Favorece una economía social de mercado: incentiva la empresa privada y la inversión (incluida la extranjera) para crecer, con un Estado fuerte que redistribuya mediante programas sociales. Prioriza inversión en tecnología, energías limpias y turismo.",
+        "environment": "Integra la tradición verde de Costa Rica a su plan de gobierno. Impulsa la meta de carbono neutralidad, incentivos a vehículos eléctricos, protección de parques nacionales y pagos por servicios ambientales, junto con adaptación al cambio climático."
+      },
+      "official_links": {
+        "website": "https://www.plncr.org",
+        "facebook": "https://www.facebook.com/partidoliberacionnacional"
+      },
+      "accent_color": "#00693E"
+    },
+    {
+      "name": "Partido Liberal Progresista (PLP)",
+      "logo_url": "/assets/political-flags/liberalprogresista.webp",
+      "presidential_candidate": {
+        "name": "Eliécer Feinzaig Mintz",
+        "first_vice_president": "Tannia Molina Rojas",
+        "second_vice_president": "Gabriel Zamora Baudrit"
+      },
+      "ideology": "Liberalismo (centroderecha)",
+      "values": [
+        "Libertad individual y de empresa",
+        "Gobierno limitado y eficiente",
+        "Innovación, ciencia y tecnología como motores",
+        "Estado laico y defensa de libertades civiles"
+      ],
+      "stances": {
+        "education": "Propone modernizar la educación con enfoque en STEM y competencias del siglo XXI. Favorece alianzas público-privadas, evaluación rigurosa del desempeño docente y mecanismos de elección libre como vouchers o subsidios educativos.",
+        "economy": "Promueve libre mercado, menos trámites y apertura comercial. Propone recortar gasto público ineficiente, bajar impuestos para atraer inversión y crear empleos, y abrir a competencia sectores dominados por monopolios estatales.",
+        "environment": "Considera que el cuidado ambiental puede lograrse incentivando la innovación. Apoya mercados de carbono, energías renovables impulsadas por inversión privada y emprendimientos verdes, oponiéndose a prohibiciones generales sin base técnica."
+      },
+      "official_links": {
+        "website": "https://liberal.cr",
+        "facebook": "https://www.facebook.com/liberalcr"
+      },
+      "accent_color": "#1B6BD1"
+    },
+    {
+      "name": "Partido Nueva Generación (PNG)",
+      "logo_url": "/assets/political-flags/nuevageneracion.webp",
+      "presidential_candidate": {
+        "name": "Fernando Dionisio Zamora Castellanos",
+        "first_vice_president": "Lisbeth Quesada Tristán",
+        "second_vice_president": "Yeudy Sulem Araya Herrera"
+      },
+      "ideology": "Conservadurismo liberal (centroderecha)",
+      "values": [
+        "Valores tradicionales (vida, familia, fe)",
+        "Patriotismo y orgullo nacional",
+        "Libertad económica con responsabilidad",
+        "Orden, seguridad y respeto a la ley"
+      ],
+      "stances": {
+        "education": "Defiende una educación que refuerce disciplina, respeto y valores familiares. Se opone a contenidos que considere ideologizados, privilegiando contenidos académicos básicos y formación ética, y fortaleciendo la educación técnica.",
+        "economy": "Propone un modelo de libre empresa con orden: bajar trabas a negocios, reducir impuestos progresivamente para clases medias y emprendedores, y atraer inversión extranjera, reduciendo el tamaño del Estado pero manteniendo programas sociales esenciales.",
+        "environment": "Adopta un enfoque conservador moderado: proteger la naturaleza sin frenar el progreso humano. Apoya energía limpia, pero se muestra más flexible en proyectos de desarrollo si generan empleo y se mitigan adecuadamente sus impactos."
+      },
+      "official_links": {
+        "facebook": "https://www.facebook.com/PartidoNuevaGeneracion"
+      },
+      "accent_color": "#27408B"
+    },
+    {
+      "name": "Partido Nueva República (PNR)",
+      "logo_url": "/assets/political-flags/nuevarepublica.webp",
+      "presidential_candidate": {
+        "name": "Fabricio Alvarado Muñoz",
+        "first_vice_president": "David Lorenzo Segura Gamboa",
+        "second_vice_president": "Rosalía Brown Young"
+      },
+      "ideology": "Conservadurismo religioso (derecha)",
+      "values": [
+        "Defensa de la vida y la familia tradicional",
+        "Principios cristianos en la gestión pública",
+        "Patriotismo y soberanía nacional",
+        "Ley y orden, con mano firme contra el crimen"
+      ],
+      "stances": {
+        "education": "Se opone a la inclusión de contenidos de ideología de género en las aulas. Aboga por un currículo basado en valores familiares y por fortalecer la injerencia de los padres en la educación, impulsando también opciones como homeschooling y centros privados.",
+        "economy": "Promueve un capitalismo con valores: incentivos a la inversión nacional y extranjera para generar empleo, con rechazo a actividades económicas que considere contrarias a su moral. Busca reducir impuestos y simplificar regulación, apoyando el rol social de iglesias.",
+        "environment": "Considera la naturaleza como creación de Dios que debe ser cuidada, pero rechaza activismos extremos. Apoya desarrollo sostenible siempre que no afecte la soberanía y prioriza el bienestar de las comunidades en decisiones de infraestructura."
+      },
+      "official_links": {
+        "website": "https://nuevarepublica.cr/",
+        "facebook": "https://www.facebook.com/PartidoNuevaRepublica"
+      },
+      "accent_color": "#0B3D91"
+    },
+    {
+      "name": "Partido Progreso Social Democrático (PPSD)",
+      "logo_url": "/assets/political-flags/progresosocialdemocratico.webp",
+      "presidential_candidate": {
+        "name": "Luz Mary Alpízar Loaiza",
+        "first_vice_president": "Frank Alberto Mc Kenzie Peterkin",
+        "second_vice_president": "Maritza Bustamante Venegas"
+      },
+      "ideology": "Liberalismo con tintes populistas (centro)",
+      "values": [
+        "Lucha contra la corrupción y renovación política",
+        "Eficiencia estatal y empoderamiento ciudadano",
+        "Oportunidades económicas para todos (pro-mercado inclusivo)",
+        "Seguridad y mano firme contra el crimen"
+      ],
+      "stances": {
+        "education": "Enfatiza reducir la burocracia en educación, para que los recursos lleguen directamente a las aulas. Apoya evaluaciones de desempeño a docentes y directores y modelos innovadores como alianzas con empresas y escuelas tipo charter.",
+        "economy": "Propone políticas pro-mercado con resultados rápidos: reducir trabas para emprendedores, atraer inversión extranjera fuera del Gran Área Metropolitana y hacer más eficientes los trámites en el Estado, revisando monopolios que encarezcan la vida.",
+        "environment": "Se presenta como comprometido con el ambiente de forma pragmática. Continuaría proyectos de protección de áreas marinas y buscaría financiamiento internacional para proyectos verdes, evaluando caso por caso iniciativas de alto impacto."
+      },
+      "official_links": {
+        "website": "https://sites.google.com/progreso.cr/progreso",
+        "facebook": "https://www.facebook.com/CostaRicaProgreso"
+      },
+      "accent_color": "#8E44AD"
+    },
+    {
+      "name": "Partido Pueblo Soberano (PPSO)",
+      "logo_url": "/assets/political-flags/pueblosoberano.webp",
+      "presidential_candidate": {
+        "name": "Laura Fernández Delgado",
+        "first_vice_president": "Francisco Ernesto Gamboa Soto",
+        "second_vice_president": "Douglas Soto Campos"
+      },
+      "ideology": "Populismo derechista (conservador en lo social, liberal en lo económico)",
+      "values": [
+        "Soberanía y orgullo nacional (“Costa Rica para los costarricenses”)",
+        "Orden, autoridad y seguridad ciudadana",
+        "Prosperidad económica vía libre empresa",
+        "Conservadurismo social y familiar"
+      ],
+      "stances": {
+        "education": "Busca “rescatar” la educación pública de influencias politizadas. Prioriza mejorar resultados en materias básicas como matemáticas y lenguaje mediante planes de emergencia, capacitación docente y refuerzo de colegios técnicos.",
+        "economy": "Aboga por una economía pro-mercado y pro-inversión con fuerte discurso anticorrupción. Promueve reducción de trámites y tasas de interés, y mantiene la regla fiscal, combinándolo con combate a monopolios y privilegios que encarecen la vida.",
+        "environment": "Mantiene compromisos ambientales sin que limiten el desarrollo. Apoya reforestación y economía azul, pero se muestra abierta a iniciativas como exploración de gas natural si ofrecen alto rédito económico bajo condiciones estrictas."
+      },
+      "official_links": {
+        "website": "https://www.pueblosoberano.org",
+        "facebook": "https://www.facebook.com/ppscostarica"
+      },
+      "accent_color": "#00008B"
+    },
+    {
+      "name": "Partido Unidad Social Cristiana (PUSC)",
+      "logo_url": "/assets/political-flags/unidadsocialcristiana.webp",
+      "presidential_candidate": {
+        "name": "Juan Carlos Hidalgo Bogantes",
+        "first_vice_president": "Yolanda Fernández Ochoa",
+        "second_vice_president": "Steven Alberto Barrantes Núñez"
+      },
+      "ideology": "Socialcristianismo (centroderecha moderada)",
+      "values": [
+        "Humanismo cristiano: dignidad, solidaridad, subsidiariedad",
+        "Familia y comunidad como ejes del desarrollo",
+        "Democracia y libertades públicas fortalecidas",
+        "Equilibrio entre mercado y justicia social"
+      ],
+      "stances": {
+        "education": "Defiende la educación pública de calidad como igualador social. Impulsa bilingüismo, competencias digitales y refuerzo de ética y civismo, con participación de iglesias y ONG en programas de apoyo estudiantil.",
+        "economy": "Cree en la economía social de mercado: iniciativa privada con responsabilidad social. Busca bajar la deuda pública con eficiencia estatal, reducir cargas a pymes, y fomentar asociaciones público-privadas transparentes en infraestructura.",
+        "environment": "Ve la protección ambiental como un deber hacia la creación y las futuras generaciones. Se compromete con reforestación, transporte limpio y economía circular, apoyando a sectores productivos en una transición gradual a prácticas sostenibles."
+      },
+      "official_links": {
+        "website": "https://www.partidounidad.com",
+        "facebook": "https://www.facebook.com/PUSC.cr"
+      },
+      "accent_color": "#D52B1E"
+    },
+    {
+      "name": "Partido Unidos Podemos (PUP)",
+      "logo_url": "/assets/political-flags/unidospodemos.webp",
+      "presidential_candidate": {
+        "name": "Natalia Díaz Quintana",
+        "first_vice_president": "Jorge Ernesto Ocampo Sánchez",
+        "second_vice_president": "Luis Diego Vargas Rodríguez"
+      },
+      "ideology": "Liberalismo clásico (derecha liberal)",
+      "values": [
+        "Libertad económica y competencia abierta",
+        "Estado reducido y transparente",
+        "Innovación, modernización y juventud en política",
+        "Responsabilidad individual y meritocracia"
+      ],
+      "stances": {
+        "education": "Impulsa una “educación para el empleo”, con currículos alineados al mercado laboral (programación, inglés técnico). Propone introducir competencia entre centros educativos mediante mecanismos de libre elección y mayor autonomía escolar.",
+        "economy": "Como partido liberal, propone bajar impuestos y trámites para detonar crecimiento, eliminar monopolios ineficientes y flexibilizar jornadas laborales, priorizando el control del gasto público por encima de nuevos tributos.",
+        "environment": "Su enfoque es liberal pragmático: confía en innovación privada y mercados de carbono para proteger el ambiente. Apoya movilidad eléctrica mediante incentivos temporales y concesiones para turismo responsable en áreas protegidas."
+      },
+      "official_links": {
+        "website": "https://unidospodemos.cr",
+        "facebook": "https://www.facebook.com/partidounidospodemos"
+      },
+      "accent_color": "#0099CC"
+    },
+    {
+      "name": "Partido Unión Costarricense Democrática (PUCD)",
+      "logo_url": "/assets/political-flags/unioncostarricensedemocratica.webp",
+      "presidential_candidate": {
+        "name": "Boris Molina Acevedo",
+        "first_vice_president": "José Edgardo Morales Romero",
+        "second_vice_president": "Maricela Morales Mora"
+      },
+      "ideology": "Socialdemocracia sindicalista (centroizquierda)",
+      "values": [
+        "Defensa de los derechos de los trabajadores y sindicatos",
+        "Justicia social y distribución equitativa",
+        "Participación ciudadana en la toma de decisiones",
+        "Patriotismo y desarrollo nacional independiente"
+      ],
+      "stances": {
+        "education": "Con raíces sindicales docentes, enfatiza la defensa de la educación pública. Se opone a privatizaciones y recortes, y propone fortalecer las juntas de educación con representación de maestros y padres, reforzando la formación ciudadana.",
+        "economy": "Prioriza derechos laborales y justicia social. Se opone a reformas que debiliten garantías, apoya políticas industriales que favorezcan la producción nacional y salarios mínimos más altos, y una fiscalidad más progresiva.",
+        "environment": "Integra la temática ambiental con la social bajo la idea de justicia ambiental. Se opone a proyectos que dañen ecosistemas y comunidades, apoya energías renovables públicas y empleos verdes dignos (reforestación, reciclaje organizado)."
+      },
+      "official_links": {
+        "website": "https://partidoucd.com",
+        "facebook": "https://www.facebook.com/BorisMolinaA"
+      },
+      "accent_color": "#2E8B57"
+    }
+  ],
+  "quiz": {
+    "questions": [
+      {
+        "id": "renewables",
+        "text": "¿El Estado debería invertir más en energías renovables y transporte público limpio?",
+        "axis": { "env": 1, "econ": -0.2 },
+        "icon": "LeafIcon"
+      },
+      {
+        "id": "taxes",
+        "text": "¿Se deberían aumentar impuestos a grandes empresas para financiar programas sociales?",
+        "axis": { "econ": -1 },
+        "icon": "TrendingIcon"
+      },
+      {
+        "id": "dereg",
+        "text": "¿Se deberían reducir trámites e impuestos para facilitar emprender y generar empleo?",
+        "axis": { "econ": 1 },
+        "icon": "RocketIcon"
+      },
+      {
+        "id": "public-edu",
+        "text": "¿La educación pública debe recibir más inversión que la privada?",
+        "axis": { "econ": -0.6, "social": -0.2 },
+        "icon": "BookIcon"
+      },
+      {
+        "id": "security",
+        "text": "¿Preferís un enfoque de seguridad con medidas más estrictas y mano firme?",
+        "axis": { "social": 0.9 },
+        "icon": "ShieldIcon"
+      },
+      {
+        "id": "civil-liberties",
+        "text": "¿Las libertades civiles deben protegerse aunque entren en conflicto con valores tradicionales?",
+        "axis": { "social": -1 },
+        "icon": "ScaleIcon"
+      },
+      {
+        "id": "market-env",
+        "text": "¿El mercado y la innovación privada son la mejor vía para resolver los problemas ambientales?",
+        "axis": { "env": 0.4, "econ": 0.6 },
+        "icon": "BulbIcon"
+      },
+      {
+        "id": "social-programs",
+        "text": "¿El gobierno debe expandir los programas de asistencia social para los más vulnerables?",
+        "axis": { "econ": -0.7, "social": -0.3 },
+        "icon": "PeopleIcon"
+      }
+    ]
+  }
+}
