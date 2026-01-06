@@ -35,12 +35,14 @@ jobs:
         uses: pnpm/action-setup@v4
         with:
           version: 10
-          run_install: true
-          working-directory: web
+          run_install: false
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Build static export
         env:
-          NEXT_PUBLIC_BASE_PATH: /info-politic-2026
+          NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
         run: pnpm export
 
       - name: Configure Pages
