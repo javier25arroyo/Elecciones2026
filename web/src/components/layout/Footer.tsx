@@ -2,6 +2,7 @@ import Link from "next/link";
 import {
   FavoriteRounded as FavoriteIcon,
   FlagRounded as FlagRoundedIcon,
+  GitHub as GitHubIcon,
 } from "@mui/icons-material";
 
 const footerLinks = {
@@ -137,6 +138,25 @@ export function Footer() {
             >
               © 2026 Info Politic CR. Proyecto educativo sin fines de lucro.
             </p>
+
+            <a
+              href="https://github.com/javier25arroyo"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                color: "rgba(255, 255, 255, 0.75)",
+                fontSize: "0.875rem",
+                margin: 0,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                textDecoration: "none",
+              }}
+            >
+              <GitHubIcon sx={{ fontSize: "1.1rem" }} aria-hidden="true" />
+              GitHub
+            </a>
+
             <p
               style={{
                 color: "rgba(255, 255, 255, 0.5)",

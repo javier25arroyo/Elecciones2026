@@ -1089,6 +1089,17 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Evita que el header fijo tape los anclajes del menú */
+section[id] {
+  scroll-margin-top: 96px;
+}
+
+@media (max-width: 767px) {
+  section[id] {
+    scroll-margin-top: 84px;
+  }
+}
+
 /* ========================================
    UTILIDADES - Legibilidad
    ======================================== */
