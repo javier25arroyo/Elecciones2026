@@ -4,6 +4,8 @@ import { Inter, Poppins } from "next/font/google";
 import { useEffect, useState } from "react";
 import "./globals.css";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -40,7 +42,7 @@ export default function RootLayout({
           name="keywords"
           content="elecciones, Costa Rica, 2026, candidatos, presidenciales, votación"
         />
-        <link rel="icon" href="/assets/others/FlagCosta_Rica.ico" />
+        <link rel="icon" href={`${basePath}/assets/others/FlagCosta_Rica.ico`} />
       </head>
       <body className={`${inter.variable} ${poppins.variable} ${mounted ? 'is-mounted' : ''}`}>
         <a href="#main-content" className="skip-link">
