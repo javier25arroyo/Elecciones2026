@@ -26,7 +26,7 @@ const timelineEvents: TimelineEvent[] = [
     date: "1 Oct 2025",
     title: "Inicio de campaña",
     description: "Los partidos políticos inician oficialmente sus campañas electorales.",
-    icon: <PaletteIcon sx={{ fontSize: "1.25rem" }} />,
+    icon: <PaletteIcon />,
     isPast: true,
     isCurrent: false,
   },
@@ -34,7 +34,7 @@ const timelineEvents: TimelineEvent[] = [
     date: "15 Dic 2025",
     title: "Cierre de inscripciones",
     description: "Fecha límite para inscribir candidaturas ante el TSE.",
-    icon: <DocIcon sx={{ fontSize: "1.25rem" }} />,
+    icon: <DocIcon />,
     isPast: true,
     isCurrent: false,
   },
@@ -42,7 +42,7 @@ const timelineEvents: TimelineEvent[] = [
     date: "4 Ene 2026",
     title: "Período de debates",
     description: "Debates oficiales entre candidatos organizados por medios de comunicación.",
-    icon: <MicIcon sx={{ fontSize: "1.25rem" }} />,
+    icon: <MicIcon />,
     isPast: false,
     isCurrent: true,
   },
@@ -50,7 +50,7 @@ const timelineEvents: TimelineEvent[] = [
     date: "29 Ene 2026",
     title: "Cierre de campaña",
     description: "Último día permitido para actividades de campaña electoral.",
-    icon: <FlagIcon sx={{ fontSize: "1.25rem" }} />,
+    icon: <FlagIcon />,
     isPast: false,
     isCurrent: false,
   },
@@ -58,7 +58,7 @@ const timelineEvents: TimelineEvent[] = [
     date: "1 Feb 2026",
     title: "Día de elección",
     description: "Elecciones presidenciales y legislativas. ¡Tu voto cuenta!",
-    icon: <VoteIcon sx={{ fontSize: "1.25rem" }} />,
+    icon: <VoteIcon />,
     isPast: false,
     isCurrent: false,
   },
@@ -66,7 +66,7 @@ const timelineEvents: TimelineEvent[] = [
     date: "6 Abr 2026",
     title: "Segunda ronda",
     description: "Balotaje en caso de que ningún candidato obtenga el 40% de los votos.",
-    icon: <RestartIcon sx={{ fontSize: "1.25rem" }} />,
+    icon: <RestartIcon />,
     isPast: false,
     isCurrent: false,
   },
@@ -90,7 +90,7 @@ export function TimelineSection() {
 
         {/* Timeline */}
         <div className="relative" style={{ maxWidth: 800, margin: "0 auto" }}>
-          {/* Vertical line */}
+          {/* Vertical line - Desktop */}
           <div
             className="absolute hide-mobile"
             style={{
@@ -100,6 +100,7 @@ export function TimelineSection() {
               width: 2,
               background: "rgba(255,255,255,0.3)",
               transform: "translateX(-50%)",
+              zIndex: 0,
             }}
           />
 
@@ -162,7 +163,7 @@ function TimelineItem({ event, index, isLeft }: TimelineItemProps) {
   return (
     <div
       ref={itemRef}
-      className={`relative flex ${isLeft ? "md:flex-row" : "md:flex-row-reverse"}`}
+      className={`relative flex items-center ${isLeft ? "md:flex-row" : "md:flex-row-reverse"}`}
       style={{
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? "translateY(0)" : "translateY(20px)",
@@ -171,20 +172,18 @@ function TimelineItem({ event, index, isLeft }: TimelineItemProps) {
     >
       {/* Content - Desktop */}
       <div
-        className={`hide-mobile flex-1 ${isLeft ? "pr-xl text-right" : "pl-xl text-left"}`}
+        className={`hide-mobile flex-1 ${isLeft ? "pr-2xl text-right" : "pl-2xl text-left"}`}
       >
         <TimelineCard event={event} />
       </div>
 
       {/* Center dot - Desktop */}
       <div
-        className="hide-mobile absolute flex items-center justify-center"
+        className="hide-mobile"
         style={{
-          left: "50%",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
-          width: 48,
-          height: 48,
+          position: "relative",
+          width: 52,
+          height: 52,
           borderRadius: "50%",
           background: event.isCurrent
             ? "var(--gradient-cta)"
@@ -200,25 +199,31 @@ function TimelineItem({ event, index, isLeft }: TimelineItemProps) {
           }`,
           color: "white",
           zIndex: 1,
-          fontSize: "1.25rem",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexShrink: 0,
+          boxShadow: event.isCurrent
+            ? "0 4px 14px rgba(0,0,0,0.25)"
+            : "0 2px 8px rgba(0,0,0,0.15)",
         }}
       >
-        {event.icon}
+        {renderIcon(event.icon, "1.5rem")}
       </div>
 
       {/* Empty space - Desktop */}
-      <div className="hide-mobile flex-1" />
+      <div className={`hide-mobile flex-1 ${isLeft ? "pl-2xl" : "pr-2xl"}`} />
 
       {/* Content - Mobile */}
       <div className="hide-desktop pl-xl w-full">
         {/* Mobile dot */}
         <div
-          className="absolute flex items-center justify-center"
           style={{
-            left: 8,
+            position: "absolute",
+            left: 4,
             top: 8,
-            width: 28,
-            height: 28,
+            width: 34,
+            height: 34,
             borderRadius: "50%",
             background: event.isCurrent
               ? "var(--gradient-cta)"
@@ -234,15 +239,34 @@ function TimelineItem({ event, index, isLeft }: TimelineItemProps) {
             }`,
             color: "white",
             zIndex: 1,
-            fontSize: "0.75rem",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            boxShadow: event.isCurrent
+              ? "0 3px 10px rgba(0,0,0,0.2)"
+              : "0 2px 6px rgba(0,0,0,0.1)",
           }}
         >
-          {event.icon}
+          {renderIcon(event.icon, "1.125rem")}
         </div>
         <TimelineCard event={event} />
       </div>
     </div>
   );
+}
+
+function renderIcon(icon: React.ReactNode, size: string) {
+  if (React.isValidElement(icon)) {
+    return React.cloneElement(icon as React.ReactElement<{ sx?: object }>, {
+      sx: {
+        fontSize: size,
+        display: "block",
+        width: size,
+        height: size,
+      },
+    });
+  }
+  return icon;
 }
 
 function TimelineCard({ event }: { event: TimelineEvent }) {

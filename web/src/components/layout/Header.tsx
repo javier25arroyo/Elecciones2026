@@ -41,35 +41,38 @@ export function Header() {
       }}
     >
       <div className="container h-full flex items-center justify-between">
-        {/* Logo */}
-        <Link
-          href="/"
-          className="flex items-center gap-sm"
-          style={{ textDecoration: "none" }}
-        >
-          <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
-            <FlagRoundedIcon sx={{ fontSize: 26, color: "#60a5fa" }} aria-hidden="true" />
-            <span
-              style={{
-                fontSize: 24,
-                fontWeight: 800,
-                letterSpacing: "-0.5px",
-                color: "white",
-                textShadow: "0 2px 10px rgba(0,0,0,0.1)",
-              }}
-            >
-              Elecciones 2026
+        {/* Logo - Izquierda */}
+        <div style={{ flex: 1, display: "flex", justifyContent: "flex-start" }}>
+          <Link
+            href="/"
+            className="flex items-center gap-sm"
+            style={{ textDecoration: "none" }}
+          >
+            <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+              <FlagRoundedIcon sx={{ fontSize: 26, color: "#60a5fa" }} aria-hidden="true" />
+              <span
+                style={{
+                  fontSize: 24,
+                  fontWeight: 800,
+                  letterSpacing: "-0.5px",
+                  color: "white",
+                  textShadow: "0 2px 10px rgba(0,0,0,0.1)",
+                }}
+              >
+                Elecciones
+              </span>
             </span>
-          </span>
-        </Link>
+          </Link>
+        </div>
 
-        {/* Desktop Navigation */}
+        {/* Desktop Navigation - Centro */}
         <nav 
           className="items-center"
           style={{ 
             display: "var(--nav-desktop-display, none)",
             gap: "clamp(1rem, 3vw, 2.5rem)",
             alignItems: "center",
+            justifyContent: "center",
           }}
         >
           {navLinks.map((link) => (
@@ -96,21 +99,23 @@ export function Header() {
           </a>
         </nav>
 
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
-          aria-expanded={isMenuOpen}
-          style={{
-            padding: "var(--spacing-sm)",
-            display: "var(--nav-mobile-display, flex)",
-            flexDirection: "column",
-            gap: 4,
-            background: "transparent",
-            border: "none",
-            cursor: "pointer",
-          }}
-        >
+        {/* Espacio derecho para balance + Mobile Menu Button */}
+        <div style={{ flex: 1, display: "flex", justifyContent: "flex-end" }}>
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
+            aria-expanded={isMenuOpen}
+            style={{
+              padding: "var(--spacing-sm)",
+              display: "var(--nav-mobile-display, flex)",
+              flexDirection: "column",
+              gap: 4,
+              background: "transparent",
+              border: "none",
+              cursor: "pointer",
+            }}
+          >
           <span
             style={{
               display: "block",
@@ -149,6 +154,7 @@ export function Header() {
             }}
           />
         </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}

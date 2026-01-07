@@ -47,7 +47,7 @@ export function Footer() {
               }}
             >
               <FlagRoundedIcon sx={{ fontSize: "1.5rem" }} aria-hidden="true" />
-              <span style={{ fontSize: "1.5rem", fontWeight: 700 }}>Elecciones 2026</span>
+              <span style={{ fontSize: "1.5rem", fontWeight: 700 }}>Elecciones</span>
             </Link>
             <p
               className="mt-md"
