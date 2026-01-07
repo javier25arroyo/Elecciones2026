@@ -44,5 +44,29 @@ export type Content = {
 export async function getContent(): Promise<Content> {
   const filePath = path.join(process.cwd(), "content.json");
   const raw = await fs.readFile(filePath, "utf8");
-  return JSON.parse(raw) as Content;
+  const data = JSON.parse(raw) as Content;
+
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+  const withBase = (url?: string) => {
+    if (!url) return url;
+    if (url.startsWith("http://") || url.startsWith("https://")) return url;
+    if (basePath && url.startsWith("/")) return `${basePath}${url}`;
+    return url;
+  };
+
+  if (Array.isArray(data.parties)) {
+    data.parties = data.parties.map((party) => ({
+      ...party,
+      logo_url: withBase(party.logo_url),
+      logo_urls: party.logo_urls?.map((u) => withBase(u) as string),
+      presidential_candidate: party.presidential_candidate
+        ? {
+            ...party.presidential_candidate,
+            photo_url: withBase(party.presidential_candidate.photo_url),
+          }
+        : party.presidential_candidate,
+    }));
+  }
+
+  return data;
 }
