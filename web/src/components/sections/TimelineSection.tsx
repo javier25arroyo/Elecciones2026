@@ -74,15 +74,15 @@ const timelineEvents: TimelineEvent[] = [
 
 export function TimelineSection() {
   return (
-    <section id="timeline" className="py-3xl">
+    <section id="timeline" className="py-3xl bg-app-gradient">
       <div className="container">
         {/* Header */}
         <div className="text-center mb-2xl">
-          <Badge variant="accent" className="mb-md">
+          <Badge variant="accent" className="mb-md" style={{ background: "rgba(255,255,255,0.15)", color: "white" }}>
             Fechas importantes
           </Badge>
-          <h2>Cronograma Electoral 2026</h2>
-          <p className="text-secondary" style={{ maxWidth: 600, margin: "0 auto" }}>
+          <h2 style={{ color: "white" }}>Cronograma Electoral 2026</h2>
+          <p style={{ maxWidth: 600, margin: "0 auto", color: "rgba(255,255,255,0.85)" }}>
             Conocé las fechas clave del proceso electoral costarricense.
             Marcá tu calendario y no te perdás ningún evento importante.
           </p>
@@ -98,7 +98,7 @@ export function TimelineSection() {
               top: 0,
               bottom: 0,
               width: 2,
-              background: "var(--color-border)",
+              background: "rgba(255,255,255,0.3)",
               transform: "translateX(-50%)",
             }}
           />
@@ -111,7 +111,7 @@ export function TimelineSection() {
               top: 0,
               bottom: 0,
               width: 2,
-              background: "var(--color-border)",
+              background: "rgba(255,255,255,0.3)",
             }}
           />
 
@@ -190,14 +190,15 @@ function TimelineItem({ event, index, isLeft }: TimelineItemProps) {
             ? "var(--gradient-cta)"
             : event.isPast
             ? "var(--color-secondary)"
-            : "var(--color-background)",
+            : "rgba(255,255,255,0.15)",
           border: `3px solid ${
             event.isCurrent
               ? "transparent"
               : event.isPast
               ? "var(--color-secondary)"
-              : "var(--color-border)"
+              : "rgba(255,255,255,0.3)"
           }`,
+          color: "white",
           zIndex: 1,
           fontSize: "1.25rem",
         }}
@@ -223,14 +224,15 @@ function TimelineItem({ event, index, isLeft }: TimelineItemProps) {
               ? "var(--gradient-cta)"
               : event.isPast
               ? "var(--color-secondary)"
-              : "var(--color-background)",
+              : "rgba(255,255,255,0.15)",
             border: `2px solid ${
               event.isCurrent
                 ? "transparent"
                 : event.isPast
                 ? "var(--color-secondary)"
-                : "var(--color-border)"
+                : "rgba(255,255,255,0.3)"
             }`,
+            color: "white",
             zIndex: 1,
             fontSize: "0.75rem",
           }}
@@ -250,9 +252,10 @@ function TimelineCard({ event }: { event: TimelineEvent }) {
       style={{
         background: event.isCurrent
           ? "var(--gradient-cta)"
-          : "var(--color-background)",
+          : "rgba(255,255,255,0.1)",
+        backdropFilter: "blur(10px)",
         color: event.isCurrent ? "white" : undefined,
-        border: event.isCurrent ? "none" : undefined,
+        border: event.isCurrent ? "none" : "1px solid rgba(255,255,255,0.2)",
         boxShadow: event.isCurrent ? "var(--shadow-lg)" : undefined,
       }}
     >
@@ -262,7 +265,7 @@ function TimelineCard({ event }: { event: TimelineEvent }) {
           fontWeight: 600,
           textTransform: "uppercase",
           letterSpacing: "0.5px",
-          color: event.isCurrent ? "rgba(255,255,255,0.8)" : "var(--color-text-secondary)",
+          color: event.isCurrent ? "rgba(255,255,255,0.8)" : "rgba(255,255,255,0.7)",
           marginBottom: "var(--spacing-xs)",
         }}
       >
@@ -271,7 +274,7 @@ function TimelineCard({ event }: { event: TimelineEvent }) {
       <h4
         style={{
           marginBottom: "var(--spacing-sm)",
-          color: event.isCurrent ? "white" : undefined,
+          color: "white",
         }}
       >
         {event.title}
@@ -279,7 +282,7 @@ function TimelineCard({ event }: { event: TimelineEvent }) {
       <p
         style={{
           fontSize: "0.875rem",
-          color: event.isCurrent ? "rgba(255,255,255,0.9)" : "var(--color-text-secondary)",
+          color: event.isCurrent ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.8)",
           margin: 0,
         }}
       >

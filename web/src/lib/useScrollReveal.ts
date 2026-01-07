@@ -8,10 +8,6 @@ interface ScrollRevealOptions {
   triggerOnce?: boolean;
 }
 
-/**
- * Hook personalizado para animaciones de scroll reveal
- * Detecta cuando un elemento entra en el viewport y le añade la clase 'is-visible'
- */
 export function useScrollReveal<T extends HTMLElement>(
   options: ScrollRevealOptions = {}
 ) {
@@ -26,7 +22,6 @@ export function useScrollReveal<T extends HTMLElement>(
     const element = ref.current;
     if (!element) return;
 
-    // Verificar si el usuario prefiere reducir movimiento
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;

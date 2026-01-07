@@ -30,9 +30,9 @@ export function Header() {
       className="fixed top-0 left-0 right-0 page-load-slide-up"
       style={{
         height: 70,
-        background: isScrolled ? "rgba(255, 255, 255, 0.95)" : "white",
-        backdropFilter: isScrolled ? "blur(10px)" : undefined,
-        boxShadow: isScrolled ? "var(--shadow-sm)" : undefined,
+        background: isScrolled ? "rgba(15, 23, 42, 0.9)" : "rgba(15, 23, 42, 0.95)",
+        backdropFilter: "blur(10px)",
+        boxShadow: isScrolled ? "var(--shadow-md)" : "var(--shadow-sm)",
         zIndex: "var(--z-sticky)",
         transition: "all var(--transition-normal)",
         borderBottom: "4px solid transparent",
@@ -48,15 +48,14 @@ export function Header() {
           style={{ textDecoration: "none" }}
         >
           <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
-            <FlagRoundedIcon sx={{ fontSize: 26, color: "var(--color-primary)" }} aria-hidden="true" />
+            <FlagRoundedIcon sx={{ fontSize: 26, color: "#60a5fa" }} aria-hidden="true" />
             <span
               style={{
                 fontSize: 24,
-                fontWeight: 700,
-                background: "var(--gradient-primary)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
+                fontWeight: 800,
+                letterSpacing: "-0.5px",
+                color: "white",
+                textShadow: "0 2px 10px rgba(0,0,0,0.1)",
               }}
             >
               Elecciones 2026
@@ -65,32 +64,51 @@ export function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hide-mobile flex items-center gap-xl">
+        <nav 
+          className="items-center"
+          style={{ 
+            display: "var(--nav-desktop-display, none)",
+            gap: "clamp(1rem, 3vw, 2.5rem)",
+            alignItems: "center",
+          }}
+        >
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
               className="nav-link"
+              style={{
+                whiteSpace: "nowrap",
+                padding: "8px 12px",
+              }}
             >
               {link.label}
             </a>
           ))}
-          <a href="#quiz" className="btn btn-primary btn-sm">
+          <a 
+            href="#quiz" 
+            className="btn btn-primary btn-sm"
+            style={{
+              marginLeft: "8px",
+            }}
+          >
             Hacer Quiz
           </a>
         </nav>
 
         {/* Mobile Menu Button */}
         <button
-          className="hide-desktop btn-ghost"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
           aria-expanded={isMenuOpen}
           style={{
             padding: "var(--spacing-sm)",
-            display: "flex",
+            display: "var(--nav-mobile-display, flex)",
             flexDirection: "column",
             gap: 4,
+            background: "transparent",
+            border: "none",
+            cursor: "pointer",
           }}
         >
           <span
@@ -98,7 +116,7 @@ export function Header() {
               display: "block",
               width: 24,
               height: 2,
-              background: "var(--color-text-primary)",
+              background: "white",
               borderRadius: 1,
               transition: "transform var(--transition-normal)",
               transform: isMenuOpen
@@ -111,7 +129,7 @@ export function Header() {
               display: "block",
               width: 24,
               height: 2,
-              background: "var(--color-text-primary)",
+              background: "white",
               borderRadius: 1,
               opacity: isMenuOpen ? 0 : 1,
               transition: "opacity var(--transition-fast)",
@@ -122,7 +140,7 @@ export function Header() {
               display: "block",
               width: 24,
               height: 2,
-              background: "var(--color-text-primary)",
+              background: "white",
               borderRadius: 1,
               transition: "transform var(--transition-normal)",
               transform: isMenuOpen
@@ -134,35 +152,48 @@ export function Header() {
       </div>
 
       {/* Mobile Menu */}
-      <div
-        className="hide-desktop"
-        style={{
-          position: "fixed",
-          top: 70,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: "white",
-          transform: isMenuOpen ? "translateY(0)" : "translateY(-100%)",
-          opacity: isMenuOpen ? 1 : 0,
-          transition: "all var(--transition-slow)",
-          pointerEvents: isMenuOpen ? "auto" : "none",
-          padding: "var(--spacing-lg)",
-        }}
-      >
+      {isMenuOpen && (
+        <div
+          style={{
+            position: "fixed",
+            top: 70,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: "linear-gradient(180deg, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.75) 30%, rgba(15, 23, 42, 0.5) 50%, rgba(15, 23, 42, 0.75) 70%, rgba(15, 23, 42, 0.95) 100%)",
+            backdropFilter: "blur(20px)",
+            WebkitBackdropFilter: "blur(20px)",
+            padding: "var(--spacing-lg)",
+            zIndex: 99,
+          }}
+        >
         <nav className="flex flex-col gap-lg">
-          {navLinks.map((link) => (
+          {navLinks.map((link, index) => (
             <a
               key={link.href}
               href={link.href}
               onClick={() => setIsMenuOpen(false)}
               style={{
-                color: "var(--color-text-primary)",
+                color: "white",
                 textDecoration: "none",
                 fontSize: "1.25rem",
                 fontWeight: 600,
-                padding: "var(--spacing-md) 0",
-                borderBottom: "1px solid var(--color-border)",
+                padding: "var(--spacing-lg)",
+                borderRadius: "var(--radius-lg)",
+                background: "rgba(255, 255, 255, 0.05)",
+                backdropFilter: "blur(10px)",
+                border: "1px solid rgba(255,255,255,0.1)",
+                transition: "all 0.2s ease",
+                animation: `slideInUpShort 0.4s ease forwards ${index * 0.05}s`,
+                opacity: 0, // Inicia invisible para la animación
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "rgba(255, 255, 255, 0.1)";
+                e.currentTarget.style.transform = "translateX(8px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "rgba(255, 255, 255, 0.05)";
+                e.currentTarget.style.transform = "translateX(0)";
               }}
             >
               {link.label}
@@ -172,11 +203,17 @@ export function Header() {
             href="#quiz"
             className="btn btn-primary mt-md"
             onClick={() => setIsMenuOpen(false)}
+            style={{
+               animation: `slideInUpShort 0.4s ease forwards ${navLinks.length * 0.05}s`,
+               opacity: 0,
+               boxShadow: "0 4px 20px rgba(206, 17, 38, 0.4)",
+            }}
           >
             Hacer Quiz
           </a>
         </nav>
-      </div>
+        </div>
+      )}
     </header>
   );
 }

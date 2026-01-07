@@ -128,17 +128,16 @@ export function EducationSection() {
   return (
     <section
       id="educacion"
-      className="py-3xl"
-      style={{ background: "var(--color-background-secondary)" }}
+      className="py-3xl bg-app-light"
     >
       <div className="container">
         {/* Header */}
         <div className="text-center mb-2xl">
-          <Badge variant="secondary" className="mb-md">
+          <Badge variant="secondary" className="mb-md" style={{ background: "rgba(255,255,255,0.1)", color: "white" }}>
             Educación cívica
           </Badge>
-          <h2>¿Cómo votar en Costa Rica?</h2>
-          <p className="text-secondary" style={{ maxWidth: 600, margin: "0 auto" }}>
+          <h2 style={{ color: "white" }}>¿Cómo votar en Costa Rica?</h2>
+          <p style={{ maxWidth: 600, margin: "0 auto", color: "rgba(255,255,255,0.8)" }}>
             Todo lo que necesitás saber para ejercer tu derecho al voto.
             Información oficial basada en el Tribunal Supremo de Elecciones.
           </p>
@@ -148,21 +147,28 @@ export function EducationSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-xl">
           {/* Quick guide */}
           <div>
-            <h3 className="mb-lg">Guía rápida</h3>
+            <h3 className="mb-lg" style={{ color: "white" }}>Guía rápida</h3>
             <QuickGuideGrid />
           </div>
 
           {/* FAQ Accordion */}
           <div>
-            <h3 className="mb-lg">Preguntas frecuentes</h3>
+            <h3 className="mb-lg" style={{ color: "white" }}>Preguntas frecuentes</h3>
             <Accordion items={faqItems} />
           </div>
         </div>
 
         {/* CTA */}
-        <div className="mt-3xl text-center py-xl px-lg tse-cta">
-          <h3 className="mb-md">¿Tenés más preguntas?</h3>
-          <p className="text-secondary mb-lg" style={{ maxWidth: 500, margin: "0 auto var(--spacing-lg)" }}>
+        <div 
+          className="mt-3xl text-center py-xl px-lg tse-cta"
+          style={{
+            background: "rgba(255,255,255,0.05)",
+            borderRadius: "var(--radius-xl)",
+            border: "1px solid rgba(255,255,255,0.1)",
+          }}
+        >
+          <h3 className="mb-md" style={{ color: "white" }}>¿Tenés más preguntas?</h3>
+          <p style={{ maxWidth: 500, margin: "0 auto var(--spacing-lg)", color: "rgba(255,255,255,0.8)" }}>
             Visitá el sitio oficial del Tribunal Supremo de Elecciones para
             información completa y actualizada.
           </p>
@@ -197,34 +203,34 @@ function QuickGuideGrid() {
     <div className="grid gap-md">
       <div ref={ref1} className="scroll-reveal scroll-reveal-delay-1">
         <QuickGuideCard
-          icon={<CalendarIcon sx={{ fontSize: "1.75rem", color: "var(--color-primary)" }} />}
+          icon={<CalendarIcon sx={{ fontSize: "1.75rem", color: "#60a5fa" }} />}
           title="Fecha de votación"
           description="1 de febrero de 2026, de 6:00 a.m. a 6:00 p.m."
-          color="var(--color-primary)"
+          color="#60a5fa"
         />
       </div>
       <div ref={ref2} className="scroll-reveal scroll-reveal-delay-2">
         <QuickGuideCard
-          icon={<IdIcon sx={{ fontSize: "1.75rem", color: "var(--color-secondary)" }} />}
+          icon={<IdIcon sx={{ fontSize: "1.75rem", color: "#f87171" }} />}
           title="Documento necesario"
           description="Cédula de identidad vigente (obligatoria)"
-          color="var(--color-secondary)"
+          color="#f87171"
         />
       </div>
       <div ref={ref3} className="scroll-reveal scroll-reveal-delay-3">
         <QuickGuideCard
-          icon={<CheckIcon sx={{ fontSize: "1.75rem", color: "var(--color-accent)" }} />}
+          icon={<CheckIcon sx={{ fontSize: "1.75rem", color: "#34d399" }} />}
           title="Cómo marcar"
           description="Una X clara dentro del círculo del candidato"
-          color="var(--color-accent)"
+          color="#34d399"
         />
       </div>
       <div ref={ref4} className="scroll-reveal scroll-reveal-delay-4">
         <QuickGuideCard
-          icon={<LockIcon sx={{ fontSize: "1.75rem", color: "var(--color-text-secondary)" }} />}
+          icon={<LockIcon sx={{ fontSize: "1.75rem", color: "#a78bfa" }} />}
           title="Tu voto es secreto"
           description="Nadie puede obligarte a revelar tu voto"
-          color="var(--color-text-secondary)"
+          color="#a78bfa"
         />
       </div>
     </div>
@@ -235,16 +241,21 @@ function QuickGuideCard({ icon, title, description, color }: QuickGuideCardProps
   return (
     <div
       className="card card-solid quick-guide-card"
-      style={{ borderLeftColor: color }}
+      style={{ 
+        borderLeftColor: color,
+        background: "rgba(255,255,255,0.05)",
+        backdropFilter: "blur(10px)",
+        border: "1px solid rgba(255,255,255,0.1)",
+      }}
     >
       <div className="quick-guide-icon">
         {icon}
       </div>
       <div>
-        <h4 className="quick-guide-title">
+        <h4 className="quick-guide-title" style={{ color: "white" }}>
           {title}
         </h4>
-        <p className="text-secondary quick-guide-desc">
+        <p className="quick-guide-desc" style={{ color: "rgba(255,255,255,0.7)" }}>
           {description}
         </p>
       </div>

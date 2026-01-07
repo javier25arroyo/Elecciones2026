@@ -42,11 +42,10 @@ export function HeroSection() {
 
   return (
     <section
-      className="relative flex items-center justify-center text-center"
+      className="relative flex items-center justify-center text-center bg-app-gradient"
       style={{
         minHeight: "100vh",
         paddingTop: 70, // Header height
-        background: "linear-gradient(135deg, #002B7F 0%, #001A4D 50%, #1E4A9E 100%)",
         overflow: "hidden",
       }}
     >
@@ -55,8 +54,8 @@ export function HeroSection() {
         className="absolute inset-0"
         style={{
           background: `
-            radial-gradient(circle at 20% 80%, rgba(206, 17, 38, 0.15) 0%, transparent 50%),
-            radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 40%)
+            radial-gradient(circle at 20% 80%, color-mix(in srgb, var(--color-secondary) 15%, transparent) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, color-mix(in srgb, white 8%, transparent) 0%, transparent 40%)
           `,
         }}
       />
@@ -238,8 +237,12 @@ function StatsGrid() {
   return (
     <div
       ref={ref}
-      className="grid grid-cols-3 gap-md mt-3xl scroll-reveal"
-      style={{ maxWidth: 500, margin: "var(--spacing-3xl) auto 0" }}
+      className="grid gap-md mt-3xl scroll-reveal"
+      style={{ 
+        maxWidth: 500, 
+        margin: "var(--spacing-3xl) auto 0",
+        gridTemplateColumns: "repeat(3, 1fr)",
+      }}
     >
       <StatCard value="14+" label="Candidatos" icon={<GroupsIcon sx={{ fontSize: "1.2rem" }} />} />
       <StatCard value="3.5M+" label="Votantes" icon={<VoteIcon sx={{ fontSize: "1.2rem" }} />} />

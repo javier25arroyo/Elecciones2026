@@ -47,17 +47,16 @@ export function CandidatesSection({ parties }: CandidatesSectionProps) {
   return (
     <section
       id="candidatos"
-      className="py-3xl"
-      style={{ background: "var(--color-background-secondary)" }}
+      className="py-3xl bg-app-light"
     >
       <div className="container">
         {/* Header */}
         <div className="text-center mb-2xl">
-          <Badge variant="primary" className="mb-md">
+          <Badge variant="primary" className="mb-md" style={{ background: "rgba(255,255,255,0.1)", color: "white" }}>
             14+ Candidaturas
           </Badge>
-          <h2>Conocé a los candidatos 2026</h2>
-          <p className="text-secondary" style={{ maxWidth: 600, margin: "0 auto" }}>
+          <h2 style={{ color: "white" }}>Conocé a los candidatos 2026</h2>
+          <p style={{ maxWidth: 600, margin: "0 auto", color: "rgba(255,255,255,0.8)" }}>
             Explorá los perfiles de cada candidato, sus propuestas y valores.
             Tocá una tarjeta para ver más detalles.
           </p>
@@ -67,24 +66,28 @@ export function CandidatesSection({ parties }: CandidatesSectionProps) {
         <div 
           className="flex flex-col sm:flex-row items-center justify-between gap-md mb-xl"
           style={{
-            background: "var(--color-background)",
+            background: "rgba(255,255,255,0.05)",
+            backdropFilter: "blur(10px)",
             padding: "var(--spacing-md)",
             borderRadius: "var(--radius-xl)",
             boxShadow: "var(--shadow-sm)",
+            border: "1px solid rgba(255,255,255,0.1)",
           }}
         >
           {/* Search */}
-          <div className="w-full sm:w-auto">
+          <div className="w-full sm:w-auto" style={{ flex: "1 1 auto", minWidth: 0 }}>
             <input
               type="search"
               placeholder="Buscar candidato o partido..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="input"
+              className="input w-full"
               style={{ 
-                minWidth: 280,
                 borderRadius: "var(--radius-full)",
                 paddingLeft: "var(--spacing-lg)",
+                background: "rgba(255,255,255,0.1)",
+                border: "1px solid rgba(255,255,255,0.2)",
+                color: "white",
               }}
               aria-label="Buscar candidatos"
             />
@@ -105,16 +108,16 @@ export function CandidatesSection({ parties }: CandidatesSectionProps) {
                 style={{
                   background: filter === option.value 
                     ? "var(--color-primary)" 
-                    : "var(--color-background-secondary)",
+                    : "rgba(255,255,255,0.1)",
                   color: filter === option.value 
                     ? "white" 
-                    : "var(--color-text-secondary)",
+                    : "rgba(255,255,255,0.8)",
                   borderRadius: "var(--radius-full)",
                   padding: "8px 16px",
                   display: "inline-flex",
                   alignItems: "center",
                   gap: "4px",
-                  border: filter === option.value ? "none" : "1px solid var(--color-border)",
+                  border: filter === option.value ? "none" : "1px solid rgba(255,255,255,0.2)",
                   transition: "all 0.2s ease",
                 }}
                 aria-pressed={filter === option.value}
@@ -126,10 +129,12 @@ export function CandidatesSection({ parties }: CandidatesSectionProps) {
           </div>
         </div>
 
-        {/* Cards Grid */}
+        {/* Cards Grid - Responsive: 1 col móvil, 2 col tablet+ */}
         <div
           className="grid gap-lg"
-          style={{ gridTemplateColumns: "repeat(2, minmax(0, 1fr))" }}
+          style={{
+            gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 320px), 1fr))",
+          }}
         >
           {filteredParties.map((party, index) => (
             <CandidateCard
@@ -142,7 +147,7 @@ export function CandidatesSection({ parties }: CandidatesSectionProps) {
 
         {filteredParties.length === 0 && (
           <div className="text-center py-3xl">
-            <p className="text-secondary">
+            <p style={{ color: "rgba(255,255,255,0.7)" }}>
               No se encontraron candidatos con ese criterio.
             </p>
           </div>
@@ -211,6 +216,9 @@ function CandidateCard({ party, index }: CandidateCardProps) {
         borderTop: `4px solid ${party.accent_color || "var(--color-primary)"}`,
         cursor: "pointer",
         minHeight: 360,
+        background: "rgba(255,255,255,0.05)",
+        backdropFilter: "blur(10px)",
+        border: "1px solid rgba(255,255,255,0.1)",
       }}
       onClick={() => setIsExpanded(!isExpanded)}
       role="button"
@@ -269,6 +277,7 @@ function CandidateCard({ party, index }: CandidateCardProps) {
             lineHeight: 1.25,
             minHeight: "2.6rem",
             marginBottom: "var(--spacing-xs)",
+            color: "white",
           }}
         >
           {candidateName}
@@ -276,12 +285,13 @@ function CandidateCard({ party, index }: CandidateCardProps) {
 
         {/* Party */}
         <p
-          className="text-secondary line-clamp-1"
+          className="line-clamp-1"
           style={{
             fontSize: "0.875rem",
             lineHeight: 1.35,
             minHeight: "1.25rem",
             marginBottom: "var(--spacing-sm)",
+            color: "rgba(255,255,255,0.7)",
           }}
         >
           {party.name}

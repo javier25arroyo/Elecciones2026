@@ -148,13 +148,8 @@ export function QuizSection({ parties, questions }: QuizSectionProps) {
   return (
     <section
       id="quiz"
-      className="py-3xl"
+      className={`py-3xl ${state === "results" ? "bg-app-light" : "bg-app-gradient"}`}
       style={{
-        background: state === "intro" 
-          ? "linear-gradient(135deg, #002B7F 0%, #0056B3 50%, #CE1126 100%)" 
-          : state === "results"
-          ? "var(--color-background)"
-          : "linear-gradient(180deg, #F5F5F5 0%, #FFFFFF 100%)",
         minHeight: "100vh",
         transition: "background 0.5s ease",
         position: "relative",
@@ -401,7 +396,7 @@ function QuizQuestions({ questions, currentIndex, onAnswer }: QuizQuestionsProps
         key={current.id}
         style={{ 
           padding: "var(--spacing-2xl)",
-          background: "white",
+          background: "rgba(255,255,255,0.95)",
           borderRadius: "var(--radius-xl)",
           boxShadow: "0 10px 40px rgba(0,0,0,0.12)",
           border: "none",
@@ -409,12 +404,18 @@ function QuizQuestions({ questions, currentIndex, onAnswer }: QuizQuestionsProps
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
+          color: "var(--color-background-dark)",
         }}
       >
         {/* Icon indicator */}
         <div 
           className="text-center mb-lg"
-          style={{ fontSize: "3rem", display: "flex", justifyContent: "center" }}
+          style={{
+            fontSize: "3rem",
+            display: "flex",
+            justifyContent: "center",
+            color: "var(--color-background-dark)",
+          }}
         >
           {current.icon && getIconComponent(current.icon)}
         </div>
@@ -426,7 +427,7 @@ function QuizQuestions({ questions, currentIndex, onAnswer }: QuizQuestionsProps
             lineHeight: 1.5,
             fontSize: "1.25rem",
             fontWeight: 600,
-            color: "var(--color-text-primary)",
+            color: "var(--color-background-dark)",
           }}
         >
           {current.text}
@@ -578,8 +579,13 @@ function QuizResults({ results, onReset }: QuizResultsProps) {
         </div>
       )}
 
-      {/* Top 2 y 3 */}
-      <div className="grid gap-md mb-xl" style={{ gridTemplateColumns: "1fr 1fr" }}>
+      {/* Top 2 y 3 - Responsive */}
+      <div 
+        className="grid gap-md mb-xl" 
+        style={{ 
+          gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 250px), 1fr))",
+        }}
+      >
         {top3.slice(1).map((result, index) => (
           <div
             key={result.party.name}

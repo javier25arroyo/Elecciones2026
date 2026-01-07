@@ -36,7 +36,7 @@ export function AccordionItem({
   return (
     <div
       style={{
-        borderBottom: "1px solid var(--color-border)",
+        borderBottom: "1px solid rgba(255,255,255,0.1)",
       }}
     >
       <button
@@ -51,7 +51,7 @@ export function AccordionItem({
         aria-expanded={isOpen}
         aria-controls={`accordion-content-${id}`}
       >
-        <span style={{ fontWeight: 600, color: "var(--color-text-primary)" }}>
+        <span style={{ fontWeight: 600, color: "white" }}>
           {title}
         </span>
         <svg
@@ -64,7 +64,7 @@ export function AccordionItem({
           style={{
             transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
             transition: "transform var(--transition-normal)",
-            color: "var(--color-text-secondary)",
+            color: "rgba(255,255,255,0.7)",
           }}
         >
           <path d="M6 9l6 6 6-6" />
@@ -80,7 +80,7 @@ export function AccordionItem({
         }}
         aria-hidden={!isOpen}
       >
-        <div className="px-md pb-lg text-secondary">{children}</div>
+        <div className="px-md pb-lg" style={{ color: "rgba(255,255,255,0.8)" }}>{children}</div>
       </div>
     </div>
   );
@@ -113,9 +113,11 @@ export function Accordion({ items, allowMultiple = false, className = "" }: Acco
     <div
       className={className}
       style={{
-        border: "1px solid var(--color-border)",
+        border: "1px solid rgba(255,255,255,0.1)",
         borderRadius: "var(--radius-lg)",
         overflow: "hidden",
+        background: "rgba(255,255,255,0.05)",
+        backdropFilter: "blur(10px)",
       }}
     >
       {items.map((item) => (
