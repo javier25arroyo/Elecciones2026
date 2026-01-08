@@ -13,6 +13,7 @@ import SchoolIcon from "@mui/icons-material/SchoolOutlined";
 import ShieldIcon from "@mui/icons-material/ShieldOutlined";
 import HealthIcon from "@mui/icons-material/LocalHospitalOutlined";
 import BoltIcon from "@mui/icons-material/BoltOutlined";
+import DownloadIcon from "@mui/icons-material/DownloadOutlined";
 
 interface CandidatesSectionProps {
   parties: Party[];
@@ -129,11 +130,12 @@ export function CandidatesSection({ parties }: CandidatesSectionProps) {
           </div>
         </div>
 
-        {/* Cards Grid - Responsive: 1 col móvil, 2 col tablet+ */}
+        {/* Cards Grid - Responsive: 1 col móvil, 2 col tablet, 3 col desktop */}
         <div
           className="grid gap-lg"
           style={{
-            gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 320px), 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 340px), 1fr))",
+            alignItems: "stretch",
           }}
         >
           {filteredParties.map((party, index) => (
@@ -177,6 +179,7 @@ function CandidateCard({ party, index }: CandidateCardProps) {
   };
 
   const candidateName = candidate?.name || "Por definir";
+  const accentColor = party.accent_color || "var(--color-primary)";
 
   // Generar tags basados en valores/ideología
   const getTags = () => {
@@ -211,14 +214,20 @@ function CandidateCard({ party, index }: CandidateCardProps) {
   return (
     <article
       ref={ref}
-      className={`card card-solid h-full scroll-reveal scroll-reveal-delay-${Math.min(index % 6 + 1, 5)}`}
+      className={`card scroll-reveal scroll-reveal-delay-${Math.min(index % 6 + 1, 5)}`}
       style={{
-        borderTop: `4px solid ${party.accent_color || "var(--color-primary)"}`,
+        borderTop: `4px solid ${accentColor}`,
         cursor: "pointer",
-        minHeight: 360,
-        background: "rgba(255,255,255,0.05)",
+        display: "flex",
+        flexDirection: "column",
+        height: isExpanded ? "auto" : "500px",
+        background: "rgba(255,255,255,0.1)",
         backdropFilter: "blur(10px)",
-        border: "1px solid rgba(255,255,255,0.1)",
+        border: "1px solid rgba(255,255,255,0.2)",
+        boxShadow: "var(--shadow-md)",
+        transition: "all var(--transition-slow)",
+        position: "relative",
+        overflow: "hidden",
       }}
       onClick={() => setIsExpanded(!isExpanded)}
       role="button"
@@ -226,18 +235,30 @@ function CandidateCard({ party, index }: CandidateCardProps) {
       onKeyDown={(e) => e.key === "Enter" && setIsExpanded(!isExpanded)}
       aria-expanded={isExpanded}
     >
-      <div className="flex flex-col items-center text-center h-full">
+      <div 
+        className="flex flex-col items-center text-center" 
+        style={{ 
+          flex: 1, 
+          display: "flex", 
+          flexDirection: "column",
+          height: "100%",
+          position: "relative",
+        }}
+      >
         {/* Logo / Photo */}
         <div
           className="relative"
           style={{
-            width: 90,
-            height: 90,
+            width: 100,
+            height: 100,
             borderRadius: "50%",
             overflow: "hidden",
-            background: "var(--color-background-secondary)",
-            border: `3px solid ${party.accent_color || "var(--color-border)"}`,
-            boxShadow: `0 4px 12px ${party.accent_color || "var(--color-primary)"}20`,
+            background: "linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)",
+            border: `3px solid ${accentColor}`,
+            boxShadow: `0 8px 24px ${accentColor}30, 0 0 0 1px rgba(255,255,255,0.1)`,
+            flexShrink: 0,
+            marginBottom: "var(--spacing-md)",
+            transition: "all var(--transition-slow)",
           }}
         >
           {candidate?.photo_url ? (
@@ -262,7 +283,7 @@ function CandidateCard({ party, index }: CandidateCardProps) {
               style={{
                 fontSize: "1.5rem",
                 fontWeight: 700,
-                color: "var(--color-text-secondary)",
+                color: accentColor,
               }}
             >
               {getInitials(candidateName)}
@@ -270,79 +291,143 @@ function CandidateCard({ party, index }: CandidateCardProps) {
           )}
         </div>
 
-        {/* Name */}
+        {/* Name - Altura fija para simetría */}
         <h3
-          className="mt-md mb-xs line-clamp-2"
+          className="mb-sm"
           style={{
-            lineHeight: 1.25,
-            minHeight: "2.6rem",
-            marginBottom: "var(--spacing-xs)",
+            fontSize: "1.125rem",
+            fontWeight: 700,
+            lineHeight: 1.3,
+            minHeight: "3rem",
+            maxHeight: "3rem",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
             color: "white",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
+            padding: "0 var(--spacing-sm)",
+            marginBottom: "var(--spacing-sm)",
           }}
         >
           {candidateName}
         </h3>
 
-        {/* Party */}
+        {/* Party - Altura fija para simetría */}
         <p
-          className="line-clamp-1"
+          className="mb-md"
           style={{
             fontSize: "0.875rem",
-            lineHeight: 1.35,
-            minHeight: "1.25rem",
-            marginBottom: "var(--spacing-sm)",
-            color: "rgba(255,255,255,0.7)",
+            lineHeight: 1.4,
+            minHeight: "2.5rem",
+            maxHeight: "2.5rem",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            color: "rgba(255,255,255,0.8)",
+            fontWeight: 500,
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
+            padding: "0 var(--spacing-sm)",
+            marginBottom: "var(--spacing-md)",
           }}
         >
           {party.name}
         </p>
 
-        {/* Ideology badge */}
-        {party.ideology ? (
-          <Badge variant="neutral" className="mb-sm">
-            {party.ideology.split("(")[0].trim()}
-          </Badge>
-        ) : (
-          <div aria-hidden className="mb-sm" style={{ height: 24 }} />
-        )}
-
-        {/* Tags de posturas - Snackable content */}
-        <div
-          className="flex flex-wrap justify-center gap-xs mb-md"
-          style={{ minHeight: 26 }}
+        {/* Ideology badge - Altura fija para simetría */}
+        <div 
+          style={{ 
+            minHeight: "32px",
+            maxHeight: "32px",
+            display: "flex", 
+            alignItems: "center", 
+            justifyContent: "center", 
+            marginBottom: "var(--spacing-md)",
+            width: "100%",
+          }}
         >
-          {tags.map((tag) => (
-            <span
-              key={tag.label}
+          {party.ideology ? (
+            <Badge 
+              variant="neutral" 
               style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "4px",
-                background: `color-mix(in srgb, ${tag.color} 12%, transparent)`,
-                color: tag.color,
-                border: `1px solid color-mix(in srgb, ${tag.color} 22%, transparent)`,
-                padding: "4px 10px",
-                borderRadius: "var(--radius-full)",
-                fontSize: "0.75rem",
-                lineHeight: 1,
+                background: `color-mix(in srgb, ${accentColor} 15%, rgba(255,255,255,0.05))`,
+                color: accentColor,
+                border: `1px solid color-mix(in srgb, ${accentColor} 30%, transparent)`,
                 fontWeight: 600,
+                fontSize: "0.75rem",
               }}
             >
-              {tag.icon} {tag.label}
-            </span>
-          ))}
+              {party.ideology.split("(")[0].trim()}
+            </Badge>
+          ) : (
+            <div style={{ height: "32px" }} />
+          )}
+        </div>
+
+        {/* Tags de posturas - Altura fija para simetría */}
+        <div
+          className="flex flex-wrap justify-center gap-xs"
+          style={{ 
+            minHeight: "64px",
+            maxHeight: "64px",
+            alignContent: tags.length > 0 ? "center" : "flex-start",
+            overflow: "hidden",
+            marginBottom: "var(--spacing-md)",
+            padding: "0 var(--spacing-sm)",
+            width: "100%",
+          }}
+        >
+          {tags.length > 0 ? (
+            tags.slice(0, 3).map((tag) => (
+              <span
+                key={tag.label}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "4px",
+                  background: `color-mix(in srgb, ${tag.color} 15%, rgba(0,0,0,0.3))`,
+                  color: tag.color,
+                  border: `1px solid color-mix(in srgb, ${tag.color} 35%, transparent)`,
+                  padding: "6px 12px",
+                  borderRadius: "var(--radius-full)",
+                  fontSize: "0.75rem",
+                  lineHeight: 1.2,
+                  fontWeight: 600,
+                  whiteSpace: "nowrap",
+                  boxShadow: `0 2px 8px ${tag.color}15`,
+                }}
+              >
+                {tag.icon} {tag.label}
+              </span>
+            ))
+          ) : (
+            <div style={{ height: "64px" }} />
+          )}
         </div>
 
         {/* Expanded content */}
         {isExpanded && (
           <div
             className="w-full mt-md pt-md text-left animate-fade-in"
-            style={{ borderTop: "1px solid var(--color-border)" }}
+            style={{ 
+              borderTop: "1px solid rgba(255,255,255,0.2)",
+              marginTop: "var(--spacing-md)",
+              paddingTop: "var(--spacing-md)",
+            }}
           >
             {/* Values */}
             {party.values && party.values.length > 0 && (
               <div className="mb-md">
-                <h4 style={{ fontSize: "0.875rem", marginBottom: "var(--spacing-sm)" }}>
+                <h4 style={{ 
+                  fontSize: "0.875rem", 
+                  marginBottom: "var(--spacing-sm)",
+                  color: "white",
+                }}>
                   Valores clave
                 </h4>
                 <ul
@@ -356,18 +441,18 @@ function CandidateCard({ party, index }: CandidateCardProps) {
                   {party.values.slice(0, 3).map((value) => (
                     <li
                       key={value}
-                      className="text-secondary"
                       style={{
                         padding: "var(--spacing-xs) 0",
                         paddingLeft: "var(--spacing-md)",
                         position: "relative",
+                        color: "rgba(255,255,255,0.8)",
                       }}
                     >
                       <span
                         style={{
                           position: "absolute",
                           left: 0,
-                          color: party.accent_color || "var(--color-primary)",
+                          color: accentColor,
                         }}
                       >
                         •
@@ -382,10 +467,19 @@ function CandidateCard({ party, index }: CandidateCardProps) {
             {/* Vice presidents */}
             {(candidate?.first_vice_president || candidate?.second_vice_president) && (
               <div className="mb-md">
-                <h4 style={{ fontSize: "0.875rem", marginBottom: "var(--spacing-sm)" }}>
+                <h4 style={{ 
+                  fontSize: "0.875rem", 
+                  marginBottom: "var(--spacing-sm)",
+                  color: "white",
+                }}>
                   Fórmula presidencial
                 </h4>
-                <p className="text-secondary" style={{ fontSize: "0.875rem", lineHeight: 1.5, marginBottom: 0 }}>
+                <p style={{ 
+                  fontSize: "0.875rem", 
+                  lineHeight: 1.5, 
+                  marginBottom: 0,
+                  color: "rgba(255,255,255,0.8)",
+                }}>
                   {candidate.first_vice_president && (
                     <>1er Vice: {candidate.first_vice_president}<br /></>
                   )}
@@ -393,6 +487,37 @@ function CandidateCard({ party, index }: CandidateCardProps) {
                     <>2do Vice: {candidate.second_vice_president}</>
                   )}
                 </p>
+              </div>
+            )}
+
+            {/* Plan de gobierno */}
+            {party.plan_url && (
+              <div className="mb-md">
+                <h4 style={{ 
+                  fontSize: "0.875rem", 
+                  marginBottom: "var(--spacing-sm)",
+                  color: "white",
+                }}>
+                  Plan de gobierno
+                </h4>
+                <a
+                  href={party.plan_url}
+                  download
+                  className="btn btn-sm"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "0.4rem",
+                    background: accentColor,
+                    color: "white",
+                    border: "none",
+                  }}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <DownloadIcon sx={{ fontSize: "1rem" }} /> Descargar PDF
+                </a>
               </div>
             )}
 
@@ -407,7 +532,10 @@ function CandidateCard({ party, index }: CandidateCardProps) {
                     rel="noopener noreferrer"
                     className="btn btn-sm btn-ghost"
                     onClick={(e) => e.stopPropagation()}
-                    style={{ textTransform: "capitalize" }}
+                    style={{ 
+                      textTransform: "capitalize",
+                      color: "rgba(255,255,255,0.9)",
+                    }}
                   >
                     {label} ↗
                   </a>
@@ -417,17 +545,31 @@ function CandidateCard({ party, index }: CandidateCardProps) {
           </div>
         )}
 
-        {/* Expand indicator */}
+        {/* Expand indicator - Siempre al fondo */}
         <div
-          className="mt-auto pt-md"
           style={{ 
-            fontSize: "0.75rem",
-            color: party.accent_color || "var(--color-primary)",
-            fontWeight: 500,
-            borderTop: isExpanded ? "none" : "1px solid var(--color-border)",
+            marginTop: "auto",
+            paddingTop: "var(--spacing-md)",
+            fontSize: "0.8rem",
+            color: accentColor,
+            fontWeight: 600,
+            borderTop: isExpanded ? "none" : "1px solid rgba(255,255,255,0.2)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "0.25rem",
+            transition: "all 0.2s ease",
           }}
         >
-          {isExpanded ? "▲ Cerrar" : "▼ Ver más"}
+          <span style={{ 
+            fontSize: "0.7rem",
+            transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)",
+            transition: "transform 0.3s ease",
+            display: "inline-block",
+          }}>
+            ▼
+          </span>
+          {isExpanded ? "Cerrar" : "Ver más"}
         </div>
       </div>
     </article>

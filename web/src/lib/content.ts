@@ -6,6 +6,7 @@ export type Party = {
   name: string;
   logo_url?: string;
   logo_urls?: string[];
+  plan_url?: string;
   presidential_candidate?: {
     name?: string;
     first_vice_president?: string;
@@ -59,6 +60,7 @@ export async function getContent(): Promise<Content> {
       ...party,
       logo_url: withBase(party.logo_url),
       logo_urls: party.logo_urls?.map((u) => withBase(u) as string),
+      plan_url: withBase(party.plan_url),
       presidential_candidate: party.presidential_candidate
         ? {
             ...party.presidential_candidate,

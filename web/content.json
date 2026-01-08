@@ -24,7 +24,8 @@
         "website": "https://www.somosadncr.com",
         "facebook": "https://www.facebook.com/somosadncr"
       },
-      "accent_color": "#F7B500"
+      "accent_color": "#F7B500",
+      "plan_url": "/plans/CAC.pdf"
     },
     {
       "name": "Partido Alianza Costa Rica Primero (CR1)",
@@ -50,7 +51,8 @@
         "website": "https://costaricaprimero.org",
         "facebook": "https://www.facebook.com/partidocostaricaprimero"
       },
-      "accent_color": "#FF69B4"
+      "accent_color": "#FF69B4",
+      "plan_url": "/plans/CR1.pdf"
     },
     {
       "name": "Partido Aquí Costa Rica Manda (ACRM)",
@@ -76,7 +78,8 @@
         "website": "https://acrm.cr",
         "facebook": "https://www.facebook.com/partidoacrm"
       },
-      "accent_color": "#0057B8"
+      "accent_color": "#0057B8",
+      "plan_url": "/plans/ACRM.pdf"
     },
     {
       "name": "Partido Avanza",
@@ -102,7 +105,8 @@
         "website": "https://www.avanzacr.net",
         "facebook": "https://www.facebook.com/PartidoAvanzaCR"
       },
-      "accent_color": "#0074A8"
+      "accent_color": "#0074A8",
+      "plan_url": "/plans/PA.pdf"
     },
     {
       "name": "Partido Centro Democrático y Social (CDS)",
@@ -127,7 +131,8 @@
       "official_links": {
         "facebook": "https://www.facebook.com/centrodemocraticoysocial"
       },
-      "accent_color": "#8B4513"
+      "accent_color": "#8B4513",
+      "plan_url": "/plans/CDS.pdf"
     },
     {
       "name": "Partido De la Clase Trabajadora (PT)",
@@ -153,7 +158,8 @@
         "website": "https://ptcostarica.org",
         "facebook": "https://www.facebook.com/ptcostarica"
       },
-      "accent_color": "#DC143C"
+      "accent_color": "#DC143C",
+      "plan_url": "/plans/PDLCT.pdf"
     },
     {
       "name": "Partido Esperanza Nacional (PEN)",
@@ -179,7 +185,8 @@
         "website": "https://esperanzanacional.cr",
         "facebook": "https://www.facebook.com/PartidoEsperanzaNacional"
       },
-      "accent_color": "#2E8B57"
+      "accent_color": "#2E8B57",
+      "plan_url": "/plans/PEN.pdf"
     },
     {
       "name": "Partido Esperanza y Libertad (PEL)",
@@ -205,7 +212,8 @@
         "website": "https://www.esperanzaylibertad.com",
         "facebook": "https://www.facebook.com/p/Partido-Esperanza-y-Libertad-100094280552557"
       },
-      "accent_color": "#FFA500"
+      "accent_color": "#FFA500",
+      "plan_url": "/plans/PEL.pdf"
     },
     {
       "name": "Partido Frente Amplio (FA)",
@@ -231,7 +239,8 @@
         "website": "https://www.frenteamplio.org",
         "facebook": "https://www.facebook.com/frenteamplioCRICA"
       },
-      "accent_color": "#F5C800"
+      "accent_color": "#F5C800",
+      "plan_url": "/plans/FA.pdf"
     },
     {
       "name": "Partido Integración Nacional (PIN)",
@@ -256,7 +265,8 @@
       "official_links": {
         "facebook": "https://www.facebook.com/PartidoIntegracionNacional"
       },
-      "accent_color": "#4169E1"
+      "accent_color": "#4169E1",
+      "plan_url": "/plans/PIN.pdf"
     },
     {
       "name": "Partido Justicia Social Costarricense (PJSC)",
@@ -281,7 +291,8 @@
       "official_links": {
         "facebook": "https://www.facebook.com/JusticiaSocialCostarricense"
       },
-      "accent_color": "#B22222"
+      "accent_color": "#B22222",
+      "plan_url": "/plans/PJSC.pdf"
     },
     {
       "name": "Partido Liberación Nacional (PLN)",
@@ -307,7 +318,8 @@
         "website": "https://www.plncr.org",
         "facebook": "https://www.facebook.com/partidoliberacionnacional"
       },
-      "accent_color": "#00693E"
+      "accent_color": "#00693E",
+      "plan_url": "/plans/PLN.pdf"
     },
     {
       "name": "Partido Liberal Progresista (PLP)",
@@ -333,7 +345,8 @@
         "website": "https://liberal.cr",
         "facebook": "https://www.facebook.com/liberalcr"
       },
-      "accent_color": "#1B6BD1"
+      "accent_color": "#1B6BD1",
+      "plan_url": "/plans/PLP.pdf"
     },
     {
       "name": "Partido Nueva Generación (PNG)",
@@ -358,7 +371,8 @@
       "official_links": {
         "facebook": "https://www.facebook.com/PartidoNuevaGeneracion"
       },
-      "accent_color": "#27408B"
+      "accent_color": "#27408B",
+      "plan_url": "/plans/PNG.pdf"
     },
     {
       "name": "Partido Nueva República (PNR)",
@@ -384,7 +398,8 @@
         "website": "https://nuevarepublica.cr/",
         "facebook": "https://www.facebook.com/PartidoNuevaRepublica"
       },
-      "accent_color": "#0B3D91"
+      "accent_color": "#0B3D91",
+      "plan_url": "/plans/PNR.pdf"
     },
     {
       "name": "Partido Progreso Social Democrático (PPSD)",
@@ -410,7 +425,8 @@
         "website": "https://sites.google.com/progreso.cr/progreso",
         "facebook": "https://www.facebook.com/CostaRicaProgreso"
       },
-      "accent_color": "#8E44AD"
+      "accent_color": "#8E44AD",
+      "plan_url": "/plans/PSD.pdf"
     },
     {
       "name": "Partido Pueblo Soberano (PPSO)",
@@ -436,7 +452,8 @@
         "website": "https://www.pueblosoberano.org",
         "facebook": "https://www.facebook.com/ppscostarica"
       },
-      "accent_color": "#00008B"
+      "accent_color": "#00008B",
+      "plan_url": "/plans/PPSO.pdf"
     },
     {
       "name": "Partido Unidad Social Cristiana (PUSC)",
@@ -462,7 +479,8 @@
         "website": "https://www.partidounidad.com",
         "facebook": "https://www.facebook.com/PUSC.cr"
       },
-      "accent_color": "#D52B1E"
+      "accent_color": "#D52B1E",
+      "plan_url": "/plans/PUSC.pdf"
     },
     {
       "name": "Partido Unidos Podemos (PUP)",
@@ -488,7 +506,8 @@
         "website": "https://unidospodemos.cr",
         "facebook": "https://www.facebook.com/partidounidospodemos"
       },
-      "accent_color": "#0099CC"
+      "accent_color": "#0099CC",
+      "plan_url": "/plans/UP.pdf"
     },
     {
       "name": "Partido Unión Costarricense Democrática (PUCD)",
@@ -514,7 +533,8 @@
         "website": "https://partidoucd.com",
         "facebook": "https://www.facebook.com/BorisMolinaA"
       },
-      "accent_color": "#2E8B57"
+      "accent_color": "#2E8B57",
+      "plan_url": "/plans/PUCD.pdf"
     }
   ],
   "quiz": {
@@ -522,49 +542,69 @@
       {
         "id": "renewables",
         "text": "¿El Estado debería invertir más en energías renovables y transporte público limpio?",
-        "axis": { "env": 1, "econ": -0.2 },
+        "axis": {
+          "env": 1,
+          "econ": -0.2
+        },
         "icon": "LeafIcon"
       },
       {
         "id": "taxes",
         "text": "¿Se deberían aumentar impuestos a grandes empresas para financiar programas sociales?",
-        "axis": { "econ": -1 },
+        "axis": {
+          "econ": -1
+        },
         "icon": "TrendingIcon"
       },
       {
         "id": "dereg",
         "text": "¿Se deberían reducir trámites e impuestos para facilitar emprender y generar empleo?",
-        "axis": { "econ": 1 },
+        "axis": {
+          "econ": 1
+        },
         "icon": "RocketIcon"
       },
       {
         "id": "public-edu",
         "text": "¿La educación pública debe recibir más inversión que la privada?",
-        "axis": { "econ": -0.6, "social": -0.2 },
+        "axis": {
+          "econ": -0.6,
+          "social": -0.2
+        },
         "icon": "BookIcon"
       },
       {
         "id": "security",
         "text": "¿Preferís un enfoque de seguridad con medidas más estrictas y mano firme?",
-        "axis": { "social": 0.9 },
+        "axis": {
+          "social": 0.9
+        },
         "icon": "ShieldIcon"
       },
       {
         "id": "civil-liberties",
         "text": "¿Las libertades civiles deben protegerse aunque entren en conflicto con valores tradicionales?",
-        "axis": { "social": -1 },
+        "axis": {
+          "social": -1
+        },
         "icon": "ScaleIcon"
       },
       {
         "id": "market-env",
         "text": "¿El mercado y la innovación privada son la mejor vía para resolver los problemas ambientales?",
-        "axis": { "env": 0.4, "econ": 0.6 },
+        "axis": {
+          "env": 0.4,
+          "econ": 0.6
+        },
         "icon": "BulbIcon"
       },
       {
         "id": "social-programs",
         "text": "¿El gobierno debe expandir los programas de asistencia social para los más vulnerables?",
-        "axis": { "econ": -0.7, "social": -0.3 },
+        "axis": {
+          "econ": -0.7,
+          "social": -0.3
+        },
         "icon": "PeopleIcon"
       }
     ]

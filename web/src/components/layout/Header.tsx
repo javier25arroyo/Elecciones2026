@@ -54,37 +54,37 @@ export function Header() {
         }}
       />
 
-      <div className="container mx-auto px-4 h-17.5 flex items-center justify-between">
+      <div className="container mx-auto px-4 max-w-7xl h-17.5 flex items-center justify-between">
         {/* Logo */}
         <Link
           href="/"
-          className="flex items-center gap-3 group focus:outline-none"
+          className="flex items-center gap-3 group focus:outline-none shrink-0"
           onClick={() => setIsMenuOpen(false)}
         >
           <div className="relative p-2 bg-white/10 rounded-lg group-hover:bg-white/20 transition-colors ring-1 ring-white/10">
             <Flag className="w-5 h-5 text-white" />
           </div>
-          <span className="text-xl font-bold text-white tracking-tight">
+          <span className="text-xl font-bold text-white tracking-tight whitespace-nowrap">
             Elecciones <span className="text-blue-400">CR</span>
           </span>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-8 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
           {navLinks.map((link) => (
             <Link
               key={link.label}
               href={link.href}
-              className="text-sm font-medium text-slate-300 hover:text-white transition-colors relative group py-2"
+              className="text-sm font-medium text-slate-300 hover:text-white transition-colors relative group py-2 whitespace-nowrap"
             >
               {link.label}
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 group-hover:w-full transition-all duration-300 ease-out" />
             </Link>
           ))}
+        </nav>
 
-          <div className="w-px h-6 bg-slate-700 mx-2" />
-
-          {/* GitHub Link placehoder - Actualiza con la URL real si es necesario */}
+        {/* GitHub Link - Desktop */}
+        <div className="hidden md:flex items-center gap-4 shrink-0">
           <a
             href="https://github.com/javier25arroyo/info-politic-2026" 
             target="_blank"
@@ -94,11 +94,11 @@ export function Header() {
           >
             <Github className="w-5 h-5" />
           </a>
-        </nav>
+        </div>
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden p-2 text-slate-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+          className="md:hidden p-2 text-slate-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500/50 shrink-0"
           onClick={toggleMenu}
           aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
           aria-expanded={isMenuOpen}
