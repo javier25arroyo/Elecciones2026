@@ -86,7 +86,7 @@ export function Header() {
         {/* GitHub Link - Desktop */}
         <div className="hidden md:flex items-center gap-4 shrink-0">
           <a
-            href="https://github.com/javier25arroyo/info-politic-2026" 
+            href="https://github.com/javier25arroyo" 
             target="_blank"
             rel="noopener noreferrer"
             className="p-2 text-slate-400 hover:text-white hover:bg-white/10 rounded-full transition-all"
