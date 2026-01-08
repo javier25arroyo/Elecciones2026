@@ -144,7 +144,7 @@ export function Header() {
                  transition={{ delay: navLinks.length * 0.05 }}
               >
                   <a
-                    href="https://github.com/javier25arroyo/info-politic-2026"
+                    href="https://github.com/javier25arroyo"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors font-medium flex items-center gap-3"
