@@ -2,7 +2,7 @@
 
 import { Inter, Poppins } from "next/font/google";
 import { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
+import { Header } from "@/components/layout";
 import "./globals.css";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
@@ -46,11 +46,11 @@ export default function RootLayout({
         <link rel="icon" href={`${basePath}/assets/others/FlagCosta_Rica.ico`} />
       </head>
       <body className={`${inter.variable} ${poppins.variable} ${mounted ? 'is-mounted' : ''} antialiased min-h-screen flex flex-col bg-gray-50 dark:bg-black/95`}>
-        <Navbar />
+        <Header />
         <a href="#main-content" className="skip-link">
           Saltar al contenido principal
         </a>
-        <main id="main-content" className="flex-grow">
+        <main id="main-content" className="grow">
           {children}
         </main>
       </body>

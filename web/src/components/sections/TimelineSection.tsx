@@ -11,12 +11,13 @@ import {
   RestartAltOutlined as RestartIcon,
   LocationOnOutlined as LocationIcon,
 } from "@mui/icons-material";
+import type { SvgIconComponent } from "@mui/icons-material";
 
 interface TimelineEvent {
   date: string;
   title: string;
   description: string;
-  icon: React.ReactNode;
+  Icon: SvgIconComponent;
   isPast: boolean;
   isCurrent: boolean;
 }
@@ -26,7 +27,7 @@ const timelineEvents: TimelineEvent[] = [
     date: "1 Oct 2025",
     title: "Inicio de campaña",
     description: "Los partidos políticos inician oficialmente sus campañas electorales.",
-    icon: <PaletteIcon />,
+    Icon: PaletteIcon,
     isPast: true,
     isCurrent: false,
   },
@@ -34,7 +35,7 @@ const timelineEvents: TimelineEvent[] = [
     date: "15 Dic 2025",
     title: "Cierre de inscripciones",
     description: "Fecha límite para inscribir candidaturas ante el TSE.",
-    icon: <DocIcon />,
+    Icon: DocIcon,
     isPast: true,
     isCurrent: false,
   },
@@ -42,7 +43,7 @@ const timelineEvents: TimelineEvent[] = [
     date: "4 Ene 2026",
     title: "Período de debates",
     description: "Debates oficiales entre candidatos organizados por medios de comunicación.",
-    icon: <MicIcon />,
+    Icon: MicIcon,
     isPast: false,
     isCurrent: true,
   },
@@ -50,7 +51,7 @@ const timelineEvents: TimelineEvent[] = [
     date: "29 Ene 2026",
     title: "Cierre de campaña",
     description: "Último día permitido para actividades de campaña electoral.",
-    icon: <FlagIcon />,
+    Icon: FlagIcon,
     isPast: false,
     isCurrent: false,
   },
@@ -58,7 +59,7 @@ const timelineEvents: TimelineEvent[] = [
     date: "1 Feb 2026",
     title: "Día de elección",
     description: "Elecciones presidenciales y legislativas. ¡Tu voto cuenta!",
-    icon: <VoteIcon />,
+    Icon: VoteIcon,
     isPast: false,
     isCurrent: false,
   },
@@ -66,7 +67,7 @@ const timelineEvents: TimelineEvent[] = [
     date: "6 Abr 2026",
     title: "Segunda ronda",
     description: "Balotaje en caso de que ningún candidato obtenga el 40% de los votos.",
-    icon: <RestartIcon />,
+    Icon: RestartIcon,
     isPast: false,
     isCurrent: false,
   },
@@ -199,16 +200,28 @@ function TimelineItem({ event, index, isLeft }: TimelineItemProps) {
           }`,
           color: "white",
           zIndex: 1,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          display: "grid",
+          placeItems: "center",
           flexShrink: 0,
           boxShadow: event.isCurrent
             ? "0 4px 14px rgba(0,0,0,0.25)"
             : "0 2px 8px rgba(0,0,0,0.15)",
         }}
       >
-        {renderIcon(event.icon, "1.5rem")}
+        <span
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            lineHeight: 0,
+          }}
+        >
+          <event.Icon sx={{ fontSize: 24 }} />
+        </span>
       </div>
 
       {/* Empty space - Desktop */}
@@ -239,34 +252,32 @@ function TimelineItem({ event, index, isLeft }: TimelineItemProps) {
             }`,
             color: "white",
             zIndex: 1,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
+            display: "grid",
+            placeItems: "center",
             boxShadow: event.isCurrent
               ? "0 3px 10px rgba(0,0,0,0.2)"
               : "0 2px 6px rgba(0,0,0,0.1)",
           }}
         >
-          {renderIcon(event.icon, "1.125rem")}
+          <span
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              lineHeight: 0,
+            }}
+          >
+            <event.Icon sx={{ fontSize: 18 }} />
+          </span>
         </div>
         <TimelineCard event={event} />
       </div>
     </div>
   );
-}
-
-function renderIcon(icon: React.ReactNode, size: string) {
-  if (React.isValidElement(icon)) {
-    return React.cloneElement(icon as React.ReactElement<{ sx?: object }>, {
-      sx: {
-        fontSize: size,
-        display: "block",
-        width: size,
-        height: size,
-      },
-    });
-  }
-  return icon;
 }
 
 function TimelineCard({ event }: { event: TimelineEvent }) {
