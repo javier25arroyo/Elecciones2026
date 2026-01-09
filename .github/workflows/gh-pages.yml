@@ -38,7 +38,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build static export
-        run: pnpm run build:gh-pages
+        run: pnpm run build
 
       - name: Add .nojekyll file
         run: touch out/.nojekyll
