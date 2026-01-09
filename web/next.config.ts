@@ -1,8 +1,6 @@
 import type { NextConfig } from "next";
 import path from "node:path";
 
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-
 const nextConfig: NextConfig = {
   turbopack: {
     root: path.resolve(__dirname),
@@ -10,8 +8,8 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath,
-  assetPrefix: basePath || undefined,
+  // La app se sirve en la raíz del dominio (http://elecciones2026.lat/),
+  // por lo que no usamos basePath/assetPrefix personalizados.
   trailingSlash: true,
   output: "export",
   poweredByHeader: false,
