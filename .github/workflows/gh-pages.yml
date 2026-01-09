@@ -38,9 +38,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build static export
-        env:
-          NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
-        run: pnpm export
+        run: pnpm run build:gh-pages
 
       - name: Add .nojekyll file
         run: touch out/.nojekyll
