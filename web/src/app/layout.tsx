@@ -54,6 +54,8 @@ export default function RootLayout({
         <meta property="og:type" content="website" />
         <meta property="og:url" content={normalizedSiteUrl} />
         <meta property="og:image" content={previewImage} />
+        <meta property="og:image:width" content="1633" />
+        <meta property="og:image:height" content="980" />
         <meta property="og:image:alt" content="Bandera de Costa Rica" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Elecciones Costa Rica 2026 | Información Electoral" />
