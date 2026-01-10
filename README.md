@@ -75,7 +75,6 @@ Deploy:       GitHub Pages (Export estático)
 ---
 
 ## 💻 Instalación y Uso
-## 💻 Instalación y Uso
 
 ### Prerrequisitos
 - Node.js 20+
