@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "export": "next build",
-    "build:gh-pages": "cross-env NEXT_PUBLIC_BASE_PATH=/Elecciones2026 NEXT_PUBLIC_ASSET_PREFIX=/Elecciones2026 next build"
+    "build:gh-pages": "cross-env NEXT_PUBLIC_BASE_PATH=/Elecciones2026 NEXT_PUBLIC_ASSET_PREFIX=/Elecciones2026 next build",
+    "generate:pwa-icons": "node scripts/generate-pwa-icons.mjs"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -29,6 +30,7 @@
     "cross-env": "^7.0.3",
     "eslint": "^9",
     "eslint-config-next": "16.1.1",
+    "sharp": "^0.34.5",
     "tailwindcss": "^4",
     "typescript": "^5"
   },

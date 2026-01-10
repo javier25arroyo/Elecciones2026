@@ -1,29 +1,46 @@
 import { getContent } from "@/lib/content";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
+import dynamic from "next/dynamic";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { CandidatesSection } from "@/components/sections/CandidatesSection";
-import { TimelineSection } from "@/components/sections/TimelineSection";
-import { EducationSection } from "@/components/sections/EducationSection";
-import { QuizSection } from "@/components/sections/QuizSection";
+
+// Lazy load componentes pesados que no están en el viewport inicial
+const TimelineSection = dynamic(
+  () => import("@/components/sections/TimelineSection").then(mod => ({ default: mod.TimelineSection })),
+  { 
+    loading: () => <div style={{ minHeight: "400px" }} />,
+    ssr: true 
+  }
+);
+
+const EducationSection = dynamic(
+  () => import("@/components/sections/EducationSection").then(mod => ({ default: mod.EducationSection })),
+  { 
+    loading: () => <div style={{ minHeight: "400px" }} />,
+    ssr: true 
+  }
+);
+
+const QuizSection = dynamic(
+  () => import("@/components/sections/QuizSection").then(mod => ({ default: mod.QuizSection })),
+  { 
+    loading: () => <div style={{ minHeight: "400px" }} />,
+    ssr: true 
+  }
+);
 
 export default async function Home() {
   const content = await getContent();
 
   return (
     <>
-      <Header />
-      <main id="main-content">
-        <HeroSection />
-        <CandidatesSection parties={content.parties} />
-        <TimelineSection />
-        <EducationSection />
-        <QuizSection 
-          parties={content.parties} 
-          questions={content.quiz?.questions} 
-        />
-      </main>
-      <Footer />
+      <HeroSection />
+      <CandidatesSection parties={content.parties} />
+      <TimelineSection />
+      <EducationSection />
+      <QuizSection 
+        parties={content.parties} 
+        questions={content.quiz?.questions} 
+      />
     </>
   );
 }

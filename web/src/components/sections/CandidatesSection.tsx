@@ -268,6 +268,8 @@ function CandidateCard({ party, index }: CandidateCardProps) {
               fill
               className="object-cover"
               sizes="100px"
+              loading="lazy"
+              decoding="async"
             />
           ) : logoUrl ? (
             <Image
@@ -276,6 +278,8 @@ function CandidateCard({ party, index }: CandidateCardProps) {
               fill
               className="object-contain p-2"
               sizes="100px"
+              loading="lazy"
+              decoding="async"
             />
           ) : (
             <div
@@ -355,13 +359,24 @@ function CandidateCard({ party, index }: CandidateCardProps) {
             <Badge 
               variant="neutral" 
               style={{
-                background: `color-mix(in srgb, ${accentColor} 15%, rgba(255,255,255,0.05))`,
-                color: accentColor,
-                border: `1px solid color-mix(in srgb, ${accentColor} 30%, transparent)`,
+                background: `color-mix(in srgb, ${accentColor} 20%, rgba(0,0,0,0.4))`, // Fondo más oscuro para contraste
+                color: "#ffffff", // Texto blanco siempre para legibilidad
+                border: `1px solid color-mix(in srgb, ${accentColor} 60%, rgba(255,255,255,0.3))`, // Borde más visible
                 fontWeight: 600,
                 fontSize: "0.75rem",
+                letterSpacing: "0.02em",
+                boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
               }}
             >
+              <span style={{ 
+                display: "inline-block", 
+                width: "6px", 
+                height: "6px", 
+                borderRadius: "50%", 
+                backgroundColor: accentColor, 
+                marginRight: "6px",
+                boxShadow: `0 0 6px ${accentColor}`
+              }} />
               {party.ideology.split("(")[0].trim()}
             </Badge>
           ) : (
@@ -389,20 +404,22 @@ function CandidateCard({ party, index }: CandidateCardProps) {
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
-                  gap: "4px",
-                  background: `color-mix(in srgb, ${tag.color} 15%, rgba(0,0,0,0.3))`,
-                  color: tag.color,
-                  border: `1px solid color-mix(in srgb, ${tag.color} 35%, transparent)`,
-                  padding: "6px 12px",
-                  borderRadius: "var(--radius-full)",
+                  gap: "6px",
+                  background: "rgba(255, 255, 255, 0.08)", // Fondo neutro translúcido
+                  color: "#ffffff", // Texto blanco para legibilidad
+                  border: `1px solid ${tag.color}`, // Borde lleva el color
+                  borderLeftWidth: "3px", // Acento lateral más fuerte
+                  padding: "6px 10px",
+                  borderRadius: "var(--radius-md)",
                   fontSize: "0.75rem",
                   lineHeight: 1.2,
                   fontWeight: 600,
                   whiteSpace: "nowrap",
-                  boxShadow: `0 2px 8px ${tag.color}15`,
+                  boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
                 }}
               >
-                {tag.icon} {tag.label}
+                <span style={{ color: tag.color, display: "flex" }}>{tag.icon}</span> 
+                {tag.label}
               </span>
             ))
           ) : (
@@ -427,6 +444,9 @@ function CandidateCard({ party, index }: CandidateCardProps) {
                   fontSize: "0.875rem", 
                   marginBottom: "var(--spacing-sm)",
                   color: "white",
+                  fontWeight: 600,
+                  borderBottom: "1px solid rgba(255,255,255,0.1)",
+                  paddingBottom: "4px"
                 }}>
                   Valores clave
                 </h4>
@@ -445,14 +465,18 @@ function CandidateCard({ party, index }: CandidateCardProps) {
                         padding: "var(--spacing-xs) 0",
                         paddingLeft: "var(--spacing-md)",
                         position: "relative",
-                        color: "rgba(255,255,255,0.8)",
+                        color: "rgba(255,255,255,0.9)", // Mejor contraste
+                        lineHeight: 1.5
                       }}
                     >
                       <span
                         style={{
                           position: "absolute",
                           left: 0,
+                          top: 0,
                           color: accentColor,
+                          fontWeight: "bold",
+                          textShadow: `0 0 10px ${accentColor}` // Resplandor para visibilidad en fondo oscuro
                         }}
                       >
                         •
