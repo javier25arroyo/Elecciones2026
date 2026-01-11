@@ -228,13 +228,13 @@ function TimelineItem({ event, index, isLeft }: TimelineItemProps) {
       <div className={`hide-mobile flex-1 ${isLeft ? "pl-2xl" : "pr-2xl"}`} />
 
       {/* Content - Mobile */}
-      <div className="hide-desktop pl-xl w-full">
+      <div className="hide-desktop w-full" style={{ paddingLeft: "60px" }}>
         {/* Mobile dot */}
         <div
           style={{
             position: "absolute",
             left: 4,
-            top: 8,
+            top: 10,
             width: 34,
             height: 34,
             borderRadius: "50%",

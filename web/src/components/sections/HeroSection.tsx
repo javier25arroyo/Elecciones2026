@@ -60,26 +60,27 @@ export function HeroSection() {
         }}
       />
 
-      {/* Animated particles */}
+      {/* Animated particles - Reduced for performance */}
       <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
-        {[...Array(6)].map((_, i) => (
+        {[...Array(3)].map((_, i) => (
           <div
             key={i}
             className="particle"
             style={{
-              top: `${20 + i * 15}%`,
-              left: `${10 + i * 15}%`,
-              width: `${4 + i * 2}px`,
-              height: `${4 + i * 2}px`,
+              top: `${20 + i * 30}%`,
+              left: `${10 + i * 30}%`,
+              width: `${6 + i * 2}px`,
+              height: `${6 + i * 2}px`,
               background: i % 2 === 0 ? "rgba(255, 255, 255, 0.3)" : "rgba(206, 17, 38, 0.4)",
               animationDelay: `${i * 0.5}s`,
               animationDuration: `${4 + i}s`,
+              willChange: "transform",
             }}
           />
         ))}
       </div>
 
-      {/* Floating decorative elements */}
+      {/* Floating decorative elements - Optimized */}
       <div
         className="absolute animate-float"
         style={{
@@ -90,6 +91,7 @@ export function HeroSection() {
           background: "rgba(255, 255, 255, 0.03)",
           borderRadius: "50%",
           filter: "blur(40px)",
+          willChange: "transform",
         }}
       />
       <div
@@ -103,19 +105,7 @@ export function HeroSection() {
           borderRadius: "50%",
           filter: "blur(60px)",
           animationDelay: "1.5s",
-        }}
-      />
-      <div
-        className="absolute animate-float"
-        style={{
-          top: "40%",
-          right: "25%",
-          width: 150,
-          height: 150,
-          background: "rgba(255, 255, 255, 0.05)",
-          borderRadius: "50%",
-          filter: "blur(30px)",
-          animationDelay: "0.8s",
+          willChange: "transform",
         }}
       />
 

@@ -20,6 +20,11 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   output: "export",
   poweredByHeader: false,
+  reactStrictMode: true,
+  compress: true,
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production",
+  },
 };
 
 export default nextConfig;

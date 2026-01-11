@@ -16,6 +16,7 @@ const inter = Inter({
   display: "swap",
   preload: true,
   adjustFontFallback: true,
+  fallback: ["system-ui", "arial"],
 });
 
 const poppins = Poppins({
@@ -25,6 +26,7 @@ const poppins = Poppins({
   display: "swap",
   preload: true,
   adjustFontFallback: true,
+  fallback: ["system-ui", "arial"],
 });
 
 export default function RootLayout({
@@ -78,9 +80,6 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="Elecciones CR 2026" />
         <link rel="apple-touch-icon" href={`${basePath}/assets/others/icon-192.png`} />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         
         {/* Structured Data (JSON-LD) */}
         <script
