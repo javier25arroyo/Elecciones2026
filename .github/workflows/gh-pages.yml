@@ -39,6 +39,12 @@ jobs:
 
       - name: Build static export
         run: pnpm run build
+        env:
+          # Opcional: definilo en GitHub Settings -> Secrets and variables -> Actions -> Variables.
+          # - Para GitHub Pages sin dominio propio (project site): setear a "/<repo>" (ej. "/info-politic-2026").
+          # - Para dominio propio: setear a "/" (el next.config lo normaliza a basePath vacío).
+          NEXT_PUBLIC_BASE_PATH: ${{ vars.NEXT_PUBLIC_BASE_PATH }}
+          NEXT_PUBLIC_ASSET_PREFIX: ${{ vars.NEXT_PUBLIC_ASSET_PREFIX }}
 
       - name: Add .nojekyll file
         run: touch out/.nojekyll
