@@ -763,7 +763,7 @@ function QuizResults({ results, parties, userVector, onReset }: QuizResultsProps
             style={{ background: "#25D366", color: "white" }}
             onClick={() => {
               const text = `Mi resultado en el compás político de #EleccionesCR2026 me acerca a ${winner?.party.presidential_candidate?.name || winner?.party.name}. ¡Descubrí el tuyo acá: ${window.location.href}!`;
-              window.open(`httpsa://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+              window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
             }}
           >
             WhatsApp
