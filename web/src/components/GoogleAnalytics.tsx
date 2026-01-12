@@ -4,7 +4,6 @@ export function GoogleAnalytics() {
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
   if (!gaId) {
-    console.warn("Google Analytics ID not configured. Set NEXT_PUBLIC_GA_ID environment variable.");
     return null;
   }
 
