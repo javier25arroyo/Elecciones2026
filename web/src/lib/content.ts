@@ -64,6 +64,7 @@ export async function getContent(): Promise<Content> {
   if (Array.isArray(data.parties)) {
     data.parties = data.parties.map((party) => ({
       ...party,
+      id: party.id || party.name.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, ""),
       logo_url: withBase(party.logo_url),
       logo_urls: party.logo_urls?.map((u) => withBase(u) as string),
       plan_url: withBase(party.plan_url),

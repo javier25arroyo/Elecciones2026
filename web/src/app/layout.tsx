@@ -3,6 +3,7 @@
 import { Inter, Poppins } from "next/font/google";
 import { useEffect, useState } from "react";
 import { Header, Footer } from "@/components/layout";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import "./globals.css";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
@@ -126,6 +127,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.variable} ${poppins.variable} ${mounted ? 'is-mounted' : ''} antialiased min-h-screen flex flex-col bg-gray-50 dark:bg-black/95`}>
+        <GoogleAnalytics />
         <Header />
         <a href="#main-content" className="skip-link">
           Saltar al contenido principal

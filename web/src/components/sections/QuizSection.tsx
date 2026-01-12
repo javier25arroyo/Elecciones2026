@@ -5,6 +5,7 @@ import type { Party, QuizQuestion } from "@/lib/content";
 import Image from "next/image";
 import { Badge } from "@/components/ui/Badge";
 import { Progress } from "@/components/ui/Progress";
+import { PoliticalCompass } from "@/components/ui/PoliticalCompass";
 import {
   EnergySavingsLeafOutlined as LeafIcon,
   TrendingUpOutlined as TrendingIcon,
@@ -117,6 +118,13 @@ interface PartyResult {
   percentage: number;
 }
 
+// Define the type for the user vector
+type UserVector = {
+  econ: number;
+  social: number;
+  env: number;
+};
+
 export function QuizSection({
   parties,
   questions,
@@ -178,6 +186,11 @@ export function QuizSection({
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const [answers, setAnswers] = React.useState<Answer[]>([]);
   const [results, setResults] = React.useState<PartyResult[]>([]);
+  const [userVector, setUserVector] = React.useState<UserVector>({
+    econ: 0,
+    social: 0,
+    env: 0,
+  });
 
   const handleStart = () => {
     setState("questions");
@@ -192,26 +205,27 @@ export function QuizSection({
     if (currentIndex < quizQuestions.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
-      // Calculate results
       calculateResults(newAnswers);
       setState("results");
     }
   };
 
   const calculateResults = (finalAnswers: Answer[]) => {
-    const userVector = { econ: 0, social: 0, env: 0 };
+    const newUserVector: UserVector = { econ: 0, social: 0, env: 0 };
 
     quizQuestions.forEach((q, idx) => {
       const answer = finalAnswers[idx];
       const axis = q.axis || {};
-      userVector.econ += (axis.econ || 0) * answer;
-      userVector.social += (axis.social || 0) * answer;
-      userVector.env += (axis.env || 0) * answer;
+      newUserVector.econ += (axis.econ || 0) * answer;
+      newUserVector.social += (axis.social || 0) * answer;
+      newUserVector.env += (axis.env || 0) * answer;
     });
+
+    setUserVector(newUserVector);
 
     const partyResults: PartyResult[] = parties.map((party) => {
       const partyVector = guessPartyVector(party);
-      const similarity = cosineSimilarity(userVector, partyVector);
+      const similarity = cosineSimilarity(newUserVector, partyVector);
       const percentage = Math.round(((similarity + 1) / 2) * 100);
       return { party, score: similarity, percentage };
     });
@@ -230,7 +244,7 @@ export function QuizSection({
   return (
     <section
       id={sectionId}
-      className={`py-3xl scrollbar-stable ${state === "results" ? "bg-app-light" : "bg-app-gradient"}`}
+      className={`py-3xl scrollbar-stable ${state === "results" ? "bg-app-dark" : "bg-app-gradient"}`}
       style={{
         minHeight: "100vh",
         transition: "background 0.5s ease",
@@ -238,7 +252,6 @@ export function QuizSection({
         overflow: "hidden",
       }}
     >
-      {/* Decorative elements for intro */}
       {state === "intro" && (
         <>
           <div
@@ -268,7 +281,7 @@ export function QuizSection({
           />
         </>
       )}
-      
+
       <div className="container relative">
         {state === "intro" && (
           <QuizIntro
@@ -281,7 +294,7 @@ export function QuizSection({
             note={noteNode}
           />
         )}
-        
+
         {state === "questions" && (
           <QuizQuestions
             questions={quizQuestions}
@@ -289,15 +302,19 @@ export function QuizSection({
             onAnswer={handleAnswer}
           />
         )}
-        
+
         {state === "results" && (
-          <QuizResults results={results} onReset={handleReset} />
+          <QuizResults
+            results={results}
+            parties={parties}
+            userVector={userVector}
+            onReset={handleReset}
+          />
         )}
       </div>
     </section>
   );
 }
-
 interface QuizIntroProps {
   onStart: () => void;
   title: React.ReactNode;
@@ -314,7 +331,6 @@ function QuizIntro({ onStart, title, description, badgeText, featurePills, ctaLa
       className="text-center py-xl animate-fade-in-up" 
       style={{ maxWidth: 600, margin: "0 auto" }}
     >
-      {/* Floating icon */}
       <div 
         className="animate-float mb-lg"
         style={{ fontSize: "4rem", display: "flex", justifyContent: "center" }}
@@ -342,7 +358,6 @@ function QuizIntro({ onStart, title, description, badgeText, featurePills, ctaLa
       <div style={{ marginBottom: "var(--spacing-md)", textWrap: "balance" }}>{title}</div>
       <div style={{ marginBottom: "var(--spacing-xl)", textWrap: "balance" }}>{description}</div>
 
-      {/* Feature pills */}
       <div 
         className="flex flex-wrap justify-center gap-sm mb-xl"
         style={{ opacity: 0.9 }}
@@ -415,7 +430,6 @@ function QuizQuestions({ questions, currentIndex, onAnswer }: QuizQuestionsProps
     setSelectedAnswer(answer);
     setIsAnimating(true);
     
-    // Pequeño delay para mostrar la animación de selección
     setTimeout(() => {
       onAnswer(answer);
       setSelectedAnswer(null);
@@ -449,7 +463,6 @@ function QuizQuestions({ questions, currentIndex, onAnswer }: QuizQuestionsProps
 
   return (
     <div style={{ maxWidth: 500, margin: "0 auto", padding: "var(--spacing-lg) 0" }}>
-      {/* Progress header */}
       <div className="mb-xl animate-fade-in">
         <div className="flex justify-between items-center mb-md">
           <span 
@@ -471,7 +484,6 @@ function QuizQuestions({ questions, currentIndex, onAnswer }: QuizQuestionsProps
         <Progress value={progress} />
       </div>
 
-      {/* Question card - Estilo tarjeta tipo Tinder/Stories */}
       <div
         className="card animate-fade-in-up"
         key={current.id}
@@ -490,7 +502,6 @@ function QuizQuestions({ questions, currentIndex, onAnswer }: QuizQuestionsProps
         }}
       >
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-          {/* Icon indicator */}
           <div
             className="text-center"
             style={{
@@ -523,7 +534,6 @@ function QuizQuestions({ questions, currentIndex, onAnswer }: QuizQuestionsProps
           </p>
         </div>
 
-        {/* Answer buttons - Grandes y táctiles */}
         <div className="flex flex-col gap-md">
           {answerButtons.map((btn) => (
             <button
@@ -554,7 +564,6 @@ function QuizQuestions({ questions, currentIndex, onAnswer }: QuizQuestionsProps
         </div>
       </div>
 
-      {/* Swipe hint for mobile */}
       <p 
         className="text-center mt-lg text-muted hide-desktop"
         style={{ fontSize: "0.8rem" }}
@@ -567,301 +576,194 @@ function QuizQuestions({ questions, currentIndex, onAnswer }: QuizQuestionsProps
 
 interface QuizResultsProps {
   results: PartyResult[];
+  parties: Party[];
+  userVector: UserVector;
   onReset: () => void;
 }
 
-function QuizResults({ results, onReset }: QuizResultsProps) {
+function QuizResults({ results, parties, userVector, onReset }: QuizResultsProps) {
   const top3 = results.slice(0, 3);
   const rest = results.slice(3);
   const winner = top3[0];
 
   return (
-    <div style={{ maxWidth: 700, margin: "0 auto", padding: "var(--spacing-lg) 0" }}>
-      {/* Header con animación de celebración */}
+    <div style={{ maxWidth: 800, margin: "0 auto", padding: "var(--spacing-lg) 0" }}>
       <div className="text-center mb-2xl animate-fade-in-up">
         <div 
           className="animate-celebrate mb-md"
           style={{ fontSize: "4rem", display: "flex", justifyContent: "center" }}
         >
-          <CelebrationIcon sx={{ fontSize: "4rem", color: "var(--color-primary)" }} />
+          <CelebrationIcon sx={{ fontSize: "4rem", color: "var(--color-accent)" }} />
         </div>
         <Badge 
           variant="secondary" 
           className="mb-md"
-          style={{ 
-            padding: "8px 16px",
-            fontSize: "0.9rem",
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "8px",
-          }}
         >
           <SparklesIcon sx={{ fontSize: "1.2rem" }} />
           Resultados listos
         </Badge>
-        <h2 style={{ marginBottom: "var(--spacing-sm)" }}>
-          Tu afinidad política
+        <h2 
+          style={{ 
+            marginBottom: "var(--spacing-sm)", 
+            color: "white",
+            fontSize: "clamp(1.8rem, 4vw, 2.5rem)",
+            fontWeight: 800,
+            background: "linear-gradient(135deg, #ffffff 0%, #e3f2fd 50%, #bbdefb 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+            textShadow: "0 2px 4px rgba(0,0,0,0.1)"
+          }}
+        >
+          ✨ Tus Resultados
         </h2>
-        <p className="text-secondary">
-          Basado en tus respuestas, este es tu nivel de afinidad con cada candidatura.
+        <p 
+          style={{ 
+            color: "rgba(255,255,255,0.85)",
+            fontSize: "1.1rem",
+            lineHeight: 1.5,
+            textWrap: "balance"
+          }}
+        >
+          Estos son los candidatos con mayor afinidad a tus respuestas
         </p>
       </div>
 
-      {/* Winner Card - Destacado */}
-      {winner && (
-        <div
-          className="card animate-fade-in-up mb-xl"
-          style={{
-            background: `radial-gradient(900px circle at 20% 20%, ${(winner.party.accent_color || "#002B7F")}55 0%, transparent 55%), radial-gradient(700px circle at 85% 75%, rgba(255,255,255,0.14) 0%, transparent 60%), linear-gradient(135deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.06) 55%, rgba(255,255,255,0.04) 100%)`,
-            border: "1px solid rgba(255,255,255,0.16)",
-            borderTop: `5px solid ${winner.party.accent_color || "var(--color-primary)"}`,
-            padding: "var(--spacing-2xl)",
-            textAlign: "center",
-            position: "relative",
-            overflow: "hidden",
-            boxShadow: "0 18px 60px rgba(0,0,0,0.22)",
-          }}
-        >
-          {/* Badge de primer lugar */}
-          <div
-            style={{
-              position: "absolute",
-              top: 16,
-              right: 16,
-              background: "var(--gradient-cta)",
-              color: "white",
-              padding: "6px 12px",
-              borderRadius: "var(--radius-full)",
-              fontSize: "0.75rem",
-              fontWeight: 700,
-            }}
-          >
-            #1 Match
-          </div>
-          
-          <div style={{ display: "flex", justifyContent: "center", marginBottom: "var(--spacing-md)" }}>
-            <div
-              style={{
-                width: 92,
-                height: 92,
-                borderRadius: "24px",
-                background: `linear-gradient(135deg, ${winner.party.accent_color || "var(--color-primary)"} 0%, var(--color-primary) 60%, var(--color-secondary) 120%)`,
-                color: "white",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: "2rem",
-                fontWeight: 850,
-                boxShadow: `0 16px 40px ${winner.party.accent_color || "var(--color-primary)"}40`,
-              }}
-            >
-              {winner.percentage}%
-            </div>
-          </div>
-          
-          <h3 style={{ marginBottom: "var(--spacing-xs)", fontSize: "1.5rem" }}>
-            {winner.party.presidential_candidate?.name || winner.party.name}
-          </h3>
-          <p
-            style={{
-              marginBottom: "var(--spacing-md)",
-              color: "rgba(255,255,255,0.78)",
-              fontSize: "0.95rem",
-              textWrap: "balance",
-            }}
-          >
-            {winner.party.name}
-          </p>
-          
-          <Progress
-            value={winner.percentage}
-            color={winner.party.accent_color}
-            className="quiz-results-progress"
-          />
-
-          {winner.party.logo_url && (
-            <div style={{ marginTop: "var(--spacing-md)", display: "flex", justifyContent: "center" }}>
-              <Image
-                src={winner.party.logo_url}
-                alt={`Bandera de ${winner.party.name}`}
-                loading="lazy"
-                width={160}
-                height={34}
-                style={{
-                  height: 34,
-                  width: "auto",
-                  opacity: 0.9,
-                  filter: "drop-shadow(0 8px 20px rgba(0,0,0,0.25))",
-                }}
-              />
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* Top 2 y 3 - Responsive */}
-      <div 
-        className="grid gap-md mb-xl" 
-        style={{ 
-          gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 290px), 1fr))",
-        }}
-      >
-        {top3.slice(1).map((result, index) => {
-          const accent = result.party.accent_color || "var(--color-primary)";
-          const rank = index + 2;
-          return (
-            <div
-              key={result.party.name}
-              className="card animate-fade-in-up"
-              style={{
-                animationDelay: `${(index + 1) * 0.15}s`,
-                padding: "var(--spacing-lg)",
-                background: `radial-gradient(700px circle at 20% 10%, ${accent}55 0%, transparent 55%), linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.05) 100%)`,
-                border: "1px solid rgba(255,255,255,0.14)",
-                boxShadow: "0 16px 44px rgba(0,0,0,0.18)",
-              }}
-            >
-              <div className="flex items-center justify-between mb-md" style={{ gap: "var(--spacing-sm)" }}>
-                <span
-                  style={{
-                    background: "rgba(255,255,255,0.7)",
-                    border: "1px solid rgba(0,0,0,0.06)",
-                    padding: "6px 10px",
-                    borderRadius: "var(--radius-full)",
-                    fontSize: "0.8rem",
-                    fontWeight: 800,
-                    color: "var(--color-text-primary)",
-                  }}
-                >
-                  #{rank}
-                </span>
-                <span
-                  style={{
-                    fontSize: "1.15rem",
-                    fontWeight: 850,
-                    color: accent,
-                  }}
-                >
-                  {result.percentage}%
-                </span>
-              </div>
-
-              <h4
-                style={{
-                  margin: 0,
-                  fontSize: "1.05rem",
-                  textWrap: "balance",
-                  color: "rgba(255,255,255,0.92)",
-                }}
-              >
-                {result.party.presidential_candidate?.name || result.party.name}
-              </h4>
-              <p style={{ margin: "6px 0 12px", color: "rgba(255,255,255,0.70)", fontSize: "0.9rem" }}>
-                {result.party.name}
-              </p>
-
-              <Progress value={result.percentage} color={accent} className="quiz-results-progress" />
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Rest */}
-      {rest.length > 0 && (
-        <div className="mb-xl animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
-          <h4 className="mb-md text-secondary" style={{ fontSize: "0.95rem" }}>
-            Todos los resultados
-          </h4>
+      <div className="flex flex-col gap-lg mb-xl">
+        {winner && (
           <div 
-            className="grid gap-sm"
-            style={{
-              background: "rgba(255,255,255,0.06)",
-              borderRadius: "var(--radius-lg)",
-              padding: "var(--spacing-md)",
-              border: "1px solid rgba(255,255,255,0.12)",
-            }}
+             className="card animate-fade-in-up"
+             style={{
+               background: `linear-gradient(135deg, ${winner.party.accent_color}33 0%, rgba(0,0,0,0.4) 100%)`,
+               border: `1px solid ${winner.party.accent_color}66`,
+               padding: "var(--spacing-xl)",
+               display: "flex",
+               flexDirection: "column",
+               alignItems: "center",
+               textAlign: "center",
+               boxShadow: `0 20px 40px -10px ${winner.party.accent_color}33`,
+             }}
           >
-            {rest.map((result) => (
+             <div style={{ fontSize: "1rem", fontWeight: 600, color: winner.party.accent_color, marginBottom: "var(--spacing-sm)", textTransform: "uppercase", letterSpacing: "1px" }}>
+                 Mayor Afinidad
+             </div>
+             <div style={{ 
+                width: 120, height: 120, borderRadius: "50%", 
+                background: winner.party.accent_color,
+                display: "flex", alignItems: "center", justifyContent: "center",
+                fontSize: "3rem", fontWeight: 800, color: "white",
+                marginBottom: "var(--spacing-md)",
+                border: "4px solid white",
+                boxShadow: "0 10px 20px rgba(0,0,0,0.3)"
+             }}>
+                {winner.percentage}%
+             </div>
+             <h3 style={{ fontSize: "2rem", color: "white", marginBottom: "var(--spacing-xs)" }}>
+                {winner.party.presidential_candidate?.name || winner.party.name}
+             </h3>
+             <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "1.1rem", marginBottom: "var(--spacing-lg)" }}>
+                {winner.party.name}
+             </p>
+             <div style={{ width: "100%", maxWidth: 300 }}>
+                <Progress value={winner.percentage} color={winner.party.accent_color} />
+             </div>
+          </div>
+        )}
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-md">
+           {top3.slice(1).map((result, idx) => (
               <div
                 key={result.party.name}
-                className="flex items-center justify-between"
+                className="card animate-fade-in-up"
                 style={{
-                  padding: "var(--spacing-sm) 0",
-                  gap: "var(--spacing-md)",
+                  animationDelay: `${(idx + 1) * 0.1}s`,
+                  background: "rgba(0,0,0,0.2)",
+                  borderLeft: `4px solid ${result.party.accent_color || "var(--color-primary)"}`,
+                  padding: "var(--spacing-lg)",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "var(--spacing-md)"
                 }}
               >
-                <div style={{ minWidth: 0, flex: 1 }}>
-                  <div
-                    style={{
-                      fontSize: "0.9rem",
-                      marginBottom: 6,
-                      color: "rgba(255,255,255,0.86)",
-                      textWrap: "balance",
-                    }}
-                  >
-                    {result.party.presidential_candidate?.name || result.party.name}
-                  </div>
-                  <Progress value={result.percentage} color={result.party.accent_color} />
-                </div>
-                <div
-                  style={{
-                    fontWeight: 850,
-                    color: "white",
-                    minWidth: 56,
-                    textAlign: "right",
-                  }}
-                >
-                  {result.percentage}%
-                </div>
+                 <div style={{ 
+                    width: 60, height: 60, borderRadius: "50%", 
+                    background: "rgba(255,255,255,0.1)",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    fontSize: "1.2rem", fontWeight: 700, color: "white",
+                    flexShrink: 0
+                 }}>
+                    {result.percentage}%
+                 </div>
+                 <div>
+                    <h4 style={{ fontSize: "1.1rem", color: "white", marginBottom: "4px" }}>
+                       {result.party.presidential_candidate?.name || result.party.name}
+                    </h4>
+                    <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "0.9rem", margin: 0 }}>
+                       {result.party.name}
+                    </p>
+                 </div>
               </div>
-            ))}
-          </div>
+           ))}
         </div>
-      )}
 
-      {/* Share card - Para compartir en redes */}
+        {rest.length > 0 && (
+           <div className="animate-fade-in-up" style={{ animationDelay: "0.4s", marginTop: "var(--spacing-md)" }}>
+             <h4 className="mb-md text-center" style={{ color: "rgba(255,255,255,0.6)", fontSize: "0.95rem" }}>
+                Otros candidatos
+             </h4>
+             <div className="grid gap-sm">
+                {rest.map((result) => (
+                   <div 
+                      key={result.party.name} 
+                      className="card"
+                      style={{
+                         background: "rgba(0,0,0,0.1)",
+                         padding: "12px 20px",
+                         display: "flex", alignItems: "center", justifyContent: "center", gap: "10px"
+                      }}
+                   >
+                       <span style={{color: "white", fontSize: "0.9rem", flex: 1, textAlign: "left"}}>{result.party.presidential_candidate?.name || result.party.name}</span>
+                       <span style={{color: result.party.accent_color, fontWeight: 700}}>{result.percentage}%</span>
+                   </div>
+                ))}
+             </div>
+           </div>
+        )}
+      </div>
+
       <div
         className="card text-center mb-xl animate-fade-in-up"
         style={{
           animationDelay: "0.5s",
-          background: "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)",
-          border: "1px solid rgba(255,255,255,0.16)",
+          background: "rgba(0,0,0,0.2)",
+          border: "1px solid rgba(255,255,255,0.1)",
           padding: "var(--spacing-xl)",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
         }}
       >
-        <ShareIcon sx={{ fontSize: "2rem", marginBottom: "var(--spacing-sm)", color: "var(--color-primary)" }} />
-        <h4 style={{ marginBottom: "var(--spacing-sm)" }}>
+        <ShareIcon sx={{ fontSize: "2rem", marginBottom: "var(--spacing-sm)", color: "var(--color-accent)" }} />
+        <h4 style={{ marginBottom: "var(--spacing-sm)", color: "white" }}>
           ¡Compartí tus resultados!
         </h4>
-        <p className="text-muted" style={{ marginBottom: "var(--spacing-md)", fontSize: "0.9rem", color: "rgba(255,255,255,0.75)" }}>
-          Invitá a tus amigos a comparar afinidad con los planes
+        <p style={{ color: "rgba(255,255,255,0.7)", marginBottom: "var(--spacing-md)" }}>
+          Invitá a tus amigos a descubrir su compás político.
         </p>
         <div className="flex justify-center gap-sm">
           <button
             className="btn btn-sm"
-            style={{
-              background: "#1DA1F2",
-              color: "white",
-            }}
+            style={{ background: "#1DA1F2", color: "white" }}
             onClick={() => {
-              const text = `Mi candidato más afín para las #EleccionesCR2026 es ${winner?.party.presidential_candidate?.name || winner?.party.name} con ${winner?.percentage}% de afinidad. ¡Hacé el quiz vos también!`;
-              window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank');
+              const text = `Mi resultado en el compás político de #EleccionesCR2026 me acerca a ${winner?.party.presidential_candidate?.name || winner?.party.name}. ¡Hacé el quiz vos también!`;
+              window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${window.location.href}`, '_blank');
             }}
           >
             Twitter/X
           </button>
           <button
             className="btn btn-sm"
-            style={{
-              background: "#25D366",
-              color: "white",
-            }}
+            style={{ background: "#25D366", color: "white" }}
             onClick={() => {
-              const text = `Mi candidato más afín para las Elecciones CR 2026 es ${winner?.party.presidential_candidate?.name || winner?.party.name} con ${winner?.percentage}% de afinidad. ¡Hacé el quiz vos también!`;
-              window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+              const text = `Mi resultado en el compás político de #EleccionesCR2026 me acerca a ${winner?.party.presidential_candidate?.name || winner?.party.name}. ¡Descubrí el tuyo acá: ${window.location.href}!`;
+              window.open(`httpsa://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
             }}
           >
             WhatsApp
@@ -869,35 +771,17 @@ function QuizResults({ results, onReset }: QuizResultsProps) {
         </div>
       </div>
 
-      {/* Disclaimer */}
-      <div
-        className="text-center p-lg mb-xl animate-fade-in-up"
-        style={{
-          animationDelay: "0.6s",
-          background: "rgba(245, 158, 11, 0.1)",
-          borderRadius: "var(--radius-lg)",
-          border: "1px solid rgba(245, 158, 11, 0.3)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "var(--spacing-sm)",
-        }}
-      >
-        <WarningIcon sx={{ color: "rgb(245, 158, 11)" }} />
-        <p className="text-secondary" style={{ margin: 0, fontSize: "0.85rem" }}>
-          Este quiz es orientativo. Investigá más sobre cada candidato antes de votar.
-        </p>
-      </div>
-
-      {/* Actions - Mobile friendly en la parte inferior */}
       <div 
         className="flex flex-col sm:flex-row justify-center gap-md animate-fade-in-up"
         style={{ animationDelay: "0.7s" }}
       >
         <button 
           onClick={onReset} 
-          className="btn btn-secondary"
+          className="btn"
           style={{ 
+            background: "rgba(255,255,255,0.1)",
+            border: "1px solid rgba(255,255,255,0.2)",
+            color: "white",
             padding: "14px 28px",
             borderRadius: "var(--radius-full)",
             display: "inline-flex",
@@ -912,6 +796,7 @@ function QuizResults({ results, onReset }: QuizResultsProps) {
           href="#candidatos" 
           className="btn btn-primary"
           style={{ 
+            background: "var(--color-accent)",
             padding: "14px 28px",
             borderRadius: "var(--radius-full)",
           }}
