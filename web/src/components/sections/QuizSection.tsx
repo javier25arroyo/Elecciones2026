@@ -244,7 +244,7 @@ export function QuizSection({
   return (
     <section
       id={sectionId}
-      className={`py-3xl scrollbar-stable ${state === "results" ? "bg-app-dark" : "bg-app-gradient"}`}
+      className={`py-3xl scrollbar-stable ${state === "results" ? "bg-app-light" : "bg-app-gradient"}`}
       style={{
         minHeight: "100vh",
         transition: "background 0.5s ease",
