@@ -2,10 +2,8 @@
 
 import * as React from "react";
 import type { Party, QuizQuestion } from "@/lib/content";
-import Image from "next/image";
 import { Badge } from "@/components/ui/Badge";
 import { Progress } from "@/components/ui/Progress";
-import { PoliticalCompass } from "@/components/ui/PoliticalCompass";
 import {
   EnergySavingsLeafOutlined as LeafIcon,
   TrendingUpOutlined as TrendingIcon,
@@ -125,6 +123,10 @@ type UserVector = {
   env: number;
 };
 
+type StartQuizDetail = {
+  sectionId: string;
+};
+
 export function QuizSection({
   parties,
   questions,
@@ -192,11 +194,25 @@ export function QuizSection({
     env: 0,
   });
 
-  const handleStart = () => {
+  const handleStart = React.useCallback(() => {
     setState("questions");
     setCurrentIndex(0);
     setAnswers([]);
-  };
+  }, []);
+
+  React.useEffect(() => {
+    const onStartQuiz = (event: Event) => {
+      const customEvent = event as CustomEvent<StartQuizDetail>;
+      if (customEvent.detail?.sectionId !== sectionId) return;
+      if (state !== "intro") return;
+      handleStart();
+    };
+
+    window.addEventListener("start-quiz", onStartQuiz as EventListener);
+    return () => {
+      window.removeEventListener("start-quiz", onStartQuiz as EventListener);
+    };
+  }, [handleStart, sectionId, state]);
 
   const handleAnswer = (answer: Answer) => {
     const newAnswers = [...answers, answer];
