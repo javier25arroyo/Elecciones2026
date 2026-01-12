@@ -165,6 +165,14 @@ export function Footer() {
                   e.currentTarget.style.background = "transparent";
                   e.currentTarget.style.color = "rgba(255, 255, 255, 0.75)";
                 }}
+                onFocus={(e) => {
+                  e.currentTarget.style.background = "rgba(255, 255, 255, 0.1)";
+                  e.currentTarget.style.color = "white";
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.style.background = "transparent";
+                  e.currentTarget.style.color = "rgba(255, 255, 255, 0.75)";
+                }}
               >
                 <GitHubIcon sx={{ fontSize: "1.1rem" }} aria-hidden="true" />
                 GitHub
@@ -193,6 +201,14 @@ export function Footer() {
                   e.currentTarget.style.background = "transparent";
                   e.currentTarget.style.color = "rgba(255, 255, 255, 0.75)";
                 }}
+                onFocus={(e) => {
+                  e.currentTarget.style.background = "rgba(0, 119, 181, 0.2)";
+                  e.currentTarget.style.color = "#00A0DF";
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.style.background = "transparent";
+                  e.currentTarget.style.color = "rgba(255, 255, 255, 0.75)";
+                }}
               >
                 <LinkedInIcon sx={{ fontSize: "1.1rem" }} aria-hidden="true" />
                 LinkedIn
@@ -218,6 +234,14 @@ export function Footer() {
                   e.currentTarget.style.color = "#E91E63";
                 }}
                 onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "transparent";
+                  e.currentTarget.style.color = "rgba(255, 255, 255, 0.75)";
+                }}
+                onFocus={(e) => {
+                  e.currentTarget.style.background = "rgba(224, 27, 131, 0.2)";
+                  e.currentTarget.style.color = "#E91E63";
+                }}
+                onBlur={(e) => {
                   e.currentTarget.style.background = "transparent";
                   e.currentTarget.style.color = "rgba(255, 255, 255, 0.75)";
                 }}
