@@ -105,6 +105,7 @@ interface QuizSectionProps {
   introCTA?: string;
   featurePills?: FeaturePill[];
   note?: React.ReactNode;
+  onRepeatToPicker?: () => void;
 }
 
 type QuizState = "intro" | "questions" | "results";
@@ -137,6 +138,7 @@ export function QuizSection({
   introCTA,
   featurePills,
   note,
+  onRepeatToPicker,
 }: QuizSectionProps) {
   const quizQuestions = questions?.length ? questions : defaultQuestions;
   const featureList = featurePills?.length ? featurePills : defaultFeaturePills;
@@ -325,6 +327,7 @@ export function QuizSection({
             parties={parties}
             userVector={userVector}
             onReset={handleReset}
+            onRepeatToPicker={onRepeatToPicker}
           />
         )}
       </div>
@@ -595,12 +598,15 @@ interface QuizResultsProps {
   parties: Party[];
   userVector: UserVector;
   onReset: () => void;
+  onRepeatToPicker?: () => void;
 }
 
-function QuizResults({ results, parties, userVector, onReset }: QuizResultsProps) {
+function QuizResults({ results, parties, userVector, onReset, onRepeatToPicker }: QuizResultsProps) {
   const top3 = results.slice(0, 3);
   const rest = results.slice(3);
   const winner = top3[0];
+  const shareUrl = "https://elecciones2026.lat/";
+  const shareText = `Mi resultado en el compás político de #EleccionesCR2026 me acerca a ${winner?.party.presidential_candidate?.name || winner?.party.name}. ¡Hacé el quiz vos también!`;
 
   return (
     <div style={{ maxWidth: 800, margin: "0 auto", padding: "var(--spacing-lg) 0" }}>
@@ -766,20 +772,10 @@ function QuizResults({ results, parties, userVector, onReset }: QuizResultsProps
         <div className="flex justify-center gap-sm">
           <button
             className="btn btn-sm"
-            style={{ background: "#1DA1F2", color: "white" }}
-            onClick={() => {
-              const text = `Mi resultado en el compás político de #EleccionesCR2026 me acerca a ${winner?.party.presidential_candidate?.name || winner?.party.name}. ¡Hacé el quiz vos también!`;
-              window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${window.location.href}`, '_blank');
-            }}
-          >
-            Twitter/X
-          </button>
-          <button
-            className="btn btn-sm"
             style={{ background: "#25D366", color: "white" }}
             onClick={() => {
-              const text = `Mi resultado en el compás político de #EleccionesCR2026 me acerca a ${winner?.party.presidential_candidate?.name || winner?.party.name}. ¡Descubrí el tuyo acá: ${window.location.href}!`;
-              window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+              const text = `${shareText} ¡Descubrí el tuyo acá: ${shareUrl}!`;
+              window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, "_blank");
             }}
           >
             WhatsApp
@@ -792,7 +788,7 @@ function QuizResults({ results, parties, userVector, onReset }: QuizResultsProps
         style={{ animationDelay: "0.7s" }}
       >
         <button 
-          onClick={onReset} 
+          onClick={onRepeatToPicker ?? onReset} 
           className="btn"
           style={{ 
             background: "rgba(255,255,255,0.1)",
@@ -806,7 +802,7 @@ function QuizResults({ results, parties, userVector, onReset }: QuizResultsProps
             justifyContent: "center",
           }}
         >
-          <RestartIcon sx={{ fontSize: "1.2rem" }} /> Repetir quiz
+          <RestartIcon sx={{ fontSize: "1.2rem" }} /> {onRepeatToPicker ? "Elegir otro quiz" : "Repetir quiz"}
         </button>
         <a 
           href="#candidatos" 

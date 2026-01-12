@@ -342,6 +342,7 @@ export function QuizzesSection({ parties, quickQuestions, deepQuestions, deepDes
           parties={parties}
           questions={selected === "quick" ? quickQuestions : deepQuestions}
           sectionId={quizRunSectionId}
+          onRepeatToPicker={resetSelection}
           introTitle={
             selected === "quick"
               ? "Quiz rápido"
@@ -364,14 +365,6 @@ export function QuizzesSection({ parties, quickQuestions, deepQuestions, deepDes
               : "Estas preguntas fueron formuladas a partir de los planes depositados ante el TSE para ofrecerte un match más preciso."
           }
         />
-      )}
-
-      {selected && (
-        <div className="container" style={{ marginTop: "var(--spacing-xl)" }}>
-          <div className="text-center" style={{ color: "rgba(0,0,0,0.5)", fontSize: "0.85rem" }}>
-            ¿Querés hacer el otro quiz también? Usá “Cambiar de quiz”.
-          </div>
-        </div>
       )}
     </>
   );
