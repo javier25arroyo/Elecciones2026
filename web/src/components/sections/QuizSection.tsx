@@ -2,8 +2,10 @@
 
 import * as React from "react";
 import type { Party, QuizQuestion } from "@/lib/content";
+import Image from "next/image";
 import { Badge } from "@/components/ui/Badge";
 import { Progress } from "@/components/ui/Progress";
+import { PoliticalCompass } from "@/components/ui/PoliticalCompass";
 import {
   EnergySavingsLeafOutlined as LeafIcon,
   TrendingUpOutlined as TrendingIcon,
@@ -75,9 +77,36 @@ const defaultQuestions: QuizQuestion[] = [
   },
 ];
 
+type FeaturePill = {
+  text: string;
+  icon?: React.ReactNode;
+};
+
+const defaultFeaturePills: FeaturePill[] = [
+  {
+    icon: <RocketIcon sx={{ fontSize: "1rem" }} />,
+    text: "2 min",
+  },
+  {
+    icon: <ShieldIcon sx={{ fontSize: "1rem" }} />,
+    text: "Anónimo",
+  },
+  {
+    icon: <TrendingIcon sx={{ fontSize: "1rem" }} />,
+    text: "Resultados al instante",
+  },
+];
+
 interface QuizSectionProps {
   parties: Party[];
   questions?: QuizQuestion[];
+  sectionId?: string;
+  introTitle?: React.ReactNode;
+  introDescription?: React.ReactNode;
+  introBadgeText?: string;
+  introCTA?: string;
+  featurePills?: FeaturePill[];
+  note?: React.ReactNode;
 }
 
 type QuizState = "intro" | "questions" | "results";
@@ -89,13 +118,79 @@ interface PartyResult {
   percentage: number;
 }
 
-export function QuizSection({ parties, questions }: QuizSectionProps) {
+// Define the type for the user vector
+type UserVector = {
+  econ: number;
+  social: number;
+  env: number;
+};
+
+export function QuizSection({
+  parties,
+  questions,
+  sectionId = "quiz",
+  introTitle,
+  introDescription,
+  introBadgeText,
+  introCTA,
+  featurePills,
+  note,
+}: QuizSectionProps) {
   const quizQuestions = questions?.length ? questions : defaultQuestions;
-  
+  const featureList = featurePills?.length ? featurePills : defaultFeaturePills;
+  const badgeText = introBadgeText ?? "Quiz interactivo";
+  const ctaLabel = introCTA ?? "Comenzar quiz →";
+  const titleNode =
+    introTitle ?? (
+      <h2
+        style={{
+          color: "white",
+          marginBottom: "var(--spacing-md)",
+          fontSize: "clamp(2rem, 5vw, 3rem)",
+          fontWeight: 800,
+        }}
+      >
+        ¿Cuál candidato
+        <br />
+        te representa?
+      </h2>
+    );
+  const descriptionNode =
+    introDescription ?? (
+      <p
+        style={{
+          color: "rgba(255,255,255,0.9)",
+          marginBottom: "var(--spacing-xl)",
+          fontSize: "1.1rem",
+          lineHeight: 1.6,
+        }}
+      >
+        Respondé <strong>{quizQuestions.length} preguntas rápidas</strong> y descubrí qué candidatos
+        piensan como vos. ¡Es anónimo y solo toma un momento!
+      </p>
+    );
+  const noteNode =
+    note ?? (
+      <p
+        style={{
+          color: "rgba(255,255,255,0.6)",
+          fontSize: "0.8rem",
+          marginTop: "var(--spacing-xl)",
+        }}
+      >
+        Este quiz es orientativo y no constituye una recomendación oficial.
+      </p>
+    );
+
   const [state, setState] = React.useState<QuizState>("intro");
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const [answers, setAnswers] = React.useState<Answer[]>([]);
   const [results, setResults] = React.useState<PartyResult[]>([]);
+  const [userVector, setUserVector] = React.useState<UserVector>({
+    econ: 0,
+    social: 0,
+    env: 0,
+  });
 
   const handleStart = () => {
     setState("questions");
@@ -110,26 +205,27 @@ export function QuizSection({ parties, questions }: QuizSectionProps) {
     if (currentIndex < quizQuestions.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
-      // Calculate results
       calculateResults(newAnswers);
       setState("results");
     }
   };
 
   const calculateResults = (finalAnswers: Answer[]) => {
-    const userVector = { econ: 0, social: 0, env: 0 };
+    const newUserVector: UserVector = { econ: 0, social: 0, env: 0 };
 
     quizQuestions.forEach((q, idx) => {
       const answer = finalAnswers[idx];
       const axis = q.axis || {};
-      userVector.econ += (axis.econ || 0) * answer;
-      userVector.social += (axis.social || 0) * answer;
-      userVector.env += (axis.env || 0) * answer;
+      newUserVector.econ += (axis.econ || 0) * answer;
+      newUserVector.social += (axis.social || 0) * answer;
+      newUserVector.env += (axis.env || 0) * answer;
     });
+
+    setUserVector(newUserVector);
 
     const partyResults: PartyResult[] = parties.map((party) => {
       const partyVector = guessPartyVector(party);
-      const similarity = cosineSimilarity(userVector, partyVector);
+      const similarity = cosineSimilarity(newUserVector, partyVector);
       const percentage = Math.round(((similarity + 1) / 2) * 100);
       return { party, score: similarity, percentage };
     });
@@ -147,8 +243,8 @@ export function QuizSection({ parties, questions }: QuizSectionProps) {
 
   return (
     <section
-      id="quiz"
-      className={`py-3xl ${state === "results" ? "bg-app-light" : "bg-app-gradient"}`}
+      id={sectionId}
+      className={`py-3xl scrollbar-stable ${state === "results" ? "bg-app-light" : "bg-app-gradient"}`}
       style={{
         minHeight: "100vh",
         transition: "background 0.5s ease",
@@ -156,7 +252,6 @@ export function QuizSection({ parties, questions }: QuizSectionProps) {
         overflow: "hidden",
       }}
     >
-      {/* Decorative elements for intro */}
       {state === "intro" && (
         <>
           <div
@@ -186,10 +281,20 @@ export function QuizSection({ parties, questions }: QuizSectionProps) {
           />
         </>
       )}
-      
+
       <div className="container relative">
-        {state === "intro" && <QuizIntro onStart={handleStart} />}
-        
+        {state === "intro" && (
+          <QuizIntro
+            onStart={handleStart}
+            title={titleNode}
+            description={descriptionNode}
+            badgeText={badgeText}
+            featurePills={featureList}
+            ctaLabel={ctaLabel}
+            note={noteNode}
+          />
+        )}
+
         {state === "questions" && (
           <QuizQuestions
             questions={quizQuestions}
@@ -197,22 +302,35 @@ export function QuizSection({ parties, questions }: QuizSectionProps) {
             onAnswer={handleAnswer}
           />
         )}
-        
+
         {state === "results" && (
-          <QuizResults results={results} onReset={handleReset} />
+          <QuizResults
+            results={results}
+            parties={parties}
+            userVector={userVector}
+            onReset={handleReset}
+          />
         )}
       </div>
     </section>
   );
 }
+interface QuizIntroProps {
+  onStart: () => void;
+  title: React.ReactNode;
+  description: React.ReactNode;
+  badgeText: string;
+  featurePills: FeaturePill[];
+  ctaLabel: string;
+  note: React.ReactNode;
+}
 
-function QuizIntro({ onStart }: { onStart: () => void }) {
+function QuizIntro({ onStart, title, description, badgeText, featurePills, ctaLabel, note }: QuizIntroProps) {
   return (
     <div 
       className="text-center py-xl animate-fade-in-up" 
       style={{ maxWidth: 600, margin: "0 auto" }}
     >
-      {/* Floating icon */}
       <div 
         className="animate-float mb-lg"
         style={{ fontSize: "4rem", display: "flex", justifyContent: "center" }}
@@ -234,42 +352,17 @@ function QuizIntro({ onStart }: { onStart: () => void }) {
           gap: "8px",
         }}
       >
-        <CelebrationIcon sx={{ fontSize: "1.2rem" }} /> Quiz interactivo
+        <CelebrationIcon sx={{ fontSize: "1.2rem" }} /> {badgeText}
       </Badge>
       
-      <h2 
-        style={{ 
-          color: "white", 
-          marginBottom: "var(--spacing-md)",
-          fontSize: "clamp(2rem, 5vw, 3rem)",
-          fontWeight: 800,
-        }}
-      >
-        ¿Cuál candidato<br />te representa?
-      </h2>
-      
-      <p 
-        style={{ 
-          color: "rgba(255,255,255,0.9)", 
-          marginBottom: "var(--spacing-xl)",
-          fontSize: "1.1rem",
-          lineHeight: 1.6,
-        }}
-      >
-        Respondé <strong>8 preguntas rápidas</strong> y descubrí qué candidatos 
-        piensan como vos. ¡Es anónimo y solo toma 2 minutos!
-      </p>
+      <div style={{ marginBottom: "var(--spacing-md)", textWrap: "balance" }}>{title}</div>
+      <div style={{ marginBottom: "var(--spacing-xl)", textWrap: "balance" }}>{description}</div>
 
-      {/* Feature pills */}
       <div 
         className="flex flex-wrap justify-center gap-sm mb-xl"
         style={{ opacity: 0.9 }}
       >
-        {[
-          { icon: <RocketIcon sx={{ fontSize: "1rem" }} />, text: "2 min" },
-          { icon: <ShieldIcon sx={{ fontSize: "1rem" }} />, text: "Anónimo" },
-          { icon: <TrendingIcon sx={{ fontSize: "1rem" }} />, text: "Resultados al instante" },
-        ].map((pill) => (
+        {featurePills.map((pill) => (
           <span
             key={pill.text}
             style={{
@@ -283,7 +376,10 @@ function QuizIntro({ onStart }: { onStart: () => void }) {
               gap: "4px",
             }}
           >
-            {pill.icon} {pill.text}
+            {pill.icon ? (
+              <span style={{ display: "inline-flex", alignItems: "center" }}>{pill.icon}</span>
+            ) : null}
+            <span>{pill.text}</span>
           </span>
         ))}
       </div>
@@ -300,18 +396,18 @@ function QuizIntro({ onStart }: { onStart: () => void }) {
           borderRadius: "var(--radius-full)",
         }}
       >
-        Comenzar quiz →
+        {ctaLabel}
       </button>
       
-      <p
+      <div
         style={{
           color: "rgba(255,255,255,0.6)",
           fontSize: "0.8rem",
           marginTop: "var(--spacing-xl)",
         }}
       >
-        Este quiz es orientativo y no constituye una recomendación oficial.
-      </p>
+        {note}
+      </div>
     </div>
   );
 }
@@ -324,7 +420,7 @@ interface QuizQuestionsProps {
 
 function QuizQuestions({ questions, currentIndex, onAnswer }: QuizQuestionsProps) {
   const current = questions[currentIndex];
-  const progress = ((currentIndex) / questions.length) * 100;
+  const progress = ((currentIndex + 1) / questions.length) * 100;
   const [selectedAnswer, setSelectedAnswer] = React.useState<Answer | null>(null);
   const [isAnimating, setIsAnimating] = React.useState(false);
 
@@ -334,7 +430,6 @@ function QuizQuestions({ questions, currentIndex, onAnswer }: QuizQuestionsProps
     setSelectedAnswer(answer);
     setIsAnimating(true);
     
-    // Pequeño delay para mostrar la animación de selección
     setTimeout(() => {
       onAnswer(answer);
       setSelectedAnswer(null);
@@ -368,7 +463,6 @@ function QuizQuestions({ questions, currentIndex, onAnswer }: QuizQuestionsProps
 
   return (
     <div style={{ maxWidth: 500, margin: "0 auto", padding: "var(--spacing-lg) 0" }}>
-      {/* Progress header */}
       <div className="mb-xl animate-fade-in">
         <div className="flex justify-between items-center mb-md">
           <span 
@@ -390,9 +484,8 @@ function QuizQuestions({ questions, currentIndex, onAnswer }: QuizQuestionsProps
         <Progress value={progress} />
       </div>
 
-      {/* Question card - Estilo tarjeta tipo Tinder/Stories */}
       <div
-        className={`card animate-fade-in-up ${isAnimating ? 'animate-scale-in' : ''}`}
+        className="card animate-fade-in-up"
         key={current.id}
         style={{ 
           padding: "var(--spacing-2xl)",
@@ -400,40 +493,47 @@ function QuizQuestions({ questions, currentIndex, onAnswer }: QuizQuestionsProps
           borderRadius: "var(--radius-xl)",
           boxShadow: "0 10px 40px rgba(0,0,0,0.12)",
           border: "none",
-          minHeight: 280,
+          minHeight: 420,
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
+          justifyContent: "space-between",
           color: "var(--color-background-dark)",
+          gap: "var(--spacing-lg)",
         }}
       >
-        {/* Icon indicator */}
-        <div 
-          className="text-center mb-lg"
-          style={{
-            fontSize: "3rem",
-            display: "flex",
-            justifyContent: "center",
-            color: "var(--color-background-dark)",
-          }}
-        >
-          {current.icon && getIconComponent(current.icon)}
-        </div>
-        
-        <h3 
-          className="text-center"
-          style={{ 
-            marginBottom: "var(--spacing-xl)", 
-            lineHeight: 1.5,
-            fontSize: "1.25rem",
-            fontWeight: 600,
-            color: "var(--color-background-dark)",
-          }}
-        >
-          {current.text}
-        </h3>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <div
+            className="text-center"
+            style={{
+              fontSize: "3rem",
+              display: "flex",
+              justifyContent: "center",
+              color: "var(--color-background-dark)",
+              marginBottom: "var(--spacing-md)",
+            }}
+          >
+            {current.icon && getIconComponent(current.icon)}
+          </div>
+          
+          <h3
+            className="text-center"
+            style={{
+              margin: 0,
+              lineHeight: 1.5,
+              fontSize: "1.2rem",
+              fontWeight: 650,
+              color: "var(--color-background-dark)",
+              textWrap: "balance",
+            }}
+          >
+            {current.text}
+          </h3>
 
-        {/* Answer buttons - Grandes y táctiles */}
+          <p className="text-muted" style={{ margin: "var(--spacing-sm) 0 0", textAlign: "center" }}>
+            Elegí la opción que más se acerque a tu criterio.
+          </p>
+        </div>
+
         <div className="flex flex-col gap-md">
           {answerButtons.map((btn) => (
             <button
@@ -452,6 +552,7 @@ function QuizQuestions({ questions, currentIndex, onAnswer }: QuizQuestionsProps
                 fontWeight: 600,
                 transition: "all 0.2s ease",
                 transform: selectedAnswer === btn.value ? "scale(1.02)" : "scale(1)",
+                boxShadow: selectedAnswer === btn.value ? "0 10px 24px rgba(0,0,0,0.15)" : "none",
               }}
             >
               <span style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "var(--spacing-sm)" }}>
@@ -463,7 +564,6 @@ function QuizQuestions({ questions, currentIndex, onAnswer }: QuizQuestionsProps
         </div>
       </div>
 
-      {/* Swipe hint for mobile */}
       <p 
         className="text-center mt-lg text-muted hide-desktop"
         style={{ fontSize: "0.8rem" }}
@@ -476,242 +576,193 @@ function QuizQuestions({ questions, currentIndex, onAnswer }: QuizQuestionsProps
 
 interface QuizResultsProps {
   results: PartyResult[];
+  parties: Party[];
+  userVector: UserVector;
   onReset: () => void;
 }
 
-function QuizResults({ results, onReset }: QuizResultsProps) {
+function QuizResults({ results, parties, userVector, onReset }: QuizResultsProps) {
   const top3 = results.slice(0, 3);
-  const rest = results.slice(3, 8);
+  const rest = results.slice(3);
   const winner = top3[0];
 
   return (
-    <div style={{ maxWidth: 700, margin: "0 auto", padding: "var(--spacing-lg) 0" }}>
-      {/* Header con animación de celebración */}
+    <div style={{ maxWidth: 800, margin: "0 auto", padding: "var(--spacing-lg) 0" }}>
       <div className="text-center mb-2xl animate-fade-in-up">
         <div 
           className="animate-celebrate mb-md"
           style={{ fontSize: "4rem", display: "flex", justifyContent: "center" }}
         >
-          <CelebrationIcon sx={{ fontSize: "4rem", color: "var(--color-primary)" }} />
+          <CelebrationIcon sx={{ fontSize: "4rem", color: "var(--color-accent)" }} />
         </div>
         <Badge 
           variant="secondary" 
           className="mb-md"
-          style={{ 
-            padding: "8px 16px",
-            fontSize: "0.9rem",
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "8px",
-          }}
         >
           <SparklesIcon sx={{ fontSize: "1.2rem" }} />
           Resultados listos
         </Badge>
-        <h2 style={{ marginBottom: "var(--spacing-sm)" }}>
-          Tu candidato más afín
+        <h2 
+          style={{ 
+            marginBottom: "var(--spacing-sm)", 
+            color: "white",
+            fontSize: "clamp(1.8rem, 4vw, 2.5rem)",
+            fontWeight: 800,
+            background: "linear-gradient(135deg, #ffffff 0%, #e3f2fd 50%, #bbdefb 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+            textShadow: "0 2px 4px rgba(0,0,0,0.1)"
+          }}
+        >
+          ✨ Tus Resultados
         </h2>
-        <p className="text-secondary">
-          Basado en tus respuestas, estos son los resultados.
+        <p 
+          style={{ 
+            color: "rgba(255,255,255,0.85)",
+            fontSize: "1.1rem",
+            lineHeight: 1.5,
+            textWrap: "balance"
+          }}
+        >
+          Estos son los candidatos con mayor afinidad a tus respuestas
         </p>
       </div>
 
-      {/* Winner Card - Destacado */}
-      {winner && (
-        <div
-          className="card animate-fade-in-up mb-xl"
-          style={{
-            background: `linear-gradient(135deg, ${winner.party.accent_color || 'var(--color-primary)'}15 0%, white 100%)`,
-            borderTop: `4px solid ${winner.party.accent_color || 'var(--color-primary)'}`,
-            padding: "var(--spacing-2xl)",
-            textAlign: "center",
-            position: "relative",
-            overflow: "hidden",
-          }}
-        >
-          {/* Badge de primer lugar */}
-          <div
-            style={{
-              position: "absolute",
-              top: 16,
-              right: 16,
-              background: "var(--gradient-cta)",
-              color: "white",
-              padding: "6px 12px",
-              borderRadius: "var(--radius-full)",
-              fontSize: "0.75rem",
-              fontWeight: 700,
-            }}
-          >
-            #1 Match
-          </div>
-          
-          <div
-            style={{
-              width: 80,
-              height: 80,
-              borderRadius: "50%",
-              background: winner.party.accent_color || 'var(--color-primary)',
-              color: "white",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: "2rem",
-              fontWeight: 800,
-              margin: "0 auto var(--spacing-md)",
-              boxShadow: `0 8px 24px ${winner.party.accent_color || 'var(--color-primary)'}40`,
-            }}
-          >
-            {winner.percentage}%
-          </div>
-          
-          <h3 style={{ marginBottom: "var(--spacing-xs)", fontSize: "1.5rem" }}>
-            {winner.party.presidential_candidate?.name || winner.party.name}
-          </h3>
-          <p className="text-muted" style={{ marginBottom: "var(--spacing-md)" }}>
-            {winner.party.name}
-          </p>
-          
-          <Progress
-            value={winner.percentage}
-            color={winner.party.accent_color}
-          />
-        </div>
-      )}
-
-      {/* Top 2 y 3 - Responsive */}
-      <div 
-        className="grid gap-md mb-xl" 
-        style={{ 
-          gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 250px), 1fr))",
-        }}
-      >
-        {top3.slice(1).map((result, index) => (
-          <div
-            key={result.party.name}
-            className="card animate-fade-in-up"
-            style={{
-              animationDelay: `${(index + 1) * 0.15}s`,
-              borderLeft: `4px solid ${result.party.accent_color || "var(--color-primary)"}`,
-              padding: "var(--spacing-lg)",
-            }}
-          >
-            <div className="flex items-center gap-sm mb-sm">
-              <span
-                style={{
-                  width: 28,
-                  height: 28,
-                  borderRadius: "50%",
-                  background: "var(--color-background-secondary)",
-                  color: "var(--color-text-secondary)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontWeight: 700,
-                  fontSize: "0.85rem",
-                }}
-              >
-                {index + 2}
-              </span>
-              <span
-                style={{
-                  fontSize: "1.25rem",
-                  fontWeight: 700,
-                  color: result.party.accent_color || "var(--color-primary)",
-                }}
-              >
-                {result.percentage}%
-              </span>
-            </div>
-            <h4 style={{ margin: 0, fontSize: "1rem" }}>
-              {result.party.presidential_candidate?.name || result.party.name}
-            </h4>
-            <p className="text-muted" style={{ margin: 0, fontSize: "0.8rem" }}>
-              {result.party.name}
-            </p>
-          </div>
-        ))}
-      </div>
-
-      {/* Rest */}
-      {rest.length > 0 && (
-        <div className="mb-xl animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
-          <h4 className="mb-md text-secondary" style={{ fontSize: "0.9rem" }}>
-            Otros candidatos
-          </h4>
+      <div className="flex flex-col gap-lg mb-xl">
+        {winner && (
           <div 
-            className="grid gap-sm"
-            style={{
-              background: "var(--color-background-secondary)",
-              borderRadius: "var(--radius-lg)",
-              padding: "var(--spacing-md)",
-            }}
+             className="card animate-fade-in-up"
+             style={{
+               background: `linear-gradient(135deg, ${winner.party.accent_color}33 0%, rgba(0,0,0,0.4) 100%)`,
+               border: `1px solid ${winner.party.accent_color}66`,
+               padding: "var(--spacing-xl)",
+               display: "flex",
+               flexDirection: "column",
+               alignItems: "center",
+               textAlign: "center",
+               boxShadow: `0 20px 40px -10px ${winner.party.accent_color}33`,
+             }}
           >
-            {rest.map((result) => (
+             <div style={{ fontSize: "1rem", fontWeight: 600, color: winner.party.accent_color, marginBottom: "var(--spacing-sm)", textTransform: "uppercase", letterSpacing: "1px" }}>
+                 Mayor Afinidad
+             </div>
+             <div style={{ 
+                width: 120, height: 120, borderRadius: "50%", 
+                background: winner.party.accent_color,
+                display: "flex", alignItems: "center", justifyContent: "center",
+                fontSize: "3rem", fontWeight: 800, color: "white",
+                marginBottom: "var(--spacing-md)",
+                border: "4px solid white",
+                boxShadow: "0 10px 20px rgba(0,0,0,0.3)"
+             }}>
+                {winner.percentage}%
+             </div>
+             <h3 style={{ fontSize: "2rem", color: "white", marginBottom: "var(--spacing-xs)" }}>
+                {winner.party.presidential_candidate?.name || winner.party.name}
+             </h3>
+             <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "1.1rem", marginBottom: "var(--spacing-lg)" }}>
+                {winner.party.name}
+             </p>
+             <div style={{ width: "100%", maxWidth: 300 }}>
+                <Progress value={winner.percentage} color={winner.party.accent_color} />
+             </div>
+          </div>
+        )}
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-md">
+           {top3.slice(1).map((result, idx) => (
               <div
                 key={result.party.name}
-                className="flex items-center justify-between"
-                style={{ padding: "var(--spacing-sm) 0" }}
+                className="card animate-fade-in-up"
+                style={{
+                  animationDelay: `${(idx + 1) * 0.1}s`,
+                  background: "rgba(0,0,0,0.2)",
+                  borderLeft: `4px solid ${result.party.accent_color || "var(--color-primary)"}`,
+                  padding: "var(--spacing-lg)",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "var(--spacing-md)"
+                }}
               >
-                <span className="text-secondary" style={{ fontSize: "0.9rem" }}>
-                  {result.party.presidential_candidate?.name || result.party.name}
-                </span>
-                <span 
-                  style={{ 
-                    fontWeight: 600,
-                    color: "var(--color-text-primary)",
-                  }}
-                >
-                  {result.percentage}%
-                </span>
+                 <div style={{ 
+                    width: 60, height: 60, borderRadius: "50%", 
+                    background: "rgba(255,255,255,0.1)",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    fontSize: "1.2rem", fontWeight: 700, color: "white",
+                    flexShrink: 0
+                 }}>
+                    {result.percentage}%
+                 </div>
+                 <div>
+                    <h4 style={{ fontSize: "1.1rem", color: "white", marginBottom: "4px" }}>
+                       {result.party.presidential_candidate?.name || result.party.name}
+                    </h4>
+                    <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "0.9rem", margin: 0 }}>
+                       {result.party.name}
+                    </p>
+                 </div>
               </div>
-            ))}
-          </div>
+           ))}
         </div>
-      )}
 
-      {/* Share card - Para compartir en redes */}
+        {rest.length > 0 && (
+           <div className="animate-fade-in-up" style={{ animationDelay: "0.4s", marginTop: "var(--spacing-md)" }}>
+             <h4 className="mb-md text-center" style={{ color: "rgba(255,255,255,0.6)", fontSize: "0.95rem" }}>
+                Otros candidatos
+             </h4>
+             <div className="grid gap-sm">
+                {rest.map((result) => (
+                   <div 
+                      key={result.party.name} 
+                      className="card"
+                      style={{
+                         background: "rgba(0,0,0,0.1)",
+                         padding: "12px 20px",
+                         display: "flex", alignItems: "center", justifyContent: "center", gap: "10px"
+                      }}
+                   >
+                       <span style={{color: "white", fontSize: "0.9rem", flex: 1, textAlign: "left"}}>{result.party.presidential_candidate?.name || result.party.name}</span>
+                       <span style={{color: result.party.accent_color, fontWeight: 700}}>{result.percentage}%</span>
+                   </div>
+                ))}
+             </div>
+           </div>
+        )}
+      </div>
+
       <div
         className="card text-center mb-xl animate-fade-in-up"
         style={{
           animationDelay: "0.5s",
-          background: "linear-gradient(135deg, #002B7F08 0%, #CE112608 100%)",
-          border: "2px dashed var(--color-border)",
+          background: "rgba(0,0,0,0.2)",
+          border: "1px solid rgba(255,255,255,0.1)",
           padding: "var(--spacing-xl)",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
         }}
       >
-        <ShareIcon sx={{ fontSize: "2rem", marginBottom: "var(--spacing-sm)", color: "var(--color-primary)" }} />
-        <h4 style={{ marginBottom: "var(--spacing-sm)" }}>
+        <ShareIcon sx={{ fontSize: "2rem", marginBottom: "var(--spacing-sm)", color: "var(--color-accent)" }} />
+        <h4 style={{ marginBottom: "var(--spacing-sm)", color: "white" }}>
           ¡Compartí tus resultados!
         </h4>
-        <p className="text-muted" style={{ marginBottom: "var(--spacing-md)", fontSize: "0.9rem" }}>
-          Invitá a tus amigos a descubrir su candidato ideal
+        <p style={{ color: "rgba(255,255,255,0.7)", marginBottom: "var(--spacing-md)" }}>
+          Invitá a tus amigos a descubrir su compás político.
         </p>
         <div className="flex justify-center gap-sm">
           <button
             className="btn btn-sm"
-            style={{
-              background: "#1DA1F2",
-              color: "white",
-            }}
+            style={{ background: "#1DA1F2", color: "white" }}
             onClick={() => {
-              const text = `Mi candidato más afín para las #EleccionesCR2026 es ${winner?.party.presidential_candidate?.name || winner?.party.name} con ${winner?.percentage}% de afinidad. ¡Hacé el quiz vos también!`;
-              window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank');
+              const text = `Mi resultado en el compás político de #EleccionesCR2026 me acerca a ${winner?.party.presidential_candidate?.name || winner?.party.name}. ¡Hacé el quiz vos también!`;
+              window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${window.location.href}`, '_blank');
             }}
           >
             Twitter/X
           </button>
           <button
             className="btn btn-sm"
-            style={{
-              background: "#25D366",
-              color: "white",
-            }}
+            style={{ background: "#25D366", color: "white" }}
             onClick={() => {
-              const text = `Mi candidato más afín para las Elecciones CR 2026 es ${winner?.party.presidential_candidate?.name || winner?.party.name} con ${winner?.percentage}% de afinidad. ¡Hacé el quiz vos también!`;
+              const text = `Mi resultado en el compás político de #EleccionesCR2026 me acerca a ${winner?.party.presidential_candidate?.name || winner?.party.name}. ¡Descubrí el tuyo acá: ${window.location.href}!`;
               window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
             }}
           >
@@ -720,35 +771,17 @@ function QuizResults({ results, onReset }: QuizResultsProps) {
         </div>
       </div>
 
-      {/* Disclaimer */}
-      <div
-        className="text-center p-lg mb-xl animate-fade-in-up"
-        style={{
-          animationDelay: "0.6s",
-          background: "rgba(245, 158, 11, 0.1)",
-          borderRadius: "var(--radius-lg)",
-          border: "1px solid rgba(245, 158, 11, 0.3)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "var(--spacing-sm)",
-        }}
-      >
-        <WarningIcon sx={{ color: "rgb(245, 158, 11)" }} />
-        <p className="text-secondary" style={{ margin: 0, fontSize: "0.85rem" }}>
-          Este quiz es orientativo. Investigá más sobre cada candidato antes de votar.
-        </p>
-      </div>
-
-      {/* Actions - Mobile friendly en la parte inferior */}
       <div 
         className="flex flex-col sm:flex-row justify-center gap-md animate-fade-in-up"
         style={{ animationDelay: "0.7s" }}
       >
         <button 
           onClick={onReset} 
-          className="btn btn-secondary"
+          className="btn"
           style={{ 
+            background: "rgba(255,255,255,0.1)",
+            border: "1px solid rgba(255,255,255,0.2)",
+            color: "white",
             padding: "14px 28px",
             borderRadius: "var(--radius-full)",
             display: "inline-flex",
@@ -763,6 +796,7 @@ function QuizResults({ results, onReset }: QuizResultsProps) {
           href="#candidatos" 
           className="btn btn-primary"
           style={{ 
+            background: "var(--color-accent)",
             padding: "14px 28px",
             borderRadius: "var(--radius-full)",
           }}

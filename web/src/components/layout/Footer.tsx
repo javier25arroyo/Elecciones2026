@@ -3,6 +3,8 @@ import {
   FavoriteRounded as FavoriteIcon,
   FlagRounded as FlagRoundedIcon,
   GitHub as GitHubIcon,
+  LinkedIn as LinkedInIcon,
+  Instagram as InstagramIcon,
 } from "@mui/icons-material";
 
 const footerLinks = {
@@ -139,23 +141,91 @@ export function Footer() {
               © 2026 Info Politic CR. Proyecto educativo sin fines de lucro.
             </p>
 
-            <a
-              href="https://github.com/javier25arroyo"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                color: "rgba(255, 255, 255, 0.75)",
-                fontSize: "0.875rem",
-                margin: 0,
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "8px",
-                textDecoration: "none",
-              }}
-            >
-              <GitHubIcon sx={{ fontSize: "1.1rem" }} aria-hidden="true" />
-              GitHub
-            </a>
+            <div className="flex items-center gap-lg">
+              <a
+                href="https://github.com/javier25arroyo"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  color: "rgba(255, 255, 255, 0.75)",
+                  fontSize: "0.875rem",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  textDecoration: "none",
+                  transition: "all 0.3s ease",
+                  padding: "8px 12px",
+                  borderRadius: "var(--radius-md)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "rgba(255, 255, 255, 0.1)";
+                  e.currentTarget.style.color = "white";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "transparent";
+                  e.currentTarget.style.color = "rgba(255, 255, 255, 0.75)";
+                }}
+              >
+                <GitHubIcon sx={{ fontSize: "1.1rem" }} aria-hidden="true" />
+                GitHub
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/javier-arroyo-dev"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  color: "rgba(255, 255, 255, 0.75)",
+                  fontSize: "0.875rem",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  textDecoration: "none",
+                  transition: "all 0.3s ease",
+                  padding: "8px 12px",
+                  borderRadius: "var(--radius-md)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "rgba(0, 119, 181, 0.2)";
+                  e.currentTarget.style.color = "#00A0DF";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "transparent";
+                  e.currentTarget.style.color = "rgba(255, 255, 255, 0.75)";
+                }}
+              >
+                <LinkedInIcon sx={{ fontSize: "1.1rem" }} aria-hidden="true" />
+                LinkedIn
+              </a>
+
+              <a
+                href="https://instagram.com/javier_arroyo25"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  color: "rgba(255, 255, 255, 0.75)",
+                  fontSize: "0.875rem",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  textDecoration: "none",
+                  transition: "all 0.3s ease",
+                  padding: "8px 12px",
+                  borderRadius: "var(--radius-md)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "rgba(224, 27, 131, 0.2)";
+                  e.currentTarget.style.color = "#E91E63";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "transparent";
+                  e.currentTarget.style.color = "rgba(255, 255, 255, 0.75)";
+                }}
+              >
+                <InstagramIcon sx={{ fontSize: "1.1rem" }} aria-hidden="true" />
+                Instagram
+              </a>
+            </div>
 
             <p
               style={{

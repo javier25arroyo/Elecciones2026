@@ -38,6 +38,9 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build static export
+        env:
+          NEXT_PUBLIC_BASE_PATH: ${{ vars.NEXT_PUBLIC_BASE_PATH }}
+          NEXT_PUBLIC_GA_ID: ${{ vars.NEXT_PUBLIC_GA_ID }}
         run: pnpm run build
         env:
           # Opcional: definilo en GitHub Settings -> Secrets and variables -> Actions -> Variables.
