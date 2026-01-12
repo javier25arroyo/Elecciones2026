@@ -146,6 +146,11 @@ body {
   background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
 }
 
+/* Evita saltos horizontales cuando aparece/desaparece el scrollbar */
+.scrollbar-stable {
+  scrollbar-gutter: stable;
+}
+
 @keyframes pageLoadFadeIn {
   from {
     opacity: 0;
@@ -465,6 +470,11 @@ p {
   background: var(--gradient-cta);
   border-radius: var(--radius-sm);
   transition: width var(--transition-slow);
+}
+
+/* Barra de progreso con más contraste en fondos oscuros (resultados del quiz) */
+.quiz-results-progress .progress {
+  background: rgba(255, 255, 255, 0.18);
 }
 
 /* ========================================

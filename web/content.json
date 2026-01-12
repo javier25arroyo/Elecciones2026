@@ -608,5 +608,130 @@
         "icon": "PeopleIcon"
       }
     ]
+  },
+  "deep_quiz": {
+    "description": "Estas 20 preguntas recogen compromisos y ejes clave mencionados en los planes de gobierno depositados ante el Tribunal Supremo de Elecciones, desde la descarbonización hasta la educación técnica y la justicia social.",
+    "questions": [
+      {
+        "id": "carbon-neutralidad",
+        "text": "Los planes oficiales insisten en metas claras de carbono neutralidad para 2050; ¿apoyás priorizarlas en la agenda nacional?",
+        "axis": { "env": 1, "econ": -0.2 },
+        "icon": "LeafIcon"
+      },
+      {
+        "id": "energia-renovable",
+        "text": "Invertir en energías limpias y transporte público eléctrico, como plantean las propuestas ambientales, es clave para cumplir esos compromisos.",
+        "axis": { "env": 0.9, "econ": -0.1 },
+        "icon": "BulbIcon"
+      },
+      {
+        "id": "proteccion-ecosistemas",
+        "text": "Blindar parques nacionales y cuencas hídricas, una prioridad mencionada en varios planes, merece más recursos.",
+        "axis": { "env": 0.8, "social": 0.2 },
+        "icon": "LeafIcon"
+      },
+      {
+        "id": "pagos-servicios-ambientales",
+        "text": "Promover pagos por servicios ambientales y corredores biológicos para las comunidades rurales, como sugieren los planes, es esencial.",
+        "axis": { "env": 0.7, "econ": -0.1 },
+        "icon": "LeafIcon"
+      },
+      {
+        "id": "infraestructura-rural",
+        "text": "Priorizar obras públicas, conectividad digital y carreteras rurales para cerrar brechas territoriales figura en los planes de gobierno; ¿lo apoyás?",
+        "axis": { "econ": 0.2, "social": 0.1 },
+        "icon": "TrendingIcon"
+      },
+      {
+        "id": "educacion-valores-tec",
+        "text": "Combinar educación técnica con formación en valores cívicos y disciplina, como proponen varios planes, debe ser una prioridad.",
+        "axis": { "econ": -0.2, "social": -0.3 },
+        "icon": "BookIcon"
+      },
+      {
+        "id": "formacion-dual",
+        "text": "Fortalecer redes de formación dual, universidades regionales y alianzas público-privadas, tal como aparece en los planes, mejora el empleo.",
+        "axis": { "econ": -0.1, "social": -0.4 },
+        "icon": "BookIcon"
+      },
+      {
+        "id": "salud-universal",
+        "text": "Los planes remarcan la cobertura universal y la atención primaria; ¿querés más recursos y profesionales en salud pública?",
+        "axis": { "social": -0.6, "econ": -0.2 },
+        "icon": "PeopleIcon"
+      },
+      {
+        "id": "salud-mental",
+        "text": "Programas comunitarios de salud mental y prevención que describen los planes deben recibir más inversión.",
+        "axis": { "social": -0.4 },
+        "icon": "PeopleIcon"
+      },
+      {
+        "id": "transparencia-digital",
+        "text": "Auditar y digitalizar las compras públicas para combatir la corrupción, una promesa repetida en los planes, es indispensable.",
+        "axis": { "econ": -0.4, "social": -0.2 },
+        "icon": "ScaleIcon"
+      },
+      {
+        "id": "seguridad-tecnologia",
+        "text": "Medidas de seguridad con tecnología y capacitación de cuerpos policiales, como plantean distintas candidaturas, refuerzan la ley y el orden.",
+        "axis": { "social": 0.7 },
+        "icon": "ShieldIcon"
+      },
+      {
+        "id": "participacion-ciudadana",
+        "text": "Referendos, presupuestos participativos y veedurías ciudadanas, propuestas habituales en los planes, deben crecer.",
+        "axis": { "social": -0.3 },
+        "icon": "PeopleIcon"
+      },
+      {
+        "id": "redes-de-proteccion",
+        "text": "Expandir redes sociales para familias en pobreza extrema, como plantean los planes sociales, fortalece la cohesión.",
+        "axis": { "econ": -0.8, "social": -0.2 },
+        "icon": "PeopleIcon"
+      },
+      {
+        "id": "pyme-burocracia",
+        "text": "Reducir trámites e impuestos para PYMEs, acorde a los planes liberales y centroderecha, dinamiza la creación de empleo.",
+        "axis": { "econ": 0.8 },
+        "icon": "RocketIcon"
+      },
+      {
+        "id": "economia-social",
+        "text": "Impulsar cooperativas, empresas sociales y participación estatal estratégica, como proponen planes de centroizquierda, equilibra el modelo productivo.",
+        "axis": { "econ": -0.3, "social": -0.1 },
+        "icon": "PeopleIcon"
+      },
+      {
+        "id": "innovacion-inversion",
+        "text": "Incentivar innovación, ciencia y atraer inversión extranjera responsable según los planes modernos es clave para competir globalmente.",
+        "axis": { "econ": 0.6 },
+        "icon": "RocketIcon"
+      },
+      {
+        "id": "estabilidad-fiscal",
+        "text": "Los planes hablan de responsabilidad fiscal sin sacrificar inversión social; ¿apoyás ese equilibrio?",
+        "axis": { "econ": 0.4, "social": 0.1 },
+        "icon": "ScaleIcon"
+      },
+      {
+        "id": "gobiernos-locales",
+        "text": "Descentralizar recursos y dar mayor autonomía a municipios, como indican varios planes, mejora la gestión.",
+        "axis": { "social": -0.3, "econ": -0.1 },
+        "icon": "PeopleIcon"
+      },
+      {
+        "id": "turismo-sostenible",
+        "text": "Apoyar turismo sostenible y economías regionales, otro eje repetido en planes, ayuda a regiones costeras e interiores.",
+        "axis": { "econ": 0.3, "env": 0.2 },
+        "icon": "RocketIcon"
+      },
+      {
+        "id": "derechos-trabajadores",
+        "text": "Garantizar salarios dignos y diálogo con sindicatos, señalado en los planes sindicalistas, protege a la clase trabajadora.",
+        "axis": { "econ": -0.7, "social": -0.5 },
+        "icon": "PeopleIcon"
+      }
+    ]
   }
 }

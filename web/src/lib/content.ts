@@ -34,12 +34,18 @@ export type QuizQuestion = {
   };
 };
 
+export type DeepQuiz = {
+  description?: string;
+  questions: QuizQuestion[];
+};
+
 export type Content = {
   design?: unknown;
   parties: Party[];
   quiz?: {
     questions: QuizQuestion[];
   };
+  deep_quiz?: DeepQuiz;
 };
 
 export async function getContent(): Promise<Content> {
