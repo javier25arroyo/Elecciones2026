@@ -49,7 +49,7 @@ const faqItems = [
           tu número de cédula.
         </p>
         <a
-          href="https://www.tse.go.cr/consultapadron/"
+          href="https://www.tse.go.cr/descarga_padron.html"
           target="_blank"
           rel="noopener noreferrer"
           className="btn btn-secondary btn-sm mt-md"
