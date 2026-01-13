@@ -95,6 +95,25 @@ pnpm dev
 # ➜ Abrir http://localhost:3000
 ```
 
+### 📈 Google Analytics (GA4)
+
+El proyecto incluye soporte para Google Analytics 4 vía `NEXT_PUBLIC_GA_ID`.
+
+1. En Google Analytics crea una **Propiedad GA4** y un **Web data stream**.
+2. Copia el **Measurement ID** (formato `G-XXXXXXXXXX`).
+3. Configúralo como variable de entorno:
+
+```bash
+# Windows PowerShell (solo para la sesión)
+$env:NEXT_PUBLIC_GA_ID="G-XXXXXXXXXX"; pnpm dev
+
+# Alternativa: define NEXT_PUBLIC_GA_ID en tu hosting (Vercel/Netlify/etc.)
+```
+
+Notas:
+- Reporta pageviews también en navegación client-side.
+- Si haces deploy con GitHub Actions, guarda `NEXT_PUBLIC_GA_ID` como **Repository Secret** y pásalo al paso de build.
+
 ### 📦 Build y Export
 
 ```bash

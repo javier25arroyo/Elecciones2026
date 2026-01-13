@@ -20,7 +20,6 @@ import {
   ThumbDownOutlined as ThumbsDownIcon,
   ShareOutlined as ShareIcon,
   RestartAltOutlined as RestartIcon,
-  WarningOutlined as WarningIcon,
   CelebrationOutlined as CelebrationIcon,
 } from "@mui/icons-material";
 
@@ -190,11 +189,6 @@ export function QuizSection({
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const [answers, setAnswers] = React.useState<Answer[]>([]);
   const [results, setResults] = React.useState<PartyResult[]>([]);
-  const [userVector, setUserVector] = React.useState<UserVector>({
-    econ: 0,
-    social: 0,
-    env: 0,
-  });
 
   const handleStart = React.useCallback(() => {
     setState("questions");
@@ -238,8 +232,6 @@ export function QuizSection({
       newUserVector.social += (axis.social || 0) * answer;
       newUserVector.env += (axis.env || 0) * answer;
     });
-
-    setUserVector(newUserVector);
 
     const partyResults: PartyResult[] = parties.map((party) => {
       const partyVector = guessPartyVector(party);
@@ -324,8 +316,6 @@ export function QuizSection({
         {state === "results" && (
           <QuizResults
             results={results}
-            parties={parties}
-            userVector={userVector}
             onReset={handleReset}
             onRepeatToPicker={onRepeatToPicker}
           />
@@ -595,13 +585,11 @@ function QuizQuestions({ questions, currentIndex, onAnswer }: QuizQuestionsProps
 
 interface QuizResultsProps {
   results: PartyResult[];
-  parties: Party[];
-  userVector: UserVector;
   onReset: () => void;
   onRepeatToPicker?: () => void;
 }
 
-function QuizResults({ results, parties, userVector, onReset, onRepeatToPicker }: QuizResultsProps) {
+function QuizResults({ results, onReset, onRepeatToPicker }: QuizResultsProps) {
   const top3 = results.slice(0, 3);
   const rest = results.slice(3);
   const winner = top3[0];

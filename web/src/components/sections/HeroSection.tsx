@@ -28,18 +28,6 @@ function pad2(value: number) {
 }
 
 export function HeroSection() {
-  // 1 de febrero 2026 a las 00:00 en Costa Rica (UTC-06:00) => 06:00Z
-  const electionDateMs = React.useMemo(() => Date.UTC(2026, 1, 1, 6, 0, 0), []);
-  const [timeLeft, setTimeLeft] = React.useState<TimeLeft | null>(null);
-
-  // Evita mismatch de hidratación: inicializa en el cliente.
-  React.useEffect(() => {
-    const update = () => setTimeLeft(getTimeLeft(electionDateMs, Date.now()));
-    update();
-    const id = window.setInterval(update, 1000);
-    return () => window.clearInterval(id);
-  }, [electionDateMs]);
-
   return (
     <section
       className="relative flex items-center justify-center text-center bg-app-gradient"

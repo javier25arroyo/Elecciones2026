@@ -1,7 +1,6 @@
 "use client";
 
 import { Inter, Poppins } from "next/font/google";
-import { useEffect, useState } from "react";
 import { Header, Footer } from "@/components/layout";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import "./globals.css";
@@ -35,12 +34,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   return (
     <html lang="es">
       <head>
@@ -126,7 +119,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.variable} ${poppins.variable} ${mounted ? 'is-mounted' : ''} antialiased min-h-screen flex flex-col bg-gray-50 dark:bg-black/95`}>
+      <body className={`${inter.variable} ${poppins.variable} is-mounted antialiased min-h-screen flex flex-col bg-gray-50 dark:bg-black/95`}>
         <GoogleAnalytics />
         <Header />
         <a href="#main-content" className="skip-link">
