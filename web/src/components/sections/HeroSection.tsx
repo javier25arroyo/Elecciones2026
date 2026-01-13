@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { CalendarMonthOutlined as CalendarIcon, HowToVoteOutlined as VoteIcon, GroupsOutlined as GroupsIcon, AccessTimeOutlined as TimeIcon } from "@mui/icons-material";
 import { useScrollReveal } from "@/lib/useScrollReveal";
 
 type TimeLeft = {
@@ -28,6 +27,18 @@ function pad2(value: number) {
 }
 
 export function HeroSection() {
+  // 1 de febrero 2026 a las 00:00 en Costa Rica (UTC-06:00) => 06:00Z
+  const electionDateMs = React.useMemo(() => Date.UTC(2026, 1, 1, 6, 0, 0), []);
+  const [timeLeft, setTimeLeft] = React.useState<TimeLeft | null>(null);
+
+  // Evita mismatch de hidratación: inicializa en el cliente.
+  React.useEffect(() => {
+    const update = () => setTimeLeft(getTimeLeft(electionDateMs, Date.now()));
+    update();
+    const id = window.setInterval(update, 1000);
+    return () => window.clearInterval(id);
+  }, [electionDateMs]);
+
   return (
     <section
       className="relative flex items-center justify-center text-center bg-app-gradient"
@@ -48,27 +59,9 @@ export function HeroSection() {
         }}
       />
 
-      {/* Animated particles - Reduced for performance */}
-      <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
-        {[...Array(3)].map((_, i) => (
-          <div
-            key={i}
-            className="particle"
-            style={{
-              top: `${20 + i * 30}%`,
-              left: `${10 + i * 30}%`,
-              width: `${6 + i * 2}px`,
-              height: `${6 + i * 2}px`,
-              background: i % 2 === 0 ? "rgba(255, 255, 255, 0.3)" : "rgba(206, 17, 38, 0.4)",
-              animationDelay: `${i * 0.5}s`,
-              animationDuration: `${4 + i}s`,
-              willChange: "transform",
-            }}
-          />
-        ))}
-      </div>
+      {/* Particles removed for mobile performance */}
 
-      {/* Floating decorative elements - Optimized */}
+      {/* Floating decorative element - Optimized for mobile */}
       <div
         className="absolute animate-float"
         style={{
@@ -78,22 +71,8 @@ export function HeroSection() {
           height: 200,
           background: "rgba(255, 255, 255, 0.03)",
           borderRadius: "50%",
-          filter: "blur(40px)",
-          willChange: "transform",
-        }}
-      />
-      <div
-        className="absolute animate-float"
-        style={{
-          bottom: "20%",
-          right: "10%",
-          width: 300,
-          height: 300,
-          background: "rgba(206, 17, 38, 0.08)",
-          borderRadius: "50%",
-          filter: "blur(60px)",
-          animationDelay: "1.5s",
-          willChange: "transform",
+          filter: "blur(30px)",
+          pointerEvents: "none",
         }}
       />
 
@@ -115,7 +94,9 @@ export function HeroSection() {
             fontSize: "0.95rem",
           }}
         >
-          <CalendarIcon sx={{ fontSize: "1.2rem" }} />
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/>
+          </svg>
           <span>1 de febrero de 2026</span>
         </span>
 
@@ -172,9 +153,15 @@ export function HeroSection() {
               borderRadius: "var(--radius-full)",
               fontSize: "1.1rem",
               fontWeight: 700,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "8px",
             }}
           >
-              ¿A quién votar? <VoteIcon sx={{ fontSize: "1.5rem", verticalAlign: "middle" }} />
+            ¿A quién votar? 
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style={{ verticalAlign: "middle" }}>
+              <path d="M18 13h-.68l-2 2h1.91L19 17H5l1.78-2h2.05l-2-2H6l-3 3v4c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2v-4l-3-3zm-1-5.05l-4.95 4.95-3.54-3.54 4.95-4.95L17 7.95zm-4.24-5.66L6.39 8.66c-.39.39-.39 1.02 0 1.41l4.95 4.95c.39.39 1.02.39 1.41 0l6.36-6.36c.39-.39.39-1.02 0-1.41L14.16 2.3c-.38-.4-1.01-.4-1.4-.01z"/>
+            </svg>
           </a>
           <a
             href="#candidatos"
@@ -222,12 +209,24 @@ function StatsGrid() {
         gridTemplateColumns: "repeat(3, 1fr)",
       }}
     >
-      <StatCard value="14+" label="Candidatos" icon={<GroupsIcon sx={{ fontSize: "1.2rem" }} />} />
-      <StatCard value="3.5M+" label="Votantes" icon={<VoteIcon sx={{ fontSize: "1.2rem" }} />} />
-  <StatCard 
+      <StatCard value="14+" label="Candidatos" icon={
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+        </svg>
+      } />
+      <StatCard value="3.5M+" label="Votantes" icon={
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18 13h-.68l-2 2h1.91L19 17H5l1.78-2h2.05l-2-2H6l-3 3v4c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2v-4l-3-3zm-1-5.05l-4.95 4.95-3.54-3.54 4.95-4.95L17 7.95zm-4.24-5.66L6.39 8.66c-.39.39-.39 1.02 0 1.41l4.95 4.95c.39.39 1.02.39 1.41 0l6.36-6.36c.39-.39.39-1.02 0-1.41L14.16 2.3c-.38-.4-1.01-.4-1.4-.01z"/>
+        </svg>
+      } />
+      <StatCard 
         value={<CountdownValue timeLeft={timeLeft} />}
         label="Cuenta regresiva" 
-        icon={<TimeIcon sx={{ fontSize: "1.2rem" }} />}
+        icon={
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+          </svg>
+        }
         highlight 
       />
     </div>
