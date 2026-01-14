@@ -7,7 +7,7 @@ import { CandidatesSection } from "@/components/sections/CandidatesSection";
 const TimelineSection = dynamic(
   () => import("@/components/sections/TimelineSection").then(mod => ({ default: mod.TimelineSection })),
   { 
-    loading: () => <div style={{ minHeight: "400px" }} />,
+    loading: () => <div className="min-h-[400px]" />,
     ssr: true 
   }
 );
@@ -15,7 +15,7 @@ const TimelineSection = dynamic(
 const EducationSection = dynamic(
   () => import("@/components/sections/EducationSection").then(mod => ({ default: mod.EducationSection })),
   { 
-    loading: () => <div style={{ minHeight: "400px" }} />,
+    loading: () => <div className="min-h-[400px]" />,
     ssr: true 
   }
 );
@@ -23,7 +23,7 @@ const EducationSection = dynamic(
 const QuizzesSection = dynamic(
   () => import("@/components/sections/QuizzesSection").then(mod => ({ default: mod.QuizzesSection })),
   {
-    loading: () => <div style={{ minHeight: "400px" }} />,
+    loading: () => <div className="min-h-[400px]" />,
     ssr: true,
   }
 );

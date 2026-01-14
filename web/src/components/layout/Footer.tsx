@@ -1,12 +1,12 @@
 "use client";
 import Link from "next/link";
 import {
-  FavoriteRounded as FavoriteIcon,
-  FlagRounded as FlagRoundedIcon,
-  GitHub as GitHubIcon,
-  LinkedIn as LinkedInIcon,
-  Instagram as InstagramIcon,
-} from "@mui/icons-material";
+  Heart,
+  Flag,
+  Github,
+  Linkedin,
+  Instagram,
+} from "lucide-react";
 
 const footerLinks = {
   recursos: [
@@ -22,71 +22,48 @@ const footerLinks = {
   ],
 };
 
+const SocialLink = ({ href, icon, text, hoverColor, hoverBgColor }: { href: string, icon: React.ReactNode, text: string, hoverColor: string, hoverBgColor: string }) => (
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    className={`inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm text-white/75 transition-colors duration-200 ${hoverColor} ${hoverBgColor}`}
+  >
+    {icon}
+    {text}
+  </a>
+);
+
 export function Footer() {
   return (
-    <footer
-      style={{
-        background: "var(--color-background-dark)",
-        color: "white",
-        marginTop: "var(--spacing-3xl)",
-      }}
-    >
-      <div className="container py-3xl">
-        <div 
-          className="grid gap-xl"
-          style={{
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 250px), 1fr))",
-          }}
-        >
+    <footer className="mt-16 bg-background-dark text-white">
+      <div className="container mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Logo y descripción */}
-          <div className="lg:col-span-2">
-            <Link
-              href="/"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "var(--spacing-sm)",
-                textDecoration: "none",
-                color: "white",
-              }}
-            >
-              <FlagRoundedIcon sx={{ fontSize: "1.5rem" }} aria-hidden="true" />
-              <span style={{ fontSize: "1.5rem", fontWeight: 700 }}>Elecciones</span>
+          <div className="md:col-span-2">
+            <Link href="/" className="inline-flex items-center gap-2 text-white">
+              <Flag className="h-6 w-6" />
+              <span className="text-2xl font-bold font-display">Elecciones</span>
             </Link>
-            <p
-              className="mt-md"
-              style={{ color: "rgba(255, 255, 255, 0.7)", maxWidth: 400 }}
-            >
+            <p className="mt-4 max-w-md text-white/70">
               Plataforma educativa e interactiva sobre las elecciones
               presidenciales de Costa Rica 2026. Información clara, sin sesgos,
               para todos los votantes.
             </p>
-            <p
-              className="mt-lg"
-              style={{ color: "rgba(255, 255, 255, 0.5)", fontSize: "0.875rem" }}
-            >
+            <p className="mt-6 text-sm text-white/50">
               Fecha de elección: <strong>1 de febrero de 2026</strong>
             </p>
           </div>
 
           {/* Recursos */}
           <div>
-            <h4
-              style={{
-                color: "white",
-                marginBottom: "var(--spacing-md)",
-                fontSize: "1rem",
-              }}
-            >
+            <h4 className="mb-4 text-base font-semibold text-white">
               Recursos
             </h4>
-            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            <ul className="space-y-2">
               {footerLinks.recursos.map((link) => (
-                <li key={link.href} style={{ marginBottom: "var(--spacing-sm)" }}>
-                  <a
-                    href={link.href}
-                    className="footer-link"
-                  >
+                <li key={link.href}>
+                  <a href={link.href} className="text-white/70 transition-colors hover:text-white">
                     {link.label}
                   </a>
                 </li>
@@ -96,23 +73,17 @@ export function Footer() {
 
           {/* Legal */}
           <div>
-            <h4
-              style={{
-                color: "white",
-                marginBottom: "var(--spacing-md)",
-                fontSize: "1rem",
-              }}
-            >
+            <h4 className="mb-4 text-base font-semibold text-white">
               Enlaces
             </h4>
-            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            <ul className="space-y-2">
               {footerLinks.legal.map((link) => (
-                <li key={link.href} style={{ marginBottom: "var(--spacing-sm)" }}>
+                <li key={link.href}>
                   <a
                     href={link.href}
                     target={link.external ? "_blank" : undefined}
                     rel={link.external ? "noopener noreferrer" : undefined}
-                    className="footer-link"
+                    className="text-white/70 transition-colors hover:text-white"
                   >
                     {link.label}
                     {link.external && " ↗"}
@@ -123,147 +94,40 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Divider */}
-        <div
-          style={{
-            borderTop: "1px solid rgba(255, 255, 255, 0.1)",
-            marginTop: "var(--spacing-2xl)",
-            paddingTop: "var(--spacing-lg)",
-          }}
-        >
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-md">
-            <p
-              style={{
-                color: "rgba(255, 255, 255, 0.5)",
-                fontSize: "0.875rem",
-                margin: 0,
-              }}
-            >
+        {/* Divider y créditos */}
+        <div className="mt-12 border-t border-white/10 pt-8 lg:mt-16">
+          <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
+            <p className="m-0 text-sm text-white/50">
               © 2026 Info Politic CR. Proyecto educativo sin fines de lucro.
             </p>
 
-            <div className="flex items-center gap-lg">
-              <a
+            <div className="flex items-center gap-2 sm:gap-4">
+              <SocialLink 
                 href="https://github.com/javier25arroyo"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  color: "rgba(255, 255, 255, 0.75)",
-                  fontSize: "0.875rem",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  textDecoration: "none",
-                  transition: "all 0.3s ease",
-                  padding: "8px 12px",
-                  borderRadius: "var(--radius-md)",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(255, 255, 255, 0.1)";
-                  e.currentTarget.style.color = "white";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "transparent";
-                  e.currentTarget.style.color = "rgba(255, 255, 255, 0.75)";
-                }}
-                onFocus={(e) => {
-                  e.currentTarget.style.background = "rgba(255, 255, 255, 0.1)";
-                  e.currentTarget.style.color = "white";
-                }}
-                onBlur={(e) => {
-                  e.currentTarget.style.background = "transparent";
-                  e.currentTarget.style.color = "rgba(255, 255, 255, 0.75)";
-                }}
-              >
-                <GitHubIcon sx={{ fontSize: "1.1rem" }} aria-hidden="true" />
-                GitHub
-              </a>
-
-              <a
+                icon={<Github className="h-5 w-5" />}
+                text="GitHub"
+                hoverColor="hover:text-white"
+                hoverBgColor="hover:bg-white/10"
+              />
+               <SocialLink 
                 href="https://www.linkedin.com/in/javier-arroyo-dev"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  color: "rgba(255, 255, 255, 0.75)",
-                  fontSize: "0.875rem",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  textDecoration: "none",
-                  transition: "all 0.3s ease",
-                  padding: "8px 12px",
-                  borderRadius: "var(--radius-md)",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(0, 119, 181, 0.2)";
-                  e.currentTarget.style.color = "#00A0DF";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "transparent";
-                  e.currentTarget.style.color = "rgba(255, 255, 255, 0.75)";
-                }}
-                onFocus={(e) => {
-                  e.currentTarget.style.background = "rgba(0, 119, 181, 0.2)";
-                  e.currentTarget.style.color = "#00A0DF";
-                }}
-                onBlur={(e) => {
-                  e.currentTarget.style.background = "transparent";
-                  e.currentTarget.style.color = "rgba(255, 255, 255, 0.75)";
-                }}
-              >
-                <LinkedInIcon sx={{ fontSize: "1.1rem" }} aria-hidden="true" />
-                LinkedIn
-              </a>
-
-              <a
+                icon={<Linkedin className="h-5 w-5" />}
+                text="LinkedIn"
+                hoverColor="hover:text-[#00A0DF]"
+                hoverBgColor="hover:bg-[#0077B5]/20"
+              />
+               <SocialLink 
                 href="https://instagram.com/javier_arroyo25"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  color: "rgba(255, 255, 255, 0.75)",
-                  fontSize: "0.875rem",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  textDecoration: "none",
-                  transition: "all 0.3s ease",
-                  padding: "8px 12px",
-                  borderRadius: "var(--radius-md)",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(224, 27, 131, 0.2)";
-                  e.currentTarget.style.color = "#E91E63";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "transparent";
-                  e.currentTarget.style.color = "rgba(255, 255, 255, 0.75)";
-                }}
-                onFocus={(e) => {
-                  e.currentTarget.style.background = "rgba(224, 27, 131, 0.2)";
-                  e.currentTarget.style.color = "#E91E63";
-                }}
-                onBlur={(e) => {
-                  e.currentTarget.style.background = "transparent";
-                  e.currentTarget.style.color = "rgba(255, 255, 255, 0.75)";
-                }}
-              >
-                <InstagramIcon sx={{ fontSize: "1.1rem" }} aria-hidden="true" />
-                Instagram
-              </a>
+                icon={<Instagram className="h-5 w-5" />}
+                text="Instagram"
+                hoverColor="hover:text-[#E91E63]"
+                hoverBgColor="hover:bg-[#E41B7F]/20"
+              />
             </div>
 
-            <p
-              style={{
-                color: "rgba(255, 255, 255, 0.5)",
-                fontSize: "0.875rem",
-                margin: 0,
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "6px",
-              }}
-            >
-              Hecho con <FavoriteIcon sx={{ color: "#E63946", fontSize: "1rem" }} aria-hidden="true" /> para Costa Rica
-              <FlagRoundedIcon sx={{ fontSize: "1rem" }} aria-hidden="true" />
+            <p className="m-0 inline-flex items-center gap-1.5 text-sm text-white/50">
+              Hecho con <Heart className="h-4 w-4 text-red-500" /> para Costa Rica
+              <Flag className="h-4 w-4" />
             </p>
           </div>
         </div>

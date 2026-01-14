@@ -5,73 +5,73 @@ import type { Party, QuizQuestion } from "@/lib/content";
 import { Badge } from "@/components/ui/Badge";
 import { Progress } from "@/components/ui/Progress";
 import {
-  EnergySavingsLeafOutlined as LeafIcon,
-  TrendingUpOutlined as TrendingIcon,
-  AutoAwesomeOutlined as RocketIcon,
-  AutoAwesomeRounded as SparklesIcon,
-  SchoolOutlined as BookIcon,
-  SecurityOutlined as ShieldIcon,
-  BalanceOutlined as ScaleIcon,
-  LightbulbOutlined as BulbIcon,
-  PeopleOutlineOutlined as PeopleIcon,
-  HowToVoteOutlined as VotingIcon,
-  ThumbUpOutlined as ThumbsUpIcon,
-  SentimentSatisfiedAltOutlined as NeutralIcon,
-  ThumbDownOutlined as ThumbsDownIcon,
-  ShareOutlined as ShareIcon,
-  RestartAltOutlined as RestartIcon,
-  WarningOutlined as WarningIcon,
-  CelebrationOutlined as CelebrationIcon,
-} from "@mui/icons-material";
+  Leaf,
+  TrendingUp,
+  Rocket,
+  Sparkles,
+  BookOpen,
+  Shield,
+  Scale,
+  Lightbulb,
+  Users,
+  Vote,
+  ThumbsUp,
+  Meh,
+  ThumbsDown,
+  Share2,
+  RotateCcw,
+  AlertTriangle,
+  PartyPopper,
+} from "lucide-react";
 
 const defaultQuestions: QuizQuestion[] = [
   {
     id: "renewables",
     text: "¿El Estado debería invertir más en energías renovables y transporte público limpio?",
     axis: { env: 1, econ: -0.2 },
-    icon: "LeafIcon",
+    icon: "Leaf",
   },
   {
     id: "taxes",
     text: "¿Se deberían aumentar impuestos a grandes empresas para financiar programas sociales?",
     axis: { econ: -1 },
-    icon: "TrendingIcon",
+    icon: "TrendingUp",
   },
   {
     id: "dereg",
     text: "¿Se deberían reducir trámites e impuestos para facilitar emprender y generar empleo?",
     axis: { econ: 1 },
-    icon: "RocketIcon",
+    icon: "Rocket",
   },
   {
     id: "public-edu",
     text: "¿La educación pública debe recibir más inversión que la privada?",
     axis: { econ: -0.6, social: -0.2 },
-    icon: "BookIcon",
+    icon: "BookOpen",
   },
   {
     id: "security",
     text: "¿Preferís un enfoque de seguridad con medidas más estrictas y mano firme?",
     axis: { social: 0.9 },
-    icon: "ShieldIcon",
+    icon: "Shield",
   },
   {
     id: "civil-liberties",
     text: "¿Las libertades civiles deben protegerse aunque entren en conflicto con valores tradicionales?",
     axis: { social: -1 },
-    icon: "ScaleIcon",
+    icon: "Scale",
   },
   {
     id: "market-env",
     text: "¿El mercado y la innovación privada son la mejor vía para resolver los problemas ambientales?",
     axis: { env: 0.4, econ: 0.6 },
-    icon: "BulbIcon",
+    icon: "Lightbulb",
   },
   {
     id: "social-programs",
     text: "¿El gobierno debe expandir los programas de asistencia social para los más vulnerables?",
     axis: { econ: -0.7, social: -0.3 },
-    icon: "PeopleIcon",
+    icon: "Users",
   },
 ];
 
@@ -82,15 +82,15 @@ type FeaturePill = {
 
 const defaultFeaturePills: FeaturePill[] = [
   {
-    icon: <RocketIcon sx={{ fontSize: "1rem" }} />,
+    icon: <Rocket className="h-4 w-4" />,
     text: "2 min",
   },
   {
-    icon: <ShieldIcon sx={{ fontSize: "1rem" }} />,
+    icon: <Shield className="h-4 w-4" />,
     text: "Anónimo",
   },
   {
-    icon: <TrendingIcon sx={{ fontSize: "1rem" }} />,
+    icon: <TrendingUp className="h-4 w-4" />,
     text: "Resultados al instante",
   },
 ];
@@ -354,24 +354,14 @@ function QuizIntro({ onStart, title, description, badgeText, featurePills, ctaLa
         className="animate-float mb-lg"
         style={{ fontSize: "4rem", display: "flex", justifyContent: "center" }}
       >
-        <VotingIcon sx={{ fontSize: "4rem", color: "white" }} />
+        <Vote className="h-16 w-16 text-white" />
       </div>
       
       <Badge
         variant="neutral"
-        className="mb-lg"
-        style={{ 
-          background: "rgba(255,255,255,0.15)", 
-          color: "white",
-          backdropFilter: "blur(10px)",
-          border: "1px solid rgba(255,255,255,0.2)",
-          padding: "8px 16px",
-          display: "inline-flex",
-          alignItems: "center",
-          gap: "8px",
-        }}
+        className="mb-lg inline-flex items-center gap-2 bg-white/15 text-white backdrop-blur-[10px] border border-white/20 py-2 px-4"
       >
-        <CelebrationIcon sx={{ fontSize: "1.2rem" }} /> {badgeText}
+        <PartyPopper className="h-5 w-5" /> {badgeText}
       </Badge>
       
       <div style={{ marginBottom: "var(--spacing-md)", textWrap: "balance" }}>{title}</div>
@@ -460,21 +450,21 @@ function QuizQuestions({ questions, currentIndex, onAnswer }: QuizQuestionsProps
     { 
       value: 1 as Answer, 
       label: "De acuerdo", 
-      icon: <ThumbsUpIcon sx={{ fontSize: "1.5rem" }} />,
+      icon: <ThumbsUp className="h-6 w-6" />,
       color: "#16A34A",
       bgColor: "rgba(22, 163, 74, 0.1)",
     },
     { 
       value: 0 as Answer, 
       label: "Neutral", 
-      icon: <NeutralIcon sx={{ fontSize: "1.5rem" }} />,
+      icon: <Meh className="h-6 w-6" />,
       color: "#6B7280",
       bgColor: "rgba(107, 114, 128, 0.1)",
     },
     { 
       value: -1 as Answer, 
       label: "En desacuerdo", 
-      icon: <ThumbsDownIcon sx={{ fontSize: "1.5rem" }} />,
+      icon: <ThumbsDown className="h-6 w-6" />,
       color: "#CE1126",
       bgColor: "rgba(206, 17, 38, 0.1)",
     },
@@ -615,13 +605,13 @@ function QuizResults({ results, parties, userVector, onReset, onRepeatToPicker }
           className="animate-celebrate mb-md"
           style={{ fontSize: "4rem", display: "flex", justifyContent: "center" }}
         >
-          <CelebrationIcon sx={{ fontSize: "4rem", color: "var(--color-accent)" }} />
+          <PartyPopper className="h-16 w-16 text-accent" />
         </div>
         <Badge 
           variant="secondary" 
           className="mb-md"
         >
-          <SparklesIcon sx={{ fontSize: "1.2rem" }} />
+          <Sparkles className="h-5 w-5" />
           Resultados listos
         </Badge>
         <h2 
@@ -762,7 +752,7 @@ function QuizResults({ results, parties, userVector, onReset, onRepeatToPicker }
           padding: "var(--spacing-xl)",
         }}
       >
-        <ShareIcon sx={{ fontSize: "2rem", marginBottom: "var(--spacing-sm)", color: "var(--color-accent)" }} />
+        <Share2 className="h-8 w-8 mb-2 text-accent" />
         <h4 style={{ marginBottom: "var(--spacing-sm)", color: "white" }}>
           ¡Compartí tus resultados!
         </h4>
@@ -802,7 +792,7 @@ function QuizResults({ results, parties, userVector, onReset, onRepeatToPicker }
             justifyContent: "center",
           }}
         >
-          <RestartIcon sx={{ fontSize: "1.2rem" }} /> {onRepeatToPicker ? "Elegir otro quiz" : "Repetir quiz"}
+          <RotateCcw className="h-5 w-5" /> {onRepeatToPicker ? "Elegir otro quiz" : "Repetir quiz"}
         </button>
         <a 
           href="#candidatos" 
@@ -822,14 +812,14 @@ function QuizResults({ results, parties, userVector, onReset, onRepeatToPicker }
 
 function getIconComponent(iconName: string): React.ReactNode {
   const iconMap: { [key: string]: React.ReactNode } = {
-    LeafIcon: <LeafIcon sx={{ fontSize: "3rem", color: "var(--color-primary)" }} />,
-    TrendingIcon: <TrendingIcon sx={{ fontSize: "3rem", color: "var(--color-primary)" }} />,
-    RocketIcon: <RocketIcon sx={{ fontSize: "3rem", color: "var(--color-primary)" }} />,
-    BookIcon: <BookIcon sx={{ fontSize: "3rem", color: "var(--color-primary)" }} />,
-    ShieldIcon: <ShieldIcon sx={{ fontSize: "3rem", color: "var(--color-primary)" }} />,
-    ScaleIcon: <ScaleIcon sx={{ fontSize: "3rem", color: "var(--color-primary)" }} />,
-    BulbIcon: <BulbIcon sx={{ fontSize: "3rem", color: "var(--color-primary)" }} />,
-    PeopleIcon: <PeopleIcon sx={{ fontSize: "3rem", color: "var(--color-primary)" }} />,
+    Leaf: <Leaf className="h-12 w-12 text-primary" />,
+    TrendingUp: <TrendingUp className="h-12 w-12 text-primary" />,
+    Rocket: <Rocket className="h-12 w-12 text-primary" />,
+    BookOpen: <BookOpen className="h-12 w-12 text-primary" />,
+    Shield: <Shield className="h-12 w-12 text-primary" />,
+    Scale: <Scale className="h-12 w-12 text-primary" />,
+    Lightbulb: <Lightbulb className="h-12 w-12 text-primary" />,
+    Users: <Users className="h-12 w-12 text-primary" />,
   };
   return iconMap[iconName] || null;
 }

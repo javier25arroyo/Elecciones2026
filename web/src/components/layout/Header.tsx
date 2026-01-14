@@ -47,11 +47,7 @@ export function Header() {
     >
       {/* Barra tricolor inferior estilo CR */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-1"
-        style={{
-          background:
-            "linear-gradient(90deg, #002B7F 0%, #002B7F 20%, #FFFFFF 20%, #FFFFFF 35%, #CE1126 35%, #CE1126 65%, #FFFFFF 65%, #FFFFFF 80%, #002B7F 80%, #002B7F 100%)",
-        }}
+        className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-costa-rica"
       />
 
       <div className="container mx-auto px-4 max-w-7xl h-17.5 flex items-center justify-between">

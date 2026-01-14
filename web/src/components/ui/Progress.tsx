@@ -2,6 +2,9 @@
 
 import * as React from "react";
 
+const cn = (...classes: (string | undefined | null | false)[]) =>
+  classes.filter(Boolean).join(" ");
+
 interface ProgressProps {
   value: number;
   max?: number;
@@ -9,6 +12,7 @@ interface ProgressProps {
   showValue?: boolean;
   color?: string;
   className?: string;
+  barClassName?: string;
 }
 
 export function Progress({
@@ -18,30 +22,34 @@ export function Progress({
   showValue = false,
   color,
   className = "",
+  barClassName = "",
 }: ProgressProps) {
   const percentage = Math.min(100, Math.max(0, (value / max) * 100));
 
   return (
     <div className={className}>
       {(label || showValue) && (
-        <div className="flex justify-between mb-sm">
-          {label && <span className="text-muted">{label}</span>}
-          {showValue && <span className="text-muted">{Math.round(percentage)}%</span>}
+        <div className="mb-2 flex justify-between">
+          {label && <span className="text-sm text-text-secondary">{label}</span>}
+          {showValue && <span className="text-sm font-medium text-text-primary">{Math.round(percentage)}%</span>}
         </div>
       )}
-      <div 
-        className="progress" 
-        role="progressbar" 
-        aria-valuenow={value} 
-        aria-valuemin={0} 
+      <div
+        className="h-2 w-full overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700"
+        role="progressbar"
+        aria-valuenow={value}
+        aria-valuemin={0}
         aria-valuemax={max}
         aria-label={label}
       >
         <div
-          className="progress-bar"
+          className={cn(
+            "h-full rounded-full bg-gradient-cta transition-[width] duration-500 ease-in-out",
+            barClassName,
+          )}
           style={{
             width: `${percentage}%`,
-            background: color || undefined,
+            backgroundColor: color,
           }}
         />
       </div>
@@ -70,14 +78,14 @@ export function CircularProgress({
   const offset = circumference - (value / 100) * circumference;
 
   return (
-    <div className={`relative inline-flex items-center justify-center ${className}`}>
-      <svg width={size} height={size} className="transform -rotate-90">
+    <div className={cn("relative inline-flex items-center justify-center", className)}>
+      <svg width={size} height={size} className="-rotate-90 transform">
         <circle
           cx={size / 2}
           cy={size / 2}
           r={radius}
           fill="none"
-          stroke="var(--color-border)"
+          className="stroke-slate-200 dark:stroke-slate-700"
           strokeWidth={strokeWidth}
         />
         <circle
@@ -90,12 +98,12 @@ export function CircularProgress({
           strokeLinecap="round"
           strokeDasharray={circumference}
           strokeDashoffset={offset}
-          style={{ transition: "stroke-dashoffset 0.6s ease" }}
+          className="transition-[stroke-dashoffset] duration-500 ease-in-out"
         />
       </svg>
-      <span 
-        className="absolute text-center font-semibold" 
-        style={{ fontSize: size * 0.2, color: "var(--color-text-primary)" }}
+      <span
+        className="absolute text-center font-semibold text-text-primary"
+        style={{ fontSize: size * 0.2 }}
       >
         {Math.round(value)}%
       </span>

@@ -2,26 +2,29 @@
 
 import * as React from "react";
 
+const cn = (...classes: (string | undefined | null | false)[]) =>
+  classes.filter(Boolean).join(" ");
+
 interface SpinnerProps {
   size?: "sm" | "md" | "lg";
   className?: string;
 }
 
-const sizeMap = {
-  sm: 20,
-  md: 40,
-  lg: 60,
-};
-
 export function Spinner({ size = "md", className = "" }: SpinnerProps) {
-  const pixelSize = sizeMap[size];
+  const sizeClasses = {
+    sm: "h-5 w-5 border-2",
+    md: "h-10 w-10 border-4",
+    lg: "h-16 w-16 border-4",
+  };
 
   return (
     <div
-      className={`spinner ${className}`}
-      style={{ width: pixelSize, height: pixelSize }}
+      className={cn(
+        "animate-spin rounded-full border-slate-200 border-t-primary",
+        sizeClasses[size],
+        className
+      )}
       role="status"
-      aria-label="Cargando"
     >
       <span className="sr-only">Cargando...</span>
     </div>
@@ -29,33 +32,16 @@ export function Spinner({ size = "md", className = "" }: SpinnerProps) {
 }
 
 interface SkeletonProps {
-  width?: string | number;
-  height?: string | number;
   className?: string;
-  variant?: "text" | "circular" | "rectangular";
 }
 
-export function Skeleton({
-  width = "100%",
-  height = 20,
-  className = "",
-  variant = "rectangular",
-}: SkeletonProps) {
-  const borderRadius =
-    variant === "circular"
-      ? "50%"
-      : variant === "text"
-      ? "var(--radius-sm)"
-      : "var(--radius-md)";
-
+export function Skeleton({ className = "" }: SkeletonProps) {
   return (
     <div
-      className={`skeleton ${className}`}
-      style={{
-        width,
-        height,
-        borderRadius,
-      }}
+      className={cn(
+        "animate-skeleton rounded-md bg-[length:200%_100%] bg-gradient-to-r from-slate-200 via-slate-300 to-slate-200",
+        className
+      )}
       aria-hidden="true"
     />
   );
@@ -64,14 +50,14 @@ export function Skeleton({
 // Skeleton para tarjeta de candidato
 export function CandidateCardSkeleton() {
   return (
-    <div className="card">
+    <div className="flex flex-col rounded-xl border border-border bg-white p-6">
       <div className="flex flex-col items-center text-center">
-        <Skeleton variant="circular" width={120} height={120} />
-        <Skeleton width="60%" height={24} className="mt-lg" />
-        <Skeleton width="40%" height={16} className="mt-sm" />
-        <Skeleton width="80%" height={14} className="mt-md" />
-        <Skeleton width="80%" height={14} className="mt-xs" />
-        <Skeleton width={120} height={40} className="mt-lg" />
+        <Skeleton className="h-32 w-32 rounded-full" />
+        <Skeleton className="mt-6 h-6 w-3/5" />
+        <Skeleton className="mt-2 h-4 w-2/5" />
+        <Skeleton className="mt-4 h-3.5 w-4/5" />
+        <Skeleton className="mt-1 h-3.5 w-4/5" />
+        <Skeleton className="mt-6 h-10 w-32" />
       </div>
     </div>
   );
@@ -81,20 +67,15 @@ export function CandidateCardSkeleton() {
 interface LoadingOverlayProps {
   isLoading: boolean;
   children: React.ReactNode;
+  className?: string;
 }
 
-export function LoadingOverlay({ isLoading, children }: LoadingOverlayProps) {
+export function LoadingOverlay({ isLoading, children, className = "" }: LoadingOverlayProps) {
   return (
-    <div className="relative">
+    <div className={cn("relative", className)}>
       {children}
       {isLoading && (
-        <div
-          className="absolute inset-0 flex items-center justify-center"
-          style={{
-            background: "rgba(255, 255, 255, 0.8)",
-            borderRadius: "var(--radius-lg)",
-          }}
-        >
+        <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-white/80">
           <Spinner size="lg" />
         </div>
       )}

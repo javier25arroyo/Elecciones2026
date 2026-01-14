@@ -3,6 +3,9 @@
 import * as React from "react";
 import Image from "next/image";
 
+const cn = (...classes: (string | undefined | null | false)[]) =>
+  classes.filter(Boolean).join(" ");
+
 interface CardProps {
   children: React.ReactNode;
   className?: string;
@@ -18,14 +21,19 @@ export function Card({
   accentColor,
   onClick,
 }: CardProps) {
-  const accentStyle = accentColor
-    ? { borderLeftColor: accentColor }
-    : undefined;
+  const accentClasses = accent ? "border-l-4 border-l-primary" : "";
+  const customStyle = accentColor ? { borderLeftColor: accentColor } : undefined;
 
   return (
     <div
-      className={`card ${accent ? "card-accent" : ""} ${className}`}
-      style={accentStyle}
+      className={cn(
+        "bg-white/70 backdrop-blur-xl border border-white/30 rounded-xl p-6 shadow-md transition-all duration-300 ease-in-out",
+        "hover:shadow-xl hover:-translate-y-[6px] hover:border-primary/20",
+        accentClasses,
+        onClick && "cursor-pointer",
+        className
+      )}
+      style={customStyle}
       onClick={onClick}
       role={onClick ? "button" : undefined}
       tabIndex={onClick ? 0 : undefined}
@@ -44,7 +52,7 @@ interface CardImageProps {
 
 export function CardImage({ src, alt, className = "" }: CardImageProps) {
   return (
-    <div className={`card-image-wrapper ${className}`}>
+    <div className={cn("relative h-48 w-full", className)}>
       <Image
         src={src}
         alt={alt}
@@ -62,7 +70,7 @@ interface CardHeaderProps {
 }
 
 export function CardHeader({ children, className = "" }: CardHeaderProps) {
-  return <div className={`mb-md ${className}`}>{children}</div>;
+  return <div className={cn("mb-4", className)}>{children}</div>;
 }
 
 interface CardContentProps {
@@ -80,5 +88,9 @@ interface CardFooterProps {
 }
 
 export function CardFooter({ children, className = "" }: CardFooterProps) {
-  return <div className={`mt-lg pt-md ${className}`} style={{ borderTop: "1px solid var(--color-border)" }}>{children}</div>;
+  return (
+    <div className={cn("mt-6 pt-4 border-t border-border", className)}>
+      {children}
+    </div>
+  );
 }

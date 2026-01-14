@@ -3,15 +3,15 @@
 import * as React from "react";
 import type { Party, QuizQuestion } from "@/lib/content";
 import {
-  AutoAwesomeRounded as SparklesIcon,
-  RocketLaunchRounded as RocketIcon,
-  ArticleOutlined as ArticleIcon,
-  TimerOutlined as TimerIcon,
-  CheckCircleOutlineRounded as CheckIcon,
-  ArrowBackRounded as BackIcon,
-} from "@mui/icons-material";
-
+  Sparkles,
+  Rocket,
+  FileText,
+  Timer,
+  CheckCircle,
+  ArrowLeft,
+} from "lucide-react";
 import { QuizSection } from "@/components/sections/QuizSection";
+import { AnimatePresence, motion } from "framer-motion";
 
 type QuizKind = "quick" | "deep";
 
@@ -23,28 +23,20 @@ type QuizzesSectionProps = {
 };
 
 function scrollToId(id: string) {
-  const target = document.getElementById(id);
-  if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 function dispatchStartQuiz(sectionId: string) {
-  window.dispatchEvent(
-    new CustomEvent("start-quiz", {
-      detail: { sectionId },
-    })
-  );
+  window.dispatchEvent(new CustomEvent("start-quiz", { detail: { sectionId } }));
 }
 
 export function QuizzesSection({ parties, quickQuestions, deepQuestions, deepDescription }: QuizzesSectionProps) {
   const deepAvailable = (deepQuestions?.length ?? 0) > 0;
   const [selected, setSelected] = React.useState<QuizKind | null>(null);
-
   const quizRunSectionId = "quiz-run";
 
   const selectQuiz = (kind: QuizKind) => {
     setSelected(kind);
-
-    // Esperá al siguiente paint para asegurar que el DOM del quiz exista
     requestAnimationFrame(() => {
       scrollToId(quizRunSectionId);
       dispatchStartQuiz(quizRunSectionId);
@@ -58,284 +50,74 @@ export function QuizzesSection({ parties, quickQuestions, deepQuestions, deepDes
 
   return (
     <>
-      <section
-        id="quiz"
-        className="py-3xl bg-app-gradient"
-        style={{ position: "relative", overflow: "hidden" }}
-      >
+      <section id="quiz" className="relative overflow-hidden bg-gradient-app py-16 sm:py-24">
         {/* Decorative blobs */}
-        <div
-          className="absolute animate-float"
-          style={{
-            top: "10%",
-            left: "6%",
-            width: 220,
-            height: 220,
-            background: "rgba(255,255,255,0.08)",
-            borderRadius: "50%",
-            filter: "blur(40px)",
-          }}
-        />
-        <div
-          className="absolute animate-float"
-          style={{
-            bottom: "15%",
-            right: "10%",
-            width: 320,
-            height: 320,
-            background: "rgba(255,255,255,0.06)",
-            borderRadius: "50%",
-            filter: "blur(60px)",
-            animationDelay: "1s",
-          }}
-        />
+        <div className="absolute top-[10%] left-[6%] h-56 w-56 animate-float rounded-full bg-white/5 blur-3xl" />
+        <div className="absolute bottom-[15%] right-[10%] h-80 w-80 animate-float rounded-full bg-white/5 blur-3xl [animation-delay:1s]" />
 
-        <div className="container relative">
-          <div className="text-center mb-2xl">
-            <div
-              className="inline-flex items-center gap-sm mb-md"
-              style={{
-                background: "rgba(255,255,255,0.14)",
-                color: "white",
-                padding: "8px 14px",
-                borderRadius: "var(--radius-full)",
-                border: "1px solid rgba(255,255,255,0.2)",
-                backdropFilter: "blur(10px)",
-                fontWeight: 600,
-                fontSize: "0.9rem",
-              }}
-            >
-              <SparklesIcon sx={{ fontSize: "1.1rem" }} aria-hidden="true" />
+        <div className="container relative mx-auto max-w-7xl px-4">
+          <div className="mb-12 text-center">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white backdrop-blur-md">
+              <Sparkles className="h-4 w-4" />
               Elegí tu quiz
             </div>
-            <h2
-              style={{
-                color: "white",
-                fontSize: "clamp(1.8rem, 4vw, 2.6rem)",
-                fontWeight: 800,
-                marginBottom: "var(--spacing-sm)",
-                textWrap: "balance",
-              }}
-            >
-              ¿Querés resultados rápidos o una comparación más profunda?
+            <h2 className="text-balance text-3xl font-extrabold text-white sm:text-4xl">
+              ¿Resultados rápidos o una comparación más profunda?
             </h2>
-            <p
-              style={{
-                color: "rgba(255,255,255,0.85)",
-                fontSize: "1.05rem",
-                lineHeight: 1.6,
-                margin: 0,
-                textWrap: "balance",
-              }}
-            >
+            <p className="text-balance mt-2 text-lg leading-relaxed text-white/85">
               Ambos quizzes son anónimos. Podés hacer uno o los dos.
             </p>
           </div>
 
-          <div className="grid gap-lg md:grid-cols-2" style={{ alignItems: "stretch" }}>
-            {/* Quick quiz */}
-            <div
-              className="card"
-              style={{
-                background: "rgba(0,0,0,0.22)",
-                border: selected === "quick" ? "2px solid rgba(255,255,255,0.35)" : "1px solid rgba(255,255,255,0.12)",
-                backdropFilter: "blur(20px)",
-                padding: "var(--spacing-xl)",
-                display: "flex",
-                flexDirection: "column",
-                gap: "var(--spacing-lg)",
-              }}
-            >
-              <div className="flex items-start justify-between gap-md">
-                <div>
-                  <div
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: 8,
-                      padding: "6px 12px",
-                      borderRadius: "var(--radius-full)",
-                      background: "rgba(255,255,255,0.12)",
-                      color: "white",
-                      border: "1px solid rgba(255,255,255,0.15)",
-                      fontWeight: 700,
-                      fontSize: "0.85rem",
-                      marginBottom: "var(--spacing-sm)",
-                    }}
-                  >
-                    <RocketIcon sx={{ fontSize: "1.1rem" }} aria-hidden="true" />
-                    Quiz rápido
-                  </div>
-                  <h3 style={{ margin: 0, color: "white", fontSize: "1.35rem", fontWeight: 800 }}>
-                    Afinidad en minutos
-                  </h3>
-                </div>
-                <div
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 6,
-                    color: "rgba(255,255,255,0.85)",
-                    fontWeight: 600,
-                    fontSize: "0.9rem",
-                  }}
-                >
-                  <TimerIcon sx={{ fontSize: "1.05rem" }} aria-hidden="true" />
-                  2–3 min
-                </div>
-              </div>
-
-              <div style={{ color: "rgba(255,255,255,0.85)", lineHeight: 1.6 }}>
-                Ideal si querés una recomendación rápida basada en preguntas generales.
-              </div>
-
-              <div className="grid gap-sm" style={{ textAlign: "left" }}>
-                <div className="flex items-center gap-sm" style={{ color: "rgba(255,255,255,0.9)" }}>
-                  <CheckIcon sx={{ fontSize: "1.1rem", color: "rgba(255,255,255,0.9)" }} aria-hidden="true" />
-                  {quickQuestions.length} preguntas
-                </div>
-                <div className="flex items-center gap-sm" style={{ color: "rgba(255,255,255,0.9)" }}>
-                  <CheckIcon sx={{ fontSize: "1.1rem", color: "rgba(255,255,255,0.9)" }} aria-hidden="true" />
-                  Resultados inmediatos
-                </div>
-              </div>
-
-              <button
-                type="button"
-                className="btn btn-lg"
-                onClick={() => selectQuiz("quick")}
-                style={{
-                  marginTop: "auto",
-                  background: "white",
-                  color: "#002B7F",
-                  borderRadius: "var(--radius-full)",
-                  padding: "16px 22px",
-                  fontWeight: 800,
-                }}
-                aria-label="Empezar quiz rápido"
-              >
-                Empezar quiz rápido →
-              </button>
-            </div>
-
-            {/* Deep quiz */}
-            <div
-              className="card"
-              style={{
-                background: deepAvailable ? "rgba(0,0,0,0.22)" : "rgba(0,0,0,0.14)",
-                border: selected === "deep" ? "2px solid rgba(255,255,255,0.35)" : deepAvailable ? "1px solid rgba(255,255,255,0.12)" : "1px solid rgba(255,255,255,0.10)",
-                backdropFilter: "blur(20px)",
-                padding: "var(--spacing-xl)",
-                display: "flex",
-                flexDirection: "column",
-                gap: "var(--spacing-lg)",
-                opacity: deepAvailable ? 1 : 0.7,
-              }}
-            >
-              <div className="flex items-start justify-between gap-md">
-                <div>
-                  <div
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: 8,
-                      padding: "6px 12px",
-                      borderRadius: "var(--radius-full)",
-                      background: "rgba(255,255,255,0.12)",
-                      color: "white",
-                      border: "1px solid rgba(255,255,255,0.15)",
-                      fontWeight: 700,
-                      fontSize: "0.85rem",
-                      marginBottom: "var(--spacing-sm)",
-                    }}
-                  >
-                    <ArticleIcon sx={{ fontSize: "1.05rem" }} aria-hidden="true" />
-                    Quiz profundo
-                  </div>
-                  <h3 style={{ margin: 0, color: "white", fontSize: "1.35rem", fontWeight: 800 }}>
-                    Basado en planes de gobierno
-                  </h3>
-                </div>
-                <div
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 6,
-                    color: "rgba(255,255,255,0.85)",
-                    fontWeight: 600,
-                    fontSize: "0.9rem",
-                  }}
-                >
-                  <TimerIcon sx={{ fontSize: "1.05rem" }} aria-hidden="true" />
-                  6–10 min
-                </div>
-              </div>
-
-              <div style={{ color: "rgba(255,255,255,0.85)", lineHeight: 1.6 }}>
-                {deepAvailable
-                  ? deepDescription || "Para un match más preciso: preguntas más detalladas y alineadas a propuestas oficiales."
-                  : "Este quiz estará disponible pronto."}
-              </div>
-
-              <div className="grid gap-sm" style={{ textAlign: "left" }}>
-                <div className="flex items-center gap-sm" style={{ color: "rgba(255,255,255,0.9)" }}>
-                  <CheckIcon sx={{ fontSize: "1.1rem", color: "rgba(255,255,255,0.9)" }} aria-hidden="true" />
-                  {deepAvailable ? `${deepQuestions?.length ?? 0} preguntas` : "Próximamente"}
-                </div>
-                <div className="flex items-center gap-sm" style={{ color: "rgba(255,255,255,0.9)" }}>
-                  <CheckIcon sx={{ fontSize: "1.1rem", color: "rgba(255,255,255,0.9)" }} aria-hidden="true" />
-                  Enfoque en planes
-                </div>
-              </div>
-
-              <button
-                type="button"
-                className="btn btn-lg"
-                disabled={!deepAvailable}
-                onClick={() => selectQuiz("deep")}
-                style={{
-                  marginTop: "auto",
-                  background: deepAvailable ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.08)",
-                  border: "1px solid rgba(255,255,255,0.20)",
-                  color: "white",
-                  borderRadius: "var(--radius-full)",
-                  padding: "16px 22px",
-                  fontWeight: 800,
-                }}
-                aria-label="Empezar quiz profundo"
-              >
-                {deepAvailable ? "Empezar quiz profundo →" : "Muy pronto"}
-              </button>
-            </div>
+          <div className="grid items-stretch gap-8 md:grid-cols-2">
+            <QuizCard
+              kind="quick"
+              title="Afinidad en minutos"
+              icon={<Rocket className="h-4 w-4" />}
+              badgeText="Quiz rápido"
+              time="2–3 min"
+              description="Ideal si querés una recomendación rápida basada en preguntas generales."
+              features={[`${quickQuestions.length} preguntas`, "Resultados inmediatos"]}
+              buttonText="Empezar quiz rápido"
+              isSelected={selected === "quick"}
+              onClick={() => selectQuiz("quick")}
+            />
+            <QuizCard
+              kind="deep"
+              title="Basado en planes de gobierno"
+              icon={<FileText className="h-4 w-4" />}
+              badgeText="Quiz profundo"
+              time="6–10 min"
+              description={deepDescription || "Para un match más preciso: preguntas más detalladas y alineadas a propuestas oficiales."}
+              features={[`${deepQuestions?.length ?? 0} preguntas`, "Enfoque en planes"]}
+              buttonText={deepAvailable ? "Empezar quiz profundo" : "Muy pronto"}
+              isSelected={selected === "deep"}
+              isAvailable={deepAvailable}
+              onClick={() => selectQuiz("deep")}
+            />
           </div>
 
-          {selected && (
-            <div className="flex justify-center mt-xl">
-              <button
-                type="button"
-                className="btn"
-                onClick={resetSelection}
-                style={{
-                  background: "rgba(255,255,255,0.10)",
-                  border: "1px solid rgba(255,255,255,0.22)",
-                  color: "white",
-                  borderRadius: "var(--radius-full)",
-                  padding: "12px 18px",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 8,
-                  fontWeight: 700,
-                }}
+          <AnimatePresence>
+            {selected && (
+              <motion.div
+                className="mt-8 flex justify-center"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
               >
-                <BackIcon sx={{ fontSize: "1.1rem" }} aria-hidden="true" />
-                Cambiar de quiz
-              </button>
-            </div>
-          )}
+                <button
+                  type="button"
+                  onClick={resetSelection}
+                  className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 py-3 px-5 font-bold text-white transition-colors hover:bg-white/20"
+                >
+                  <ArrowLeft className="h-4 w-4" />
+                  Cambiar de quiz
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </section>
 
-      {/* Solo renderizamos un quiz a la vez (eliminamos las dos secciones separadas) */}
       {selected && (
         <QuizSection
           key={selected}
@@ -343,29 +125,84 @@ export function QuizzesSection({ parties, quickQuestions, deepQuestions, deepDes
           questions={selected === "quick" ? quickQuestions : deepQuestions}
           sectionId={quizRunSectionId}
           onRepeatToPicker={resetSelection}
-          introTitle={
-            selected === "quick"
-              ? "Quiz rápido"
-              : "Evaluación profunda de planes de gobierno"
-          }
-          introBadgeText={selected === "quick" ? "Quiz interactivo" : "Planes oficiales"}
-          introCTA={selected === "quick" ? "Comenzar quiz →" : "Comenzar evaluación profunda →"}
-          featurePills={
-            selected === "quick"
-              ? undefined
-              : [
-                  { text: "20 preguntas detalladas" },
-                  { text: "Planes oficiales en foco" },
-                  { text: "Comparación profunda" },
-                ]
-          }
-          note={
-            selected === "quick"
-              ? undefined
-              : "Estas preguntas fueron formuladas a partir de los planes depositados ante el TSE para ofrecerte un match más preciso."
-          }
         />
       )}
     </>
+  );
+}
+
+
+type QuizCardProps = {
+  kind: QuizKind;
+  title: string;
+  icon: React.ReactNode;
+  badgeText: string;
+  time: string;
+  description: string;
+  features: string[];
+  buttonText: string;
+  isSelected: boolean;
+  isAvailable?: boolean;
+  onClick: () => void;
+};
+
+function QuizCard({
+  title,
+  icon,
+  badgeText,
+  time,
+  description,
+  features,
+  buttonText,
+  isSelected,
+  isAvailable = true,
+  onClick,
+}: QuizCardProps) {
+  const cardClasses = `
+    flex flex-col gap-6 rounded-2xl p-8 text-white backdrop-blur-2xl transition-all duration-300
+    ${isAvailable ? "bg-black/20" : "bg-black/10"}
+    ${isSelected ? "border-2 border-white/40 shadow-2xl" : "border border-white/15"}
+    ${!isAvailable ? "opacity-70" : "hover:border-white/30 hover:shadow-xl"}
+  `;
+
+  const buttonClasses = `
+    mt-auto rounded-full py-4 px-5 text-base font-extrabold transition-all duration-200
+    ${isAvailable
+      ? "bg-white text-primary shadow-lg hover:scale-105"
+      : "cursor-not-allowed bg-white/10 text-white/80"
+    }
+  `;
+
+  return (
+    <div className={cardClasses}>
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-sm font-bold">
+            {icon}
+            {badgeText}
+          </div>
+          <h3 className="text-xl font-bold">{title}</h3>
+        </div>
+        <div className="inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-white/85">
+          <Timer className="h-4 w-4" />
+          {time}
+        </div>
+      </div>
+
+      <p className="leading-relaxed text-white/85">{description}</p>
+
+      <div className="grid gap-2 text-left">
+        {features.map((text, i) => (
+          <div key={i} className="flex items-center gap-3 text-white/90">
+            <CheckCircle className="h-4 w-4 text-white/90" />
+            <span className="text-sm font-medium">{text}</span>
+          </div>
+        ))}
+      </div>
+
+      <button type="button" disabled={!isAvailable} onClick={onClick} className={buttonClasses} aria-label={buttonText}>
+        {buttonText} {isAvailable && "→"}
+      </button>
+    </div>
   );
 }
