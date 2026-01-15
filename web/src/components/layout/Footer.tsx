@@ -1,12 +1,12 @@
 "use client";
 import Link from "next/link";
 import {
-  FavoriteRounded as FavoriteIcon,
-  FlagRounded as FlagRoundedIcon,
-  GitHub as GitHubIcon,
-  LinkedIn as LinkedInIcon,
-  Instagram as InstagramIcon,
-} from "@mui/icons-material";
+  Heart,
+  Flag,
+  Github,
+  Linkedin,
+  Instagram,
+} from "lucide-react";
 
 const footerLinks = {
   recursos: [
@@ -22,71 +22,51 @@ const footerLinks = {
   ],
 };
 
+const SocialLink = ({ href, icon, text, hoverColor, hoverBgColor }: { href: string, icon: React.ReactNode, text: string, hoverColor: string, hoverBgColor: string }) => (
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    className={`inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm text-white/75 transition-colors duration-200 ${hoverColor} ${hoverBgColor}`}
+  >
+    {icon}
+    {text}
+  </a>
+);
+
 export function Footer() {
   return (
-    <footer
-      style={{
-        background: "var(--color-background-dark)",
-        color: "white",
-        marginTop: "var(--spacing-3xl)",
-      }}
-    >
-      <div className="container py-3xl">
-        <div 
-          className="grid gap-xl"
-          style={{
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 250px), 1fr))",
-          }}
-        >
+    <footer className="relative bg-slate-900 border-t border-white/5 text-white">
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
+      <div className="container mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Logo y descripción */}
-          <div className="lg:col-span-2">
-            <Link
-              href="/"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "var(--spacing-sm)",
-                textDecoration: "none",
-                color: "white",
-              }}
-            >
-              <FlagRoundedIcon sx={{ fontSize: "1.5rem" }} aria-hidden="true" />
-              <span style={{ fontSize: "1.5rem", fontWeight: 700 }}>Elecciones</span>
+          <div className="md:col-span-2 space-y-4">
+            <Link href="/" className="inline-flex items-center gap-2 text-white transition-opacity hover:opacity-80">
+              <div className="p-1.5 bg-white/10 rounded-lg ring-1 ring-white/20">
+                <Flag className="h-5 w-5" />
+              </div>
+              <span className="text-xl font-black font-display tracking-tighter uppercase">Elecciones <span className="text-blue-400">2026</span></span>
             </Link>
-            <p
-              className="mt-md"
-              style={{ color: "rgba(255, 255, 255, 0.7)", maxWidth: 400 }}
-            >
-              Plataforma educativa e interactiva sobre las elecciones
-              presidenciales de Costa Rica 2026. Información clara, sin sesgos,
-              para todos los votantes.
+            <p className="max-w-md text-sm leading-relaxed text-white/70">
+              Plataforma educativa e interactiva diseñada para fortalecer la democracia costarricense. 
+              Información clara, accesible y neutral para un electorado más informado.
             </p>
-            <p
-              className="mt-lg"
-              style={{ color: "rgba(255, 255, 255, 0.5)", fontSize: "0.875rem" }}
-            >
-              Fecha de elección: <strong>1 de febrero de 2026</strong>
-            </p>
+            <div className="flex items-center gap-3 text-xs font-bold text-white/50 uppercase tracking-widest">
+              <span className="h-px w-6 bg-white/20" />
+              1 de febrero de 2026
+            </div>
           </div>
 
           {/* Recursos */}
           <div>
-            <h4
-              style={{
-                color: "white",
-                marginBottom: "var(--spacing-md)",
-                fontSize: "1rem",
-              }}
-            >
+            <h4 className="mb-3 text-sm font-semibold text-white">
               Recursos
             </h4>
-            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            <ul className="space-y-1.5">
               {footerLinks.recursos.map((link) => (
-                <li key={link.href} style={{ marginBottom: "var(--spacing-sm)" }}>
-                  <a
-                    href={link.href}
-                    className="footer-link"
-                  >
+                <li key={link.href}>
+                  <a href={link.href} className="text-xs text-white/70 transition-colors hover:text-white">
                     {link.label}
                   </a>
                 </li>
@@ -96,23 +76,17 @@ export function Footer() {
 
           {/* Legal */}
           <div>
-            <h4
-              style={{
-                color: "white",
-                marginBottom: "var(--spacing-md)",
-                fontSize: "1rem",
-              }}
-            >
+            <h4 className="mb-3 text-sm font-semibold text-white">
               Enlaces
             </h4>
-            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            <ul className="space-y-1.5">
               {footerLinks.legal.map((link) => (
-                <li key={link.href} style={{ marginBottom: "var(--spacing-sm)" }}>
+                <li key={link.href}>
                   <a
                     href={link.href}
                     target={link.external ? "_blank" : undefined}
                     rel={link.external ? "noopener noreferrer" : undefined}
-                    className="footer-link"
+                    className="text-xs text-white/70 transition-colors hover:text-white"
                   >
                     {link.label}
                     {link.external && " ↗"}
@@ -123,147 +97,40 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Divider */}
-        <div
-          style={{
-            borderTop: "1px solid rgba(255, 255, 255, 0.1)",
-            marginTop: "var(--spacing-2xl)",
-            paddingTop: "var(--spacing-lg)",
-          }}
-        >
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-md">
-            <p
-              style={{
-                color: "rgba(255, 255, 255, 0.5)",
-                fontSize: "0.875rem",
-                margin: 0,
-              }}
-            >
+        {/* Divider y créditos */}
+        <div className="mt-8 border-t border-white/10 pt-6 lg:mt-10">
+          <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
+            <p className="m-0 text-xs text-white/50">
               © 2026 Info Politic CR. Proyecto educativo sin fines de lucro.
             </p>
 
-            <div className="flex items-center gap-lg">
-              <a
+            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2">
+              <SocialLink 
                 href="https://github.com/javier25arroyo"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  color: "rgba(255, 255, 255, 0.75)",
-                  fontSize: "0.875rem",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  textDecoration: "none",
-                  transition: "all 0.3s ease",
-                  padding: "8px 12px",
-                  borderRadius: "var(--radius-md)",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(255, 255, 255, 0.1)";
-                  e.currentTarget.style.color = "white";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "transparent";
-                  e.currentTarget.style.color = "rgba(255, 255, 255, 0.75)";
-                }}
-                onFocus={(e) => {
-                  e.currentTarget.style.background = "rgba(255, 255, 255, 0.1)";
-                  e.currentTarget.style.color = "white";
-                }}
-                onBlur={(e) => {
-                  e.currentTarget.style.background = "transparent";
-                  e.currentTarget.style.color = "rgba(255, 255, 255, 0.75)";
-                }}
-              >
-                <GitHubIcon sx={{ fontSize: "1.1rem" }} aria-hidden="true" />
-                GitHub
-              </a>
-
-              <a
+                icon={<Github className="h-5 w-5" />}
+                text="GitHub"
+                hoverColor="hover:text-white"
+                hoverBgColor="hover:bg-white/10"
+              />
+               <SocialLink 
                 href="https://www.linkedin.com/in/javier-arroyo-dev"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  color: "rgba(255, 255, 255, 0.75)",
-                  fontSize: "0.875rem",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  textDecoration: "none",
-                  transition: "all 0.3s ease",
-                  padding: "8px 12px",
-                  borderRadius: "var(--radius-md)",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(0, 119, 181, 0.2)";
-                  e.currentTarget.style.color = "#00A0DF";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "transparent";
-                  e.currentTarget.style.color = "rgba(255, 255, 255, 0.75)";
-                }}
-                onFocus={(e) => {
-                  e.currentTarget.style.background = "rgba(0, 119, 181, 0.2)";
-                  e.currentTarget.style.color = "#00A0DF";
-                }}
-                onBlur={(e) => {
-                  e.currentTarget.style.background = "transparent";
-                  e.currentTarget.style.color = "rgba(255, 255, 255, 0.75)";
-                }}
-              >
-                <LinkedInIcon sx={{ fontSize: "1.1rem" }} aria-hidden="true" />
-                LinkedIn
-              </a>
-
-              <a
+                icon={<Linkedin className="h-5 w-5" />}
+                text="LinkedIn"
+                hoverColor="hover:text-[#00A0DF]"
+                hoverBgColor="hover:bg-[#0077B5]/20"
+              />
+               <SocialLink 
                 href="https://instagram.com/javier_arroyo25"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  color: "rgba(255, 255, 255, 0.75)",
-                  fontSize: "0.875rem",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  textDecoration: "none",
-                  transition: "all 0.3s ease",
-                  padding: "8px 12px",
-                  borderRadius: "var(--radius-md)",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(224, 27, 131, 0.2)";
-                  e.currentTarget.style.color = "#E91E63";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "transparent";
-                  e.currentTarget.style.color = "rgba(255, 255, 255, 0.75)";
-                }}
-                onFocus={(e) => {
-                  e.currentTarget.style.background = "rgba(224, 27, 131, 0.2)";
-                  e.currentTarget.style.color = "#E91E63";
-                }}
-                onBlur={(e) => {
-                  e.currentTarget.style.background = "transparent";
-                  e.currentTarget.style.color = "rgba(255, 255, 255, 0.75)";
-                }}
-              >
-                <InstagramIcon sx={{ fontSize: "1.1rem" }} aria-hidden="true" />
-                Instagram
-              </a>
+                icon={<Instagram className="h-5 w-5" />}
+                text="Instagram"
+                hoverColor="hover:text-[#E91E63]"
+                hoverBgColor="hover:bg-[#E41B7F]/20"
+              />
             </div>
 
-            <p
-              style={{
-                color: "rgba(255, 255, 255, 0.5)",
-                fontSize: "0.875rem",
-                margin: 0,
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "6px",
-              }}
-            >
-              Hecho con <FavoriteIcon sx={{ color: "#E63946", fontSize: "1rem" }} aria-hidden="true" /> para Costa Rica
-              <FlagRoundedIcon sx={{ fontSize: "1rem" }} aria-hidden="true" />
+            <p className="m-0 inline-flex items-center gap-1 text-xs text-white/50">
+              Hecho con <Heart className="h-3 w-3 text-red-500" /> para Costa Rica
+              <Flag className="h-3 w-3" />
             </p>
           </div>
         </div>

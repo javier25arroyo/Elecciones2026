@@ -1,38 +1,40 @@
 "use client";
 
 import * as React from "react";
+import { cn } from "@/lib/utils";
 
-type BadgeVariant = "primary" | "secondary" | "accent" | "neutral" | "outline" | "success" | "error";
+type BadgeVariant =
+  | "primary"
+  | "secondary"
+  | "accent"
+  | "neutral"
+  | "outline"
+  | "success"
+  | "error";
 
 interface BadgeProps {
   variant?: BadgeVariant;
   children: React.ReactNode;
   className?: string;
-  style?: React.CSSProperties;
 }
 
-const variantClasses: Record<BadgeVariant, string> = {
-  primary: "badge-primary",
-  secondary: "badge-secondary",
-  accent: "badge-accent",
-  neutral: "badge-neutral",
-  outline: "badge-outline",
-  success: "badge-secondary", // Using secondary (green)
-  error: "badge-accent", // Custom styling below
+const base =
+  "inline-block py-1.5 px-3 text-xs font-semibold tracking-wide rounded-full transition-transform duration-150 ease-in-out hover:scale-105";
+
+const variants: Record<BadgeVariant, string> = {
+  primary: "bg-primary text-white",
+  secondary: "bg-secondary text-white",
+  accent: "bg-accent text-white",
+  neutral: "bg-background-secondary text-text-secondary",
+  outline: "bg-transparent border border-current",
+  success: "bg-success text-white",
+  error: "bg-error text-white",
 };
 
-export function Badge({ variant = "primary", children, className = "", style }: BadgeProps) {
-  const customStyle: React.CSSProperties = {
-    ...(variant === "error" ? { background: "var(--color-error)" } : {}),
-    ...style,
-  };
-
-  return (
-    <span 
-      className={`badge ${variantClasses[variant]} ${className}`}
-      style={Object.keys(customStyle).length > 0 ? customStyle : undefined}
-    >
-      {children}
-    </span>
-  );
+export function Badge({
+  variant = "primary",
+  children,
+  className = "",
+}: BadgeProps) {
+  return <span className={cn(base, variants[variant], className)}>{children}</span>;
 }

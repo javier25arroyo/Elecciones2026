@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 interface AccordionItemProps {
   id: string;
@@ -17,43 +18,15 @@ export function AccordionItem({
   isOpen = false,
   onToggle,
 }: AccordionItemProps) {
-  const contentRef = React.useRef<HTMLDivElement>(null);
-  const [height, setHeight] = React.useState<number | undefined>(
-    isOpen ? undefined : 0
-  );
-
-  React.useEffect(() => {
-    if (isOpen) {
-      const contentEl = contentRef.current;
-      if (contentEl) {
-        setHeight(contentEl.scrollHeight);
-      }
-    } else {
-      setHeight(0);
-    }
-  }, [isOpen]);
-
   return (
-    <div
-      style={{
-        borderBottom: "1px solid rgba(255,255,255,0.1)",
-      }}
-    >
+    <div className="border-b border-white/10 last-of-type:border-b-0">
       <button
         onClick={() => onToggle?.(id)}
-        className="w-full flex items-center justify-between py-lg px-md"
-        style={{
-          background: "transparent",
-          border: "none",
-          cursor: "pointer",
-          textAlign: "left",
-        }}
+        className="flex w-full items-center justify-between py-5 px-6 text-left"
         aria-expanded={isOpen}
         aria-controls={`accordion-content-${id}`}
       >
-        <span style={{ fontWeight: 600, color: "white" }}>
-          {title}
-        </span>
+        <span className="font-semibold text-white">{title}</span>
         <svg
           width="20"
           height="20"
@@ -61,27 +34,31 @@ export function AccordionItem({
           fill="none"
           stroke="currentColor"
           strokeWidth="2"
-          style={{
-            transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
-            transition: "transform var(--transition-normal)",
-            color: "rgba(255,255,255,0.7)",
-          }}
+          className={`shrink-0 text-white/70 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
         >
           <path d="M6 9l6 6 6-6" />
         </svg>
       </button>
-      <div
-        id={`accordion-content-${id}`}
-        ref={contentRef}
-        style={{
-          height: height,
-          overflow: "hidden",
-          transition: "height var(--transition-slow)",
-        }}
-        aria-hidden={!isOpen}
-      >
-        <div className="px-md pb-lg" style={{ color: "rgba(255,255,255,0.8)" }}>{children}</div>
-      </div>
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            key="content"
+            initial="collapsed"
+            animate="open"
+            exit="collapsed"
+            variants={{
+              open: { opacity: 1, height: "auto" },
+              collapsed: { opacity: 0, height: 0 },
+            }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="overflow-hidden"
+            id={`accordion-content-${id}`}
+            aria-hidden={!isOpen}
+          >
+            <div className="px-6 pb-6 text-white/80">{children}</div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -100,26 +77,16 @@ export function Accordion({ items, allowMultiple = false, className = "" }: Acco
   const [openItems, setOpenItems] = React.useState<string[]>([]);
 
   const handleToggle = (id: string) => {
-    if (allowMultiple) {
-      setOpenItems((prev) =>
-        prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
-      );
-    } else {
-      setOpenItems((prev) => (prev.includes(id) ? [] : [id]));
-    }
+    setOpenItems((prev) => {
+      if (allowMultiple) {
+        return prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id];
+      }
+      return prev.includes(id) ? [] : [id];
+    });
   };
 
   return (
-    <div
-      className={className}
-      style={{
-        border: "1px solid rgba(255,255,255,0.1)",
-        borderRadius: "var(--radius-lg)",
-        overflow: "hidden",
-        background: "rgba(255,255,255,0.05)",
-        backdropFilter: "blur(10px)",
-      }}
-    >
+    <div className={`overflow-hidden rounded-lg border border-white/10 bg-white/5 backdrop-blur-md ${className}`}>
       {items.map((item) => (
         <AccordionItem
           key={item.id}

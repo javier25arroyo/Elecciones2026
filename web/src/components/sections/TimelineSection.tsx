@@ -3,129 +3,67 @@
 import * as React from "react";
 import { Badge } from "@/components/ui/Badge";
 import {
-  PaletteOutlined as PaletteIcon,
-  DescriptionOutlined as DocIcon,
-  MicOutlined as MicIcon,
-  FlagOutlined as FlagIcon,
-  HowToVoteOutlined as VoteIcon,
-  RestartAltOutlined as RestartIcon,
-  LocationOnOutlined as LocationIcon,
-} from "@mui/icons-material";
-import type { SvgIconComponent } from "@mui/icons-material";
+  Palette,
+  FileText,
+  Mic,
+  Flag,
+  Vote,
+  RotateCcw,
+  CheckCircle2
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 interface TimelineEvent {
   date: string;
   title: string;
   description: string;
-  Icon: SvgIconComponent;
+  Icon: LucideIcon;
   isPast: boolean;
   isCurrent: boolean;
 }
 
 const timelineEvents: TimelineEvent[] = [
-  {
-    date: "1 Oct 2025",
-    title: "Inicio de campaña",
-    description: "Los partidos políticos inician oficialmente sus campañas electorales.",
-    Icon: PaletteIcon,
-    isPast: true,
-    isCurrent: false,
-  },
-  {
-    date: "15 Dic 2025",
-    title: "Cierre de inscripciones",
-    description: "Fecha límite para inscribir candidaturas ante el TSE.",
-    Icon: DocIcon,
-    isPast: true,
-    isCurrent: false,
-  },
-  {
-    date: "4 Ene 2026",
-    title: "Período de debates",
-    description: "Debates oficiales entre candidatos organizados por medios de comunicación.",
-    Icon: MicIcon,
-    isPast: false,
-    isCurrent: true,
-  },
-  {
-    date: "29 Ene 2026",
-    title: "Cierre de campaña",
-    description: "Último día permitido para actividades de campaña electoral.",
-    Icon: FlagIcon,
-    isPast: false,
-    isCurrent: false,
-  },
-  {
-    date: "1 Feb 2026",
-    title: "Día de elección",
-    description: "Elecciones presidenciales y legislativas. ¡Tu voto cuenta!",
-    Icon: VoteIcon,
-    isPast: false,
-    isCurrent: false,
-  },
-  {
-    date: "6 Abr 2026",
-    title: "Segunda ronda",
-    description: "Balotaje en caso de que ningún candidato obtenga el 40% de los votos.",
-    Icon: RestartIcon,
-    isPast: false,
-    isCurrent: false,
-  },
+  { date: "1 Oct 2025", title: "Inicio de campaña", description: "Los partidos políticos inician oficialmente sus campañas electorales.", Icon: Palette, isPast: true, isCurrent: false },
+  { date: "15 Dic 2025", title: "Cierre de inscripciones", description: "Fecha límite para inscribir candidaturas ante el TSE.", Icon: FileText, isPast: true, isCurrent: false },
+  { date: "4 Ene 2026", title: "Período de debates", description: "Debates oficiales entre candidatos organizados por medios de comunicación.", Icon: Mic, isPast: false, isCurrent: true },
+  { date: "29 Ene 2026", title: "Cierre de campaña", description: "Último día permitido para actividades de campaña electoral.", Icon: Flag, isPast: false, isCurrent: false },
+  { date: "1 Feb 2026", title: "Día de elección", description: "Elecciones presidenciales y legislativas. ¡Tu voto cuenta!", Icon: Vote, isPast: false, isCurrent: false },
+  { date: "6 Abr 2026", title: "Segunda ronda", description: "Balotaje en caso de que ningún candidato obtenga el 40% de los votos.", Icon: RotateCcw, isPast: false, isCurrent: false },
 ];
 
 export function TimelineSection() {
   return (
-    <section id="timeline" className="py-3xl bg-app-gradient">
-      <div className="container">
+    <section id="timeline" className="relative bg-gradient-to-b from-slate-900 via-[#0b2b6b] to-slate-900 py-24 sm:py-32 lg:py-40 overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(206,17,38,0.2),transparent_50%),radial-gradient(circle_at_25%_40%,rgba(0,47,108,0.2),transparent_50%)]" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent via-slate-900/30 to-slate-900" />
+      <div className="container mx-auto max-w-7xl px-4">
         {/* Header */}
-        <div className="text-center mb-2xl">
-          <Badge variant="accent" className="mb-md" style={{ background: "rgba(255,255,255,0.15)", color: "white" }}>
-            Fechas importantes
+        <div className="mb-20 text-center">
+          <Badge variant="primary" className="mb-6 bg-white/10 px-5 py-2 text-sm font-bold text-white ring-1 ring-white/20">
+            Ruta Electoral 2026
           </Badge>
-          <h2 style={{ color: "white" }}>Cronograma Electoral 2026</h2>
-          <p style={{ maxWidth: 600, margin: "0 auto", color: "rgba(255,255,255,0.85)" }}>
-            Conocé las fechas clave del proceso electoral costarricense.
-            Marcá tu calendario y no te perdás ningún evento importante.
+          <h2 className="text-balance font-display text-4xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl">
+            Cronograma del Proceso
+          </h2>
+          <p className="mx-auto mt-8 max-w-3xl text-xl leading-relaxed text-white/70 lg:text-2xl">
+            Sigue paso a paso los hitos que marcarán el futuro del país. 
+            Información actualizada según el calendario oficial.
           </p>
         </div>
 
-        {/* Timeline */}
-        <div className="relative" style={{ maxWidth: 800, margin: "0 auto" }}>
-          {/* Vertical line - Desktop */}
-          <div
-            className="absolute hide-mobile"
-            style={{
-              left: "50%",
-              top: 0,
-              bottom: 0,
-              width: 2,
-              background: "rgba(255,255,255,0.3)",
-              transform: "translateX(-50%)",
-              zIndex: 0,
-            }}
-          />
-
-          {/* Mobile line */}
-          <div
-            className="absolute hide-desktop"
-            style={{
-              left: 20,
-              top: 0,
-              bottom: 0,
-              width: 2,
-              background: "rgba(255,255,255,0.3)",
-            }}
-          />
+        {/* Timeline Container */}
+        <div className="relative mx-auto max-w-5xl">
+          {/* Central Line (Desktop) */}
+          <div className="absolute left-1/2 top-0 bottom-0 hidden w-px -translate-x-1/2 bg-gradient-to-b from-blue-500 via-red-500 to-slate-700 opacity-30 md:block" />
+          
+          {/* Left Line (Mobile) */}
+          <div className="absolute left-4 top-0 bottom-0 w-px bg-gradient-to-b from-blue-500 via-red-500 to-slate-700 opacity-30 md:hidden" />
 
           {/* Events */}
-          <div className="flex flex-col gap-xl">
+          <div className="flex flex-col gap-12 md:gap-16">
             {timelineEvents.map((event, index) => (
-              <TimelineItem
-                key={event.date}
-                event={event}
-                index={index}
-                isLeft={index % 2 === 0}
-              />
+              <TimelineItem key={event.date} event={event} index={index} />
             ))}
           </div>
         </div>
@@ -134,211 +72,84 @@ export function TimelineSection() {
   );
 }
 
-interface TimelineItemProps {
-  event: TimelineEvent;
-  index: number;
-  isLeft: boolean;
-}
-
-function TimelineItem({ event, index, isLeft }: TimelineItemProps) {
+function TimelineItem({ event, index }: { event: TimelineEvent; index: number }) {
+  const isLeft = index % 2 === 0;
   const [isVisible, setIsVisible] = React.useState(false);
   const itemRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.2 }
-    );
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) setIsVisible(true);
+    }, { threshold: 0.1 });
 
-    if (itemRef.current) {
-      observer.observe(itemRef.current);
-    }
-
+    if (itemRef.current) observer.observe(itemRef.current);
     return () => observer.disconnect();
   }, []);
 
   return (
     <div
       ref={itemRef}
-      className={`relative flex items-center ${isLeft ? "md:flex-row" : "md:flex-row-reverse"}`}
-      style={{
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible ? "translateY(0)" : "translateY(20px)",
-        transition: `all 0.5s ease ${index * 0.1}s`,
-      }}
+      className={`relative flex flex-col md:flex-row items-start md:items-center transition-all duration-700 ease-out 
+        ${isVisible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"}
+        ${isLeft ? "md:flex-row" : "md:flex-row-reverse"}`}
     >
-      {/* Content - Desktop */}
-      <div
-        className={`hide-mobile flex-1 ${isLeft ? "pr-2xl text-right" : "pl-2xl text-left"}`}
-      >
-        <TimelineCard event={event} />
-      </div>
-
-      {/* Center dot - Desktop */}
-      <div
-        className="hide-mobile"
-        style={{
-          position: "relative",
-          width: 52,
-          height: 52,
-          borderRadius: "50%",
-          background: event.isCurrent
-            ? "var(--gradient-cta)"
-            : event.isPast
-            ? "var(--color-secondary)"
-            : "rgba(255,255,255,0.15)",
-          border: `3px solid ${
-            event.isCurrent
-              ? "transparent"
-              : event.isPast
-              ? "var(--color-secondary)"
-              : "rgba(255,255,255,0.3)"
-          }`,
-          color: "white",
-          zIndex: 1,
-          display: "grid",
-          placeItems: "center",
-          flexShrink: 0,
-          boxShadow: event.isCurrent
-            ? "0 4px 14px rgba(0,0,0,0.25)"
-            : "0 2px 8px rgba(0,0,0,0.15)",
-        }}
-      >
-        <span
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            lineHeight: 0,
-          }}
+      {/* Content Card */}
+      <div className={`w-full md:w-[45%] pl-12 md:pl-0 ${isLeft ? "md:text-right md:pr-12" : "md:text-left md:pl-12"}`}>
+        <div className={`group relative rounded-2xl p-6 transition-all duration-300 border
+          bg-white/5 text-white border-white/10 hover:bg-white/10
+          ${event.isPast ? "opacity-70" : ""}
+          ${event.isCurrent ? "ring-1 ring-red-500/40 shadow-[0_20px_40px_-20px_rgba(206,17,38,0.45)]" : ""}`}
         >
-          <event.Icon sx={{ fontSize: 24 }} />
-        </span>
-      </div>
+          {event.isCurrent && (
+            <div className="pointer-events-none absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_20%_10%,rgba(206,17,38,0.18),transparent_55%)]" />
+          )}
+          {/* Status Indicator (Mobile Only Small Dot) */}
+          <div className={`absolute top-1/2 -left-[37px] h-3 w-3 rounded-full md:hidden border-2 border-slate-900
+            ${event.isCurrent ? "bg-red-500 animate-pulse" : event.isPast ? "bg-blue-500" : "bg-slate-600"}`} 
+          />
 
-      {/* Empty space - Desktop */}
-      <div className={`hide-mobile flex-1 ${isLeft ? "pl-2xl" : "pr-2xl"}`} />
-
-      {/* Content - Mobile */}
-      <div className="hide-desktop w-full" style={{ paddingLeft: "60px" }}>
-        {/* Mobile dot */}
-        <div
-          style={{
-            position: "absolute",
-            left: 4,
-            top: 10,
-            width: 34,
-            height: 34,
-            borderRadius: "50%",
-            background: event.isCurrent
-              ? "var(--gradient-cta)"
-              : event.isPast
-              ? "var(--color-secondary)"
-              : "rgba(255,255,255,0.15)",
-            border: `2px solid ${
-              event.isCurrent
-                ? "transparent"
-                : event.isPast
-                ? "var(--color-secondary)"
-                : "rgba(255,255,255,0.3)"
-            }`,
-            color: "white",
-            zIndex: 1,
-            display: "grid",
-            placeItems: "center",
-            boxShadow: event.isCurrent
-              ? "0 3px 10px rgba(0,0,0,0.2)"
-              : "0 2px 6px rgba(0,0,0,0.1)",
-          }}
-        >
-          <span
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              lineHeight: 0,
-            }}
-          >
-            <event.Icon sx={{ fontSize: 18 }} />
+          <span className={`text-xs font-black uppercase tracking-widest mb-2 inline-flex items-center gap-2
+            ${event.isCurrent ? "text-red-400" : "text-blue-400"}`}>
+            {event.date}
+            {event.isCurrent && (
+              <span className="rounded-full border border-red-400/40 bg-red-500/10 px-2 py-0.5 text-[10px] font-bold tracking-wider text-red-200">
+                En curso
+              </span>
+            )}
           </span>
-        </div>
-        <TimelineCard event={event} />
-      </div>
-    </div>
-  );
-}
+          <h4 className="text-xl font-bold mb-2 flex items-center gap-2 group-hover:translate-x-1 transition-transform md:group-hover:translate-x-0">
+            {event.title}
+            {event.isPast && <CheckCircle2 className="h-4 w-4 text-blue-500" />}
+          </h4>
+          <p className={`text-sm leading-relaxed ${event.isCurrent ? "text-slate-600" : "text-white/60"}`}>
+            {event.description}
+          </p>
 
-function TimelineCard({ event }: { event: TimelineEvent }) {
-  return (
-    <div
-      className="card"
-      style={{
-        background: event.isCurrent
-          ? "var(--gradient-cta)"
-          : "rgba(255,255,255,0.1)",
-        backdropFilter: "blur(10px)",
-        color: event.isCurrent ? "white" : undefined,
-        border: event.isCurrent ? "none" : "1px solid rgba(255,255,255,0.2)",
-        boxShadow: event.isCurrent ? "var(--shadow-lg)" : undefined,
-      }}
-    >
-      <p
-        style={{
-          fontSize: "0.75rem",
-          fontWeight: 600,
-          textTransform: "uppercase",
-          letterSpacing: "0.5px",
-          color: event.isCurrent ? "rgba(255,255,255,0.8)" : "rgba(255,255,255,0.7)",
-          marginBottom: "var(--spacing-xs)",
-        }}
+          {event.isCurrent && (
+            <div className="mt-4 flex items-center gap-2 text-[10px] font-black uppercase tracking-tighter text-red-600">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
+              </span>
+              En Progreso
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Central Icon */}
+      <div className={`absolute left-0 md:left-1/2 flex h-9 w-9 -translate-x-1/2 items-center justify-center rounded-full border-4 border-slate-900 z-10 transition-transform duration-500 group-hover:scale-110
+        ${event.isCurrent 
+          ? "bg-red-600 text-white ring-4 ring-red-500/30 scale-125" 
+          : event.isPast 
+          ? "bg-blue-600 text-white" 
+          : "bg-slate-800 text-slate-400"}`}
       >
-        {event.date}
-      </p>
-      <h4
-        style={{
-          marginBottom: "var(--spacing-sm)",
-          color: "white",
-        }}
-      >
-        {event.title}
-      </h4>
-      <p
-        style={{
-          fontSize: "0.875rem",
-          color: event.isCurrent ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.8)",
-          margin: 0,
-        }}
-      >
-        {event.description}
-      </p>
-      {event.isCurrent && (
-        <Badge
-          variant="neutral"
-          className="mt-md"
-          style={{
-            background: "rgba(255,255,255,0.2)",
-            color: "white",
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "6px",
-          }}
-        >
-          <LocationIcon sx={{ fontSize: "1rem" }} />
-          Estamos aquí
-        </Badge>
-      )}
+        <event.Icon className={event.isCurrent ? "h-4 w-4 animate-pulse" : "h-4 w-4"} />
+      </div>
+
+      {/* Spacer for Desktop */}
+      <div className="hidden md:block md:w-[45%]" />
     </div>
   );
 }
