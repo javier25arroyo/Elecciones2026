@@ -9,7 +9,7 @@ import {
   Flag,
   Vote,
   RotateCcw,
-  MapPin,
+  CheckCircle2
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -33,30 +33,35 @@ const timelineEvents: TimelineEvent[] = [
 
 export function TimelineSection() {
   return (
-    <section id="timeline" className="bg-gradient-app py-24 sm:py-32 lg:py-40">
+    <section id="timeline" className="relative bg-gradient-to-b from-slate-900 via-[#0b2b6b] to-slate-900 py-24 sm:py-32 lg:py-40 overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(206,17,38,0.2),transparent_50%),radial-gradient(circle_at_25%_40%,rgba(0,47,108,0.2),transparent_50%)]" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent via-slate-900/30 to-slate-900" />
       <div className="container mx-auto max-w-7xl px-4">
         {/* Header */}
         <div className="mb-20 text-center">
-          <Badge variant="accent" className="mb-6 bg-white/15 px-5 py-2 text-sm font-bold text-white backdrop-blur-md">
-            Fechas clave 2025 - 2026
+          <Badge variant="primary" className="mb-6 bg-white/10 px-5 py-2 text-sm font-bold text-white ring-1 ring-white/20">
+            Ruta Electoral 2026
           </Badge>
           <h2 className="text-balance font-display text-4xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl">
-            Cronograma Electoral 2026
+            Cronograma del Proceso
           </h2>
-          <p className="mx-auto mt-8 max-w-3xl text-xl leading-relaxed text-white/90 lg:text-2xl">
-            Mantenete informado sobre los hitos más importantes del proceso. 
-            Cada fecha es un paso fundamental hacia nuestra democracia.
+          <p className="mx-auto mt-8 max-w-3xl text-xl leading-relaxed text-white/70 lg:text-2xl">
+            Sigue paso a paso los hitos que marcarán el futuro del país. 
+            Información actualizada según el calendario oficial.
           </p>
         </div>
 
-        {/* Timeline */}
-        <div className="relative mx-auto max-w-4xl py-12">
-          {/* Vertical Lines */}
-          <div className="absolute top-0 bottom-0 left-1/2 hidden w-0.5 -translate-x-1/2 bg-white/20 md:block" />
-          <div className="absolute top-0 bottom-0 left-5 w-0.5 bg-white/20 md:hidden" />
+        {/* Timeline Container */}
+        <div className="relative mx-auto max-w-5xl">
+          {/* Central Line (Desktop) */}
+          <div className="absolute left-1/2 top-0 bottom-0 hidden w-px -translate-x-1/2 bg-gradient-to-b from-blue-500 via-red-500 to-slate-700 opacity-30 md:block" />
+          
+          {/* Left Line (Mobile) */}
+          <div className="absolute left-4 top-0 bottom-0 w-px bg-gradient-to-b from-blue-500 via-red-500 to-slate-700 opacity-30 md:hidden" />
 
           {/* Events */}
-          <div className="flex flex-col gap-24 lg:gap-32">
+          <div className="flex flex-col gap-12 md:gap-16">
             {timelineEvents.map((event, index) => (
               <TimelineItem key={event.date} event={event} index={index} />
             ))}
@@ -67,86 +72,84 @@ export function TimelineSection() {
   );
 }
 
-interface TimelineItemProps {
-  event: TimelineEvent;
-  index: number;
-}
-
-function TimelineItem({ event, index }: TimelineItemProps) {
+function TimelineItem({ event, index }: { event: TimelineEvent; index: number }) {
+  const isLeft = index % 2 === 0;
   const [isVisible, setIsVisible] = React.useState(false);
   const itemRef = React.useRef<HTMLDivElement>(null);
-  const isLeft = index % 2 === 0;
 
   React.useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) setIsVisible(true);
-    }, { threshold: 0.2 });
+    }, { threshold: 0.1 });
 
     if (itemRef.current) observer.observe(itemRef.current);
     return () => observer.disconnect();
   }, []);
 
-  const dotClasses = `
-    z-10 grid shrink-0 place-items-center rounded-full shadow-xl transition-all duration-500 ring-4
-    ${event.isCurrent
-      ? "bg-white text-secondary ring-secondary animate-pulse scale-110"
-      : event.isPast
-      ? "bg-secondary text-white ring-secondary/20 grayscale-[0.5]"
-      : "bg-slate-700 text-white ring-white/10"
-    }
-  `;
-
   return (
     <div
       ref={itemRef}
-      className={`relative transition-all duration-500 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0"}`}
-      style={{ transitionDelay: `${index * 100}ms` }}
+      className={`relative flex flex-col md:flex-row items-start md:items-center transition-all duration-700 ease-out 
+        ${isVisible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"}
+        ${isLeft ? "md:flex-row" : "md:flex-row-reverse"}`}
     >
-      {/* --- Desktop Layout --- */}
-      <div className={`hidden md:flex ${isLeft ? "flex-row" : "flex-row-reverse"}`}>
-        <div className={`flex-1 ${isLeft ? "pr-12 text-right" : "pl-12 text-left"}`}>
-          <TimelineCard event={event} />
+      {/* Content Card */}
+      <div className={`w-full md:w-[45%] pl-12 md:pl-0 ${isLeft ? "md:text-right md:pr-12" : "md:text-left md:pl-12"}`}>
+        <div className={`group relative rounded-2xl p-6 transition-all duration-300 border
+          bg-white/5 text-white border-white/10 hover:bg-white/10
+          ${event.isPast ? "opacity-70" : ""}
+          ${event.isCurrent ? "ring-1 ring-red-500/40 shadow-[0_20px_40px_-20px_rgba(206,17,38,0.45)]" : ""}`}
+        >
+          {event.isCurrent && (
+            <div className="pointer-events-none absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_20%_10%,rgba(206,17,38,0.18),transparent_55%)]" />
+          )}
+          {/* Status Indicator (Mobile Only Small Dot) */}
+          <div className={`absolute top-1/2 -left-[37px] h-3 w-3 rounded-full md:hidden border-2 border-slate-900
+            ${event.isCurrent ? "bg-red-500 animate-pulse" : event.isPast ? "bg-blue-500" : "bg-slate-600"}`} 
+          />
+
+          <span className={`text-xs font-black uppercase tracking-widest mb-2 inline-flex items-center gap-2
+            ${event.isCurrent ? "text-red-400" : "text-blue-400"}`}>
+            {event.date}
+            {event.isCurrent && (
+              <span className="rounded-full border border-red-400/40 bg-red-500/10 px-2 py-0.5 text-[10px] font-bold tracking-wider text-red-200">
+                En curso
+              </span>
+            )}
+          </span>
+          <h4 className="text-xl font-bold mb-2 flex items-center gap-2 group-hover:translate-x-1 transition-transform md:group-hover:translate-x-0">
+            {event.title}
+            {event.isPast && <CheckCircle2 className="h-4 w-4 text-blue-500" />}
+          </h4>
+          <p className={`text-sm leading-relaxed ${event.isCurrent ? "text-slate-600" : "text-white/60"}`}>
+            {event.description}
+          </p>
+
+          {event.isCurrent && (
+            <div className="mt-4 flex items-center gap-2 text-[10px] font-black uppercase tracking-tighter text-red-600">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
+              </span>
+              En Progreso
+            </div>
+          )}
         </div>
-        <div className={`${dotClasses} h-12 w-12`}>
-          <event.Icon className="h-6 w-6" />
-        </div>
-        <div className="flex-1" />
       </div>
 
-      {/* --- Mobile Layout --- */}
-      <div className="relative pl-16 md:hidden">
-        <div className={`${dotClasses} absolute top-1 left-0 h-10 w-10`}>
-          <event.Icon className="h-5 w-5" />
-        </div>
-        <TimelineCard event={event} />
+      {/* Central Icon */}
+      <div className={`absolute left-0 md:left-1/2 flex h-9 w-9 -translate-x-1/2 items-center justify-center rounded-full border-4 border-slate-900 z-10 transition-transform duration-500 group-hover:scale-110
+        ${event.isCurrent 
+          ? "bg-red-600 text-white ring-4 ring-red-500/30 scale-125" 
+          : event.isPast 
+          ? "bg-blue-600 text-white" 
+          : "bg-slate-800 text-slate-400"}`}
+      >
+        <event.Icon className={event.isCurrent ? "h-4 w-4 animate-pulse" : "h-4 w-4"} />
       </div>
-    </div>
-  );
-}
 
-function TimelineCard({ event }: { event: TimelineEvent }) {
-  const cardClasses = `
-    relative overflow-hidden rounded-3xl p-8 lg:p-10 transition-all duration-300
-    ${event.isCurrent
-      ? "bg-white text-slate-900 shadow-[0_30px_60px_rgba(0,0,0,0.4)] scale-105 z-20 border-0"
-      : "bg-white/5 border border-white/10 text-white backdrop-blur-md hover:bg-white/10"
-    }
-  `;
-  return (
-    <div className={cardClasses}>
-      <p className={`text-xs font-black uppercase tracking-[0.25em] mb-4 ${event.isCurrent ? "text-secondary" : "text-white/60"}`}>
-        {event.date}
-      </p>
-      <h4 className={`text-2xl font-black mb-3 leading-tight ${event.isCurrent ? "text-slate-900" : "text-white"}`}>{event.title}</h4>
-      <p className={`text-base lg:text-lg leading-relaxed ${event.isCurrent ? "text-slate-600 font-medium" : "text-white/80"}`}>
-        {event.description}
-      </p>
-      {event.isCurrent && (
-        <div className="mt-4 flex items-center gap-2 text-xs font-bold text-secondary uppercase tracking-wider">
-          <MapPin className="h-4 w-4" />
-          Evento Actual
-        </div>
-      )}
+      {/* Spacer for Desktop */}
+      <div className="hidden md:block md:w-[45%]" />
     </div>
   );
 }

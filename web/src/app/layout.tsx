@@ -118,7 +118,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.variable} ${poppins.variable} antialiased min-h-screen flex flex-col bg-gray-50 dark:bg-black/95`}>
+      <body className={`${inter.variable} ${poppins.variable} antialiased min-h-screen flex flex-col`}>
         <GoogleAnalytics />
         <Header />
         <a href="#main-content" className="skip-link">

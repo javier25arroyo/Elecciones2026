@@ -9,6 +9,8 @@ import {
   CreditCard,
   CheckCircle,
   Lock,
+  MapPin,
+  FileCheck2,
 } from "lucide-react";
 
 const faqItems = [
@@ -81,7 +83,10 @@ export function EducationSection() {
   const ctaRef = useScrollReveal<HTMLDivElement>();
 
   return (
-    <section id="educacion" className="bg-gradient-to-b from-slate-900 to-slate-800 py-24 sm:py-32 lg:py-40">
+    <section id="educacion" className="relative bg-gradient-to-b from-slate-900 via-[#0b2b6b] to-slate-900 py-24 sm:py-32 lg:py-40">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_30%,rgba(0,47,108,0.22),transparent_50%),radial-gradient(circle_at_85%_70%,rgba(206,17,38,0.18),transparent_55%)]" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent via-slate-900/30 to-slate-900" />
       <div className="container mx-auto max-w-7xl px-4">
         {/* Header */}
         <div className="mb-24 text-center">
@@ -97,19 +102,10 @@ export function EducationSection() {
           </p>
         </div>
 
-        {/* Main content grid */}
-        <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-24">
-          {/* Quick guide */}
-          <div>
-            <h3 className="mb-6 text-2xl font-bold text-white">Guía rápida</h3>
-            <QuickGuideGrid />
-          </div>
-
-          {/* FAQ Accordion */}
-          <div>
-            <h3 className="mb-6 text-2xl font-bold text-white">Preguntas frecuentes</h3>
-            <Accordion items={faqItems} />
-          </div>
+        {/* FAQ Accordion */}
+        <div>
+          <h3 className="mb-6 text-2xl font-bold text-white">Preguntas frecuentes</h3>
+          <Accordion items={faqItems} />
         </div>
 
         {/* CTA */}
@@ -137,9 +133,11 @@ export function EducationSection() {
 function QuickGuideGrid() {
   const guideItems = [
     { icon: <Calendar className="text-blue-400" />, title: "Fecha de votación", description: "1 de febrero de 2026, de 6:00 a.m. a 6:00 p.m.", color: "#60a5fa" },
-    { icon: <CreditCard className="text-red-400" />, title: "Documento necesario", description: "Cédula de identidad vigente (obligatoria)", color: "#f87171" },
-    { icon: <CheckCircle className="text-green-400" />, title: "Cómo marcar", description: "Una X clara dentro del círculo del candidato", color: "#34d399" },
-    { icon: <Lock className="text-purple-400" />, title: "Tu voto es secreto", description: "Nadie puede obligarte a revelar tu voto", color: "#a78bfa" },
+    { icon: <MapPin className="text-sky-400" />, title: "Centro de votación", description: "Consultá tu centro en el TSE con tu número de cédula.", color: "#38bdf8" },
+    { icon: <CreditCard className="text-red-400" />, title: "Documento necesario", description: "Cédula de identidad vigente y en buen estado.", color: "#f87171" },
+    { icon: <FileCheck2 className="text-white" />, title: "Papeletas", description: "Recibís papeleta presidencial y legislativa; revisá antes de votar.", color: "#e5e7eb" },
+    { icon: <CheckCircle className="text-green-400" />, title: "Cómo marcar", description: "Una X clara dentro del círculo del candidato/partido.", color: "#34d399" },
+    { icon: <Lock className="text-purple-400" />, title: "Tu voto es secreto", description: "Nadie puede obligarte a revelar tu voto.", color: "#a78bfa" },
   ];
 
   return (

@@ -49,7 +49,10 @@ export function CandidatesSection({ parties }: CandidatesSectionProps) {
   }, [parties, filter, searchTerm]);
 
   return (
-    <section id="candidatos" className="bg-gradient-to-b from-slate-900 to-slate-800 py-24 sm:py-32 lg:py-40">
+    <section id="candidatos" className="relative bg-gradient-to-b from-slate-900 via-[#0b2b6b] to-slate-900 py-24 sm:py-32 lg:py-40">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(0,47,108,0.25),transparent_45%),radial-gradient(circle_at_80%_60%,rgba(206,17,38,0.25),transparent_45%)]" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent via-slate-900/30 to-slate-900" />
       <div className="container mx-auto max-w-7xl px-4">
         {/* Header */}
         <div className="mb-20 text-center">
@@ -134,7 +137,7 @@ function CandidateCard({ party, index }: CandidateCardProps) {
   };
 
   const candidateName = candidate?.name || "Por definir";
-  const accentColor = party.accent_color || "#0056B3"; // fallback a un azul
+  const accentColor = party.accent_color || "#0056B3";
 
   const getTags = () => {
     const tags: { icon: React.ReactNode; label: string; color: string }[] = [];
@@ -142,17 +145,17 @@ function CandidateCard({ party, index }: CandidateCardProps) {
     const ideology = (party.ideology || "").toLowerCase();
 
     if (values.includes("ambiente") || values.includes("ecolog") || values.includes("sostenib"))
-      tags.push({ icon: <Leaf className="h-4 w-4" />, label: "Ambiente", color: "text-green-400" });
+      tags.push({ icon: <Leaf className="h-3.5 w-3.5" />, label: "Ambiente", color: "text-green-400" });
     if (values.includes("empleo") || values.includes("trabajo") || values.includes("económic"))
-      tags.push({ icon: <Briefcase className="h-4 w-4" />, label: "Empleo", color: "text-sky-400" });
+      tags.push({ icon: <Briefcase className="h-3.5 w-3.5" />, label: "Empleo", color: "text-sky-400" });
     if (values.includes("educación") || values.includes("educacion"))
-      tags.push({ icon: <GraduationCap className="h-4 w-4" />, label: "Educación", color: "text-blue-400" });
+      tags.push({ icon: <GraduationCap className="h-3.5 w-3.5" />, label: "Educación", color: "text-blue-400" });
     if (values.includes("seguridad") || values.includes("justicia"))
-      tags.push({ icon: <Shield className="h-4 w-4" />, label: "Seguridad", color: "text-red-400" });
+      tags.push({ icon: <Shield className="h-3.5 w-3.5" />, label: "Seguridad", color: "text-red-400" });
     if (values.includes("salud") || values.includes("bienestar"))
-      tags.push({ icon: <HealthIcon className="h-4 w-4" />, label: "Salud", color: "text-rose-400" });
+      tags.push({ icon: <HealthIcon className="h-3.5 w-3.5" />, label: "Salud", color: "text-rose-400" });
     if (ideology.includes("liberal") || values.includes("libertad"))
-      tags.push({ icon: <Zap className="h-4 w-4" />, label: "Libertad", color: "text-yellow-400" });
+      tags.push({ icon: <Zap className="h-3.5 w-3.5" />, label: "Libertad", color: "text-yellow-400" });
 
     return tags.slice(0, 3);
   };
@@ -160,119 +163,159 @@ function CandidateCard({ party, index }: CandidateCardProps) {
   const tags = getTags();
 
   return (
-    <article
+    <motion.article
       ref={ref}
-      className={`scroll-reveal scroll-reveal-delay-${Math.min(index % 6 + 1, 5)} relative flex flex-col rounded-2xl border border-white/20 bg-white/10 shadow-lg backdrop-blur-md transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-2xl`}
+      className={`scroll-reveal scroll-reveal-delay-${Math.min(index % 6 + 1, 5)} group relative flex flex-col rounded-[2rem] border border-white/10 bg-white/[0.06] shadow-xl backdrop-blur-xl will-change-transform`}
       style={{ '--accent-color': accentColor } as React.CSSProperties}
+      whileHover={{
+        y: -16,
+        scale: 1.04,
+        backgroundColor: "rgba(255, 255, 255, 0.15)",
+        borderColor: "rgba(255, 255, 255, 0.4)",
+        boxShadow: "0 50px 120px -20px rgba(0, 0, 0, 0.9), 0 0 40px -8px var(--accent-color)"
+      }}
+      transition={{
+        duration: 0.5,
+        ease: [0.23, 1, 0.32, 1]
+      }}
       onClick={() => setIsExpanded(!isExpanded)}
       role="button"
       tabIndex={0}
       onKeyDown={(e) => e.key === "Enter" && setIsExpanded(!isExpanded)}
       aria-expanded={isExpanded}
     >
-      {/* Color Accent Border */}
-      <div className="h-1.5 w-full rounded-t-2xl bg-[var(--accent-color)]" />
+      {/* Glow Effect on Hover */}
+      <motion.div 
+        className="absolute inset-0 rounded-[2rem] bg-[radial-gradient(circle_at_50%_-10%,var(--accent-color),transparent_70%)]"
+        initial={{ opacity: 0 }}
+        whileHover={{ opacity: 0.2 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      ></motion.div>
       
-      <div className="flex h-full flex-1 flex-col items-center p-6 text-center">
-        {/* Logo / Photo */}
-        <div
-          className="relative mb-4 h-24 w-24 shrink-0 overflow-hidden rounded-full border-2 border-[var(--accent-color)] bg-gradient-to-br from-white/10 to-white/5 shadow-xl transition-all duration-300"
-          style={{ boxShadow: `0 8px 24px -10px var(--accent-color)` }}
-        >
-          {candidate?.photo_url ? (
-            <Image src={candidate.photo_url} alt={`Foto de ${candidateName}`} fill className="object-cover" sizes="100px" loading="lazy" />
-          ) : logoUrl ? (
-            <Image src={logoUrl} alt={`Logo de ${party.name}`} fill className="object-contain p-2" sizes="100px" loading="lazy" />
-          ) : (
-            <div className="flex h-full w-full items-center justify-center text-2xl font-bold text-[var(--accent-color)]">
-              {getInitials(candidateName)}
-            </div>
-          )}
+      <div className="flex h-full flex-1 flex-col items-center px-7 py-8 text-center">
+        {/* Top Accent Line */}
+        <motion.div 
+          className="mb-4 h-1 w-24 rounded-full bg-[var(--accent-color)] shadow-[0_0_12px_var(--accent-color)]"
+          initial={{ width: 96, opacity: 0.5 }}
+          whileHover={{ width: 128, opacity: 1 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        ></motion.div>
+        <div className="relative mb-6">
+          <motion.div 
+            className="absolute -inset-2 rounded-full bg-[var(--accent-color)] blur-lg"
+            initial={{ opacity: 0 }}
+            whileHover={{ opacity: 0.5 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          ></motion.div>
+          <motion.div
+            className="relative h-28 w-28 shrink-0 overflow-hidden rounded-full border-2 border-white/20 bg-slate-900 shadow-2xl"
+            whileHover={{ 
+              scale: 1.15,
+              borderColor: "var(--accent-color)",
+              boxShadow: "0 0 50px -8px var(--accent-color)"
+            }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+          >
+            {candidate?.photo_url ? (
+              <Image src={candidate.photo_url} alt={`Foto de ${candidateName}`} fill className="object-cover" sizes="112px" loading="lazy" />
+            ) : logoUrl ? (
+              <Image src={logoUrl} alt={`Logo de ${party.name}`} fill className="object-contain p-4" sizes="112px" loading="lazy" />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center text-3xl font-black text-[var(--accent-color)]">
+                {getInitials(candidateName)}
+              </div>
+            )}
+          </motion.div>
         </div>
 
-        {/* Name */}
-        <h3 className="flex min-h-[3.5rem] items-center justify-center text-xl font-bold leading-tight tracking-tight text-white lg:text-2xl">
-          {candidateName}
-        </h3>
+        {/* Name & Party */}
+        <div className="mb-4 space-y-2">
+          <h3 className="text-2xl font-black leading-[1.1] tracking-tight text-white lg:text-3xl">
+            {candidateName}
+          </h3>
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--accent-color)] opacity-90">
+            {party.name}
+          </p>
+        </div>
 
-        {/* Party */}
-        <p className="mb-4 flex min-h-[3rem] items-center justify-center px-2 text-sm font-semibold text-white/90">
-          {party.name}
-        </p>
-
-        {/* Ideology badge */}
-        <div className="mb-5 flex h-8 items-center justify-center">
+        {/* Ideology Badge */}
+        <div className="mb-6">
           {party.ideology ? (
-            <Badge
-              variant="neutral"
-              className="border-white/20 bg-black/30 px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest text-white ring-1 ring-white/10"
-            >
-              <span className="mr-2 inline-block h-2 w-2 rounded-full bg-[var(--accent-color)] shadow-[0_0_8px_var(--accent-color)]" />
+            <div className="inline-flex items-center gap-2 rounded-full bg-black/40 px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-white ring-1 ring-white/10">
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent-color)] shadow-[0_0_8px_var(--accent-color)]" />
               {party.ideology.split("(")[0].trim()}
-            </Badge>
+            </div>
           ) : null}
         </div>
 
-        {/* Tags */}
-        <div className="mb-4 flex h-16 flex-wrap items-center justify-center gap-2">
-          {tags.map((tag) => (
-            <span
+        {/* Tags Pills */}
+        <div className="mb-8 flex flex-wrap items-center justify-center gap-2">
+          {tags.map((tag, tagIndex) => (
+            <motion.span
               key={tag.label}
-              className={`inline-flex items-center gap-1.5 rounded-md bg-white/5 py-1 px-2.5 text-xs font-semibold leading-tight text-white/90 shadow-sm border ${tag.color.replace('text-', 'border-')}/50`}
+              className="inline-flex items-center gap-1.5 rounded-full bg-white/5 py-1.5 px-3 text-[10px] font-bold text-white/90 ring-1 ring-white/10"
+              whileHover={{ 
+                backgroundColor: "rgba(255, 255, 255, 0.15)",
+                scale: 1.05
+              }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
             >
               <span className={tag.color}>{tag.icon}</span>
               {tag.label}
-            </span>
+            </motion.span>
           ))}
         </div>
 
-        {/* Expanded content */}
+        {/* Expanded Content */}
         <AnimatePresence>
           {isExpanded && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="w-full self-stretch overflow-hidden"
+              transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
+              className="w-full overflow-hidden"
             >
-              <div className="border-t border-white/20 pt-4 text-left">
+              <div className="mb-6 space-y-6 border-t border-white/10 pt-6 text-left">
                 {party.values && party.values.length > 0 && (
-                  <div className="mb-4">
-                    <h4 className="mb-2 text-sm font-semibold text-white">Valores clave</h4>
-                    <ul className="space-y-1 text-sm text-white/90">
+                  <div>
+                    <h4 className="mb-3 text-[10px] font-black uppercase tracking-widest text-white/50">Valores Clave</h4>
+                    <ul className="grid grid-cols-1 gap-2 text-xs font-medium text-white/90">
                       {party.values.slice(0, 3).map((value) => (
-                        <li key={value} className="relative pl-4">
-                          <span className="absolute left-0 top-[5px] h-1.5 w-1.5 rounded-full bg-[var(--accent-color)]" />
+                        <li key={value} className="flex items-center gap-2">
+                          <span className="h-1 w-1 rounded-full bg-[var(--accent-color)]" />
                           {value}
                         </li>
                       ))}
                     </ul>
                   </div>
                 )}
+                
                 {(candidate?.first_vice_president || candidate?.second_vice_president) && (
-                  <div className="mb-4">
-                    <h4 className="mb-1 text-sm font-semibold text-white">Fórmula presidencial</h4>
-                    <p className="text-sm leading-snug text-white/80">
-                      {candidate.first_vice_president && `1er Vice: ${candidate.first_vice_president}`}
-                      <br />
-                      {candidate.second_vice_president && `2do Vice: ${candidate.second_vice_president}`}
-                    </p>
+                  <div>
+                    <h4 className="mb-2 text-[10px] font-black uppercase tracking-widest text-white/50">Fórmula Presidencial</h4>
+                    <div className="space-y-1 text-xs text-white/90">
+                      {candidate.first_vice_president && (
+                        <p><span className="font-bold text-white/60">1er:</span> {candidate.first_vice_president}</p>
+                      )}
+                      {candidate.second_vice_president && (
+                        <p><span className="font-bold text-white/60">2do:</span> {candidate.second_vice_president}</p>
+                      )}
+                    </div>
                   </div>
                 )}
+
                 {party.plan_url && (
-                  <div className="mb-6">
-                    <h4 className="mb-2 text-sm font-semibold text-white">Plan de gobierno</h4>
+                  <div className="pt-2">
                     <a
                       href={party.plan_url}
                       download
-                      className="inline-flex items-center gap-1.5 rounded-md py-1.5 px-3 text-sm font-medium text-white transition-opacity hover:opacity-80"
-                      style={{ backgroundColor: accentColor }}
+                      className="flex w-full items-center justify-center gap-2 rounded-xl bg-[var(--accent-color)] py-3 text-xs font-black uppercase tracking-widest text-white transition-all hover:brightness-110 hover:shadow-[0_8px_20px_-5px_var(--accent-color)]"
                       rel="noopener noreferrer"
                       target="_blank"
                       onClick={(e) => e.stopPropagation()}
                     >
-                      <Download className="h-4 w-4" /> Descargar PDF
+                      <Download className="h-4 w-4" /> Plan de Gobierno
                     </a>
                   </div>
                 )}
@@ -281,12 +324,27 @@ function CandidateCard({ party, index }: CandidateCardProps) {
           )}
         </AnimatePresence>
 
-        {/* Expand indicator */}
-        <div className="mt-auto flex w-full items-center justify-center gap-1 border-t border-white/20 pt-4 text-sm font-semibold text-[var(--accent-color)]">
-          <span className={`transition-transform duration-300 ${isExpanded ? "rotate-180" : ""}`}>▼</span>
-          {isExpanded ? "Cerrar" : "Ver más"}
+        {/* Footer Toggle */}
+        <div className="mt-auto flex w-full flex-col items-center gap-2 pt-4">
+          <motion.div 
+            className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent"
+            whileHover={{ backgroundColor: "rgba(255, 255, 255, 0.3)" }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+          ></motion.div>
+          <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-white/40 transition-all duration-700 ease-out group-hover:text-[var(--accent-color)]">
+            <motion.span 
+              className="block"
+              animate={{ rotate: isExpanded ? 180 : 0 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+            >
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </motion.span>
+            {isExpanded ? "Menos info" : "Más detalles"}
+          </div>
         </div>
       </div>
-    </article>
+    </motion.article>
   );
 }

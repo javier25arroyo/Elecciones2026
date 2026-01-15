@@ -50,7 +50,10 @@ export function QuizzesSection({ parties, quickQuestions, deepQuestions, deepDes
 
   return (
     <>
-      <section id="quiz" className="relative overflow-hidden bg-gradient-app py-24 sm:py-32 lg:py-40">
+      <section id="quiz" className="relative overflow-hidden bg-gradient-to-b from-slate-900 via-[#0b2b6b] to-slate-900 py-24 sm:py-32 lg:py-40">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(0,47,108,0.25),transparent_50%),radial-gradient(circle_at_80%_60%,rgba(206,17,38,0.2),transparent_55%)]" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
+        <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent via-slate-900/30 to-slate-900" />
         {/* Decorative blobs */}
         <div className="absolute top-[10%] left-[6%] h-72 w-72 animate-float rounded-full bg-white/5 blur-3xl" />
         <div className="absolute bottom-[15%] right-[10%] h-96 w-96 animate-float rounded-full bg-white/5 blur-3xl [animation-delay:1s]" />
@@ -159,10 +162,10 @@ function QuizCard({
   onClick,
 }: QuizCardProps) {
   const cardClasses = `
-    flex flex-col gap-8 rounded-3xl p-10 text-white backdrop-blur-2xl transition-all duration-300
+    flex flex-col gap-8 rounded-3xl p-10 text-white backdrop-blur-2xl transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]
     ${isAvailable ? "bg-black/25" : "bg-black/15"}
     ${isSelected ? "border-2 border-white/50 shadow-2xl ring-8 ring-white/5" : "border border-white/15"}
-    ${!isAvailable ? "opacity-70" : "hover:border-white/30 hover:shadow-2xl hover:-translate-y-1"}
+    ${!isAvailable ? "opacity-70" : "hover:border-white/40 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] hover:-translate-y-2 hover:scale-[1.01] hover:bg-black/30"}
   `;
 
   const buttonClasses = `

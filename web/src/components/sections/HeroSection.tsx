@@ -27,25 +27,17 @@ function pad2(value: number) {
 
 export function HeroSection() {
   // 1 de febrero 2026 a las 00:00 en Costa Rica (UTC-06:00) => 06:00Z
-  const electionDateMs = React.useMemo(() => Date.UTC(2026, 1, 1, 6, 0, 0), []);
-
-  // Evita mismatch de hidratación: el countdown se calcula en el cliente.
-  React.useEffect(() => {
-    const update = () => setTimeLeft(getTimeLeft(electionDateMs, Date.now()));
-    update();
-    const id = window.setInterval(update, 1000);
-    return () => window.clearInterval(id);
-  }, [electionDateMs]);
-  
-  const [, setTimeLeft] = React.useState<TimeLeft | null>(null);
-
 
   return (
-    <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-app pt-[70px] text-center">
+    <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-b from-primary via-[#0b2b6b] to-slate-900 pt-[70px] text-center">
       {/* Animated background pattern */}
       <div
         className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,color-mix(in_srgb,var(--color-secondary)_15%,transparent)_0%,transparent_50%),radial-gradient(circle_at_80%_20%,color-mix(in_srgb,white_8%,transparent)_0%,transparent_40%)]"
       />
+      {/* Patriotic accents */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(0,47,108,0.35),transparent_45%),radial-gradient(circle_at_85%_30%,rgba(206,17,38,0.35),transparent_45%)]" />
+      {/* Section blend */}
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-b from-transparent via-slate-900/40 to-slate-900" />
 
       {/* Floating decorative element */}
       <div
@@ -145,14 +137,29 @@ function StatsGrid() {
 
 function CountdownValue() {
   const electionDateMs = React.useMemo(() => Date.UTC(2026, 1, 1, 6, 0, 0), []);
-  const [timeLeft, setTimeLeft] = React.useState(() => getTimeLeft(electionDateMs, Date.now()));
+  const [timeLeft, setTimeLeft] = React.useState<TimeLeft | null>(null);
+  const [isMounted, setIsMounted] = React.useState(false);
 
   React.useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft(getTimeLeft(electionDateMs, Date.now()));
-    }, 1000);
+    setIsMounted(true);
+    const update = () => setTimeLeft(getTimeLeft(electionDateMs, Date.now()));
+    update();
+    const timer = setInterval(update, 1000);
     return () => clearInterval(timer);
   }, [electionDateMs]);
+
+  if (!isMounted || !timeLeft) {
+    return (
+      <span className="block leading-[1.05]">
+        <span className="block font-display text-[clamp(1.5rem,4.5vw,2.25rem)] font-extrabold">
+          0
+        </span>
+        <span className="mt-1.5 block font-mono text-[0.9rem] font-semibold tracking-wider opacity-90">
+          00:00:00
+        </span>
+      </span>
+    );
+  }
 
   return (
     <span className="block leading-[1.05]">

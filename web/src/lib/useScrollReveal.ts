@@ -8,15 +8,26 @@ interface ScrollRevealOptions {
   triggerOnce?: boolean;
 }
 
+// Map to store shared observers and their subscriber counts
+// Key is a serialization of the options
+const observers = new Map<
+  string,
+  { observer: IntersectionObserver; count: number }
+>();
+
+function getObserverKey(options: Required<ScrollRevealOptions>): string {
+  return `${options.threshold}|${options.rootMargin}|${options.triggerOnce}`;
+}
+
 export function useScrollReveal<T extends HTMLElement>(
   options: ScrollRevealOptions = {}
 ) {
   const ref = useRef<T>(null);
-  const {
-    threshold = 0.1,
-    rootMargin = "0px 0px -100px 0px",
-    triggerOnce = true,
-  } = options;
+  
+  // Normalize options with defaults to ensure consistent keys
+  const threshold = options.threshold ?? 0.1;
+  const rootMargin = options.rootMargin ?? "0px 0px -100px 0px";
+  const triggerOnce = options.triggerOnce ?? true;
 
   useEffect(() => {
     const element = ref.current;
@@ -31,30 +42,51 @@ export function useScrollReveal<T extends HTMLElement>(
       return;
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
+    const normalizedOptions = { threshold, rootMargin, triggerOnce };
+    const key = getObserverKey(normalizedOptions);
+    
+    // Get or create observer
+    if (!observers.has(key)) {
+      const observerCallback: IntersectionObserverCallback = (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("is-visible");
             if (triggerOnce) {
-              observer.unobserve(entry.target);
+              const obsData = observers.get(key);
+              if (obsData) {
+                  obsData.observer.unobserve(entry.target);
+                  // Note: We don't decrement count here as the component is still mounted.
+                  // The cleanup in the return of useEffect handles the logical detachment.
+              }
             }
           } else if (!triggerOnce) {
             entry.target.classList.remove("is-visible");
           }
         });
-      },
-      {
+      };
+
+      const observer = new IntersectionObserver(observerCallback, {
         threshold,
         rootMargin,
-      }
-    );
+      });
+      observers.set(key, { observer, count: 0 });
+    }
 
-    observer.observe(element);
+    const observerData = observers.get(key)!;
+    observerData.observer.observe(element);
+    observerData.count++;
 
     return () => {
-      if (element) {
-        observer.unobserve(element);
+      const obsData = observers.get(key);
+      if (obsData) {
+        obsData.observer.unobserve(element);
+        obsData.count--;
+        
+        // Clean up observer if no one is using it anymore
+        if (obsData.count === 0) {
+          obsData.observer.disconnect();
+          observers.delete(key);
+        }
       }
     };
   }, [threshold, rootMargin, triggerOnce]);
