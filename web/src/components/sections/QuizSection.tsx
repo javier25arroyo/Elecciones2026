@@ -399,7 +399,7 @@ function QuizResults({ results, userVector, onReset, onRepeatToPicker }: any) {
         <Sparkles className="h-4 w-4 mr-2" /> Resultados Listos
       </Badge>
       <h2 className="mb-12 font-display text-4xl font-extrabold text-white sm:text-5xl">
-        Tu Afinidada Política
+        Tu Afinidad Política
       </h2>
 
       <div className="mb-12 space-y-6">
