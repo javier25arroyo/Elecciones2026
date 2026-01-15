@@ -36,23 +36,25 @@ const SocialLink = ({ href, icon, text, hoverColor, hoverBgColor }: { href: stri
 
 export function Footer() {
   return (
-    <footer className="mt-16 bg-background-dark text-white">
-      <div className="container mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+    <footer className="mt-24 bg-slate-900 border-t border-white/5 text-white">
+      <div className="container mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
+        <div className="grid grid-cols-1 gap-16 md:grid-cols-2 lg:grid-cols-4">
           {/* Logo y descripción */}
-          <div className="md:col-span-2">
-            <Link href="/" className="inline-flex items-center gap-2 text-white">
-              <Flag className="h-6 w-6" />
-              <span className="text-2xl font-bold font-display">Elecciones</span>
+          <div className="md:col-span-2 space-y-8">
+            <Link href="/" className="inline-flex items-center gap-3 text-white transition-opacity hover:opacity-80">
+              <div className="p-2 bg-white/10 rounded-lg ring-1 ring-white/20">
+                <Flag className="h-6 w-6" />
+              </div>
+              <span className="text-3xl font-black font-display tracking-tighter uppercase">Elecciones <span className="text-blue-400">2026</span></span>
             </Link>
-            <p className="mt-4 max-w-md text-white/70">
-              Plataforma educativa e interactiva sobre las elecciones
-              presidenciales de Costa Rica 2026. Información clara, sin sesgos,
-              para todos los votantes.
+            <p className="max-w-md text-lg leading-relaxed text-white/70">
+              Plataforma educativa e interactiva diseñada para fortalecer la democracia costarricense. 
+              Información clara, accesible y neutral para un electorado más informado.
             </p>
-            <p className="mt-6 text-sm text-white/50">
-              Fecha de elección: <strong>1 de febrero de 2026</strong>
-            </p>
+            <div className="flex items-center gap-4 text-sm font-bold text-white/50 uppercase tracking-widest">
+              <span className="h-px w-8 bg-white/20" />
+              1 de febrero de 2026
+            </div>
           </div>
 
           {/* Recursos */}
@@ -101,7 +103,7 @@ export function Footer() {
               © 2026 Info Politic CR. Proyecto educativo sin fines de lucro.
             </p>
 
-            <div className="flex items-center gap-2 sm:gap-4">
+            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4">
               <SocialLink 
                 href="https://github.com/javier25arroyo"
                 icon={<Github className="h-5 w-5" />}

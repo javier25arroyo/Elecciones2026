@@ -2,9 +2,7 @@
 
 import * as React from "react";
 import Image from "next/image";
-
-const cn = (...classes: (string | undefined | null | false)[]) =>
-  classes.filter(Boolean).join(" ");
+import { cn } from "@/lib/utils";
 
 interface CardProps {
   children: React.ReactNode;

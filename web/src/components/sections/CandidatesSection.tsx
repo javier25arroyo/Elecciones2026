@@ -49,22 +49,25 @@ export function CandidatesSection({ parties }: CandidatesSectionProps) {
   }, [parties, filter, searchTerm]);
 
   return (
-    <section id="candidatos" className="bg-gradient-to-b from-slate-900 to-slate-800 py-16 sm:py-24">
+    <section id="candidatos" className="bg-gradient-to-b from-slate-900 to-slate-800 py-24 sm:py-32 lg:py-40">
       <div className="container mx-auto max-w-7xl px-4">
         {/* Header */}
-        <div className="mb-12 text-center">
-          <Badge variant="primary" className="mb-4 bg-white/10 text-white">
-            14+ Candidaturas
+        <div className="mb-20 text-center">
+          <Badge variant="primary" className="mb-6 bg-white/10 px-5 py-2 text-sm font-bold text-white ring-1 ring-white/20">
+            14+ Candidaturas Confirmadas
           </Badge>
-          <h2 className="text-3xl font-bold text-white sm:text-4xl">Conocé a los candidatos 2026</h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-white/80">
-            Explorá los perfiles de cada candidato, sus propuestas y valores.
-            Tocá una tarjeta para ver más detalles.
+          <h2 className="text-balance font-display text-4xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl">
+            Conocé a los candidatos 2026
+          </h2>
+          <p className="mx-auto mt-8 max-w-3xl text-xl leading-relaxed text-white/80 lg:text-2xl">
+            Explorá los perfiles de cada candidato, sus propuestas y valores fundamentales.{" "}
+            <br className="hidden md:block" />
+            Información verificada para un voto consciente.
           </p>
         </div>
 
         {/* Filters */}
-        <div className="mb-8 flex flex-col gap-4 rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-md sm:flex-row sm:items-center sm:justify-between">
+        <div className="mb-16 flex flex-col gap-6 rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-md lg:flex-row lg:items-center lg:justify-between lg:p-8">
           <div className="flex-grow">
             <input
               type="search"
@@ -188,23 +191,23 @@ function CandidateCard({ party, index }: CandidateCardProps) {
         </div>
 
         {/* Name */}
-        <h3 className="flex h-12 items-center justify-center text-lg font-bold leading-tight text-white">
+        <h3 className="flex min-h-[3.5rem] items-center justify-center text-xl font-bold leading-tight tracking-tight text-white lg:text-2xl">
           {candidateName}
         </h3>
 
         {/* Party */}
-        <p className="mb-3 flex h-10 items-center justify-center text-sm font-medium text-white/80">
+        <p className="mb-4 flex min-h-[3rem] items-center justify-center px-2 text-sm font-semibold text-white/90">
           {party.name}
         </p>
 
         {/* Ideology badge */}
-        <div className="mb-4 flex h-8 items-center justify-center">
+        <div className="mb-5 flex h-8 items-center justify-center">
           {party.ideology ? (
             <Badge
               variant="neutral"
-              className="border-white/20 bg-black/20 text-xs font-semibold tracking-wide text-white/90 shadow-sm"
+              className="border-white/20 bg-black/30 px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest text-white ring-1 ring-white/10"
             >
-              <span className="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-[var(--accent-color)]" style={{ boxShadow: `0 0 6px var(--accent-color)`}}/>
+              <span className="mr-2 inline-block h-2 w-2 rounded-full bg-[var(--accent-color)] shadow-[0_0_8px_var(--accent-color)]" />
               {party.ideology.split("(")[0].trim()}
             </Badge>
           ) : null}
@@ -258,7 +261,7 @@ function CandidateCard({ party, index }: CandidateCardProps) {
                   </div>
                 )}
                 {party.plan_url && (
-                  <div>
+                  <div className="mb-6">
                     <h4 className="mb-2 text-sm font-semibold text-white">Plan de gobierno</h4>
                     <a
                       href={party.plan_url}

@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { cn } from "@/lib/utils";
 
 type BadgeVariant =
   | "primary"
@@ -16,9 +17,6 @@ interface BadgeProps {
   children: React.ReactNode;
   className?: string;
 }
-
-const cn = (...classes: (string | undefined | null | false)[]) =>
-  classes.filter(Boolean).join(" ");
 
 const base =
   "inline-block py-1.5 px-3 text-xs font-semibold tracking-wide rounded-full transition-transform duration-150 ease-in-out hover:scale-105";

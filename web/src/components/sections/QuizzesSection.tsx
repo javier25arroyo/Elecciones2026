@@ -50,26 +50,26 @@ export function QuizzesSection({ parties, quickQuestions, deepQuestions, deepDes
 
   return (
     <>
-      <section id="quiz" className="relative overflow-hidden bg-gradient-app py-16 sm:py-24">
+      <section id="quiz" className="relative overflow-hidden bg-gradient-app py-24 sm:py-32 lg:py-40">
         {/* Decorative blobs */}
-        <div className="absolute top-[10%] left-[6%] h-56 w-56 animate-float rounded-full bg-white/5 blur-3xl" />
-        <div className="absolute bottom-[15%] right-[10%] h-80 w-80 animate-float rounded-full bg-white/5 blur-3xl [animation-delay:1s]" />
+        <div className="absolute top-[10%] left-[6%] h-72 w-72 animate-float rounded-full bg-white/5 blur-3xl" />
+        <div className="absolute bottom-[15%] right-[10%] h-96 w-96 animate-float rounded-full bg-white/5 blur-3xl [animation-delay:1s]" />
 
         <div className="container relative mx-auto max-w-7xl px-4">
-          <div className="mb-12 text-center">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white backdrop-blur-md">
+          <div className="mb-20 text-center">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-2.5 text-sm font-bold text-white backdrop-blur-md">
               <Sparkles className="h-4 w-4" />
               Elegí tu quiz
             </div>
-            <h2 className="text-balance text-3xl font-extrabold text-white sm:text-4xl">
-              ¿Resultados rápidos o una comparación más profunda?
+            <h2 className="text-balance text-4xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl">
+              ¿Resultados rápidos o una<br className="hidden lg:block" /> comparación más profunda?
             </h2>
-            <p className="text-balance mt-2 text-lg leading-relaxed text-white/85">
+            <p className="text-balance mt-6 text-xl leading-relaxed text-white/90 lg:text-2xl">
               Ambos quizzes son anónimos. Podés hacer uno o los dos.
             </p>
           </div>
 
-          <div className="grid items-stretch gap-8 md:grid-cols-2">
+          <div className="grid items-stretch gap-10 lg:grid-cols-2 lg:gap-16">
             <QuizCard
               kind="quick"
               title="Afinidad en minutos"
@@ -159,10 +159,10 @@ function QuizCard({
   onClick,
 }: QuizCardProps) {
   const cardClasses = `
-    flex flex-col gap-6 rounded-2xl p-8 text-white backdrop-blur-2xl transition-all duration-300
-    ${isAvailable ? "bg-black/20" : "bg-black/10"}
-    ${isSelected ? "border-2 border-white/40 shadow-2xl" : "border border-white/15"}
-    ${!isAvailable ? "opacity-70" : "hover:border-white/30 hover:shadow-xl"}
+    flex flex-col gap-8 rounded-3xl p-10 text-white backdrop-blur-2xl transition-all duration-300
+    ${isAvailable ? "bg-black/25" : "bg-black/15"}
+    ${isSelected ? "border-2 border-white/50 shadow-2xl ring-8 ring-white/5" : "border border-white/15"}
+    ${!isAvailable ? "opacity-70" : "hover:border-white/30 hover:shadow-2xl hover:-translate-y-1"}
   `;
 
   const buttonClasses = `

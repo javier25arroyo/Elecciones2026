@@ -53,10 +53,10 @@ export function HeroSection() {
       />
 
       {/* Content */}
-      <div className="container relative max-w-3xl px-4 py-16 sm:py-24 md:px-8">
+      <div className="container relative max-w-4xl px-4 py-24 sm:py-32 md:px-8">
         {/* Date badge - Glassmorphism */}
         <span
-          className="page-load-slide-up load-delay-1 mb-6 inline-flex items-center gap-1 rounded-full border border-white/20 bg-white/10 py-2.5 px-5 text-sm text-white backdrop-blur-md"
+          className="page-load-slide-up load-delay-1 mb-10 inline-flex items-center gap-2.5 rounded-full border border-white/20 bg-white/10 py-3 px-6 text-sm font-bold text-white backdrop-blur-md"
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
             <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/>
@@ -65,19 +65,20 @@ export function HeroSection() {
         </span>
 
         <h1
-          className="page-load-slide-up load-delay-2 mb-6 font-display text-[clamp(2.5rem,7vw,4.5rem)] font-extrabold leading-[1.05] tracking-tight text-white"
+          className="page-load-slide-up load-delay-2 mb-10 font-display text-[clamp(2.5rem,10vw,5rem)] font-black leading-[1.1] tracking-tight text-white"
         >
           Elecciones<br />
-          <span className="bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-white via-white to-white/60 bg-clip-text text-transparent">
             Costa Rica 2026
           </span>
         </h1>
 
         <p
-          className="page-load-slide-up load-delay-3 mx-auto mb-8 max-w-[550px] text-[clamp(1.1rem,2.5vw,1.35rem)] leading-relaxed text-white/85"
+          className="page-load-slide-up load-delay-3 mx-auto mb-12 max-w-[650px] text-[clamp(1.1rem,4vw,1.45rem)] leading-[1.6] text-white/95 drop-shadow-sm px-4"
         >
           Tu guía completa para las elecciones presidenciales.
-          <strong> Informate, compará y decidí.</strong>
+          <br className="hidden sm:block" />
+          <strong className="font-extrabold text-white"> Informate, compará y decidí con criterio.</strong>
         </p>
 
         {/* CTA Buttons - Mobile optimized */}
@@ -114,7 +115,7 @@ function StatsGrid() {
   return (
     <div
       ref={ref}
-      className="scroll-reveal mx-auto mt-16 grid max-w-[500px] grid-cols-1 gap-2 sm:grid-cols-3 sm:gap-4"
+      className="scroll-reveal mx-auto mt-16 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4"
     >
       <StatCard value="14+" label="Candidatos" icon={
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -126,16 +127,18 @@ function StatsGrid() {
           <path d="M18 13h-.68l-2 2h1.91L19 17H5l1.78-2h2.05l-2-2H6l-3 3v4c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2v-4l-3-3zm-1-5.05l-4.95 4.95-3.54-3.54 4.95-4.95L17 7.95zm-4.24-5.66L6.39 8.66c-.39.39-.39 1.02 0 1.41l4.95 4.95c.39.39 1.02.39 1.41 0l6.36-6.36c.39-.39.39-1.02 0-1.41L14.16 2.3c-.38-.4-1.01-.4-1.4-.01z"/>
         </svg>
       } />
-      <StatCard
-        value={<CountdownValue />}
-        label="Cuenta regresiva"
-        icon={
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
-          </svg>
-        }
-        highlight
-      />
+      <div className="col-span-2 sm:col-span-1">
+        <StatCard
+          value={<CountdownValue />}
+          label="Cuenta regresiva"
+          icon={
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+            </svg>
+          }
+          highlight
+        />
+      </div>
     </div>
   );
 }
@@ -178,34 +181,34 @@ function StatCard({ value, label, icon, highlight }: StatCardProps) {
     backdrop-blur-2xl transition-all duration-300
     hover:scale-105 hover:shadow-xl
     ${highlight
-      ? 'border-2 border-secondary/50 bg-secondary/25'
-      : 'border border-white/15 bg-white/10'
+      ? 'border-2 border-secondary/60 bg-secondary/30 ring-4 ring-secondary/10'
+      : 'border border-white/20 bg-white/10'
     }
   `;
 
   const valueClasses = `
-    m-0 leading-none
+    m-0 leading-none drop-shadow-sm
     ${isPrimitiveValue
-      ? 'font-display text-[clamp(1.75rem,5vw,2.5rem)] font-extrabold'
+      ? 'font-display text-[clamp(1.75rem,5vw,2.5rem)] font-extrabold tracking-tight'
       : ''
     }
-    ${highlight ? 'text-secondary-light' : 'text-white'}
+    ${highlight ? 'text-white' : 'text-white'}
   `;
 
   return (
     <div className={cardClasses}>
       {/* Shine effect */}
-      <div className="absolute top-0 left-[-100%] h-full w-full animate-shimmer bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent)] bg-[length:200%_100%]" />
+      <div className="absolute top-0 left-[-100%] h-full w-full animate-shimmer bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent)] bg-[length:200%_100%]" />
 
       {icon && (
-        <div className={`mb-1 ${highlight ? 'text-secondary-light' : 'text-white/70'}`}>
+        <div className={`mb-1.5 flex justify-center ${highlight ? 'text-white' : 'text-white/80'}`}>
           {icon}
         </div>
       )}
       <div className={valueClasses}>
         {value}
       </div>
-      <p className="mt-1 mb-0 text-xs font-medium uppercase tracking-widest text-white/75">
+      <p className={`mt-2 mb-0 text-xs font-bold uppercase tracking-[0.15em] ${highlight ? 'text-white' : 'text-white/80'}`}>
         {label}
       </p>
     </div>

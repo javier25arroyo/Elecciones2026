@@ -26,7 +26,7 @@ const faqItems = [
         </ul>
         <p className="mt-4">
           Podés verificar tu estado en el padrón en{" "}
-          <a href="https://www.tse.go.cr" target="_blank" rel="noopener noreferrer" className="text-primary-light font-medium underline hover:text-blue-400">
+          <a href="https://www.tse.go.cr" target="_blank" rel="noopener noreferrer" className="text-white font-bold underline decoration-primary-light decoration-2 underline-offset-4 hover:text-blue-200 transition-colors">
             www.tse.go.cr
           </a>
         </p>
@@ -81,21 +81,24 @@ export function EducationSection() {
   const ctaRef = useScrollReveal<HTMLDivElement>();
 
   return (
-    <section id="educacion" className="bg-gradient-to-b from-slate-900 to-slate-800 py-16 sm:py-24">
+    <section id="educacion" className="bg-gradient-to-b from-slate-900 to-slate-800 py-24 sm:py-32 lg:py-40">
       <div className="container mx-auto max-w-7xl px-4">
         {/* Header */}
-        <div className="mb-12 text-center">
-          <Badge variant="secondary" className="mb-4 bg-white/10 text-white">
-            Educación cívica
+        <div className="mb-24 text-center">
+          <Badge variant="secondary" className="mb-6 bg-white/10 px-5 py-2 text-sm font-bold text-white ring-1 ring-white/20">
+            Educación Cívica Electoral
           </Badge>
-          <h2 className="text-3xl font-bold text-white sm:text-4xl">¿Cómo votar en Costa Rica?</h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-white/80">
-            Todo lo que necesitás saber para ejercer tu derecho al voto. Información oficial basada en el Tribunal Supremo de Elecciones.
+          <h2 className="text-balance font-display text-4xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl">
+            ¿Cómo votar en Costa Rica?
+          </h2>
+          <p className="mx-auto mt-8 max-w-3xl text-xl leading-relaxed text-white/80 lg:text-2xl">
+            Tu derecho al voto es la herramienta más poderosa. 
+            Aquí tenés todo lo necesario para ejercerlo con confianza y seguridad.
           </p>
         </div>
 
         {/* Main content grid */}
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-24">
           {/* Quick guide */}
           <div>
             <h3 className="mb-6 text-2xl font-bold text-white">Guía rápida</h3>
@@ -151,8 +154,8 @@ function QuickGuideGrid() {
               {item.icon}
             </div>
             <div>
-              <h4 className="font-bold text-white">{item.title}</h4>
-              <p className="text-sm text-white/70">{item.description}</p>
+              <h4 className="font-bold text-white tracking-tight">{item.title}</h4>
+              <p className="text-sm font-medium text-white/90 leading-snug">{item.description}</p>
             </div>
           </div>
         </div>

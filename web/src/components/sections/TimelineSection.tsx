@@ -33,27 +33,30 @@ const timelineEvents: TimelineEvent[] = [
 
 export function TimelineSection() {
   return (
-    <section id="timeline" className="bg-gradient-app py-16 sm:py-24">
+    <section id="timeline" className="bg-gradient-app py-24 sm:py-32 lg:py-40">
       <div className="container mx-auto max-w-7xl px-4">
         {/* Header */}
-        <div className="mb-12 text-center">
-          <Badge variant="accent" className="mb-4 bg-white/15 text-white">
-            Fechas importantes
+        <div className="mb-20 text-center">
+          <Badge variant="accent" className="mb-6 bg-white/15 px-5 py-2 text-sm font-bold text-white backdrop-blur-md">
+            Fechas clave 2025 - 2026
           </Badge>
-          <h2 className="text-3xl font-bold text-white sm:text-4xl">Cronograma Electoral 2026</h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-white/85">
-            Conocé las fechas clave del proceso electoral costarricense. Marcá tu calendario y no te perdás ningún evento importante.
+          <h2 className="text-balance font-display text-4xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl">
+            Cronograma Electoral 2026
+          </h2>
+          <p className="mx-auto mt-8 max-w-3xl text-xl leading-relaxed text-white/90 lg:text-2xl">
+            Mantenete informado sobre los hitos más importantes del proceso. 
+            Cada fecha es un paso fundamental hacia nuestra democracia.
           </p>
         </div>
 
         {/* Timeline */}
-        <div className="relative mx-auto max-w-3xl">
+        <div className="relative mx-auto max-w-4xl py-12">
           {/* Vertical Lines */}
-          <div className="absolute top-0 bottom-0 left-1/2 hidden w-0.5 -translate-x-1/2 bg-white/30 md:block" />
-          <div className="absolute top-0 bottom-0 left-5 w-0.5 bg-white/30 md:hidden" />
+          <div className="absolute top-0 bottom-0 left-1/2 hidden w-0.5 -translate-x-1/2 bg-white/20 md:block" />
+          <div className="absolute top-0 bottom-0 left-5 w-0.5 bg-white/20 md:hidden" />
 
           {/* Events */}
-          <div className="flex flex-col gap-12">
+          <div className="flex flex-col gap-24 lg:gap-32">
             {timelineEvents.map((event, index) => (
               <TimelineItem key={event.date} event={event} index={index} />
             ))}
@@ -84,12 +87,12 @@ function TimelineItem({ event, index }: TimelineItemProps) {
   }, []);
 
   const dotClasses = `
-    z-10 grid shrink-0 place-items-center rounded-full text-white shadow-md transition-all duration-300
+    z-10 grid shrink-0 place-items-center rounded-full shadow-xl transition-all duration-500 ring-4
     ${event.isCurrent
-      ? "bg-gradient-cta shadow-lg shadow-secondary/30 border-0"
+      ? "bg-white text-secondary ring-secondary animate-pulse scale-110"
       : event.isPast
-      ? "bg-secondary border-2 border-secondary-dark"
-      : "bg-white/15 border-2 border-white/30"
+      ? "bg-secondary text-white ring-secondary/20 grayscale-[0.5]"
+      : "bg-slate-700 text-white ring-white/10"
     }
   `;
 
@@ -123,26 +126,26 @@ function TimelineItem({ event, index }: TimelineItemProps) {
 
 function TimelineCard({ event }: { event: TimelineEvent }) {
   const cardClasses = `
-    rounded-xl p-6 backdrop-blur-md
+    relative overflow-hidden rounded-3xl p-8 lg:p-10 transition-all duration-300
     ${event.isCurrent
-      ? "bg-gradient-cta text-white shadow-2xl shadow-secondary/20"
-      : "border border-white/20 bg-white/10"
+      ? "bg-white text-slate-900 shadow-[0_30px_60px_rgba(0,0,0,0.4)] scale-105 z-20 border-0"
+      : "bg-white/5 border border-white/10 text-white backdrop-blur-md hover:bg-white/10"
     }
   `;
   return (
     <div className={cardClasses}>
-      <p className={`text-xs font-semibold uppercase tracking-wider ${event.isCurrent ? "text-white/80" : "text-white/70"}`}>
+      <p className={`text-xs font-black uppercase tracking-[0.25em] mb-4 ${event.isCurrent ? "text-secondary" : "text-white/60"}`}>
         {event.date}
       </p>
-      <h4 className="my-1 text-lg font-bold text-white">{event.title}</h4>
-      <p className={`text-sm ${event.isCurrent ? "text-white/90" : "text-white/80"}`}>
+      <h4 className={`text-2xl font-black mb-3 leading-tight ${event.isCurrent ? "text-slate-900" : "text-white"}`}>{event.title}</h4>
+      <p className={`text-base lg:text-lg leading-relaxed ${event.isCurrent ? "text-slate-600 font-medium" : "text-white/80"}`}>
         {event.description}
       </p>
       {event.isCurrent && (
-        <Badge variant="neutral" className="mt-4 inline-flex items-center gap-1.5 bg-white/20 text-white">
+        <div className="mt-4 flex items-center gap-2 text-xs font-bold text-secondary uppercase tracking-wider">
           <MapPin className="h-4 w-4" />
-          Estamos aquí
-        </Badge>
+          Evento Actual
+        </div>
       )}
     </div>
   );

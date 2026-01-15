@@ -1,12 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-/* ========================================
-   SISTEMA DE DISEÑO (TOKENS)
-   ======================================== */
-
-:root {
+@theme {
   /* Colores */
   --color-primary: #002B7F;
   --color-primary-light: #1E4A9E;
@@ -37,125 +31,170 @@
   --color-border: #E5E7EB;
   --color-border-light: #F3F4F6;
 
-  /* Espaciado */
-  --spacing-xs: 0.25rem;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 1.5rem;
-  --spacing-xl: 2rem;
-  --spacing-2xl: 2.5rem;
-  --spacing-3xl: 3rem;
-
-  /* Transiciones */
-  --transition-fast: cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-normal: cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-
-  /* Sombras */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  --shadow-button: 0 4px 14px 0 rgba(0, 91, 179, 0.39);
-  --shadow-button-hover: 0 6px 20px 0 rgba(0, 91, 179, 0.49);
-  --shadow-glow: 0 0 20px rgba(0, 91, 179, 0.4);
-  --shadow-glow-red: 0 0 20px rgba(206, 17, 38, 0.4);
-
-  /* Gradientes */
-  --gradient-app: linear-gradient(
-    135deg,
-    var(--color-primary) 0%,
-    var(--color-accent) 50%,
-    var(--color-secondary) 100%
-  );
-  --gradient-cta: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-light) 100%);
-  --gradient-accent: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
-  --gradient-subtle: linear-gradient(135deg, var(--color-background) 0%, var(--color-background-secondary) 100%);
-  --gradient-primary: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
-  --gradient-costa-rica: linear-gradient(90deg, #002B7F 0%, #002B7F 20%, #FFFFFF 20%, #FFFFFF 35%, #CE1126 35%, #CE1126 65%, #FFFFFF 65%, #FFFFFF 80%, #002B7F 80%, #002B7F 100%);
-  
-  /* Tipografía */
-  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-display: 'Poppins', var(--font-sans);
-
   /* Radios */
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;
   --radius-xl: 16px;
   --radius-full: 9999px;
+
+  /* Tipografía */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Poppins', var(--font-sans);
+
+  /* Sombras */
+  --shadow-button: 0 4px 14px 0 rgba(0, 91, 179, 0.39);
+  --shadow-button-hover: 0 6px 20px 0 rgba(0, 91, 179, 0.49);
+  --shadow-glow: 0 0 20px rgba(0, 91, 179, 0.4);
+  --shadow-glow-red: 0 0 20px rgba(206, 17, 38, 0.4);
+
+  /* Gradientes */
+  --background-image-gradient-app: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 50%, var(--color-secondary) 100%);
+  --background-image-gradient-cta: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-light) 100%);
+  --background-image-gradient-accent: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
+  --background-image-gradient-subtle: linear-gradient(135deg, var(--color-background) 0%, var(--color-background-secondary) 100%);
+  --background-image-gradient-primary: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  --background-image-gradient-costa-rica: linear-gradient(90deg, #002B7F 0%, #002B7F 20%, #FFFFFF 20%, #FFFFFF 35%, #CE1126 35%, #CE1126 65%, #FFFFFF 65%, #FFFFFF 80%, #002B7F 80%, #002B7F 100%);
+
+  /* Animaciones */
+  --animate-fade-in-up: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-fade-in: fadeIn 0.3s ease-out forwards;
+  --animate-slide-in-left: slideInLeft 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-slide-in-right: slideInRight 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-shake: shake 0.4s ease-in-out;
+  --animate-celebrate: celebrate 0.5s ease-in-out;
+  --animate-float: float 3s ease-in-out infinite;
+  --animate-scale-in: scaleIn 0.4s ease-out forwards;
+  --animate-page-load-fade: pageLoadFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-shimmer: shimmer 3s infinite;
+  --animate-skeleton: skeleton-loading 1.5s infinite;
+
+  @keyframes skeleton-loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes slideInRight {
+    from { opacity: 0; transform: translateX(50px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+  }
+  @keyframes celebrate {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    50% { transform: translate3d(0, -10px, 0); }
+  }
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes pageLoadFadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  --z-index-dropdown: 50;
+  --z-index-sticky: 100;
+  --z-index-modal: 200;
+  --z-index-toast: 300;
 }
 
 /* ========================================
    ESTILOS BASE
    ======================================== */
 
-body {
-  font-family: var(--font-sans);
-  color: var(--color-text-primary);
-  background-color: var(--color-background);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-primary-light);
+    color: white;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    line-height: 1.6;
+    letter-spacing: -0.011em;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Evita que el header fijo tape los anclajes del menú */
+  section[id] {
+    scroll-margin-top: 96px;
+  }
 }
 
-.bg-app-gradient {
-  background: var(--gradient-app);
-}
+@layer utilities {
+  .bg-app-gradient {
+    background: var(--background-image-gradient-app);
+  }
 
-html {
-  scroll-behavior: smooth;
-}
+  .page-load-slide-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
 
-/* Evita que el header fijo tape los anclajes del menú */
-section[id] {
-  scroll-margin-top: 96px;
+  .load-delay-1 { animation-delay: 0.15s; }
+  .load-delay-2 { animation-delay: 0.3s; }
+  .load-delay-3 { animation-delay: 0.45s; }
+  .load-delay-4 { animation-delay: 0.6s; }
+  .load-delay-5 { animation-delay: 0.75s; }
+
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .scroll-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 767px) {
   section[id] {
     scroll-margin-top: 84px;
   }
-}
-
-/* ========================================
-   ANIMACIONES Y UTILIDADES
-   ======================================== */
-
-.page-load-slide-up {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: pageLoadSlideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes pageLoadSlideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.load-delay-1 { animation-delay: 0.15s; }
-.load-delay-2 { animation-delay: 0.3s; }
-.load-delay-3 { animation-delay: 0.45s; }
-.load-delay-4 { animation-delay: 0.6s; }
-.load-delay-5 { animation-delay: 0.75s; }
-
-
-.scroll-reveal {
-  opacity: 0;
-  transform: translateY(50px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.scroll-reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 @media (prefers-reduced-motion: reduce) {

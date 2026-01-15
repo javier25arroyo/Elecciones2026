@@ -39,39 +39,41 @@ export function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? "bg-slate-900/90 shadow-lg backdrop-blur-md"
-          : "bg-slate-900/95 backdrop-blur-sm"
+          ? "bg-slate-900/80 shadow-2xl backdrop-blur-xl py-2"
+          : "bg-slate-900/40 backdrop-blur-sm py-4"
       }`}
     >
       {/* Barra tricolor inferior estilo CR */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-costa-rica"
+        className={`absolute bottom-0 left-0 right-0 h-[3px] bg-gradient-costa-rica transition-opacity duration-500 ${
+          isScrolled ? "opacity-100" : "opacity-0"
+        }`}
       />
 
-      <div className="container mx-auto px-4 max-w-7xl h-17.5 flex items-center justify-between">
+      <div className="container mx-auto px-4 max-w-7xl flex items-center justify-between h-14">
         {/* Logo */}
         <Link
           href="/"
           className="flex items-center gap-3 group focus:outline-none shrink-0"
           onClick={() => setIsMenuOpen(false)}
         >
-          <div className="relative p-2 bg-white/10 rounded-lg group-hover:bg-white/20 transition-colors ring-1 ring-white/10">
+          <div className="relative p-2.5 bg-white/10 rounded-xl group-hover:bg-white/20 transition-all duration-300 ring-1 ring-white/20 group-hover:ring-white/40 shadow-inner">
             <Flag className="w-5 h-5 text-white" />
           </div>
-          <span className="text-xl font-bold text-white tracking-tight whitespace-nowrap">
-            Elecciones <span className="text-blue-400">CR</span>
+          <span className="text-xl font-black text-white tracking-tighter uppercase sm:text-2xl">
+            Elecciones <span className="text-blue-400">2026</span>
           </span>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+        <nav className="hidden md:flex items-center gap-6 lg:gap-8 mx-4">
           {navLinks.map((link) => (
             <Link
               key={link.label}
               href={link.href}
-              className="text-sm font-medium text-slate-300 hover:text-white transition-colors relative group py-2 whitespace-nowrap"
+              className="text-sm font-semibold text-slate-300 hover:text-white transition-colors relative group py-2"
             >
               {link.label}
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 group-hover:w-full transition-all duration-300 ease-out" />
