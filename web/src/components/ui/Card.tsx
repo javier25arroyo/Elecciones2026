@@ -25,7 +25,7 @@ export function Card({
   return (
     <div
       className={cn(
-        "bg-white/70 backdrop-blur-xl border border-white/30 rounded-xl p-6 shadow-md transition-all duration-300 ease-in-out",
+        "bg-white/70 backdrop-blur-xl border border-white/30 rounded-xl p-6 shadow-md transition-all duration-300 ease-in-out contain-layout contain-paint",
         "hover:shadow-xl hover:-translate-y-[6px] hover:border-primary/20",
         accentClasses,
         onClick && "cursor-pointer",

@@ -190,6 +190,28 @@
     opacity: 1;
     transform: translateY(0);
   }
+
+  /* Performance Optimizations */
+  .contain-paint {
+    contain: paint;
+  }
+  
+  .contain-layout {
+    contain: layout;
+  }
+  
+  .contain-content {
+    contain: content;
+  }
+  
+  .contain-strict {
+    contain: strict;
+  }
+
+  .content-visibility-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 500px; /* Approximate height to prevent scrollbar jumping */
+  }
 }
 
 @media (max-width: 767px) {
