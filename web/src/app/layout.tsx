@@ -119,6 +119,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.variable} ${poppins.variable} antialiased min-h-screen flex flex-col`}>
+        <div id="scroll-sentinel" className="absolute top-0 left-0 w-full h-[10px] pointer-events-none opacity-0 z-[-1]" aria-hidden="true" />
         <GoogleAnalytics />
         <Header />
         <a href="#main-content" className="skip-link">

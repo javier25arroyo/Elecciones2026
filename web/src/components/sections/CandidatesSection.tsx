@@ -165,8 +165,8 @@ function CandidateCard({ party, index }: CandidateCardProps) {
   return (
     <motion.article
       ref={ref}
-      className={`scroll-reveal scroll-reveal-delay-${Math.min(index % 6 + 1, 5)} group relative flex flex-col rounded-[2rem] border border-white/10 bg-white/[0.06] shadow-xl backdrop-blur-xl will-change-transform`}
-      style={{ '--accent-color': accentColor } as React.CSSProperties}
+      className={`scroll-reveal scroll-reveal-delay-${Math.min(index % 6 + 1, 5)} group relative flex flex-col rounded-[2rem] border border-white/10 bg-white/[0.06] shadow-xl backdrop-blur-xl will-change-transform content-visibility-auto`}
+      style={{ '--accent-color': accentColor, containIntrinsicSize: '1px 600px' } as React.CSSProperties}
       whileHover={{
         y: -16,
         scale: 1.04,
