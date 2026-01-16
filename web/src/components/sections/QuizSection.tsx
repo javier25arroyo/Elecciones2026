@@ -352,7 +352,7 @@ function QuizQuestions({ questions, currentIndex, onAnswer }: any) {
         <Progress value={progress} className="h-2.5 bg-white/20" />
       </div>
 
-      <div className="relative min-h-[450px] overflow-hidden rounded-3xl bg-white p-8 shadow-2xl transition-all sm:p-12">
+      <div className="relative min-h-112.5 overflow-hidden rounded-3xl bg-white p-8 shadow-2xl transition-all sm:p-12">
         <div className="flex h-full flex-col items-center justify-between gap-8">
           <div className="text-center">
             <div className="mb-6 flex justify-center text-primary">
