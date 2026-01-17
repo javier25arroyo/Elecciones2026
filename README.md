@@ -9,9 +9,19 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 [![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
 
-[Ver Demo](#) • [Reportar Bug](../../issues) • [Solicitar Feature](../../issues)
+ [Ver Demo](#) • [Reportar Bug](../../issues) • [Solicitar Feature](../../issues)
 
 </div>
+
+---
+
+## 📖 Descripción
+
+**Info Politic 2026** es una plataforma web interactiva diseñada para informar y educar a los ciudadanos costarricenses sobre las elecciones presidenciales de 2026. La aplicación proporciona una experiencia completa para explorar candidatos políticos, realizar quizzes interactivos para determinar afinidades políticas, y acceder a información cívica esencial sobre el proceso electoral.
+
+Desarrollada con tecnologías modernas, la plataforma combina datos actualizados sobre 19 partidos políticos registrados, información sobre requisitos para votar, fechas clave del calendario electoral, y herramientas interactivas que facilitan la participación informada en la democracia costarricense.
+
+El proyecto se alinea con los principios de transparencia y accesibilidad, ofreciendo una interfaz moderna y responsive que funciona en todos los dispositivos, desde móviles hasta desktops.
 
 ---
 
@@ -66,9 +76,10 @@ Experiencia de usuario premium:
 
 ```text
 Frontend:     Next.js 16 (App Router) + React 19
-Lenguaje:     TypeScript
-Gestión:      pnpm
-Estilos:      CSS personalizado + MUI Icons
+Lenguaje:     TypeScript 5
+Gestión:      pnpm 10+
+Estilos:      Tailwind CSS 4 + Lucide React
+Animaciones:  Framer Motion
 Deploy:       GitHub Pages (Export estático)
 ```
 
