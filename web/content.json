@@ -17,7 +17,7 @@
       ],
       "stances": {
         "education": "Promueve una educación pública de calidad y con equidad, fortaleciendo la inversión en infraestructura educativa y tecnología, y fomentando la formación en habilidades para la vida y el trabajo.",
-        "economy": "Propone un modelo socioeconómico sostenible con responsabilidad fiscal: apoyo al emprendimiento y la innovación, pero con un Estado activo que combata la corrupción y garantice programas sociales para reducir la desigualdad.",
+        "economy": "Propone un modelo socioeconómico sostenible con responsibility fiscal: apoyo al emprendimiento y la innovación, pero con un Estado activo que combata la corrupción y garantice programas sociales para reducir la desigualdad.",
         "environment": "Defiende la agenda de descarbonización y el desarrollo verde. Impulsa políticas para las energías renovables, el transporte limpio y la protección de la biodiversidad, continuando iniciativas como el Plan Nacional de Descarbonización."
       },
       "official_links": {
@@ -26,6 +26,87 @@
       },
       "accent_color": "#F7B500",
       "plan_url": "/plans/CAC.pdf"
+    },
+    {
+      "name": "Partido Liberación Nacional (PLN)",
+      "logo_url": "/assets/political-flags/liberacionnacional.jpg",
+      "presidential_candidate": {
+        "name": "Álvaro Ramos Chaves",
+        "first_vice_president": "Karen Segura Fernández",
+        "second_vice_president": "Xinia María Chaves Quirós"
+      },
+      "ideology": "Socialdemocracia (centro)",
+      "values": [
+        "Solidaridad y justicia social",
+        "Desarrollo económico con rostro humano",
+        "Institucionalidad democrática y paz social",
+        "Protección ambiental progresista"
+      ],
+      "stances": {
+        "education": "Propone continuar y mejorar el legado liberacionista en educación pública: más inversión en infraestructura escolar, capacitación docente y programas como comedores y becas, con énfasis en educación técnica, inglés y habilidades digitales.",
+        "economy": "Favorece una economía social de mercado: incentiva la empresa privada y la inversión (incluida la extranjera) para crecer, con un Estado fuerte que redistribuya mediante programas sociales. Prioriza inversión en tecnología, energías limpias y turismo.",
+        "environment": "Integra la tradición verde de Costa Rica a su plan de gobierno. Impulsa la meta de carbono neutralidad, incentivos a vehículos eléctricos, protección de parques nacionales y pagos por servicios ambientales, junto con adaptación al cambio climático."
+      },
+      "official_links": {
+        "website": "https://www.plncr.org",
+        "facebook": "https://www.facebook.com/partidoliberacionnacional"
+      },
+      "accent_color": "#00693E",
+      "plan_url": "/plans/PLN.pdf"
+    },
+    {
+      "name": "Partido Frente Amplio (FA)",
+      "logo_url": "/assets/political-flags/frenteamplio.webp",
+      "presidential_candidate": {
+        "name": "Ariel Robles Barrantes",
+        "first_vice_president": "Margarita Salas Guzmán",
+        "second_vice_president": "Guillermo Arroyo Muñoz"
+      },
+      "ideology": "Socialismo democrático progresista",
+      "values": [
+        "Justicia social e igualdad",
+        "Derechos humanos y solidaridad con grupos vulnerables",
+        "Ecologismo y desarrollo sostenible",
+        "Participación popular y ética en la política"
+      ],
+      "stances": {
+        "education": "Propone fortalecer y expandir la educación pública gratuita y de calidad a todos los niveles, con énfasis en equidad. Defiende un mayor presupuesto educativo, becas para estudiantes de bajos recursos y una educación inclusiva con perspectiva de género y derechos humanos.",
+        "economy": "Plantea un modelo económico solidario y redistributivo. Incluye aumentar impuestos a grandes empresas y fortunas para financiar programas sociales, fortalecer empresas públicas estratégicas y apoyar cooperativas y economía social, oponiéndose a privatizaciones.",
+        "environment": "Defiende con firmeza la protección ambiental y la lucha contra el cambio climático. Se opone a la explotación petrolera y a la minería a cielo abierto, promueve energías renovables, movilidad eléctrica y derechos de la naturaleza, junto con el respeto a pueblos indígenas."
+      },
+      "official_links": {
+        "website": "https://www.frenteamplio.org",
+        "facebook": "https://www.facebook.com/frenteamplioCRICA"
+      },
+      "accent_color": "#F5C800",
+      "plan_url": "/plans/FA.pdf"
+    },
+    {
+      "name": "Partido Avanza",
+      "logo_url": "/assets/political-flags/avanza.webp",
+      "presidential_candidate": {
+        "name": "José Miguel Aguilar Berrocal",
+        "first_vice_president": "Evita Arguedas Maklouf",
+        "second_vice_president": "Marcela Ortiz Bonilla"
+      },
+      "ideology": "Liberalismo clásico (libre mercado)",
+      "values": [
+        "Libertad económica y emprendimiento",
+        "Estado pequeño y eficiente",
+        "Responsabilidad individual e innovación",
+        "Seguridad ciudadana desde un enfoque liberal"
+      ],
+      "stances": {
+        "education": "Aboga por mejorar la educación mediante competencia y opciones: incentivos a la excelencia en escuelas públicas, alianzas público-privadas y libertad de elección educativa. Plantea modernizar la educación con énfasis en tecnología y habilidades emprendedoras.",
+        "economy": "Promueve un mercado libre con mínima intervención estatal. Propone reducir impuestos y trámites para facilitar los negocios, atraer inversión privada y generar empleo, bajo la premisa de que la prosperidad llega al reducir el tamaño del Estado y empoderar al sector productivo.",
+        "environment": "Plantea abordar lo ambiental mediante innovación y mercado: incentivos a empresas verdes y tecnologías limpias, evitando regulaciones excesivas. Favorece soluciones privadas como créditos de carbono y energías renovables competitivas para equilibrar crecimiento económico y sostenibilidad."
+      },
+      "official_links": {
+        "website": "https://www.avanzacr.net",
+        "facebook": "https://www.facebook.com/PartidoAvanzaCR"
+      },
+      "accent_color": "#0074A8",
+      "plan_url": "/plans/PA.pdf"
     },
     {
       "name": "Partido Alianza Costa Rica Primero (CR1)",
@@ -80,33 +161,6 @@
       },
       "accent_color": "#0057B8",
       "plan_url": "/plans/ACRM.pdf"
-    },
-    {
-      "name": "Partido Avanza",
-      "logo_url": "/assets/political-flags/avanza.webp",
-      "presidential_candidate": {
-        "name": "José Miguel Aguilar Berrocal",
-        "first_vice_president": "Evita Arguedas Maklouf",
-        "second_vice_president": "Marcela Ortiz Bonilla"
-      },
-      "ideology": "Liberalismo clásico (libre mercado)",
-      "values": [
-        "Libertad económica y emprendimiento",
-        "Estado pequeño y eficiente",
-        "Responsabilidad individual e innovación",
-        "Seguridad ciudadana desde un enfoque liberal"
-      ],
-      "stances": {
-        "education": "Aboga por mejorar la educación mediante competencia y opciones: incentivos a la excelencia en escuelas públicas, alianzas público-privadas y libertad de elección educativa. Plantea modernizar la educación con énfasis en tecnología y habilidades emprendedoras.",
-        "economy": "Promueve un mercado libre con mínima intervención estatal. Propone reducir impuestos y trámites para facilitar los negocios, atraer inversión privada y generar empleo, bajo la premisa de que la prosperidad llega al reducir el tamaño del Estado y empoderar al sector productivo.",
-        "environment": "Plantea abordar lo ambiental mediante innovación y mercado: incentivos a empresas verdes y tecnologías limpias, evitando regulaciones excesivas. Favorece soluciones privadas como créditos de carbono y energías renovables competitivas para equilibrar crecimiento económico y sostenibilidad."
-      },
-      "official_links": {
-        "website": "https://www.avanzacr.net",
-        "facebook": "https://www.facebook.com/PartidoAvanzaCR"
-      },
-      "accent_color": "#0074A8",
-      "plan_url": "/plans/PA.pdf"
     },
     {
       "name": "Partido Centro Democrático y Social (CDS)",
@@ -216,33 +270,6 @@
       "plan_url": "/plans/PEL.pdf"
     },
     {
-      "name": "Partido Frente Amplio (FA)",
-      "logo_url": "/assets/political-flags/frenteamplio.webp",
-      "presidential_candidate": {
-        "name": "Ariel Robles Barrantes",
-        "first_vice_president": "Margarita Salas Guzmán",
-        "second_vice_president": "Guillermo Arroyo Muñoz"
-      },
-      "ideology": "Socialismo democrático progresista",
-      "values": [
-        "Justicia social e igualdad",
-        "Derechos humanos y solidaridad con grupos vulnerables",
-        "Ecologismo y desarrollo sostenible",
-        "Participación popular y ética en la política"
-      ],
-      "stances": {
-        "education": "Propone fortalecer y expandir la educación pública gratuita y de calidad a todos los niveles, con énfasis en equidad. Defiende un mayor presupuesto educativo, becas para estudiantes de bajos recursos y una educación inclusiva con perspectiva de género y derechos humanos.",
-        "economy": "Plantea un modelo económico solidario y redistributivo. Incluye aumentar impuestos a grandes empresas y fortunas para financiar programas sociales, fortalecer empresas públicas estratégicas y apoyar cooperativas y economía social, oponiéndose a privatizaciones.",
-        "environment": "Defiende con firmeza la protección ambiental y la lucha contra el cambio climático. Se opone a la explotación petrolera y a la minería a cielo abierto, promueve energías renovables, movilidad eléctrica y derechos de la naturaleza, junto con el respeto a pueblos indígenas."
-      },
-      "official_links": {
-        "website": "https://www.frenteamplio.org",
-        "facebook": "https://www.facebook.com/frenteamplioCRICA"
-      },
-      "accent_color": "#F5C800",
-      "plan_url": "/plans/FA.pdf"
-    },
-    {
       "name": "Partido Integración Nacional (PIN)",
       "logo_url": "/assets/political-flags/integracionnacional.webp",
       "presidential_candidate": {
@@ -293,33 +320,6 @@
       },
       "accent_color": "#B22222",
       "plan_url": "/plans/PJSC.pdf"
-    },
-    {
-      "name": "Partido Liberación Nacional (PLN)",
-      "logo_url": "/assets/political-flags/liberacionnacional.jpg",
-      "presidential_candidate": {
-        "name": "Álvaro Ramos Chaves",
-        "first_vice_president": "Karen Segura Fernández",
-        "second_vice_president": "Xinia María Chaves Quirós"
-      },
-      "ideology": "Socialdemocracia (centro)",
-      "values": [
-        "Solidaridad y justicia social",
-        "Desarrollo económico con rostro humano",
-        "Institucionalidad democrática y paz social",
-        "Protección ambiental progresista"
-      ],
-      "stances": {
-        "education": "Propone continuar y mejorar el legado liberacionista en educación pública: más inversión en infraestructura escolar, capacitación docente y programas como comedores y becas, con énfasis en educación técnica, inglés y habilidades digitales.",
-        "economy": "Favorece una economía social de mercado: incentiva la empresa privada y la inversión (incluida la extranjera) para crecer, con un Estado fuerte que redistribuya mediante programas sociales. Prioriza inversión en tecnología, energías limpias y turismo.",
-        "environment": "Integra la tradición verde de Costa Rica a su plan de gobierno. Impulsa la meta de carbono neutralidad, incentivos a vehículos eléctricos, protección de parques nacionales y pagos por servicios ambientales, junto con adaptación al cambio climático."
-      },
-      "official_links": {
-        "website": "https://www.plncr.org",
-        "facebook": "https://www.facebook.com/partidoliberacionnacional"
-      },
-      "accent_color": "#00693E",
-      "plan_url": "/plans/PLN.pdf"
     },
     {
       "name": "Partido Liberal Progresista (PLP)",
@@ -472,7 +472,7 @@
       ],
       "stances": {
         "education": "Defiende la educación pública de calidad como igualador social. Impulsa bilingüismo, competencias digitales y refuerzo de ética y civismo, con participación de iglesias y ONG en programas de apoyo estudiantil.",
-        "economy": "Cree en la economía social de mercado: iniciativa privada con responsabilidad social. Busca bajar la deuda pública con eficiencia estatal, reducir cargas a pymes, y fomentar asociaciones público-privadas transparentes en infraestructura.",
+        "economy": "Cree en la economía social de mercado: iniciativa privada con responsibility social. Busca bajar la deuda pública con eficiencia estatal, reducir cargas a pymes, y fomentar asociaciones público-privadas transparentes en infraestructura.",
         "environment": "Ve la protección ambiental como un deber hacia la creación y las futuras generaciones. Se compromete con reforestación, transporte limpio y economía circular, apoyando a sectores productivos en una transición gradual a prácticas sostenibles."
       },
       "official_links": {
@@ -557,12 +557,47 @@
         "icon": "TrendingIcon"
       },
       {
+        "id": "state-enterprises",
+        "text": "¿El Estado debe mantener y fortalecer empresas públicas y servicios esenciales, aunque eso limite la privatización?",
+        "axis": {
+          "econ": -0.8,
+          "social": -0.1
+        },
+        "icon": "ScaleIcon"
+      },
+      {
         "id": "dereg",
         "text": "¿Se deberían reducir trámites e impuestos para facilitar emprender y generar empleo?",
         "axis": {
           "econ": 1
         },
         "icon": "RocketIcon"
+      },
+      {
+        "id": "state-size",
+        "text": "¿Es prioritario reducir el tamaño del Estado y el gasto público para mejorar la competitividad?",
+        "axis": {
+          "econ": 0.8
+        },
+        "icon": "RocketIcon"
+      },
+      {
+        "id": "ppp-infrastructure",
+        "text": "¿Las alianzas público-privadas deberían ampliarse para acelerar infraestructura y servicios?",
+        "axis": {
+          "econ": 0.6,
+          "social": 0.1
+        },
+        "icon": "TrendingIcon"
+      },
+      {
+        "id": "anti-corruption",
+        "text": "¿Se debe endurecer la lucha anticorrupción con auditorías abiertas y sanciones más severas?",
+        "axis": {
+          "social": 0.2,
+          "econ": -0.2
+        },
+        "icon": "ScaleIcon"
       },
       {
         "id": "public-edu",
@@ -574,12 +609,72 @@
         "icon": "BookIcon"
       },
       {
+        "id": "health-public",
+        "text": "¿Se debe priorizar la inversión en salud pública y atención primaria sobre opciones privadas?",
+        "axis": {
+          "econ": -0.6,
+          "social": -0.4
+        },
+        "icon": "PeopleIcon"
+      },
+      {
         "id": "security",
         "text": "¿Preferís un enfoque de seguridad con medidas más estrictas y mano firme?",
         "axis": {
           "social": 0.9
         },
         "icon": "ShieldIcon"
+      },
+      {
+        "id": "rehabilitation",
+        "text": "¿La seguridad debe priorizar prevención y rehabilitación por encima de castigos más duros?",
+        "axis": {
+          "social": -0.7
+        },
+        "icon": "PeopleIcon"
+      },
+      {
+        "id": "family-values",
+        "text": "¿Las políticas públicas deberían priorizar la protección de la familia y valores tradicionales, aunque limite cambios culturales rápidos?",
+        "axis": {
+          "social": 0.8
+        },
+        "icon": "BookIcon"
+      },
+      {
+        "id": "public-housing",
+        "text": "¿El Estado debería aumentar programas de vivienda social aunque implique más gasto público?",
+        "axis": {
+          "econ": -0.7,
+          "social": -0.2
+        },
+        "icon": "PeopleIcon"
+      },
+      {
+        "id": "labor-rights",
+        "text": "¿Debe fortalecerse la negociación colectiva y los derechos laborales, aunque aumente costos para las empresas?",
+        "axis": {
+          "econ": -0.8,
+          "social": -0.2
+        },
+        "icon": "PeopleIcon"
+      },
+      {
+        "id": "sovereignty",
+        "text": "¿Las decisiones nacionales deben priorizar la soberanía e intereses locales frente a presiones externas?",
+        "axis": {
+          "social": 0.6,
+          "econ": 0.2
+        },
+        "icon": "ShieldIcon"
+      },
+      {
+        "id": "market-innovation",
+        "text": "¿La innovación privada y la competencia deben ser el motor principal del desarrollo económico?",
+        "axis": {
+          "econ": 0.7
+        },
+        "icon": "RocketIcon"
       },
       {
         "id": "civil-liberties",
@@ -710,7 +805,7 @@
       },
       {
         "id": "estabilidad-fiscal",
-        "text": "Los planes hablan de responsabilidad fiscal sin sacrificar inversión social; ¿apoyás ese equilibrio?",
+        "text": "Los planes hablan de responsibility fiscal sin sacrificar inversión social; ¿apoyás ese equilibrio?",
         "axis": { "econ": 0.4, "social": 0.1 },
         "icon": "ScaleIcon"
       },

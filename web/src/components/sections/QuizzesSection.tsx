@@ -80,7 +80,7 @@ export function QuizzesSection({ parties, quickQuestions, deepQuestions, deepDes
               badgeText="Quiz rápido"
               time="2–3 min"
               description="Ideal si querés una recomendación rápida basada en preguntas generales."
-              features={[`${quickQuestions.length} preguntas`, "Resultados inmediatos"]}
+              features={["10 preguntas aleatorias", "Resultados inmediatos"]}
               buttonText="Empezar quiz rápido"
               isSelected={selected === "quick"}
               onClick={() => selectQuiz("quick")}
@@ -126,6 +126,7 @@ export function QuizzesSection({ parties, quickQuestions, deepQuestions, deepDes
           key={selected}
           parties={parties}
           questions={selected === "quick" ? quickQuestions : deepQuestions}
+          maxQuestions={selected === "quick" ? 10 : undefined}
           sectionId={quizRunSectionId}
           onRepeatToPicker={resetSelection}
         />

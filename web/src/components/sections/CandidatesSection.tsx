@@ -192,15 +192,15 @@ function CandidateCard({ party, index }: CandidateCardProps) {
         transition={{ duration: 0.6, ease: "easeOut" }}
       ></motion.div>
       
-      <div className="flex h-full flex-1 flex-col items-center px-7 py-8 text-center">
+      <div className="flex h-full min-h-[520px] flex-1 flex-col items-center px-7 py-8 text-center">
         {/* Top Accent Line */}
         <motion.div 
-          className="mb-4 h-1 w-24 rounded-full bg-[var(--accent-color)] shadow-[0_0_12px_var(--accent-color)]"
+          className="mb-4 h-1 w-24 shrink-0 rounded-full bg-[var(--accent-color)] shadow-[0_0_12px_var(--accent-color)]"
           initial={{ width: 96, opacity: 0.5 }}
           whileHover={{ width: 128, opacity: 1 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         ></motion.div>
-        <div className="relative mb-6">
+        <div className="relative mb-6 shrink-0">
           <motion.div 
             className="absolute -inset-2 rounded-full bg-[var(--accent-color)] blur-lg"
             initial={{ opacity: 0 }}
@@ -229,27 +229,27 @@ function CandidateCard({ party, index }: CandidateCardProps) {
         </div>
 
         {/* Name & Party */}
-        <div className="mb-4 space-y-2">
-          <h3 className="text-2xl font-black leading-[1.1] tracking-tight text-white lg:text-3xl">
+        <div className="mb-4 shrink-0 space-y-2">
+          <h3 className="line-clamp-2 min-h-[2.4rem] text-2xl font-black leading-[1.2] tracking-tight text-white lg:text-3xl">
             {candidateName}
           </h3>
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--accent-color)] opacity-90">
+          <p className="line-clamp-1 text-xs font-bold uppercase tracking-[0.2em] text-[var(--accent-color)] opacity-90">
             {party.name}
           </p>
         </div>
 
         {/* Ideology Badge */}
-        <div className="mb-6">
+        <div className="mb-6 flex h-[30px] shrink-0 items-center justify-center">
           {party.ideology ? (
             <div className="inline-flex items-center gap-2 rounded-full bg-black/40 px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-white ring-1 ring-white/10">
               <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent-color)] shadow-[0_0_8px_var(--accent-color)]" />
               {party.ideology.split("(")[0].trim()}
             </div>
-          ) : null}
+          ) : <div className="h-[30px]" />}
         </div>
 
         {/* Tags Pills */}
-        <div className="mb-8 flex flex-wrap items-center justify-center gap-2">
+        <div className="mb-8 flex min-h-[32px] shrink-0 flex-wrap items-center justify-center gap-2">
           {tags.map((tag, tagIndex) => (
             <motion.span
               key={tag.label}
@@ -276,47 +276,83 @@ function CandidateCard({ party, index }: CandidateCardProps) {
               transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
               className="w-full overflow-hidden"
             >
-              <div className="mb-6 space-y-6 border-t border-white/10 pt-6 text-left">
-                {party.values && party.values.length > 0 && (
-                  <div>
-                    <h4 className="mb-3 text-[10px] font-black uppercase tracking-widest text-white/50">Valores Clave</h4>
-                    <ul className="grid grid-cols-1 gap-2 text-xs font-medium text-white/90">
-                      {party.values.slice(0, 3).map((value) => (
-                        <li key={value} className="flex items-center gap-2">
-                          <span className="h-1 w-1 rounded-full bg-[var(--accent-color)]" />
-                          {value}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-                
-                {(candidate?.first_vice_president || candidate?.second_vice_president) && (
-                  <div>
-                    <h4 className="mb-2 text-[10px] font-black uppercase tracking-widest text-white/50">Fórmula Presidencial</h4>
-                    <div className="space-y-1 text-xs text-white/90">
-                      {candidate.first_vice_president && (
-                        <p><span className="font-bold text-white/60">1er:</span> {candidate.first_vice_president}</p>
-                      )}
-                      {candidate.second_vice_president && (
-                        <p><span className="font-bold text-white/60">2do:</span> {candidate.second_vice_president}</p>
-                      )}
+              <div className="mb-6 flex min-h-[280px] flex-col justify-between space-y-6 border-t border-white/10 pt-6 text-left">
+                {/* Content Section */}
+                <div className="flex-1 space-y-6">
+                  {party.values && party.values.length > 0 && (
+                    <div>
+                      <h4 className="mb-3 text-[10px] font-black uppercase tracking-widest text-white/50">Valores Clave</h4>
+                      <ul className="grid grid-cols-1 gap-2 text-xs font-medium text-white/90">
+                        {party.values.slice(0, 3).map((value) => (
+                          <li key={value} className="flex items-center gap-2">
+                            <span className="h-1 w-1 rounded-full bg-[var(--accent-color)]" />
+                            {value}
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                  </div>
-                )}
+                  )}
+                  
+                  {(candidate?.first_vice_president || candidate?.second_vice_president) && (
+                    <div>
+                      <h4 className="mb-2 text-[10px] font-black uppercase tracking-widest text-white/50">Fórmula Presidencial</h4>
+                      <div className="space-y-1 text-xs text-white/90">
+                        {candidate.first_vice_president && (
+                          <p><span className="font-bold text-white/60">1er:</span> {candidate.first_vice_president}</p>
+                        )}
+                        {candidate.second_vice_president && (
+                          <p><span className="font-bold text-white/60">2do:</span> {candidate.second_vice_president}</p>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
 
+                {/* Button Section - Always at bottom */}
                 {party.plan_url && (
                   <div className="pt-2">
-                    <a
+                    <motion.a
                       href={party.plan_url}
-                      download
-                      className="flex w-full items-center justify-center gap-2 rounded-xl bg-[var(--accent-color)] py-3 text-xs font-black uppercase tracking-widest text-white transition-all hover:brightness-110 hover:shadow-[0_8px_20px_-5px_var(--accent-color)]"
-                      rel="noopener noreferrer"
+                      download={`${party.name.replace(/\s+/g, "_")}_Plan_de_Gobierno.pdf`}
                       target="_blank"
+                      rel="noopener noreferrer"
+                      title="Descargar Plan de Gobierno (PDF)"
+                      className="relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-[var(--accent-color)] py-3 text-xs font-black uppercase tracking-widest text-white shadow-md transition-shadow duration-300"
                       onClick={(e) => e.stopPropagation()}
+                      onPointerDown={(e) => e.stopPropagation()}
+                      whileHover={{ 
+                        scale: 1.02,
+                        boxShadow: "0 8px 24px -4px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1)",
+                        y: -2
+                      }}
+                      whileTap={{ scale: 0.98, y: 0 }}
+                      transition={{
+                        duration: 0.2,
+                        ease: "easeOut"
+                      }}
                     >
-                      <Download className="h-4 w-4" /> Plan de Gobierno
-                    </a>
+                      <motion.span
+                        className="pointer-events-none absolute inset-0 bg-white/0 rounded-xl"
+                        whileHover={{ 
+                          backgroundColor: "rgba(255, 255, 255, 0.1)"
+                        }}
+                        transition={{ duration: 0.3 }}
+                      />
+                      <motion.span
+                        className="relative z-10"
+                        whileHover={{ 
+                          y: [0, -2, 0],
+                        }}
+                        transition={{ 
+                          duration: 0.6, 
+                          repeat: Infinity,
+                          ease: "easeInOut" 
+                        }}
+                      >
+                        <Download className="h-4 w-4" />
+                      </motion.span>
+                      <span className="relative z-10">Plan de Gobierno</span>
+                    </motion.a>
                   </div>
                 )}
               </div>

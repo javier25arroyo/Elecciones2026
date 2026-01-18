@@ -3,7 +3,6 @@ import dynamic from "next/dynamic";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { CandidatesSection } from "@/components/sections/CandidatesSection";
 
-// Lazy load componentes pesados que no están en el viewport inicial
 const TimelineSection = dynamic(
   () => import("@/components/sections/TimelineSection").then(mod => ({ default: mod.TimelineSection })),
   { 

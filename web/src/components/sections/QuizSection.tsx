@@ -99,6 +99,7 @@ const defaultFeaturePills: FeaturePill[] = [
 interface QuizSectionProps {
   parties: Party[];
   questions?: QuizQuestion[];
+  maxQuestions?: number;
   sectionId?: string;
   introTitle?: React.ReactNode;
   introDescription?: React.ReactNode;
@@ -131,6 +132,7 @@ type StartQuizDetail = {
 export function QuizSection({
   parties,
   questions,
+  maxQuestions,
   sectionId = "quiz",
   introTitle,
   introDescription,
@@ -149,6 +151,7 @@ export function QuizSection({
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const [answers, setAnswers] = React.useState<Answer[]>([]);
   const [results, setResults] = React.useState<PartyResult[]>([]);
+  const [shuffledQuestions, setShuffledQuestions] = React.useState<QuizQuestion[]>(quizQuestions);
   const [userVector, setUserVector] = React.useState<UserVector>({
     econ: 0,
     social: 0,
@@ -156,10 +159,17 @@ export function QuizSection({
   });
 
   const handleStart = React.useCallback(() => {
+    setShuffledQuestions(pickQuestionSubset(quizQuestions, maxQuestions));
     setState("questions");
     setCurrentIndex(0);
     setAnswers([]);
-  }, []);
+  }, [maxQuestions, quizQuestions]);
+
+  React.useEffect(() => {
+    if (state === "intro") {
+      setShuffledQuestions(quizQuestions);
+    }
+  }, [quizQuestions, state]);
 
   React.useEffect(() => {
     const onStartQuiz = (event: Event) => {
@@ -179,7 +189,7 @@ export function QuizSection({
     const newAnswers = [...answers, answer];
     setAnswers(newAnswers);
 
-    if (currentIndex < quizQuestions.length - 1) {
+    if (currentIndex < shuffledQuestions.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
       calculateResults(newAnswers);
@@ -190,7 +200,7 @@ export function QuizSection({
   const calculateResults = (finalAnswers: Answer[]) => {
     const newUserVector: UserVector = { econ: 0, social: 0, env: 0 };
 
-    quizQuestions.forEach((q, idx) => {
+    shuffledQuestions.forEach((q, idx) => {
       const answer = finalAnswers[idx];
       const axis = q.axis || {};
       newUserVector.econ += (axis.econ || 0) * answer;
@@ -245,7 +255,7 @@ export function QuizSection({
 
         {state === "questions" && (
           <QuizQuestions
-            questions={quizQuestions}
+            questions={shuffledQuestions}
             currentIndex={currentIndex}
             onAnswer={handleAnswer}
           />
@@ -352,13 +362,13 @@ function QuizQuestions({ questions, currentIndex, onAnswer }: any) {
         <Progress value={progress} className="h-2.5 bg-white/20" />
       </div>
 
-      <div className="relative min-h-112.5 overflow-hidden rounded-3xl bg-white p-8 shadow-2xl transition-all sm:p-12">
+      <div className="relative min-h-112.5 overflow-hidden rounded-3xl border border-white/15 bg-white/5 p-8 shadow-2xl backdrop-blur-xl transition-all sm:p-12">
         <div className="flex h-full flex-col items-center justify-between gap-8">
           <div className="text-center">
-            <div className="mb-6 flex justify-center text-primary">
+            <div className="mb-6 flex justify-center text-blue-300">
               {current.icon && getIconComponent(current.icon)}
             </div>
-            <h3 className="text-balance font-display text-2xl font-bold leading-tight text-slate-900 sm:text-3xl">
+            <h3 className="text-balance font-display text-2xl font-bold leading-tight text-white sm:text-3xl">
               {current.text}
             </h3>
           </div>
@@ -369,10 +379,10 @@ function QuizQuestions({ questions, currentIndex, onAnswer }: any) {
                 key={opt.value}
                 onClick={() => handleAnswerClick(opt.value as Answer)}
                 className={cn(
-                  "flex w-full items-center justify-center gap-4 rounded-2xl py-5 text-lg font-bold transition-all active:scale-95",
+                  "flex w-full items-center justify-center gap-4 rounded-2xl border border-white/10 py-5 text-lg font-bold transition-all active:scale-95",
                   selectedAnswer === opt.value
-                    ? `${opt.color} text-white shadow-lg ring-4 ring-white/20`
-                    : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                    ? `${opt.color} text-white shadow-lg ring-4 ring-white/20 border-white/30`
+                    : "bg-white/10 text-white/90 hover:bg-white/15"
                 )}
               >
                 {opt.icon}
@@ -476,6 +486,48 @@ function getIconComponent(iconName: string): React.ReactNode {
     Users: <Users className="h-14 w-14" />,
   };
   return iconMap[iconName] || <Vote className="h-14 w-14" />;
+}
+
+function shuffleArray<T>(items: T[]): T[] {
+  const array = [...items];
+  for (let i = array.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+function pickQuestionSubset(questions: QuizQuestion[], count?: number): QuizQuestion[] {
+  if (!count || count >= questions.length) {
+    return shuffleArray(questions);
+  }
+
+  const selected = new Map<string, QuizQuestion>();
+  const byAxis = (axis: "econ" | "social" | "env") =>
+    questions
+      .filter((q) => typeof q.axis?.[axis] === "number")
+      .sort(
+        (a, b) =>
+          Math.abs((b.axis?.[axis] as number) || 0) - Math.abs((a.axis?.[axis] as number) || 0)
+      );
+
+  const topEcon = byAxis("econ")[0];
+  const topSocial = byAxis("social")[0];
+  const topEnv = byAxis("env")[0];
+
+  [topEcon, topSocial, topEnv].forEach((q) => {
+    if (q && !selected.has(q.id)) selected.set(q.id, q);
+  });
+
+  const remaining = questions.filter((q) => !selected.has(q.id));
+  const shuffled = shuffleArray(remaining);
+
+  for (const q of shuffled) {
+    if (selected.size >= count) break;
+    selected.set(q.id, q);
+  }
+
+  return shuffleArray(Array.from(selected.values()));
 }
 
 function guessPartyVector(party: Party): { econ: number; social: number; env: number } {
