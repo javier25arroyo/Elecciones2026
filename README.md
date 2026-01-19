@@ -59,7 +59,7 @@ El proyecto prioriza **transparencia, accesibilidad y experiencia de usuario**, 
 <td width="50%">
 
 ### 🗳️ Exploración de Candidatos
-Perfiles completos de 19 partidos políticos con:
+Perfiles completos de 20 partidos políticos con:
 - Ideología y valores
 - Posturas en educación, economía y ambiente
 - Fórmula presidencial completa
@@ -69,7 +69,7 @@ Perfiles completos de 19 partidos políticos con:
 
 ### 🎯 Quiz Interactivo
 Descubre tu afinidad política:
-- 8 preguntas rápidas
+- 10 preguntas rápidas
 - Resultados al instante
 - Compartible en redes sociales
 
