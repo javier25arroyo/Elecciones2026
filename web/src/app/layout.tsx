@@ -1,6 +1,7 @@
 import { Inter, Poppins } from "next/font/google";
 import { Header, Footer } from "@/components/layout";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { SEO_CONFIG, generateWebsiteSchema } from "@/lib/seo.config";
 // import StyledComponentsRegistry from "./registry"; // Removed - not using Ant Design
 import "./globals.css";
 
@@ -36,87 +37,98 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
-        <title>Elecciones Costa Rica 2026 | Información Electoral</title>
+        <title>Elecciones Costa Rica 2026 | Información Electoral y Candidatos</title>
         <meta
           name="description"
-          content="Plataforma educativa sobre elecciones presidenciales Costa Rica 2026. Conoce candidatos, propuestas y participa informadamente."
+          content={SEO_CONFIG.descriptions.home}
         />
         <meta
           name="keywords"
-          content="elecciones, Costa Rica, 2026, candidatos, presidenciales, votación"
+          content={SEO_CONFIG.keywords.primary.concat(SEO_CONFIG.keywords.secondary).join(", ")}
         />
-        <meta property="og:title" content="Elecciones Costa Rica 2026 | Información Electoral" />
-        <meta
-          property="og:description"
-          content="Plataforma educativa e interactiva sobre las elecciones presidenciales de Costa Rica 2026. Conoce a los candidatos, sus propuestas y participa informadamente."
-        />
+        
+        {/* Charset and viewport */}
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Elecciones Costa Rica 2026 | Información Electoral y Candidatos" />
+        <meta property="og:description" content={SEO_CONFIG.descriptions.home} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={normalizedSiteUrl} />
         <meta property="og:image" content={previewImage} />
-        <meta property="og:image:width" content="1633" />
-        <meta property="og:image:height" content="980" />
-        <meta property="og:image:alt" content="Bandera de Costa Rica" />
+        <meta property="og:image:width" content={SEO_CONFIG.socialImage.width} />
+        <meta property="og:image:height" content={SEO_CONFIG.socialImage.height} />
+        <meta property="og:image:alt" content={SEO_CONFIG.socialImage.alt} />
+        <meta property="og:locale" content={SEO_CONFIG.locale} />
+        
+        {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Elecciones Costa Rica 2026 | Información Electoral" />
-        <meta
-          name="twitter:description"
-          content="Plataforma educativa e interactiva sobre las elecciones presidenciales de Costa Rica 2026. Conoce a los candidatos, sus propuestas y participa informadamente."
-        />
+        <meta name="twitter:title" content="Elecciones Costa Rica 2026 | Información Electoral y Candidatos" />
+        <meta name="twitter:description" content={SEO_CONFIG.descriptions.home} />
         <meta name="twitter:image" content={previewImage} />
-        <meta name="twitter:image:alt" content="Bandera de Costa Rica" />
-        <meta name="robots" content="index, follow" />
+        <meta name="twitter:image:alt" content={SEO_CONFIG.socialImage.alt} />
+        <meta name="twitter:site" content="@elecciones2026" />
+        
+        {/* Robots and Indexing */}
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="googlebot" content="index, follow" />
+        <meta name="bingbot" content="index, follow" />
+        <meta name="revisit-after" content="7 days" />
+        <meta name="author" content={SEO_CONFIG.organization.name} />
+        <meta name="copyright" content={`© 2026 ${SEO_CONFIG.organization.name}`} />
+        
+        {/* Links */}
         <link rel="canonical" href={normalizedSiteUrl} />
         <link rel="icon" href={`${basePath}/assets/others/FlagCosta_Rica.ico`} />
         <link rel="manifest" href={`${basePath}/manifest.json`} />
+        <link rel="alternate" hrefLang="es-CR" href={normalizedSiteUrl} />
+        <link rel="alternate" hrefLang="es" href={normalizedSiteUrl} />
+        
+        {/* App Colors */}
         <meta name="theme-color" content="#002B7F" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="Elecciones CR 2026" />
         <link rel="apple-touch-icon" href={`${basePath}/assets/others/icon-192.png`} />
         
-        {/* Structured Data (JSON-LD) */}
+        {/* Structured Data (JSON-LD) - Website */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              "name": "Elecciones Costa Rica 2026",
-              "description": "Plataforma educativa e interactiva sobre las elecciones presidenciales de Costa Rica 2026",
-              "url": normalizedSiteUrl,
-              "inLanguage": "es-CR",
-              "publisher": {
-                "@type": "Organization",
-                "name": "Info Politic CR",
-                "url": normalizedSiteUrl,
-              },
-              "potentialAction": {
-                "@type": "SearchAction",
-                "target": {
-                  "@type": "EntryPoint",
-                  "urlTemplate": `${normalizedSiteUrl}/#candidatos?search={search_term_string}`
-                },
-                "query-input": "required name=search_term_string"
-              }
-            }),
+            __html: JSON.stringify(generateWebsiteSchema()),
           }}
         />
+        
+        {/* Structured Data (JSON-LD) - Organization */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              "name": "Info Politic CR",
+              "name": SEO_CONFIG.organization.name,
               "url": normalizedSiteUrl,
               "logo": `${normalizedSiteUrl}${basePath}/assets/others/flag-cr.jpg`,
-              "sameAs": [
-                "https://github.com/javier25arroyo"
-              ],
-              "description": "Proyecto educativo sin fines de lucro para informar sobre las elecciones presidenciales de Costa Rica 2026"
+              "sameAs": SEO_CONFIG.organization.sameAs,
+              "description": SEO_CONFIG.organization.description,
+              "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "CR",
+              },
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "contactType": "Customer Service",
+                "email": SEO_CONFIG.publisher.email,
+              },
             }),
           }}
         />
+        
+        {/* Preconnect for performance */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
       </head>
       <body className={`${inter.variable} ${poppins.variable} antialiased min-h-screen flex flex-col`}>
         <div id="scroll-sentinel" className="absolute top-0 left-0 w-full h-[10px] pointer-events-none opacity-0 z-[-1]" aria-hidden="true" />
