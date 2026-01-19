@@ -230,9 +230,12 @@ function CandidateCard({ party, index }: CandidateCardProps) {
 
         {/* Name & Party */}
         <div className="mb-4 shrink-0 space-y-2">
-          <h3 className="line-clamp-2 min-h-[2.4rem] text-2xl font-black leading-[1.2] tracking-tight text-white lg:text-3xl">
-            {candidateName}
-          </h3>
+          {/* Fixed height for 2 lines of text to ensure alignment */}
+          <div className="flex min-h-[4rem] items-center justify-center lg:min-h-[4.5rem]">
+            <h3 className="line-clamp-2 text-2xl font-black leading-[1.1] tracking-tight text-white lg:text-3xl">
+              {candidateName}
+            </h3>
+          </div>
           <p className="line-clamp-1 text-xs font-bold uppercase tracking-[0.2em] text-[var(--accent-color)] opacity-90">
             {party.name}
           </p>
@@ -249,7 +252,7 @@ function CandidateCard({ party, index }: CandidateCardProps) {
         </div>
 
         {/* Tags Pills */}
-        <div className="mb-8 flex min-h-[32px] shrink-0 flex-wrap items-center justify-center gap-2">
+        <div className="mb-8 flex h-[3.5rem] shrink-0 flex-wrap items-center justify-center gap-2 content-center">
           {tags.map((tag, tagIndex) => (
             <motion.span
               key={tag.label}
@@ -276,9 +279,9 @@ function CandidateCard({ party, index }: CandidateCardProps) {
               transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
               className="w-full overflow-hidden"
             >
-              <div className="mb-6 flex min-h-[280px] flex-col justify-between space-y-6 border-t border-white/10 pt-6 text-left">
+              <div className="mb-6 flex h-[350px] flex-col justify-between space-y-6 border-t border-white/10 pt-6 text-left">
                 {/* Content Section */}
-                <div className="flex-1 space-y-6">
+                <div className="flex-1 space-y-6 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
                   {party.values && party.values.length > 0 && (
                     <div>
                       <h4 className="mb-3 text-[10px] font-black uppercase tracking-widest text-white/50">Valores Clave</h4>
@@ -310,7 +313,7 @@ function CandidateCard({ party, index }: CandidateCardProps) {
 
                 {/* Button Section - Always at bottom */}
                 {party.plan_url && (
-                  <div className="pt-2">
+                  <div className="pt-2 px-1 pb-1">
                     <motion.a
                       href={party.plan_url}
                       download={`${party.name.replace(/\s+/g, "_")}_Plan_de_Gobierno.pdf`}

@@ -1,5 +1,7 @@
 import { Metadata } from "next";
-import { SEO_CONFIG, getMetaDescription, generateWebsiteSchema } from "@/lib/seo.config";
+import { SEO_CONFIG } from "@/lib/seo.config";
+import { getContent } from "@/lib/content";
+import { CandidatesSection } from "@/components/sections/CandidatesSection";
 
 export const metadata: Metadata = {
   title: "Candidatos Presidenciales Costa Rica 2026 | Información Completa",
@@ -23,7 +25,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function CandidatosPage() {
+export default async function CandidatosPage() {
+  const content = await getContent();
+
   return (
     <>
       <script
@@ -37,23 +41,18 @@ export default function CandidatosPage() {
             "url": `${SEO_CONFIG.siteUrl}/candidatos`,
             "mainEntity": {
               "@type": "ItemList",
-              "name": "Candidatos Presidenciales 2026",
+              "itemListElement": content.parties.map((party, index) => ({
+                "@type": "ListItem",
+                "position": index + 1,
+                "name": party.presidential_candidate?.name || party.name,
+                "description": `Candidato del partido ${party.name}. ${party.ideology || ''}`,
+              })),
             },
           }),
         }}
       />
-      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-        <div className="container mx-auto px-4 py-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Candidatos Presidenciales Costa Rica 2026
-          </h1>
-          <p className="text-xl text-gray-600 mb-8">
-            Conoce a todos los candidatos presidenciales, sus propuestas y trayectoria política.
-          </p>
-          <p className="text-gray-600">
-            Esta sección se completa automáticamente desde la página principal con toda la información de candidatos.
-          </p>
-        </div>
+      <div className="pt-20">
+        <CandidatesSection parties={content.parties} />
       </div>
     </>
   );
