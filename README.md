@@ -9,19 +9,46 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 [![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
 
- [Ver Demo](#) • [Reportar Bug](../../issues) • [Solicitar Feature](../../issues)
+<br />
+
+<a href="#-descripción"><img alt="Documento" src="https://img.shields.io/badge/Ver%20proyecto-1E88E5?style=for-the-badge&logo=readthedocs&logoColor=white" /></a>
+<a href="../../issues"><img alt="Issues" src="https://img.shields.io/badge/Reportar%20Bug-FF5252?style=for-the-badge&logo=bugsnag&logoColor=white" /></a>
+<a href="../../issues"><img alt="Feature" src="https://img.shields.io/badge/Solicitar%20Feature-6D4CFF?style=for-the-badge&logo=githubsponsors&logoColor=white" /></a>
 
 </div>
 
 ---
 
+## 🧭 Tabla de contenidos
+
+- [📖 Descripción](#-descripción)
+- [✨ Características](#-características)
+- [🚀 Tech Stack](#-tech-stack)
+- [💻 Instalación y Uso](#-instalación-y-uso)
+- [🌐 Deploy en GitHub Pages](#-deploy-en-github-pages)
+- [🤝 Contribuir](#-contribuir)
+- [📝 Roadmap](#-roadmap)
+- [📄 Licencia](#-licencia)
+
+---
+
 ## 📖 Descripción
 
-**Info Politic 2026** es una plataforma web interactiva diseñada para informar y educar a los ciudadanos costarricenses sobre las elecciones presidenciales de 2026. La aplicación proporciona una experiencia completa para explorar candidatos políticos, realizar quizzes interactivos para determinar afinidades políticas, y acceder a información cívica esencial sobre el proceso electoral.
+**Info Politic 2026** es una guía cívica digital enfocada en las elecciones presidenciales de Costa Rica 2026. Su objetivo es reunir en un solo lugar información clara y verificable para que cualquier persona pueda comprender el panorama político y participar con criterio.
 
-Desarrollada con tecnologías modernas, la plataforma combina datos actualizados sobre 19 partidos políticos registrados, información sobre requisitos para votar, fechas clave del calendario electoral, y herramientas interactivas que facilitan la participación informada en la democracia costarricense.
+La plataforma permite **explorar perfiles de partidos y candidaturas**, conocer sus posturas en temas clave, y comparar visiones de país. Además, incluye **quizzes interactivos** que ayudan a identificar afinidades políticas, junto con un **resumen práctico del proceso electoral** (requisitos para votar, fechas importantes y pasos para emitir el voto).
 
-El proyecto se alinea con los principios de transparencia y accesibilidad, ofreciendo una interfaz moderna y responsive que funciona en todos los dispositivos, desde móviles hasta desktops.
+El proyecto prioriza **transparencia, accesibilidad y experiencia de usuario**, con una interfaz moderna y responsiva que funciona bien en móviles y escritorio. Está pensado como un recurso educativo, neutral y fácil de navegar para impulsar una participación informada.
+
+---
+
+## 🧩 Qué encontrarás
+
+- ✅ Perfiles de partidos y candidaturas con posturas clave
+- ✅ Quizzes para conocer afinidad política
+- ✅ Calendario y requisitos para votar
+- ✅ Diseño accesible y enfoque mobile-first
+- ✅ Experiencia rápida y visual
 
 ---
 
