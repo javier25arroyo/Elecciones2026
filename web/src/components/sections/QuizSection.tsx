@@ -393,7 +393,6 @@ function QuizQuestions({ questions, currentIndex, onAnswer }: any) {
                     ? "bg-blue-500/30 text-blue-200 shadow-lg shadow-blue-500/20 scale-105"
                     : "bg-white/10 text-white/80 hover:bg-white/20 hover:text-white hover:scale-105 hover:shadow-md"
                 )}
-                aria-label="Mostrar ejemplo"
                 aria-pressed={showExample}
               >
                 <Info className={cn("h-4 w-4 transition-all duration-500", showExample && "rotate-12")} />
