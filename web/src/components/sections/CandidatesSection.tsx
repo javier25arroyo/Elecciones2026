@@ -70,7 +70,11 @@ export function CandidatesSection({ parties }: CandidatesSectionProps) {
         </div>
 
         {/* Filters */}
-        <div className="mb-16 flex flex-col gap-6 rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-md lg:flex-row lg:items-center lg:justify-between lg:p-8" aria-label="Filtrado de candidatos">
+        <div
+          className="mb-16 flex flex-col gap-6 rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-md lg:flex-row lg:items-center lg:justify-between lg:p-8"
+          role="region"
+          aria-label="Filtrado de candidatos"
+        >
           <div className="flex-grow">
             <input
               type="search"
