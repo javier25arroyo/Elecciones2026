@@ -21,10 +21,12 @@ export function AccordionItem({
   return (
     <div className="border-b border-white/10 last-of-type:border-b-0">
       <button
+        type="button"
         onClick={() => onToggle?.(id)}
-        className="flex w-full items-center justify-between py-5 px-6 text-left"
+        className="flex w-full items-center justify-between py-5 px-6 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
         aria-expanded={isOpen}
         aria-controls={`accordion-content-${id}`}
+        id={`accordion-trigger-${id}`}
       >
         <span className="font-semibold text-white">{title}</span>
         <svg
@@ -55,6 +57,8 @@ export function AccordionItem({
             className="overflow-hidden"
             id={`accordion-content-${id}`}
             aria-hidden={!isOpen}
+            role="region"
+            aria-labelledby={`accordion-trigger-${id}`}
           >
             <div className="px-6 pb-6 text-white/80">{children}</div>
           </motion.div>

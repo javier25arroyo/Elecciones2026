@@ -29,7 +29,7 @@ export function HeroSection() {
   // 1 de febrero 2026 a las 00:00 en Costa Rica (UTC-06:00) => 06:00Z
 
   return (
-    <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-b from-primary via-[#0b2b6b] to-slate-900 pt-[70px] text-center">
+    <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-b from-primary via-[#0b2b6b] to-slate-900 pt-[70px] text-center content-visibility-auto">
       {/* Animated background pattern */}
       <div
         className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,color-mix(in_srgb,var(--color-secondary)_15%,transparent)_0%,transparent_50%),radial-gradient(circle_at_80%_20%,color-mix(in_srgb,white_8%,transparent)_0%,transparent_40%)]"

@@ -255,4 +255,13 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+
+  .animate-float,
+  .animate-fade-in,
+  .animate-fade-in-up,
+  .animate-celebrate,
+  .animate-in,
+  [class*="animate-"] {
+    animation: none !important;
+  }
 }

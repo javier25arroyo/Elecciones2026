@@ -83,7 +83,7 @@ export function EducationSection() {
   const ctaRef = useScrollReveal<HTMLDivElement>();
 
   return (
-    <section id="educacion" className="relative bg-gradient-to-b from-slate-900 via-[#0b2b6b] to-slate-900 py-24 sm:py-32 lg:py-40">
+    <section id="educacion" className="relative bg-gradient-to-b from-slate-900 via-[#0b2b6b] to-slate-900 py-24 sm:py-32 lg:py-40 content-visibility-auto">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_30%,rgba(0,47,108,0.22),transparent_50%),radial-gradient(circle_at_85%_70%,rgba(206,17,38,0.18),transparent_55%)]" />
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
       <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent via-slate-900/30 to-slate-900" />
@@ -121,7 +121,7 @@ export function EducationSection() {
               rel="noopener noreferrer"
               className="inline-block rounded-lg bg-gradient-cta px-8 py-3 font-semibold text-white shadow-lg transition-transform hover:scale-105"
             >
-              Ir al TSE ↗
+              Ir al TSE 
             </a>
           </div>
         </div>
