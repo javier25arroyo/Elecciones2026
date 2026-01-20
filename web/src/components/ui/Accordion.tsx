@@ -34,6 +34,7 @@ export function AccordionItem({
           fill="none"
           stroke="currentColor"
           strokeWidth="2"
+          aria-hidden="true"
           className={`shrink-0 text-white/70 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
         >
           <path d="M6 9l6 6 6-6" />

@@ -96,9 +96,9 @@ export function Header() {
             target="_blank"
             rel="noopener noreferrer"
             className="p-2 text-slate-400 hover:text-white hover:bg-white/10 rounded-full transition-all"
-            aria-label="GitHub Repository"
+            aria-label="Repositorio de GitHub"
           >
-            <Github className="w-5 h-5" />
+            <Github className="w-5 h-5" aria-hidden="true" />
           </a>
         </div>
 

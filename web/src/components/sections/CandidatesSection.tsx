@@ -93,7 +93,7 @@ export function CandidatesSection({ parties }: CandidatesSectionProps) {
                   }`}
                 aria-pressed={filter === option.value}
               >
-                {option.icon}
+                <span aria-hidden="true">{option.icon}</span>
                 {option.label}
               </button>
             ))}
@@ -165,7 +165,6 @@ function CandidateCard({ party, index }: CandidateCardProps) {
   return (
     <motion.article
       ref={ref}
-      className={`scroll-reveal scroll-reveal-delay-${Math.min(index % 6 + 1, 5)} group relative flex flex-col rounded-[2rem] border border-white/10 bg-white/[0.06] shadow-xl backdrop-blur-xl will-change-transform content-visibility-auto`}
       style={{ '--accent-color': accentColor, containIntrinsicSize: '1px 600px' } as React.CSSProperties}
       whileHover={{
         y: -16,
@@ -181,8 +180,14 @@ function CandidateCard({ party, index }: CandidateCardProps) {
       onClick={() => setIsExpanded(!isExpanded)}
       role="button"
       tabIndex={0}
-      onKeyDown={(e) => e.key === "Enter" && setIsExpanded(!isExpanded)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          setIsExpanded(!isExpanded);
+        }
+      }}
       aria-expanded={isExpanded}
+      className={`scroll-reveal scroll-reveal-delay-${Math.min(index % 6 + 1, 5)} group relative flex flex-col rounded-[2rem] border border-white/10 bg-white/[0.06] shadow-xl backdrop-blur-xl will-change-transform content-visibility-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900`}
     >
       {/* Glow Effect on Hover */}
       <motion.div 

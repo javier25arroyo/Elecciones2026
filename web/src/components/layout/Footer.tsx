@@ -29,7 +29,7 @@ const SocialLink = ({ href, icon, text, hoverColor, hoverBgColor }: { href: stri
     rel="noopener noreferrer"
     className={`inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm text-white/75 transition-colors duration-200 ${hoverColor} ${hoverBgColor}`}
   >
-    {icon}
+    <span aria-hidden="true">{icon}</span>
     {text}
   </a>
 );

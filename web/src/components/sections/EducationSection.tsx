@@ -148,7 +148,7 @@ function QuickGuideGrid() {
             className="flex h-full items-start gap-4 rounded-xl border border-white/10 bg-white/5 p-5 backdrop-blur-md"
             style={{ borderLeftColor: item.color, borderLeftWidth: "4px" }}
           >
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-slate-800 text-3xl">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-slate-800 text-3xl" aria-hidden="true">
               {item.icon}
             </div>
             <div>

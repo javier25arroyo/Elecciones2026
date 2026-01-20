@@ -277,7 +277,7 @@ export function QuizSection({
 function QuizIntro({ onStart, title, description, badgeText, featurePills, ctaLabel, note }: any) {
   return (
     <div className="mx-auto max-w-2xl animate-fade-in-up text-center">
-      <div className="mb-8 flex justify-center animate-float">
+      <div className="mb-8 flex justify-center animate-float" aria-hidden="true">
         <Vote className="h-16 w-16 text-white" />
       </div>
       
@@ -285,7 +285,7 @@ function QuizIntro({ onStart, title, description, badgeText, featurePills, ctaLa
         variant="neutral"
         className="mb-6 inline-flex items-center gap-2 border border-white/20 bg-white/10 py-2 px-5 text-sm font-bold text-white backdrop-blur-md"
       >
-        <Sparkles className="h-4 w-4" /> {badgeText}
+        <Sparkles className="h-4 w-4" aria-hidden="true" /> {badgeText}
       </Badge>
       
       <div className="mb-6">
@@ -311,7 +311,7 @@ function QuizIntro({ onStart, title, description, badgeText, featurePills, ctaLa
             key={pill.text}
             className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm"
           >
-            {pill.icon}
+            <span aria-hidden="true">{pill.icon}</span>
             {pill.text}
           </span>
         ))}
@@ -365,7 +365,7 @@ function QuizQuestions({ questions, currentIndex, onAnswer }: any) {
       <div className="relative min-h-112.5 overflow-hidden rounded-3xl border border-white/15 bg-white/5 p-8 shadow-2xl backdrop-blur-xl transition-all sm:p-12">
         <div className="flex h-full flex-col items-center justify-between gap-8">
           <div className="text-center">
-            <div className="mb-6 flex justify-center text-blue-300">
+            <div className="mb-6 flex justify-center text-blue-300" aria-hidden="true">
               {current.icon && getIconComponent(current.icon)}
             </div>
             <h3 className="text-balance font-display text-2xl font-bold leading-tight text-white sm:text-3xl">
@@ -385,7 +385,7 @@ function QuizQuestions({ questions, currentIndex, onAnswer }: any) {
                     : "bg-white/10 text-white/90 hover:bg-white/15"
                 )}
               >
-                {opt.icon}
+                <span aria-hidden="true">{opt.icon}</span>
                 {opt.label}
               </button>
             ))}
@@ -402,11 +402,11 @@ function QuizResults({ results, userVector, onReset, onRepeatToPicker }: any) {
 
   return (
     <div className="mx-auto max-w-3xl animate-fade-in-up py-8 text-center">
-      <div className="mb-8 flex justify-center animate-celebrate">
+      <div className="mb-8 flex justify-center animate-celebrate" aria-hidden="true">
         <PartyPopper className="h-16 w-16 text-blue-400" />
       </div>
       <Badge variant="secondary" className="mb-4 px-4 py-1.5 text-sm font-bold">
-        <Sparkles className="h-4 w-4 mr-2" /> Resultados Listos
+        <Sparkles className="h-4 w-4 mr-2" aria-hidden="true" /> Resultados Listos
       </Badge>
       <h2 className="mb-12 font-display text-4xl font-extrabold text-white sm:text-5xl">
         Tu Afinidad Política
@@ -458,7 +458,7 @@ function QuizResults({ results, userVector, onReset, onRepeatToPicker }: any) {
           onClick={onRepeatToPicker || onReset}
           className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-8 py-4 font-bold text-white transition-all hover:bg-white/20"
         >
-          <RotateCcw className="h-5 w-5" /> Repetir Quiz
+          <RotateCcw className="h-5 w-5" aria-hidden="true" /> Repetir Quiz
         </button>
         <button
           className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 font-bold text-primary transition-all hover:scale-105"
@@ -467,7 +467,7 @@ function QuizResults({ results, userVector, onReset, onRepeatToPicker }: any) {
             window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, "_blank");
           }}
         >
-          <Share2 className="h-5 w-5" /> Compartir en WhatsApp
+          <Share2 className="h-5 w-5" aria-hidden="true" /> Compartir en WhatsApp
         </button>
       </div>
     </div>
