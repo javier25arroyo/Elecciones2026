@@ -33,7 +33,7 @@ const timelineEvents: TimelineEvent[] = [
 
 export function TimelineSection() {
   return (
-    <section id="timeline" className="relative bg-gradient-to-b from-slate-900 via-[#0b2b6b] to-slate-900 py-24 sm:py-32 lg:py-40 overflow-hidden content-visibility-auto">
+    <section id="timeline" className="relative bg-gradient-to-b from-slate-900/95 via-[#0b2b6b]/80 to-slate-900/95 py-24 sm:py-32 lg:py-40 overflow-hidden content-visibility-auto">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(206,17,38,0.2),transparent_50%),radial-gradient(circle_at_25%_40%,rgba(0,47,108,0.2),transparent_50%)]" />
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent via-slate-900/30 to-slate-900" />

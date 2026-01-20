@@ -7,3 +7,4 @@ export { Spinner, Skeleton, CandidateCardSkeleton, LoadingOverlay } from "./Load
 export { Modal, ConfirmDialog } from "./Modal";
 export { Accordion, AccordionItem } from "./Accordion";
 export { Tabs } from "./Tabs";
+export { GravityStarsBackground } from "./GravityStarsBackground";
