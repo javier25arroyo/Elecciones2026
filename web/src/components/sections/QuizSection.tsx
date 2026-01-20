@@ -463,7 +463,7 @@ function QuizResults({ results, userVector, onReset, onRepeatToPicker }: any) {
         <button
           className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 font-bold text-primary transition-all hover:scale-105"
           onClick={() => {
-            const text = `¡Acabo de descubrir mi afinidad política para 2026! Mi resultado principal es ${winner.party.presidential_candidate?.name}. Descubrí el tuyo en elecciones2026.lat`;
+            const text = `¡Hice el quiz de afinidad política 2026 y mi match fue ${winner.party.presidential_candidate?.name}! 🚀 ¿Te animás a descubrir el tuyo? Es rápido, anónimo y sorprendente. Hacelo en https://elecciones2026.lat y contame tu resultado 😉`;
             window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, "_blank");
           }}
         >
