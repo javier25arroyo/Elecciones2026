@@ -49,7 +49,7 @@ export function CandidatesSection({ parties }: CandidatesSectionProps) {
   }, [parties, filter, searchTerm]);
 
   return (
-    <section id="candidatos" className="relative bg-gradient-to-b from-slate-900 via-[#0b2b6b] to-slate-900 py-24 sm:py-32 lg:py-40">
+    <section id="candidatos" className="relative bg-gradient-to-b from-slate-900 via-[#0b2b6b] to-slate-900 py-24 sm:py-32 lg:py-40 content-visibility-auto">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(0,47,108,0.25),transparent_45%),radial-gradient(circle_at_80%_60%,rgba(206,17,38,0.25),transparent_45%)]" />
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
       <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent via-slate-900/30 to-slate-900" />
@@ -70,7 +70,7 @@ export function CandidatesSection({ parties }: CandidatesSectionProps) {
         </div>
 
         {/* Filters */}
-        <div className="mb-16 flex flex-col gap-6 rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-md lg:flex-row lg:items-center lg:justify-between lg:p-8">
+        <div className="mb-16 flex flex-col gap-6 rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-md lg:flex-row lg:items-center lg:justify-between lg:p-8" aria-label="Filtrado de candidatos">
           <div className="flex-grow">
             <input
               type="search"
@@ -81,17 +81,19 @@ export function CandidatesSection({ parties }: CandidatesSectionProps) {
               aria-label="Buscar candidatos"
             />
           </div>
-          <div className="flex flex-wrap items-center justify-center gap-2">
+          <div className="flex flex-wrap items-center justify-center gap-2" role="radiogroup" aria-label="Filtrar por orientación política">
             {filterOptions.map((option) => (
               <button
                 key={option.value}
                 onClick={() => setFilter(option.value)}
-                className={`inline-flex items-center gap-1.5 rounded-full py-2 px-4 text-sm font-medium transition-all duration-200
+                className={`inline-flex items-center gap-1.5 rounded-full py-2 px-4 text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900
                   ${filter === option.value
                     ? "bg-primary text-white shadow-md"
                     : "border border-white/20 bg-white/10 text-white/80 hover:bg-white/20"
                   }`}
                 aria-pressed={filter === option.value}
+                role="radio"
+                aria-checked={filter === option.value}
               >
                 <span aria-hidden="true">{option.icon}</span>
                 {option.label}
@@ -187,6 +189,7 @@ function CandidateCard({ party, index }: CandidateCardProps) {
         }
       }}
       aria-expanded={isExpanded}
+      aria-label={`Ver más detalles de ${candidateName}`}
       className={`scroll-reveal scroll-reveal-delay-${Math.min(index % 6 + 1, 5)} group relative flex flex-col rounded-[2rem] border border-white/10 bg-white/[0.06] shadow-xl backdrop-blur-xl will-change-transform content-visibility-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900`}
     >
       {/* Glow Effect on Hover */}

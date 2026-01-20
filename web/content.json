@@ -546,7 +546,8 @@
           "env": 1,
           "econ": -0.2
         },
-        "icon": "LeafIcon"
+        "icon": "LeafIcon",
+        "example": "Invertir en paneles solares, autobuses eléctricos, trenes limpios y subsidios para energía renovable."
       },
       {
         "id": "taxes",
@@ -554,7 +555,8 @@
         "axis": {
           "econ": -1
         },
-        "icon": "TrendingIcon"
+        "icon": "TrendingIcon",
+        "example": "Mayores impuestos a multinacionales y empresas de alto ingreso para financiar salud, educación y asistencia social."
       },
       {
         "id": "state-enterprises",
@@ -563,7 +565,8 @@
           "econ": -0.8,
           "social": -0.1
         },
-        "icon": "ScaleIcon"
+        "icon": "ScaleIcon",
+        "example": "Mantener empresas públicas en energía, agua, telecomunicaciones y transporte en lugar de venderlas al sector privado."
       },
       {
         "id": "dereg",
@@ -571,7 +574,8 @@
         "axis": {
           "econ": 1
         },
-        "icon": "RocketIcon"
+        "icon": "RocketIcon",
+        "example": "Simplificar licencias, bajar impuestos de negocios nuevos y reducir regulaciones para que pymes y startups crezcan."
       },
       {
         "id": "state-size",
@@ -579,7 +583,8 @@
         "axis": {
           "econ": 0.8
         },
-        "icon": "RocketIcon"
+        "icon": "RocketIcon",
+        "example": "Recortar burocracias, reducir empleados públicos e invertir menos en agencias estatales para mejorar eficiencia."
       },
       {
         "id": "ppp-infrastructure",
@@ -588,7 +593,8 @@
           "econ": 0.6,
           "social": 0.1
         },
-        "icon": "TrendingIcon"
+        "icon": "TrendingIcon",
+        "example": "Empresas privadas construyen y operan carreteras, hospitales o escuelas con inversión y retorno de capital."
       },
       {
         "id": "anti-corruption",
@@ -597,7 +603,8 @@
           "social": 0.2,
           "econ": -0.2
         },
-        "icon": "ScaleIcon"
+        "icon": "ScaleIcon",
+        "example": "Crear sistemas de auditoría transparentes, penas más duras para funcionarios corruptos y fiscalización pública."
       },
       {
         "id": "public-edu",
@@ -606,7 +613,8 @@
           "econ": -0.6,
           "social": -0.2
         },
-        "icon": "BookIcon"
+        "icon": "BookIcon",
+        "example": "Mayor presupuesto para escuelas y universidades públicas, becas gratuitas y acceso equitativo para todos."
       },
       {
         "id": "health-public",
@@ -615,7 +623,8 @@
           "econ": -0.6,
           "social": -0.4
         },
-        "icon": "PeopleIcon"
+        "icon": "PeopleIcon",
+        "example": "Fortalecer hospitales y clínicas públicas, contratar más doctores y garantizar salud gratuita para todos."
       },
       {
         "id": "security",
@@ -623,7 +632,8 @@
         "axis": {
           "social": 0.9
         },
-        "icon": "ShieldIcon"
+        "icon": "ShieldIcon",
+        "example": "Aumentar policía, penas más duras para delincuentes, toque de queda en zonas críticas y orden estricto."
       },
       {
         "id": "rehabilitation",
@@ -631,7 +641,8 @@
         "axis": {
           "social": -0.7
         },
-        "icon": "PeopleIcon"
+        "icon": "PeopleIcon",
+        "example": "Programas educativos para jóvenes en riesgo, reinserción laboral de exconvictos y justicia restaurativa."
       },
       {
         "id": "family-values",
@@ -639,7 +650,8 @@
         "axis": {
           "social": 0.8
         },
-        "icon": "BookIcon"
+        "icon": "BookIcon",
+        "example": "Políticas que promuevan familias tradicionales, educación con énfasis en valores conservadores y protección de instituciones religiosas."
       },
       {
         "id": "public-housing",
@@ -648,7 +660,8 @@
           "econ": -0.7,
           "social": -0.2
         },
-        "icon": "PeopleIcon"
+        "icon": "PeopleIcon",
+        "example": "Construir más casas públicas, subsidios de alquiler para familias de bajos ingresos y financiamiento accesible."
       },
       {
         "id": "labor-rights",
@@ -657,7 +670,8 @@
           "econ": -0.8,
           "social": -0.2
         },
-        "icon": "PeopleIcon"
+        "icon": "PeopleIcon",
+        "example": "Permitir más sindicatos, garantizar días de descanso, estabilidad laboral y mejores salarios para trabajadores."
       },
       {
         "id": "sovereignty",
@@ -666,7 +680,8 @@
           "social": 0.6,
           "econ": 0.2
         },
-        "icon": "ShieldIcon"
+        "icon": "ShieldIcon",
+        "example": "Rechazar imposiciones de organismos internacionales, proteger industrias nacionales y tomar decisiones independientes."
       },
       {
         "id": "market-innovation",
@@ -674,7 +689,8 @@
         "axis": {
           "econ": 0.7
         },
-        "icon": "RocketIcon"
+        "icon": "RocketIcon",
+        "example": "Dejar que empresas compitan libremente, creen nuevos productos y tecnologías, generando prosperidad."
       },
       {
         "id": "civil-liberties",
@@ -682,7 +698,8 @@
         "axis": {
           "social": -1
         },
-        "icon": "ScaleIcon"
+        "icon": "ScaleIcon",
+        "example": "Garantizar derechos de protestas, igualdad de género, LGBTQ+ y libertad sexual incluso si choca con tradiciones."
       },
       {
         "id": "market-env",
@@ -691,7 +708,8 @@
           "env": 0.4,
           "econ": 0.6
         },
-        "icon": "BulbIcon"
+        "icon": "BulbIcon",
+        "example": "Empresas privadas crean tecnologías verdes, créditos de carbono y soluciones limpias sin prohibiciones estatales."
       },
       {
         "id": "social-programs",
@@ -700,7 +718,8 @@
           "econ": -0.7,
           "social": -0.3
         },
-        "icon": "PeopleIcon"
+        "icon": "PeopleIcon",
+        "example": "Aumentar planes de ayuda, seguros de desempleo, comedores escolares y pensiones para personas en pobreza extrema."
       }
     ]
   },
@@ -711,121 +730,141 @@
         "id": "carbon-neutralidad",
         "text": "Los planes oficiales insisten en metas claras de carbono neutralidad para 2050; ¿apoyás priorizarlas en la agenda nacional?",
         "axis": { "env": 1, "econ": -0.2 },
-        "icon": "LeafIcon"
+        "icon": "LeafIcon",
+        "example": "Comprometerse con metas de carbono neutralidad, invertir en energía limpia y reducir emisiones de forma medible."
       },
       {
         "id": "energia-renovable",
         "text": "Invertir en energías limpias y transporte público eléctrico, como plantean las propuestas ambientales, es clave para cumplir esos compromisos.",
         "axis": { "env": 0.9, "econ": -0.1 },
-        "icon": "BulbIcon"
+        "icon": "BulbIcon",
+        "example": "Parques solares, aerogeneradores, autobuses eléctricos, trenes limpios y recarga de vehículos eléctricos."
       },
       {
         "id": "proteccion-ecosistemas",
         "text": "Blindar parques nacionales y cuencas hídricas, una prioridad mencionada en varios planes, merece más recursos.",
         "axis": { "env": 0.8, "social": 0.2 },
-        "icon": "LeafIcon"
+        "icon": "LeafIcon",
+        "example": "Proteger parques nacionales con mayor presupuesto, defender cuencas de agua de la contaminación y expansión urbana."
       },
       {
         "id": "pagos-servicios-ambientales",
         "text": "Promover pagos por servicios ambientales y corredores biológicos para las comunidades rurales, como sugieren los planes, es esencial.",
         "axis": { "env": 0.7, "econ": -0.1 },
-        "icon": "LeafIcon"
+        "icon": "LeafIcon",
+        "example": "Pagar a campesinos por mantener bosques, proteger biodiversidad y crear corredores que conecten hábitats naturales."
       },
       {
         "id": "infraestructura-rural",
         "text": "Priorizar obras públicas, conectividad digital y carreteras rurales para cerrar brechas territoriales figura en los planes de gobierno; ¿lo apoyás?",
         "axis": { "econ": 0.2, "social": 0.1 },
-        "icon": "TrendingIcon"
+        "icon": "TrendingIcon",
+        "example": "Mejorar carreteras rurales, llevar internet de banda ancha a zonas alejadas y construir infraestructura local."
       },
       {
         "id": "educacion-valores-tec",
         "text": "Combinar educación técnica con formación en valores cívicos y disciplina, como proponen varios planes, debe ser una prioridad.",
         "axis": { "econ": -0.2, "social": -0.3 },
-        "icon": "BookIcon"
+        "icon": "BookIcon",
+        "example": "Programas de formación técnica con énfasis en civismo, disciplina y habilidades prácticas para el empleo."
       },
       {
         "id": "formacion-dual",
         "text": "Fortalecer redes de formación dual, universidades regionales y alianzas público-privadas, tal como aparece en los planes, mejora el empleo.",
         "axis": { "econ": -0.1, "social": -0.4 },
-        "icon": "BookIcon"
+        "icon": "BookIcon",
+        "example": "Estudiantes trabajan en empresas mientras aprenden; universidades regionales fuera del Gran Área Metropolitana."
       },
       {
         "id": "salud-universal",
         "text": "Los planes remarcan la cobertura universal y la atención primaria; ¿querés más recursos y profesionales en salud pública?",
         "axis": { "social": -0.6, "econ": -0.2 },
-        "icon": "PeopleIcon"
+        "icon": "PeopleIcon",
+        "example": "Ampliar hospitales y clínicas públicas, contratar más médicos y enfermeras, garantizar atención para todos sin costo."
       },
       {
         "id": "salud-mental",
         "text": "Programas comunitarios de salud mental y prevención que describen los planes deben recibir más inversión.",
         "axis": { "social": -0.4 },
-        "icon": "PeopleIcon"
+        "icon": "PeopleIcon",
+        "example": "Centros de salud mental comunitarios, terapias psicológicas gratuitas y programas de prevención de suicidio."
       },
       {
         "id": "transparencia-digital",
         "text": "Auditar y digitalizar las compras públicas para combatir la corrupción, una promesa repetida en los planes, es indispensable.",
         "axis": { "econ": -0.4, "social": -0.2 },
-        "icon": "ScaleIcon"
+        "icon": "ScaleIcon",
+        "example": "Sistema público transparente de licitaciones, auditorías digitales abiertas y control ciudadano de gastos."
       },
       {
         "id": "seguridad-tecnologia",
         "text": "Medidas de seguridad con tecnología y capacitación de cuerpos policiales, como plantean distintas candidaturas, refuerzan la ley y el orden.",
         "axis": { "social": 0.7 },
-        "icon": "ShieldIcon"
+        "icon": "ShieldIcon",
+        "example": "Cámaras de vigilancia inteligentes, capacitación de policía con tecnología avanzada y análisis de datos para combatir delitos."
       },
       {
         "id": "participacion-ciudadana",
         "text": "Referendos, presupuestos participativos y veedurías ciudadanas, propuestas habituales en los planes, deben crecer.",
         "axis": { "social": -0.3 },
-        "icon": "PeopleIcon"
+        "icon": "PeopleIcon",
+        "example": "Ciudadanos votan en referendos sobre decisiones públicas, deciden gastos municipales y supervisan gobiernos."
       },
       {
         "id": "redes-de-proteccion",
         "text": "Expandir redes sociales para familias en pobreza extrema, como plantean los planes sociales, fortalece la cohesión.",
         "axis": { "econ": -0.8, "social": -0.2 },
-        "icon": "PeopleIcon"
+        "icon": "PeopleIcon",
+        "example": "Ampliar programas de asistencia directa, becas para niños pobres, acceso a salud y alimentos para familias vulnerables."
       },
       {
         "id": "pyme-burocracia",
         "text": "Reducir trámites e impuestos para PYMEs, acorde a los planes liberales y centroderecha, dinamiza la creación de empleo.",
         "axis": { "econ": 0.8 },
-        "icon": "RocketIcon"
+        "icon": "RocketIcon",
+        "example": "Simplificar licencias de negocio, reducir impuestos iniciales, acelerar permisos municipales para pequeños empresarios."
       },
       {
         "id": "economia-social",
         "text": "Impulsar cooperativas, empresas sociales y participación estatal estratégica, como proponen planes de centroizquierda, equilibra el modelo productivo.",
         "axis": { "econ": -0.3, "social": -0.1 },
-        "icon": "PeopleIcon"
+        "icon": "PeopleIcon",
+        "example": "Apoyar cooperativas agrícolas, empresas comunitarias, producción asociativa con participación de trabajadores."
       },
       {
         "id": "innovacion-inversion",
         "text": "Incentivar innovación, ciencia y atraer inversión extranjera responsable según los planes modernos es clave para competir globalmente.",
         "axis": { "econ": 0.6 },
-        "icon": "RocketIcon"
+        "icon": "RocketIcon",
+        "example": "Parques tecnológicos, financiamiento para startups, inversión en investigación científica e incentivos para empresas tech."
       },
       {
         "id": "estabilidad-fiscal",
         "text": "Los planes hablan de responsibility fiscal sin sacrificar inversión social; ¿apoyás ese equilibrio?",
         "axis": { "econ": 0.4, "social": 0.1 },
-        "icon": "ScaleIcon"
+        "icon": "ScaleIcon",
+        "example": "Mantener finanzas públicas sanas mientras se invierte en educación, salud y programas sociales de forma equilibrada."
       },
       {
         "id": "gobiernos-locales",
         "text": "Descentralizar recursos y dar mayor autonomía a municipios, como indican varios planes, mejora la gestión.",
         "axis": { "social": -0.3, "econ": -0.1 },
-        "icon": "PeopleIcon"
+        "icon": "PeopleIcon",
+        "example": "Transferir presupuesto a municipios, darles más poder de decisión en educación, salud e infraestructura local."
       },
       {
         "id": "turismo-sostenible",
         "text": "Apoyar turismo sostenible y economías regionales, otro eje repetido en planes, ayuda a regiones costeras e interiores.",
         "axis": { "econ": 0.3, "env": 0.2 },
-        "icon": "RocketIcon"
+        "icon": "RocketIcon",
+        "example": "Turismo ecológico responsable, emprendimientos locales de hospedaje y gastronomía, protección de playas y recursos naturales."
       },
       {
         "id": "derechos-trabajadores",
         "text": "Garantizar salarios dignos y diálogo con sindicatos, señalado en los planes sindicalistas, protege a la clase trabajadora.",
         "axis": { "econ": -0.7, "social": -0.5 },
-        "icon": "PeopleIcon"
+        "icon": "PeopleIcon",
+        "example": "Salarios mínimos dignos actualizados, diálogo con sindicatos, negociación colectiva y protección del empleo."
       }
     ]
   }

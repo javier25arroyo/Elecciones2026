@@ -27,6 +27,7 @@ export type QuizQuestion = {
   id: string;
   text: string;
   icon?: string;
+  example?: string;
   axis?: {
     econ?: number;
     social?: number;

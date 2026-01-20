@@ -23,6 +23,7 @@ import {
   RotateCcw,
   PartyPopper,
   MapPin,
+  Info,
 } from "lucide-react";
 
 const defaultQuestions: QuizQuestion[] = [
@@ -31,48 +32,56 @@ const defaultQuestions: QuizQuestion[] = [
     text: "¿El Estado debería invertir más en energías renovables y transporte público limpio?",
     axis: { env: 1, econ: -0.2 },
     icon: "Leaf",
+    example: "Invertir en paneles solares, trenes eléctricos y subsidios para energía limpia",
   },
   {
     id: "taxes",
     text: "¿Se deberían aumentar impuestos a grandes empresas para financiar programas sociales?",
     axis: { econ: -1 },
     icon: "TrendingUp",
+    example: "Empresas multinacionales pagarían más para financiar salud, educación y asistencia social",
   },
   {
     id: "dereg",
     text: "¿Se deberían reducir trámites e impuestos para facilitar emprender y generar empleo?",
     axis: { econ: 1 },
     icon: "Rocket",
+    example: "Menos regulaciones, impuestos bajos y simplificación para que pymes y startups crezcan",
   },
   {
     id: "public-edu",
     text: "¿La educación pública debe recibir más inversión que la privada?",
     axis: { econ: -0.6, social: -0.2 },
     icon: "BookOpen",
+    example: "Mayor presupuesto a escuelas y universidades públicas, acceso equitativo para todos",
   },
   {
     id: "security",
     text: "¿Preferís un enfoque de seguridad con medidas más estrictas y mano firme?",
     axis: { social: 0.9 },
     icon: "Shield",
+    example: "Aumentar fuerzas de seguridad, penalidades más duras, orden y control estricto",
   },
   {
     id: "civil-liberties",
     text: "¿Las libertades civiles deben protegerse aunque entren en conflicto con valores tradicionales?",
     axis: { social: -1 },
     icon: "Scale",
+    example: "Derecho a protestas, igualdad de género y LGBTQ+, incluso si choca con tradiciones",
   },
   {
     id: "market-env",
     text: "¿El mercado y la innovación privada son la mejor vía para resolver los problemas ambientales?",
     axis: { env: 0.4, econ: 0.6 },
     icon: "Lightbulb",
+    example: "Incentivar a empresas privadas a innovar en tecnología verde en lugar de prohibiciones",
   },
   {
     id: "social-programs",
     text: "¿El gobierno debe expandir los programas de asistencia social para los más vulnerables?",
     axis: { econ: -0.7, social: -0.3 },
     icon: "Users",
+    example: "Aumentar planes sociales, seguro de desempleo, ayudas para familias en situación vulnerable",
   },
 ];
 
@@ -335,12 +344,14 @@ function QuizQuestions({ questions, currentIndex, onAnswer }: any) {
   const current = questions[currentIndex];
   const progress = ((currentIndex + 1) / questions.length) * 100;
   const [selectedAnswer, setSelectedAnswer] = React.useState<Answer | null>(null);
+  const [showExample, setShowExample] = React.useState(false);
 
   const handleAnswerClick = (answer: Answer) => {
     setSelectedAnswer(answer);
     setTimeout(() => {
       onAnswer(answer);
       setSelectedAnswer(null);
+      setShowExample(false);
     }, 250);
   };
 
@@ -364,22 +375,59 @@ function QuizQuestions({ questions, currentIndex, onAnswer }: any) {
 
       <div className="relative min-h-112.5 overflow-hidden rounded-3xl border border-white/15 bg-white/5 p-8 shadow-2xl backdrop-blur-xl transition-all sm:p-12">
         <div className="flex h-full flex-col items-center justify-between gap-8">
-          <div className="text-center">
+          <div className="w-full text-center">
             <div className="mb-6 flex justify-center text-blue-300" aria-hidden="true">
               {current.icon && getIconComponent(current.icon)}
             </div>
             <h3 className="text-balance font-display text-2xl font-bold leading-tight text-white sm:text-3xl">
               {current.text}
             </h3>
+            
+            {/* Info Icon and Example */}
+            <div className="mt-6 flex justify-center transform transition-all duration-500">
+              <button
+                onClick={() => setShowExample(!showExample)}
+                className={cn(
+                  "inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-500 transform",
+                  showExample
+                    ? "bg-blue-500/30 text-blue-200 shadow-lg shadow-blue-500/20 scale-105"
+                    : "bg-white/10 text-white/80 hover:bg-white/20 hover:text-white hover:scale-105 hover:shadow-md"
+                )}
+                aria-label="Mostrar ejemplo"
+                aria-pressed={showExample}
+              >
+                <Info className={cn("h-4 w-4 transition-all duration-500", showExample && "rotate-12")} />
+                <span className="transition-all duration-500">
+                  {showExample ? "Ocultar" : "Ver"} ejemplo
+                </span>
+              </button>
+            </div>
+
+            {/* Example Card */}
+            {showExample && current.example && (
+              <div className="mt-6 animate-in fade-in slide-in-from-top-3 duration-700 ease-out rounded-2xl border border-blue-400/30 bg-gradient-to-br from-blue-500/15 via-blue-500/10 to-transparent p-4 text-left shadow-lg shadow-blue-500/10 backdrop-blur-sm" aria-live="polite">
+                <div className="flex items-start gap-3">
+                  <div className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-400/20">
+                    <Info className="h-4 w-4 text-blue-300 animate-pulse" aria-hidden="true" />
+                  </div>
+                  <p className="text-sm text-white/90 leading-relaxed">
+                    <span className="block font-semibold text-blue-300 mb-1 animate-in fade-in duration-1000">Ejemplo:</span>
+                    <span className="block animate-in fade-in duration-1000 delay-100">{current.example}</span>
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
 
-          <div className="flex w-full flex-col gap-4">
+          <div className="flex w-full flex-col gap-4" role="radiogroup" aria-label="Seleccioná tu respuesta">
             {options.map((opt) => (
               <button
                 key={opt.value}
                 onClick={() => handleAnswerClick(opt.value as Answer)}
+                role="radio"
+                aria-checked={selectedAnswer === opt.value}
                 className={cn(
-                  "flex w-full items-center justify-center gap-4 rounded-2xl border border-white/10 py-5 text-lg font-bold transition-all active:scale-95",
+                  "flex w-full items-center justify-center gap-4 rounded-2xl border border-white/10 py-5 text-lg font-bold transition-all duration-300 active:scale-95",
                   selectedAnswer === opt.value
                     ? `${opt.color} text-white shadow-lg ring-4 ring-white/20 border-white/30`
                     : "bg-white/10 text-white/90 hover:bg-white/15"
