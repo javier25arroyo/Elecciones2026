@@ -116,7 +116,7 @@ export default function TerminosPage() {
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-4 text-gray-800">7. Limitación de Responsabilidad</h2>
           <p className="text-gray-700 mb-4">
-            Info Político 2026 se proporciona "tal como está" y "según disponibilidad". En la medida 
+            Info Político 2026 se proporciona &quot;tal como está&quot; y &quot;según disponibilidad&quot;. En la medida 
             máxima permitida por la ley:
           </p>
           <ul className="list-disc pl-6 mb-4 text-gray-700">

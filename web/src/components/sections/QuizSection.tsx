@@ -23,7 +23,6 @@ import {
   Share2,
   RotateCcw,
   PartyPopper,
-  MapPin,
   Info,
 } from "lucide-react";
 
@@ -150,7 +149,7 @@ export function QuizSection({
   introCTA,
   featurePills,
   note,
-  onRepeatToPicker,
+  onRepeatToPicker = () => {},
 }: QuizSectionProps) {
   const quizQuestions = questions?.length ? questions : defaultQuestions;
   const featureList = featurePills?.length ? featurePills : defaultFeaturePills;
@@ -274,7 +273,6 @@ export function QuizSection({
         {state === "results" && (
           <QuizResults
             results={results}
-            userVector={userVector}
             onReset={handleReset}
             onRepeatToPicker={onRepeatToPicker}
           />
@@ -284,7 +282,17 @@ export function QuizSection({
   );
 }
 
-function QuizIntro({ onStart, title, description, badgeText, featurePills, ctaLabel, note }: any) {
+interface QuizIntroProps {
+  onStart: () => void;
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+  badgeText: string;
+  featurePills: { icon?: React.ReactNode; text: string }[];
+  ctaLabel: string;
+  note?: React.ReactNode;
+}
+
+function QuizIntro({ onStart, title, description, badgeText, featurePills, ctaLabel, note }: QuizIntroProps) {
   return (
     <div className="mx-auto max-w-2xl animate-fade-in-up text-center">
       <div className="mb-8 flex justify-center animate-float" aria-hidden="true">
@@ -316,7 +324,7 @@ function QuizIntro({ onStart, title, description, badgeText, featurePills, ctaLa
       </div>
 
       <div className="mb-12 flex flex-wrap justify-center gap-3">
-        {featurePills.map((pill: any) => (
+        {featurePills.map((pill: { icon?: React.ReactNode; text: string }) => (
           <span
             key={pill.text}
             className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm"
@@ -341,7 +349,13 @@ function QuizIntro({ onStart, title, description, badgeText, featurePills, ctaLa
   );
 }
 
-function QuizQuestions({ questions, currentIndex, onAnswer }: any) {
+interface QuizQuestionsProps {
+  questions: QuizQuestion[];
+  currentIndex: number;
+  onAnswer: (answer: Answer) => void;
+}
+
+function QuizQuestions({ questions, currentIndex, onAnswer }: QuizQuestionsProps) {
   const current = questions[currentIndex];
   const progress = ((currentIndex + 1) / questions.length) * 100;
   const [selectedAnswer, setSelectedAnswer] = React.useState<Answer | null>(null);
@@ -458,7 +472,14 @@ function QuizQuestions({ questions, currentIndex, onAnswer }: any) {
   );
 }
 
-function QuizResults({ results, userVector, onReset, onRepeatToPicker }: any) {
+interface QuizResultsProps {
+  results: Array<{ party: Party; percentage: number }>;
+  userVector: UserVector;
+  onReset: () => void;
+  onRepeatToPicker: () => void;
+}
+
+function QuizResults({ results, onReset, onRepeatToPicker }: Omit<QuizResultsProps, 'userVector'>) {
   const winner = results[0];
   const top3 = results.slice(1, 4);
 
@@ -498,7 +519,7 @@ function QuizResults({ results, userVector, onReset, onRepeatToPicker }: any) {
         )}
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {top3.map((res: any, i: number) => (
+          {top3.map((res) => (
             <div key={res.party.name} className="flex items-center gap-4 rounded-2xl bg-white/5 p-4 text-left ring-1 ring-white/10">
               <div 
                 className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-sm font-bold text-white shadow-lg"

@@ -95,7 +95,6 @@ export function CandidatesSection({ parties }: CandidatesSectionProps) {
                     ? "bg-primary text-white shadow-md"
                     : "border border-white/20 bg-white/10 text-white/80 hover:bg-white/20"
                   }`}
-                aria-pressed={filter === option.value}
                 role="radio"
                 aria-checked={filter === option.value}
               >
@@ -265,7 +264,7 @@ function CandidateCard({ party, index }: CandidateCardProps) {
 
         {/* Tags Pills */}
         <div className="mb-8 flex h-[3.5rem] shrink-0 flex-wrap items-center justify-center gap-2 content-center">
-          {tags.map((tag, tagIndex) => (
+          {tags.map((tag) => (
             <motion.span
               key={tag.label}
               className="inline-flex items-center gap-1.5 rounded-full bg-white/5 py-1.5 px-3 text-[10px] font-bold text-white/90 ring-1 ring-white/10"

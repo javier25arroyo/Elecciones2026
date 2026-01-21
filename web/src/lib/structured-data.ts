@@ -9,7 +9,7 @@ export interface MetadataProps {
   keywords?: string;
   image?: string;
   url: string;
-  structuredData?: Record<string, any>;
+  structuredData?: Record<string, unknown>;
 }
 
 /**
