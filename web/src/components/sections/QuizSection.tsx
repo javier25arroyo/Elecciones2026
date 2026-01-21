@@ -404,12 +404,16 @@ function QuizQuestions({ questions, currentIndex, onAnswer }: any) {
             </div>
 
             {/* Example Card with Accordion Animation */}
-            <AnimatePresence>
+            <AnimatePresence initial={false}>
               {showExample && current.example && (
                 <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
+                  variants={{
+                    open: { height: "auto", opacity: 1 },
+                    collapsed: { height: 0, opacity: 0 },
+                  }}
+                  initial="collapsed"
+                  animate="open"
+                  exit="collapsed"
                   transition={{ duration: 0.3, ease: "easeInOut" }}
                   className="overflow-hidden"
                 >
