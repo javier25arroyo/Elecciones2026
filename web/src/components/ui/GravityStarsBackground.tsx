@@ -89,5 +89,5 @@ export const GravityStarsBackground: React.FC<GravityStarsBackgroundProps> = ({
     };
   }, [count, colors]);
 
-  return <canvas ref={canvasRef} className={`absolute inset-0 pointer-events-none ${className}`} />;
+  return <canvas ref={canvasRef} className={`pointer-events-none ${className}`} />;
 };

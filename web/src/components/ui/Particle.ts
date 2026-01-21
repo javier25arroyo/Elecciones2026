@@ -17,17 +17,21 @@ export class Particle {
     this.baseY = this.y;
     this.vx = (Math.random() - 0.5) * 1; // slow float
     this.vy = (Math.random() - 0.5) * 1;
-    this.size = Math.random() * 2 + 1.5;
+    this.size = Math.random() * 2 + 2.0;
     this.color = colors[Math.floor(Math.random() * colors.length)];
     this.density = (Math.random() * 30) + 1;
   }
 
   draw(context: CanvasRenderingContext2D) {
+    context.save();
     context.fillStyle = this.color;
+    context.shadowBlur = 10;
+    context.shadowColor = this.color;
     context.beginPath();
     context.arc(this.x, this.y, this.size, 0, Math.PI * 2);
     context.closePath();
     context.fill();
+    context.restore();
   }
 
   update(mousePos: { x: number; y: number }, canvasWidth: number, canvasHeight: number) {

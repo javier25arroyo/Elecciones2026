@@ -132,7 +132,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
       </head>
       <body className={`${inter.variable} ${poppins.variable} antialiased min-h-screen flex flex-col`}>
-        <GravityStarsBackground count={70} className="fixed inset-0 z-[-1]" />
+        <GravityStarsBackground count={70} className="fixed inset-0 z-[40]" />
         <div id="scroll-sentinel" className="absolute top-0 left-0 w-full h-[10px] pointer-events-none opacity-0 z-[-1]" aria-hidden="true" />
         <GoogleAnalytics />
         <Header />
