@@ -90,3 +90,4 @@ snapshot.txt
 trace.json
 trace_optimized.json
 trace_prod.json
+web/GESTION_RELEASES.md
