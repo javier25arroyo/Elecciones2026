@@ -10,11 +10,11 @@ interface GravityStarsBackgroundProps {
 
 export const GravityStarsBackground: React.FC<GravityStarsBackgroundProps> = ({
   className,
-  count = 80, // Reduced from 150 to be "moderate"
+  count = 300, 
   colors = [
-    "rgba(0, 43, 127, 0.8)",   // CR Blue
-    "rgba(255, 255, 255, 0.8)", // CR White
-    "rgba(206, 17, 38, 0.8)",   // CR Red
+    "rgba(0, 43, 127, 1)",   
+    "rgba(255, 255, 255, 1)", 
+    "rgba(206, 17, 38, 1)",  
   ],
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -66,33 +66,27 @@ export const GravityStarsBackground: React.FC<GravityStarsBackgroundProps> = ({
       }
 
       update(mousePos: { x: number; y: number }, canvasWidth: number, canvasHeight: number) {
-        // Distance between mouse and particle
         let dx = mousePos.x - this.x;
         let dy = mousePos.y - this.y;
         let distance = Math.sqrt(dx * dx + dy * dy);
         let forceDirectionX = dx / distance;
         let forceDirectionY = dy / distance;
         
-        // Max distance, past that the force is 0
         const maxDistance = 150;
         let force = (maxDistance - distance) / maxDistance;
 
         if (distance < maxDistance) {
-           // Attraction
-           const speed = 2; // Attraction strength
+           const speed = 2; 
            this.vx += forceDirectionX * force * speed * 0.05;
            this.vy += forceDirectionY * force * speed * 0.05;
         }
 
-        // Apply friction
         this.vx *= 0.98;
         this.vy *= 0.98;
 
-        // Constant float movement to keep them alive
         this.x += this.vx + (Math.random() - 0.5) * 0.2;
         this.y += this.vy + (Math.random() - 0.5) * 0.2;
 
-        // Wrap around screen
         if (this.x < 0) this.x = canvasWidth;
         if (this.x > canvasWidth) this.x = 0;
         if (this.y < 0) this.y = canvasHeight;
@@ -122,8 +116,6 @@ export const GravityStarsBackground: React.FC<GravityStarsBackgroundProps> = ({
 
     const handleResize = () => {
       if (canvas) {
-        // Since we are using fixed positioning for the background, 
-        // using window dimensions is often safer to cover the viewport.
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         init();
@@ -141,7 +133,6 @@ export const GravityStarsBackground: React.FC<GravityStarsBackgroundProps> = ({
         mouse.y = -9999;
     }
 
-    // Initial setup
     handleResize();
     window.addEventListener("resize", handleResize);
     window.addEventListener("mousemove", handleMouseMove);
