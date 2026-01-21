@@ -416,7 +416,7 @@ function QuizQuestions({ questions, currentIndex, onAnswer }: any) {
                   <div className="mt-6 rounded-2xl border border-blue-400/30 bg-gradient-to-br from-blue-500/15 via-blue-500/10 to-transparent p-4 text-left shadow-lg shadow-blue-500/10 backdrop-blur-sm" aria-live="polite">
                     <div className="flex items-start gap-3">
                       <div className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-400/20">
-                        <Info className="h-4 w-4 text-blue-300" aria-hidden="true" />
+                        <Info className="h-4 w-4 text-blue-300 animate-pulse" aria-hidden="true" />
                       </div>
                       <p className="text-sm text-white/90 leading-relaxed">
                         <span className="block font-semibold text-blue-300 mb-1">Ejemplo:</span>
