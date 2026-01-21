@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import type { Party, QuizQuestion } from "@/lib/content";
 import { Badge } from "@/components/ui/Badge";
 import { Progress } from "@/components/ui/Progress";
@@ -402,20 +403,30 @@ function QuizQuestions({ questions, currentIndex, onAnswer }: any) {
               </button>
             </div>
 
-            {/* Example Card */}
-            {showExample && current.example && (
-              <div className="mt-6 animate-in fade-in slide-in-from-top-3 duration-700 ease-out rounded-2xl border border-blue-400/30 bg-gradient-to-br from-blue-500/15 via-blue-500/10 to-transparent p-4 text-left shadow-lg shadow-blue-500/10 backdrop-blur-sm" aria-live="polite">
-                <div className="flex items-start gap-3">
-                  <div className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-400/20">
-                    <Info className="h-4 w-4 text-blue-300 animate-pulse" aria-hidden="true" />
+            {/* Example Card with Accordion Animation */}
+            <AnimatePresence>
+              {showExample && current.example && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  className="overflow-hidden"
+                >
+                  <div className="mt-6 rounded-2xl border border-blue-400/30 bg-gradient-to-br from-blue-500/15 via-blue-500/10 to-transparent p-4 text-left shadow-lg shadow-blue-500/10 backdrop-blur-sm" aria-live="polite">
+                    <div className="flex items-start gap-3">
+                      <div className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-400/20">
+                        <Info className="h-4 w-4 text-blue-300" aria-hidden="true" />
+                      </div>
+                      <p className="text-sm text-white/90 leading-relaxed">
+                        <span className="block font-semibold text-blue-300 mb-1">Ejemplo:</span>
+                        <span>{current.example}</span>
+                      </p>
+                    </div>
                   </div>
-                  <p className="text-sm text-white/90 leading-relaxed">
-                    <span className="block font-semibold text-blue-300 mb-1 animate-in fade-in duration-1000">Ejemplo:</span>
-                    <span className="block animate-in fade-in duration-1000 delay-100">{current.example}</span>
-                  </p>
-                </div>
-              </div>
-            )}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           <div className="flex w-full flex-col gap-4" role="radiogroup" aria-label="Seleccioná tu respuesta">
