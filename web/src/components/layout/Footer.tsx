@@ -129,8 +129,8 @@ export function Footer() {
             </div>
 
             <p className="m-0 inline-flex items-center gap-1 text-xs text-white/50">
-              Hecho con <Heart className="h-3 w-3 text-red-500" /> para Costa Rica
-              <Flag className="h-3 w-3" />
+              Hecho con <Heart className="h-3 w-3 text-red-500" aria-label="amor" role="img" /> para Costa Rica
+              <Flag className="h-3 w-3" aria-hidden="true" />
             </p>
           </div>
         </div>

@@ -16,15 +16,17 @@ export const SEO_CONFIG = {
   // Palabras clave principales (Long-tail keywords para SEO)
   keywords: {
     primary: [
-      "elecciones 2026 Costa Rica",
-      "candidatos presidenciales Costa Rica 2026",
-      "elecciones presidenciales Costa Rica",
-      "voto Costa Rica 2026",
-      "información electoral Costa Rica",
+      "Elecciones 2026",
+      "Candidatos 2026",
+      "Candidatos Costa Rica",
+      "Elecciones Costa Rica",
+      "Presidente Costa Rica 2026",
+      "Elecciones presidenciales Costa Rica 2026",
+      "Papeleta presidencial 2026",
+      "Guía electoral Costa Rica",
     ],
     secondary: [
       "propuestas políticas Costa Rica 2026",
-      "candidatos Costa Rica",
       "votación 2026",
       "política Costa Rica",
       "partidos políticos costarricenses",
@@ -34,17 +36,19 @@ export const SEO_CONFIG = {
       "ideología política",
       "primera ronda elecciones Costa Rica 2026",
       "segunda ronda elecciones Costa Rica 2026",
+      "TSE Costa Rica",
+      "dónde votar 2026",
     ],
   },
 
   // Meta descriptions
   descriptions: {
-    home: "Plataforma educativa e interactiva sobre las elecciones presidenciales de Costa Rica 2026. Conoce candidatos, propuestas, participa en tests políticos y mantente informado.",
-    candidates: "Descubre los candidatos presidenciales de Costa Rica 2026. Información completa sobre sus propuestas, trayectoria y posiciones políticas.",
-    proposals: "Propuestas de los partidos políticos para las elecciones Costa Rica 2026. Analiza y compara las posiciones en educación, economía, seguridad y más.",
-    timeline: "Cronograma electoral de Costa Rica 2026. Fechas importantes, primarias y eventos clave de las elecciones presidenciales.",
-    education: "Educación cívica sobre elecciones. Aprende sobre el sistema electoral costarricense y tu derecho al voto.",
-    quiz: "Test político interactivo. Descubre tu posición en la brújula política y compárala con los candidatos de Costa Rica 2026.",
+    home: "Tu guía oficial no gubernamental para las Elecciones 2026 en Costa Rica. Conoce a todos los Candidatos a Presidente, sus propuestas, el cronograma electoral y aprende cómo votar informado.",
+    candidates: "Lista completa y actualizada de Candidatos Costa Rica 2026. Perfiles detallados, planes de gobierno y trayectoria de los aspirantes a la presidencia.",
+    proposals: "Comparador de propuestas de gobierno Elecciones 2026. Economía, seguridad, educación y salud: ¿Qué proponen los candidatos en Costa Rica?",
+    timeline: "Calendario oficial de las Elecciones Costa Rica 2026. Fechas clave, debates presidenciales y días de votación.",
+    education: "Guía para el votante: Todo lo que necesitas saber sobre las Elecciones en Costa Rica. Requisitos, centros de votación y educación cívica.",
+    quiz: "Quiz de Afinidad Política 2026: Descubre qué candidato a la presidencia de Costa Rica se alinea mejor con tus ideas y valores.",
   },
 
   // Open Graph / Social Media
@@ -254,6 +258,28 @@ export function generateFAQSchema(faqs: Array<{ question: string; answer: string
         "text": faq.answer,
       },
     })),
+  };
+}
+
+/**
+ * Genera JSON-LD específico para la elección (Election Schema)
+ * Crítico para aparecer en "Elecciones Costa Rica"
+ */
+export function generateElectionSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Election",
+    "name": "Elecciones Presidenciales Costa Rica 2026",
+    "description": "Elecciones generales para elegir Presidente, Vicepresidentes y Diputados de la República de Costa Rica para el período 2026-2030.",
+    "startDate": "2026-02-01",
+    "location": {
+      "@type": "Country",
+      "name": "Costa Rica"
+    },
+    "candidate": {
+      "@type": "Person",
+      "name": "Candidatos Presidenciales 2026"
+    }
   };
 }
 

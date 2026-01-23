@@ -1,7 +1,7 @@
 import { Inter, Poppins } from "next/font/google";
 import { Header, Footer } from "@/components/layout";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
-import { SEO_CONFIG, generateWebsiteSchema } from "@/lib/seo.config";
+import { SEO_CONFIG, generateWebsiteSchema, generateElectionSchema } from "@/lib/seo.config";
 import { GravityStarsBackground } from "@/components/ui";
 // import StyledComponentsRegistry from "./registry"; // Removed - not using Ant Design
 import "./globals.css";
@@ -98,6 +98,14 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(generateWebsiteSchema()),
+          }}
+        />
+
+        {/* Structured Data (JSON-LD) - Election Event */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(generateElectionSchema()),
           }}
         />
         

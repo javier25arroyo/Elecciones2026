@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import Image from "next/image";
 import type { Party } from "@/lib/content";
 import { Badge } from "@/components/ui/Badge";
@@ -369,6 +370,27 @@ function CandidateCard({ party, index }: CandidateCardProps) {
                     </motion.a>
                   </div>
                 )}
+
+                {/* Full Profile Link */}
+                <div className="px-1 pb-1">
+                  <Link
+                    href={`/candidatos/${party.id || party.name.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}`}
+                    className="group/link relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl border border-white/20 bg-white/5 py-3 text-xs font-black uppercase tracking-widest text-white shadow-md transition-all duration-300 hover:bg-white/10 hover:border-white/40"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <span>Ver Perfil Completo</span>
+                    <svg 
+                      width="12" 
+                      height="12" 
+                      viewBox="0 0 12 12" 
+                      fill="none" 
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="transition-transform duration-300 group-hover/link:translate-x-1"
+                    >
+                      <path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </Link>
+                </div>
               </div>
             </motion.div>
           )}
