@@ -1,0 +1,48 @@
+# llms.txt
+
+site: https://elecciones2026.lat
+name: Elecciones Costa Rica 2026
+language: es-CR
+summary: Guía informativa no gubernamental sobre las Elecciones 2026 en Costa Rica. Incluye candidatos, propuestas, cronograma electoral, educación cívica y un quiz de afinidad política.
+contact: mailto:contact@elecciones2026.lat
+sitemap: https://elecciones2026.lat/sitemap.xml
+robots: https://elecciones2026.lat/robots.txt
+
+sections:
+	- name: Inicio
+		url: https://elecciones2026.lat/
+		description: Portada con resumen y accesos rápidos a secciones clave.
+	- name: Candidatos
+		url: https://elecciones2026.lat/candidatos
+		description: Información de candidatos presidenciales y perfiles.
+	- name: Propuestas
+		url: https://elecciones2026.lat/propuestas
+		description: Comparador de propuestas por tema.
+	- name: Cronograma
+		url: https://elecciones2026.lat/cronograma
+		description: Fechas y eventos del calendario electoral.
+	- name: Educación
+		url: https://elecciones2026.lat/educacion
+		description: Contenido cívico para votar informado.
+	- name: Quiz
+		url: https://elecciones2026.lat/quiz
+		description: Quiz de afinidad política (anónimo).
+	- name: Términos
+		url: https://elecciones2026.lat/terminos
+		description: Términos y condiciones.
+	- name: Privacidad
+		url: https://elecciones2026.lat/privacidad
+		description: Política de privacidad.
+
+content_policy:
+	- No es un sitio gubernamental oficial.
+	- No solicita datos sensibles.
+	- Enfocado en educación cívica y acceso a información pública.
+
+structured_data:
+	- WebSite
+	- Organization
+	- Election
+
+social:
+	- https://github.com/javier25arroyo
