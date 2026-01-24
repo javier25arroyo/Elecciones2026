@@ -12,11 +12,6 @@
   "categories": ["education", "news", "politics"],
   "icons": [
     {
-      "src": "/assets/others/FlagCosta_Rica.ico",
-      "sizes": "48x48",
-      "type": "image/x-icon"
-    },
-    {
       "src": "/assets/others/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",

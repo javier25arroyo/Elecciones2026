@@ -264,7 +264,7 @@ function CandidateCard({ party, index }: CandidateCardProps) {
         </div>
 
         {/* Tags Pills */}
-        <div className="mb-8 flex h-[3.5rem] shrink-0 flex-wrap items-center justify-center gap-2 content-center">
+        <div className="mb-4 flex h-[3.5rem] shrink-0 flex-wrap items-center justify-center gap-2 content-center">
           {tags.map((tag) => (
             <motion.span
               key={tag.label}
@@ -281,6 +281,27 @@ function CandidateCard({ party, index }: CandidateCardProps) {
           ))}
         </div>
 
+        {/* Presidential Formula - Always Visible */}
+        {(candidate?.first_vice_president || candidate?.second_vice_president) && (
+            <div className="mb-6 w-full shrink-0">
+              <h4 className="mb-2 text-[10px] font-black uppercase tracking-widest text-white/50">Fórmula Presidencial</h4>
+              <div className="flex flex-col items-center justify-center gap-1 text-xs text-white/90">
+                {candidate.first_vice_president && (
+                  <p className="flex items-center gap-2">
+                    <span className="font-bold text-white/60 text-[10px] uppercase">1.ª:</span> 
+                    <span className="truncate max-w-[200px]">{candidate.first_vice_president}</span>
+                  </p>
+                )}
+                {candidate.second_vice_president && (
+                  <p className="flex items-center gap-2">
+                    <span className="font-bold text-white/60 text-[10px] uppercase">2.ª:</span> 
+                    <span className="truncate max-w-[200px]">{candidate.second_vice_president}</span>
+                  </p>
+                )}
+              </div>
+            </div>
+        )}
+
         {/* Expanded Content */}
         <AnimatePresence>
           {isExpanded && (
@@ -291,9 +312,9 @@ function CandidateCard({ party, index }: CandidateCardProps) {
               transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
               className="w-full overflow-hidden"
             >
-              <div className="mb-6 flex h-[350px] flex-col justify-between space-y-6 border-t border-white/10 pt-6 text-left">
+              <div className="mb-2 flex flex-col space-y-6 border-t border-white/10 pt-6 text-left">
                 {/* Content Section */}
-                <div className="flex-1 space-y-6 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
+                <div className="flex-1 space-y-6">
                   {party.values && party.values.length > 0 && (
                     <div>
                       <h4 className="mb-3 text-[10px] font-black uppercase tracking-widest text-white/50">Valores Clave</h4>
@@ -307,97 +328,85 @@ function CandidateCard({ party, index }: CandidateCardProps) {
                       </ul>
                     </div>
                   )}
-                  
-                  {(candidate?.first_vice_president || candidate?.second_vice_president) && (
-                    <div>
-                      <h4 className="mb-2 text-[10px] font-black uppercase tracking-widest text-white/50">Fórmula Presidencial</h4>
-                      <div className="space-y-1 text-xs text-white/90">
-                        {candidate.first_vice_president && (
-                          <p><span className="font-bold text-white/60">1er:</span> {candidate.first_vice_president}</p>
-                        )}
-                        {candidate.second_vice_president && (
-                          <p><span className="font-bold text-white/60">2do:</span> {candidate.second_vice_president}</p>
-                        )}
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* Button Section - Always at bottom */}
-                {party.plan_url && (
-                  <div className="pt-2 px-1 pb-1">
-                    <motion.a
-                      href={party.plan_url}
-                      download={`${party.name.replace(/\s+/g, "_")}_Plan_de_Gobierno.pdf`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      title="Descargar Plan de Gobierno (PDF)"
-                      className="relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-[var(--accent-color)] py-3 text-xs font-black uppercase tracking-widest text-white shadow-md transition-shadow duration-300"
-                      onClick={(e) => e.stopPropagation()}
-                      onPointerDown={(e) => e.stopPropagation()}
-                      whileHover={{ 
-                        scale: 1.02,
-                        boxShadow: "0 8px 24px -4px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1)",
-                        y: -2
-                      }}
-                      whileTap={{ scale: 0.98, y: 0 }}
-                      transition={{
-                        duration: 0.2,
-                        ease: "easeOut"
-                      }}
-                    >
-                      <motion.span
-                        className="pointer-events-none absolute inset-0 bg-white/0 rounded-xl"
-                        whileHover={{ 
-                          backgroundColor: "rgba(255, 255, 255, 0.1)"
-                        }}
-                        transition={{ duration: 0.3 }}
-                      />
-                      <motion.span
-                        className="relative z-10"
-                        whileHover={{ 
-                          y: [0, -2, 0],
-                        }}
-                        transition={{ 
-                          duration: 0.6, 
-                          repeat: Infinity,
-                          ease: "easeInOut" 
-                        }}
-                      >
-                        <Download className="h-4 w-4" />
-                      </motion.span>
-                      <span className="relative z-10">Plan de Gobierno</span>
-                    </motion.a>
-                  </div>
-                )}
-
-                {/* Full Profile Link */}
-                <div className="px-1 pb-1">
-                  <Link
-                    href={`/candidatos/${party.id || party.name.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}`}
-                    className="group/link relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl border border-white/20 bg-white/5 py-3 text-xs font-black uppercase tracking-widest text-white shadow-md transition-all duration-300 hover:bg-white/10 hover:border-white/40"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <span>Ver Perfil Completo</span>
-                    <svg 
-                      width="12" 
-                      height="12" 
-                      viewBox="0 0 12 12" 
-                      fill="none" 
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="transition-transform duration-300 group-hover/link:translate-x-1"
-                    >
-                      <path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </Link>
                 </div>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
 
+        {/* Buttons Section - Always Visible & Aligned Bottom */}
+        <div className="mt-auto w-full space-y-3 pt-4">
+            {party.plan_url && (
+              <div className="px-1">
+                <motion.a
+                  href={party.plan_url}
+                  download={`${party.name.replace(/\s+/g, "_")}_Plan_de_Gobierno.pdf`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Descargar Plan de Gobierno (PDF)"
+                  className="relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-[var(--accent-color)] py-3 text-xs font-black uppercase tracking-widest text-white shadow-md transition-shadow duration-300"
+                  onClick={(e) => e.stopPropagation()}
+                  onPointerDown={(e) => e.stopPropagation()}
+                  whileHover={{ 
+                    scale: 1.02,
+                    boxShadow: "0 8px 24px -4px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1)",
+                    y: -2
+                  }}
+                  whileTap={{ scale: 0.98, y: 0 }}
+                  transition={{
+                    duration: 0.2,
+                    ease: "easeOut"
+                  }}
+                >
+                  <motion.span
+                    className="pointer-events-none absolute inset-0 bg-white/0 rounded-xl"
+                    whileHover={{ 
+                      backgroundColor: "rgba(255, 255, 255, 0.1)"
+                    }}
+                    transition={{ duration: 0.3 }}
+                  />
+                  <motion.span
+                    className="relative z-10"
+                    whileHover={{ 
+                      y: [0, -2, 0],
+                    }}
+                    transition={{ 
+                      duration: 0.6, 
+                      repeat: Infinity,
+                      ease: "easeInOut" 
+                    }}
+                  >
+                    <Download className="h-4 w-4" />
+                  </motion.span>
+                  <span className="relative z-10">Plan de Gobierno</span>
+                </motion.a>
+              </div>
+            )}
+
+            {/* Full Profile Link */}
+            <div className="px-1">
+              <Link
+                href={`/candidatos/${party.id || party.name.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}`}
+                className="group/link relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl border border-white/20 bg-white/5 py-3 text-xs font-black uppercase tracking-widest text-white shadow-md transition-all duration-300 hover:bg-white/10 hover:border-white/40"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <span>Ver Perfil Completo</span>
+                <svg 
+                  width="12" 
+                  height="12" 
+                  viewBox="0 0 12 12" 
+                  fill="none" 
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="transition-transform duration-300 group-hover/link:translate-x-1"
+                >
+                  <path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </Link>
+            </div>
+        </div>
+
         {/* Footer Toggle */}
-        <div className="mt-auto flex w-full flex-col items-center gap-2 pt-4">
+        <div className="flex w-full flex-col items-center gap-2 pt-4">
           <motion.div 
             className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent"
             whileHover={{ backgroundColor: "rgba(255, 255, 255, 0.3)" }}

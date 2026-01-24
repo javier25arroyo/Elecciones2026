@@ -81,7 +81,7 @@ export default function RootLayout({
         
         {/* Links */}
         <link rel="canonical" href={normalizedSiteUrl} />
-        <link rel="icon" href={`${basePath}/assets/others/FlagCosta_Rica.ico`} />
+        <link rel="icon" href={`${basePath}/assets/others/icon-192.png`} sizes="192x192" type="image/png" />
         <link rel="manifest" href={`${basePath}/manifest.json`} />
         <link rel="alternate" hrefLang="es-CR" href={normalizedSiteUrl} />
         <link rel="alternate" hrefLang="es" href={normalizedSiteUrl} />
