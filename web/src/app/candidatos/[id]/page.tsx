@@ -84,11 +84,11 @@ export default async function CandidatePage({ params }: Props) {
         {/* Breadcrumb / Back Navigation */}
         <div className="mb-8">
           <Link 
-            href="/candidatos" 
+            href="/" 
             className="inline-flex items-center text-sm text-slate-400 hover:text-white transition-colors"
           >
             <ChevronLeft className="mr-1 h-4 w-4" />
-            Volver a Candidatos
+            Volver al Inicio
           </Link>
         </div>
 
@@ -281,12 +281,23 @@ export default async function CandidatePage({ params }: Props) {
                   <div className="pt-2">
                     <dt className="text-slate-500 mb-2">Posturas Clave</dt>
                     <dd className="space-y-2">
-                      {Object.entries(party.stances).map(([topic, stance]) => (
-                        <div key={topic} className="group">
-                          <span className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-0.5">{topic}</span>
-                          <span className="text-slate-300 leading-snug block group-hover:text-white transition-colors">{stance}</span>
-                        </div>
-                      ))}
+                      {Object.entries(party.stances).map(([topic, stance]) => {
+                        const topicTranslations: Record<string, string> = {
+                          education: "Educación",
+                          economy: "Economía",
+                          environment: "Ambiente",
+                        };
+                        const translatedTopic = topicTranslations[topic] || topic;
+                        
+                        return (
+                          <div key={topic} className="group">
+                            <span className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-0.5">
+                              {translatedTopic}
+                            </span>
+                            <span className="text-slate-300 leading-snug block group-hover:text-white transition-colors">{stance}</span>
+                          </div>
+                        );
+                      })}
                     </dd>
                   </div>
                 )}

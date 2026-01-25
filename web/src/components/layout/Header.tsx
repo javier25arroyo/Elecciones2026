@@ -6,10 +6,10 @@ import { Flag, Menu, X, Github } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
-  { href: "#candidatos", label: "Candidatos" },
-  { href: "#timeline", label: "Cronograma" },
-  { href: "#educacion", label: "¿Cómo votar?" },
-  { href: "#quiz", label: "Quiz" },
+  { href: "/#candidatos", label: "Candidatos" },
+  { href: "/#timeline", label: "Cronograma" },
+  { href: "/#educacion", label: "¿Cómo votar?" },
+  { href: "/#quiz", label: "Quiz" },
 ];
 
 export function Header() {

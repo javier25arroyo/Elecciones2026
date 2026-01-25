@@ -840,7 +840,7 @@
       },
       {
         "id": "estabilidad-fiscal",
-        "text": "Los planes hablan de responsibility fiscal sin sacrificar inversión social; ¿apoyás ese equilibrio?",
+        "text": "Los planes hablan de responsabilidad fiscal sin sacrificar inversión social; ¿apoyás ese equilibrio?",
         "axis": { "econ": 0.4, "social": 0.1 },
         "icon": "ScaleIcon",
         "example": "Mantener finanzas públicas sanas mientras se invierte en educación, salud y programas sociales de forma equilibrada."
