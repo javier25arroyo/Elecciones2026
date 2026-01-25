@@ -1,0 +1,139 @@
+{
+  "source": {
+    "authority": "TSE Costa Rica - Fichas de candidaturas (Elecciones Nacionales 2026)",
+    "province_url": "https://www.tse.go.cr/fichas/candidaturas/D/4/",
+    "generated_at": "2026-01-25T21:45:49.365Z"
+  },
+  "election": {
+    "country": "Costa Rica",
+    "year": 2026,
+    "office": "Diputaciones"
+  },
+  "province": {
+    "id": 4,
+    "name": "Heredia"
+  },
+  "by_party": {
+    "PJSC": {
+      "party_code": "PJSC",
+      "party_name": "PARTIDO JUSTICIA SOCIAL COSTARRICENSE",
+      "tse_list_url": "https://www.tse.go.cr/fichas/candidaturas/D/4/p-PJSC/",
+      "candidates": []
+    },
+    "PPSD": {
+      "party_code": "PPSD",
+      "party_name": "PARTIDO PROGRESO SOCIAL DEMOCRATICO",
+      "tse_list_url": "https://www.tse.go.cr/fichas/candidaturas/D/4/p-PPSD/",
+      "candidates": []
+    },
+    "PUCD": {
+      "party_code": "PUCD",
+      "party_name": "PARTIDO UNION COSTARRICENSE DEMOCRATICA",
+      "tse_list_url": "https://www.tse.go.cr/fichas/candidaturas/D/4/p-PUCD/",
+      "candidates": []
+    },
+    "UP": {
+      "party_code": "UP",
+      "party_name": "PARTIDO UNIDOS PODEMOS",
+      "tse_list_url": "https://www.tse.go.cr/fichas/candidaturas/D/4/p-UP/",
+      "candidates": []
+    },
+    "PNG": {
+      "party_code": "PNG",
+      "party_name": "PARTIDO NUEVA GENERACION",
+      "tse_list_url": "https://www.tse.go.cr/fichas/candidaturas/D/4/p-PNG/",
+      "candidates": []
+    },
+    "PEL": {
+      "party_code": "PEL",
+      "party_name": "PARTIDO ESPERANZA Y LIBERTAD",
+      "tse_list_url": "https://www.tse.go.cr/fichas/candidaturas/D/4/p-PEL/",
+      "candidates": []
+    },
+    "PDLCT": {
+      "party_code": "PDLCT",
+      "party_name": "PARTIDO DE LA CLASE TRABAJADORA",
+      "tse_list_url": "https://www.tse.go.cr/fichas/candidaturas/D/4/p-PDLCT/",
+      "candidates": []
+    },
+    "CDS": {
+      "party_code": "CDS",
+      "party_name": "PARTIDO CENTRO DEMOCRATICO Y SOCIAL",
+      "tse_list_url": "https://www.tse.go.cr/fichas/candidaturas/D/4/p-CDS/",
+      "candidates": []
+    },
+    "CAC": {
+      "party_code": "CAC",
+      "party_name": "PARTIDO COALICION AGENDA CIUDADANA",
+      "tse_list_url": "https://www.tse.go.cr/fichas/candidaturas/D/4/p-CAC/",
+      "candidates": []
+    },
+    "PNR": {
+      "party_code": "PNR",
+      "party_name": "PARTIDO NUEVA REPUBLICA",
+      "tse_list_url": "https://www.tse.go.cr/fichas/candidaturas/D/4/p-PNR/",
+      "candidates": []
+    },
+    "ACRM": {
+      "party_code": "ACRM",
+      "party_name": "PARTIDO AQUI COSTA RICA MANDA",
+      "tse_list_url": "https://www.tse.go.cr/fichas/candidaturas/D/4/p-ACRM/",
+      "candidates": []
+    },
+    "PLP": {
+      "party_code": "PLP",
+      "party_name": "PARTIDO LIBERAL PROGRESISTA",
+      "tse_list_url": "https://www.tse.go.cr/fichas/candidaturas/D/4/p-PLP/",
+      "candidates": []
+    },
+    "PPSO": {
+      "party_code": "PPSO",
+      "party_name": "PARTIDO PUEBLO SOBERANO",
+      "tse_list_url": "https://www.tse.go.cr/fichas/candidaturas/D/4/p-PPSO/",
+      "candidates": []
+    },
+    "PA": {
+      "party_code": "PA",
+      "party_name": "PARTIDO AVANZA",
+      "tse_list_url": "https://www.tse.go.cr/fichas/candidaturas/D/4/p-PA/",
+      "candidates": []
+    },
+    "PEN": {
+      "party_code": "PEN",
+      "party_name": "PARTIDO ESPERANZA NACIONAL",
+      "tse_list_url": "https://www.tse.go.cr/fichas/candidaturas/D/4/p-PEN/",
+      "candidates": []
+    },
+    "PLN": {
+      "party_code": "PLN",
+      "party_name": "PARTIDO LIBERACION NACIONAL",
+      "tse_list_url": "https://www.tse.go.cr/fichas/candidaturas/D/4/p-PLN/",
+      "candidates": []
+    },
+    "CR1": {
+      "party_code": "CR1",
+      "party_name": "PARTIDO ALIANZA COSTA RICA PRIMERO",
+      "tse_list_url": "https://www.tse.go.cr/fichas/candidaturas/D/4/p-CR1/",
+      "candidates": []
+    },
+    "PIN": {
+      "party_code": "PIN",
+      "party_name": "PARTIDO INTEGRACION NACIONAL",
+      "tse_list_url": "https://www.tse.go.cr/fichas/candidaturas/D/4/p-PIN/",
+      "candidates": []
+    },
+    "FA": {
+      "party_code": "FA",
+      "party_name": "PARTIDO FRENTE AMPLIO",
+      "tse_list_url": "https://www.tse.go.cr/fichas/candidaturas/D/4/p-FA/",
+      "candidates": []
+    },
+    "PUSC": {
+      "party_code": "PUSC",
+      "party_name": "PARTIDO UNIDAD SOCIAL CRISTIANA",
+      "tse_list_url": "https://www.tse.go.cr/fichas/candidaturas/D/4/p-PUSC/",
+      "candidates": []
+    }
+  },
+  "names": []
+}
