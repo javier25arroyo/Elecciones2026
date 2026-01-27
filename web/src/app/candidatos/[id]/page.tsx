@@ -1,3 +1,5 @@
+import { promises as fs } from "node:fs";
+import path from "node:path";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -5,6 +7,7 @@ import { notFound } from "next/navigation";
 import { getContent } from "@/lib/content";
 import { Badge } from "@/components/ui/Badge";
 import { Button, LinkButton } from "@/components/ui/Button";
+import { DeputiesSection } from "@/components/sections/DeputiesSection";
 import { 
   ChevronLeft, 
   FileText, 
@@ -53,6 +56,41 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+async function getDeputiesData(partyName: string) {
+  try {
+    const dirPath = path.join(process.cwd(), "public/diputaciones_por_partido");
+    const files = await fs.readdir(dirPath);
+    
+    // Normalize party name for comparison (remove acronyms in parens, uppercase)
+    // e.g., "Partido Liberación Nacional (PLN)" -> "PARTIDO LIBERACION NACIONAL"
+    const normalizedPartyName = partyName
+      .toUpperCase()
+      .replace(/\s*\(.*?\)\s*/g, "") // Remove (Acronym)
+      .trim()
+      .normalize("NFD").replace(/[\u0300-\u036f]/g, ""); // Remove accents
+
+    // Find matching file
+    const match = files.find(file => {
+      const normalizedFile = file
+        .replace(".json", "")
+        .toUpperCase()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      
+      return normalizedPartyName.includes(normalizedFile) || normalizedFile.includes(normalizedPartyName);
+    });
+
+    if (!match) return null;
+
+    const filePath = path.join(dirPath, match);
+    const content = await fs.readFile(filePath, "utf8");
+    const data = JSON.parse(content);
+    return data.provincias;
+  } catch (error) {
+    console.error("Error loading deputies data:", error);
+    return null;
+  }
+}
+
 export default async function CandidatePage({ params }: Props) {
   const { id } = await params;
   const { parties } = await getContent();
@@ -64,6 +102,7 @@ export default async function CandidatePage({ params }: Props) {
 
   const candidate = party.presidential_candidate;
   const accentColor = party.accent_color || "#2563eb";
+  const deputiesData = await getDeputiesData(party.name);
 
   // Helper function to map social icons
   const getSocialIcon = (network: string) => {
@@ -252,6 +291,11 @@ export default async function CandidatePage({ params }: Props) {
                   ))}
                 </div>
               </section>
+            )}
+
+            {/* Deputies Section */}
+            {deputiesData && (
+              <DeputiesSection data={deputiesData} partyName={party.name} />
             )}
 
           </div>

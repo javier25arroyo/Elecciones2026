@@ -1,0 +1,37 @@
+{
+  "party_code": "PDLCT",
+  "party_name": "PARTIDO DE LA CLASE TRABAJADORA",
+  "provincias": {
+    "Alajuela": [
+      "OBETH MORALES BARQUERO",
+      "REINA REBECA CHAVES GONZALEZ",
+      "RONALD GUSTAVO ARDON JIMENEZ"
+    ],
+    "Cartago": [
+      "DIANA HERRERO VILLARREAL",
+      "JOSE ROBERTO HERRERA ZUÑIGA"
+    ],
+    "Guanacaste": [
+      "JOUSETH ANDREY CHAVES RODRIGUEZ",
+      "MINERVA NATALIA SOLANO CAMPOS"
+    ],
+    "Heredia": [
+      "ESTEBAN JOSUE BELTRAN ULATE"
+    ],
+    "Limón": [
+      "DANIELA QUESADA AVILA",
+      "MAIKOL GIOVANNI HERNANDEZ ARIAS"
+    ],
+    "Puntarenas": [
+      "YEIMY MARIA CASTRO VALVERDE",
+      "LESTER MUÑOZ SOSA",
+      "DANIA MARITZA OBANDO CASTILLO",
+      "FREDDY GERARDO RODRIGUEZ CORDERO"
+    ],
+    "San José": [
+      "ALEXIS CASANOVA MORENO",
+      "VERONICA GARCIA CASTRO",
+      "DAVID HERNANDEZ BRENES"
+    ]
+  }
+}

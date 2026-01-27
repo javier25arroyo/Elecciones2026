@@ -1,0 +1,39 @@
+{
+  "party_code": "PA",
+  "party_name": "PARTIDO AVANZA",
+  "provincias": {
+    "Alajuela": [
+      "FRANCISCO JOSE PERDOMO ARGUELLO",
+      "LAURA CRISTINA RODRIGUEZ VARELA",
+      "IGNACIO ALBERTO ALPIZAR CASTRO",
+      "DANIELA BEATRIZ BRENES GONZALEZ"
+    ],
+    "Cartago": [
+      "PAULA JENSY VILLALTA OLIVARES",
+      "JAVIER FRANCISCO VARGAS HERNANDEZ"
+    ],
+    "Guanacaste": [
+      "BRIAN DOUGLAS CAMPBELL JIMENEZ",
+      "MARJORIE LOPEZ YONG",
+      "JHONNIER ORDOÑEZ HERRERA"
+    ],
+    "Heredia": [
+      "SANDRA HERNANDEZ HERNANDEZ",
+      "STEVEN BARAHONA GUTIERREZ",
+      "SIGRID JEANNETTE CRUZ MORALES"
+    ],
+    "Limón": [
+      "FERNANDO MENDEZ GRANADOS"
+    ],
+    "Puntarenas": [
+      "FLORIBETH LOPEZ UGALDE",
+      "JUAN ATENCIO OBANDO"
+    ],
+    "San José": [
+      "LAURA SAUMA SOLANO",
+      "JORGE ARTURO BARBOZA BERROCAL",
+      "STEPHANIE DURAN WONG",
+      "ALEXANDER SANCHEZ GRANADOS"
+    ]
+  }
+}
