@@ -79,6 +79,8 @@ export function CandidatesSection({ parties }: CandidatesSectionProps) {
           <div className="flex-grow">
             <input
               type="search"
+              id="search-candidates"
+              name="search-candidates"
               placeholder="Buscar candidato o partido..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -183,18 +185,13 @@ function CandidateCard({ party, index }: CandidateCardProps) {
         duration: 0.5,
         ease: [0.23, 1, 0.32, 1]
       }}
-      onClick={() => setIsExpanded(!isExpanded)}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          setIsExpanded(!isExpanded);
-        }
+      // Keep click for mouse users, but remove semantic button role from container
+      onClick={(e) => {
+        // Prevent triggering if clicking on interactive elements
+        if ((e.target as HTMLElement).closest('a, button')) return;
+        setIsExpanded(!isExpanded);
       }}
-      aria-expanded={isExpanded}
-      aria-label={`Ver más detalles de ${candidateName}`}
-      className={`scroll-reveal scroll-reveal-delay-${Math.min(index % 6 + 1, 5)} group relative flex flex-col rounded-[2rem] border border-white/10 bg-white/[0.06] shadow-xl backdrop-blur-xl will-change-transform content-visibility-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900`}
+      className={`scroll-reveal scroll-reveal-delay-${Math.min(index % 6 + 1, 5)} group relative flex flex-col rounded-[2rem] border border-white/10 bg-white/[0.06] shadow-xl backdrop-blur-xl will-change-transform content-visibility-auto`}
     >
       {/* Glow Effect on Hover */}
       <motion.div 
@@ -311,6 +308,7 @@ function CandidateCard({ party, index }: CandidateCardProps) {
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
               className="w-full overflow-hidden"
+              id={`details-${party.name.replace(/\s+/g, '-')}`}
             >
               <div className="mb-2 flex flex-col space-y-6 border-t border-white/10 pt-6 text-left">
                 {/* Content Section */}
@@ -412,7 +410,16 @@ function CandidateCard({ party, index }: CandidateCardProps) {
             whileHover={{ backgroundColor: "rgba(255, 255, 255, 0.3)" }}
             transition={{ duration: 0.5, ease: "easeOut" }}
           ></motion.div>
-          <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-white/40 transition-all duration-700 ease-out group-hover:text-[var(--accent-color)]">
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsExpanded(!isExpanded);
+            }}
+            aria-expanded={isExpanded}
+            aria-controls={`details-${party.name.replace(/\s+/g, '-')}`}
+            className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-white/40 transition-all duration-700 ease-out hover:text-[var(--accent-color)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-color)] focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 rounded-sm"
+          >
             <motion.span 
               className="block"
               animate={{ rotate: isExpanded ? 180 : 0 }}
@@ -423,7 +430,7 @@ function CandidateCard({ party, index }: CandidateCardProps) {
               </svg>
             </motion.span>
             {isExpanded ? "Menos info" : "Más detalles"}
-          </div>
+          </button>
         </div>
       </div>
     </motion.article>

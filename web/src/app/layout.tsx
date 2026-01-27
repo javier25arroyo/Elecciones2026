@@ -88,6 +88,7 @@ export default function RootLayout({
         
         {/* App Colors */}
         <meta name="theme-color" content="#002B7F" />
+        <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="Elecciones CR 2026" />

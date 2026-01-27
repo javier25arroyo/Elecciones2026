@@ -8,6 +8,7 @@ import { getContent } from "@/lib/content";
 import { Badge } from "@/components/ui/Badge";
 import { Button, LinkButton } from "@/components/ui/Button";
 import { DeputiesSection } from "@/components/sections/DeputiesSection";
+import ConsoleDemocracyMessage from "@/components/ConsoleDemocracyMessage";
 import { 
   ChevronLeft, 
   FileText, 
@@ -120,6 +121,7 @@ export default async function CandidatePage({ params }: Props) {
   return (
     <div className="min-h-screen bg-slate-950 pt-20 pb-12">
       <div className="container mx-auto max-w-5xl px-4 sm:px-6">
+        <ConsoleDemocracyMessage />
         {/* Breadcrumb / Back Navigation */}
         <div className="mb-8">
           <Link 
