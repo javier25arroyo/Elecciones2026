@@ -30,6 +30,8 @@
 - [📝 Roadmap](#-roadmap)
 - [📄 Licencia](#-licencia)
 
+- [🔧 Estructura del proyecto](#-estructura-del-proyecto)
+
 ---
 
 ## 📖 Descripción
@@ -41,6 +43,27 @@ La plataforma permite **explorar perfiles de partidos y candidaturas**, conocer 
 El proyecto prioriza **transparencia, accesibilidad y experiencia de usuario**, con una interfaz moderna y responsiva que funciona bien en móviles y escritorio. Está pensado como un recurso educativo, neutral y fácil de navegar para impulsar una participación informada.
 
 ---
+
+## 🔧 Estructura del proyecto
+
+Este repositorio contiene la aplicación web y recursos relacionados. A continuación se muestra la estructura principal y archivos relevantes para contribuir:
+
+- `web/` — Código fuente del frontend (Next.js App Router, TypeScript).
+   - `app/` — Rutas y páginas de la aplicación Next.js.
+   - `components/` — Componentes UI reutilizables.
+   - `lib/` — Utilidades, SEO y helpers.
+   - `public/` — Archivos estáticos y assets (banderas, planes, etc.).
+   - `.github/` — Workflows y plantillas (en la exportación local pueden aparecer en `web/.github`).
+
+- Archivos de gobernanza y contribución (en `web`):
+   - [web/CODE_OF_CONDUCT.md](web/CODE_OF_CONDUCT.md) — Código de conducta del proyecto.
+   - [web/CONTRIBUTING.md](web/CONTRIBUTING.md) — Guía para contribuir (flujo de trabajo, estilo de commits, pruebas).
+   - [web/.github/ISSUE_TEMPLATE/bug_report.md](web/.github/ISSUE_TEMPLATE/bug_report.md) — Plantilla para reportar bugs.
+   - [web/.github/ISSUE_TEMPLATE/feature_request.md](web/.github/ISSUE_TEMPLATE/feature_request.md) — Plantilla para solicitar características.
+   - [web/.github/PULL_REQUEST_TEMPLATE.md](web/.github/PULL_REQUEST_TEMPLATE.md) — Plantilla para pull requests.
+
+Si trabajas localmente, entra a `web/` para instalar dependencias y ejecutar el proyecto (ver sección "Instalación y Uso").
+
 
 ## 🧩 Qué encontrarás
 
