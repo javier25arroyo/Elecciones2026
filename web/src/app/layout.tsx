@@ -3,7 +3,6 @@ import { Header, Footer } from "@/components/layout";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { SEO_CONFIG, generateWebsiteSchema, generateElectionSchema } from "@/lib/seo.config";
 import { GravityStarsBackground } from "@/components/ui";
-// import StyledComponentsRegistry from "./registry"; // Removed - not using Ant Design
 import "./globals.css";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
