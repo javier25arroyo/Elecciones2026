@@ -50,7 +50,7 @@ export function CandidatesSection({ parties }: CandidatesSectionProps) {
   }, [parties, filter, searchTerm]);
 
   return (
-    <section id="candidatos" className="relative bg-gradient-to-b from-slate-900/95 via-[#0b2b6b]/80 to-slate-900/95 py-24 sm:py-32 lg:py-40 content-visibility-auto">
+    <section id="candidatos" className="relative bg-gradient-to-b from-slate-900/95 via-[#0b2b6b]/80 to-slate-900/95 py-24 sm:py-32 lg:py-40 content-visibility-auto" aria-labelledby="candidatos-heading">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(0,47,108,0.25),transparent_45%),radial-gradient(circle_at_80%_60%,rgba(206,17,38,0.25),transparent_45%)]" />
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
       <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent via-slate-900/30 to-slate-900" />
@@ -60,11 +60,11 @@ export function CandidatesSection({ parties }: CandidatesSectionProps) {
           <Badge variant="primary" className="mb-6 bg-white/10 px-5 py-2 text-sm font-bold text-white ring-1 ring-white/20">
             14+ Candidaturas Confirmadas
           </Badge>
-          <h2 className="text-balance font-display text-4xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl">
+          <h2 id="candidatos-heading" className="text-balance font-display text-4xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl">
             Conocé a los candidatos 2026
           </h2>
           <p className="mx-auto mt-8 max-w-3xl text-xl leading-relaxed text-white/80 lg:text-2xl">
-            Explorá los perfiles de cada candidato, sus propuestas y valores fundamentales.{" "}
+            Explorá los perfiles de cada candidato, sus propuestas y valores fundamentales. {" "}
             <br className="hidden md:block" />
             Información verificada para un voto consciente.
           </p>
@@ -136,6 +136,29 @@ function CandidateCard({ party, index }: CandidateCardProps) {
   const ref = useScrollReveal<HTMLElement>();
   const candidate = party.presidential_candidate;
   const logoUrl = party.logo_urls?.[0] || party.logo_url;
+
+  // SEO: Datos estructurados para cada candidato y partido
+  React.useEffect(() => {
+    if (typeof window !== "undefined" && candidate?.name) {
+      const scriptId = `ld-candidate-${party.name.replace(/\s+/g, "-")}`;
+      if (!document.getElementById(scriptId)) {
+        const script = document.createElement("script");
+        script.type = "application/ld+json";
+        script.id = scriptId;
+        script.innerHTML = JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Person",
+          "name": candidate.name,
+          "url": `${window.location.origin}/candidatos/${party.id || party.name.toLowerCase().replace(/\s+/g, "-")}`,
+          "image": candidate.photo_url || logoUrl,
+          "description": party.values?.join(", ") || "Candidato presidencial",
+          "jobTitle": "Candidato a la Presidencia de Costa Rica 2026",
+          "worksFor": { "@type": "Organization", "name": party.name }
+        });
+        document.head.appendChild(script);
+      }
+    }
+  }, [candidate, party, logoUrl]);
 
   const getInitials = (name: string) => {
     const parts = name.split(/\s+/).filter(Boolean);
@@ -226,11 +249,19 @@ function CandidateCard({ party, index }: CandidateCardProps) {
             transition={{ duration: 0.5, ease: "easeOut" }}
           >
             {candidate?.photo_url ? (
-              <Image src={candidate.photo_url} alt={`Foto de ${candidateName}`} fill className="object-cover" sizes="112px" loading="lazy" />
+              index < 3 ? (
+                <Image src={candidate.photo_url} alt={`Foto de ${candidateName}`} fill className="object-cover" sizes="112px" priority />
+              ) : (
+                <Image src={candidate.photo_url} alt={`Foto de ${candidateName}`} fill className="object-cover" sizes="112px" loading="lazy" />
+              )
             ) : logoUrl ? (
-              <Image src={logoUrl} alt={`Logo de ${party.name}`} fill className="object-contain p-4" sizes="112px" loading="lazy" />
+              index < 3 ? (
+                <Image src={logoUrl} alt={`Logo de ${party.name}`} fill className="object-contain p-4" sizes="112px" priority />
+              ) : (
+                <Image src={logoUrl} alt={`Logo de ${party.name}`} fill className="object-contain p-4" sizes="112px" loading="lazy" />
+              )
             ) : (
-              <div className="flex h-full w-full items-center justify-center text-3xl font-black text-[var(--accent-color)]">
+              <div className="flex h-full w-full items-center justify-center text-3xl font-black text-[var(--accent-color)]" aria-label={`Iniciales de ${candidateName}`}>
                 {getInitials(candidateName)}
               </div>
             )}

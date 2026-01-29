@@ -12,9 +12,11 @@ import {
   CheckCircle2
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { generateEventSchema } from "@/lib/seo.config";
 
 interface TimelineEvent {
   date: string;
+  isoDate: string;
   title: string;
   description: string;
   Icon: LucideIcon;
@@ -23,15 +25,37 @@ interface TimelineEvent {
 }
 
 const timelineEvents: TimelineEvent[] = [
-  { date: "1 Oct 2025", title: "Inicio de campaña", description: "Los partidos políticos inician oficialmente sus campañas electorales.", Icon: Palette, isPast: true, isCurrent: false },
-  { date: "15 Dic 2025", title: "Cierre de inscripciones", description: "Fecha límite para inscribir candidaturas ante el TSE.", Icon: FileText, isPast: true, isCurrent: false },
-  { date: "4 Ene 2026", title: "Período de debates", description: "Debates oficiales entre candidatos organizados por medios de comunicación.", Icon: Mic, isPast: false, isCurrent: true },
-  { date: "29 Ene 2026", title: "Cierre de campaña", description: "Último día permitido para actividades de campaña electoral.", Icon: Flag, isPast: false, isCurrent: false },
-  { date: "1 Feb 2026", title: "Día de elección", description: "Elecciones presidenciales y legislativas. ¡Tu voto cuenta!", Icon: Vote, isPast: false, isCurrent: false },
-  { date: "6 Abr 2026", title: "Segunda ronda", description: "Balotaje en caso de que ningún candidato obtenga el 40% de los votos.", Icon: RotateCcw, isPast: false, isCurrent: false },
+  { date: "1 Oct 2025", isoDate: "2025-10-01", title: "Inicio de campaña", description: "Los partidos políticos inician oficialmente sus campañas electorales.", Icon: Palette, isPast: true, isCurrent: false },
+  { date: "15 Dic 2025", isoDate: "2025-12-15", title: "Cierre de inscripciones", description: "Fecha límite para inscribir candidaturas ante el TSE.", Icon: FileText, isPast: true, isCurrent: false },
+  { date: "4 Ene 2026", isoDate: "2026-01-04", title: "Período de debates", description: "Debates oficiales entre candidatos organizados por medios de comunicación.", Icon: Mic, isPast: false, isCurrent: true },
+  { date: "29 Ene 2026", isoDate: "2026-01-29", title: "Cierre de campaña", description: "Último día permitido para actividades de campaña electoral.", Icon: Flag, isPast: false, isCurrent: false },
+  { date: "1 Feb 2026", isoDate: "2026-02-01", title: "Día de elección", description: "Elecciones presidenciales y legislativas. ¡Tu voto cuenta!", Icon: Vote, isPast: false, isCurrent: false },
+  { date: "6 Abr 2026", isoDate: "2026-04-06", title: "Segunda ronda", description: "Balotaje en caso de que ningún candidato obtenga el 40% de los votos.", Icon: RotateCcw, isPast: false, isCurrent: false },
 ];
 
 export function TimelineSection() {
+  // Generar datos estructurados para todos los eventos del cronograma
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      // Elimina scripts previos para evitar duplicados
+      document.querySelectorAll('script[data-timeline-event]').forEach(el => el.remove());
+      timelineEvents.forEach(event => {
+        const script = document.createElement("script");
+        script.type = "application/ld+json";
+        script.setAttribute('data-timeline-event', 'true');
+        script.innerHTML = JSON.stringify(
+          generateEventSchema({
+            name: event.title,
+            description: event.description,
+            startDate: new Date(event.isoDate).toISOString(),
+            location: "Costa Rica"
+          })
+        );
+        document.head.appendChild(script);
+      });
+    }
+  }, []);
+
   return (
     <section id="timeline" className="relative bg-gradient-to-b from-slate-900/95 via-[#0b2b6b]/80 to-slate-900/95 py-24 sm:py-32 lg:py-40 overflow-hidden content-visibility-auto">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(206,17,38,0.2),transparent_50%),radial-gradient(circle_at_25%_40%,rgba(0,47,108,0.2),transparent_50%)]" />
