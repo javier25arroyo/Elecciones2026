@@ -10,3 +10,4 @@ export { Tabs } from "./Tabs";
 export { GravityStarsBackground } from "./GravityStarsBackgroundResponsive";
 export { GravityStarsBackground as GravityStarsBackgroundDesktop } from "./GravityStarsBackground";
 export { GravityStarsBackgroundMobile } from "./GravityStarsBackgroundMobile";
+export { ElectedBanner } from "./ElectedBanner";

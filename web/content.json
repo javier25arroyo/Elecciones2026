@@ -867,5 +867,10 @@
         "example": "Salarios mínimos dignos actualizados, diálogo con sindicatos, negociación colectiva y protección del empleo."
       }
     ]
+  },
+  "elected_president": {
+    "name": "Laura Fernández",
+    "party": "Partido Pueblo soberano",
+    "date": "2026-02-03"
   }
 }

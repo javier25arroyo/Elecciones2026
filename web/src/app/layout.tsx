@@ -2,7 +2,7 @@ import { Inter, Poppins } from "next/font/google";
 import { Header, Footer } from "@/components/layout";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { SEO_CONFIG, generateWebsiteSchema, generateElectionSchema } from "@/lib/seo.config";
-import { GravityStarsBackground } from "@/components/ui";
+import { GravityStarsBackground, ElectedBanner } from "@/components/ui";
 import "./globals.css";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
@@ -111,6 +111,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <a href="#main-content" className="skip-link">
           Saltar al contenido principal
         </a>
+        <ElectedBanner />
         <main id="main-content" className="grow">
           {children}
         </main>
