@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 export default function ConsoleDemocracyMessage() {
   useEffect(() => {
@@ -15,7 +15,7 @@ export default function ConsoleDemocracyMessage() {
       try {
         const el = document.getElementById("diputados");
         if (el) setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 200);
-      } catch (e) {
+      } catch {
         // ignore
       }
     }

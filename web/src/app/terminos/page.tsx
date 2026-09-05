@@ -1,8 +1,12 @@
 import { Metadata } from 'next';
+import { SEO_CONFIG } from '@/lib/seo.config';
 
 export const metadata: Metadata = {
   title: 'Términos y Condiciones | Info Político 2026',
   description: 'Lee nuestros términos y condiciones de uso para Info Político 2026.',
+  alternates: {
+    canonical: `${SEO_CONFIG.siteUrl}/terminos`,
+  },
 };
 
 export default function TerminosPage() {

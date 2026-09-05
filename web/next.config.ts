@@ -25,98 +25,10 @@ const nextConfig: NextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
-  
-  // SEO y Performance optimizaciones
-  headers: async () => {
-    return [
-      {
-        source: "/:path*",
-        headers: [
-          {
-            key: "X-Content-Type-Options",
-            value: "nosniff",
-          },
-          {
-            key: "X-Frame-Options",
-            value: "SAMEORIGIN",
-          },
-          {
-            key: "X-XSS-Protection",
-            value: "1; mode=block",
-          },
-          {
-            key: "Referrer-Policy",
-            value: "strict-origin-when-cross-origin",
-          },
-          {
-            key: "Permissions-Policy",
-            value: "camera=(), microphone=(), geolocation=()",
-          },
-        ],
-      },
-      // Cache headers para archivos estáticos
-      {
-        source: "/assets/:path*",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
-      // Cache para sitemap y robots
-      {
-        source: "/(sitemap|robots)\\.xml",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=3600",
-          },
-          {
-            key: "Content-Type",
-            value: "application/xml",
-          },
-        ],
-      },
-      // Cache para páginas HTML
-      {
-        source: "/:path*\\.html",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=3600, stale-while-revalidate=86400",
-          },
-        ],
-      },
-    ];
-  },
 
-  redirects: async () => {
-    return [
-      // Redireccionamientos SEO útiles
-      {
-        source: "/inicio",
-        destination: "/",
-        permanent: true,
-      },
-    ];
-  },
-
-  rewrites: async () => {
-    return {
-      beforeFiles: [
-        // Reescritura para /sitemap.xml si está en /public
-        {
-          source: "/sitemap.xml",
-          destination: "/sitemap.xml",
-        },
-        {
-          source: "/robots.txt",
-          destination: "/robots.txt",
-        },
-      ],
-    };
-  },
+  // Nota: headers/redirects/rewrites NO se aplican con output: "export"
+  // (GitHub Pages sirve ficheros estáticos). Los headers de seguridad deben
+  // configurarse en el CDN/hosting. Si se migra a Vercel/Netlify, añadirlos aquí.
 
   // Experimental features para mejor performance
   experimental: {
