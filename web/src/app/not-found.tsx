@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { LinkButton } from "@/components/ui/Button";
 
 export default function NotFound() {

@@ -16,26 +16,22 @@ export const GravityStarsBackground: React.FC<Props> = ({ count, mobileCount, ..
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)");
-    const handle = (e: MediaQueryListEvent | MediaQueryList) => setIsMobile(e.matches);
-    handle(mq);
-    if (mq.addEventListener) mq.addEventListener("change", handle);
-    else mq.addListener(handle as any);
-    return () => {
-      if (mq.removeEventListener) mq.removeEventListener("change", handle);
-      else mq.removeListener(handle as any);
-    };
+    const handle = () => setIsMobile(mq.matches);
+    handle();
+    mq.addEventListener("change", handle);
+    return () => mq.removeEventListener("change", handle);
   }, []);
 
   if (isMobile) {
     // Only pass mobileCount if provided, otherwise let Mobile use its default (150)
     return typeof mobileCount === "number" ? (
-      <Mobile count={mobileCount} {...(rest as any)} />
+      <Mobile count={mobileCount} {...rest} />
     ) : (
-      <Mobile {...(rest as any)} />
+      <Mobile {...rest} />
     );
   }
 
   // Desktop: if count provided, forward it; otherwise default to 70 (recommended)
   const desktopCount = typeof count === "number" ? count : 70;
-  return <Desktop count={desktopCount} {...(rest as any)} />;
+  return <Desktop count={desktopCount} {...rest} />;
 };

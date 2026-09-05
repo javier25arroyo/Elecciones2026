@@ -10,10 +10,9 @@ interface DeputiesSectionProps {
   data: {
     [province: string]: string[];
   };
-  partyName: string;
 }
 
-export function DeputiesSection({ data, partyName }: DeputiesSectionProps) {
+export function DeputiesSection({ data }: DeputiesSectionProps) {
   const provinces = Object.keys(data);
 
   if (provinces.length === 0) return null;

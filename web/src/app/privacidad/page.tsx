@@ -1,8 +1,12 @@
 import { Metadata } from 'next';
+import { SEO_CONFIG } from '@/lib/seo.config';
 
 export const metadata: Metadata = {
   title: 'Política de Privacidad | Info Político 2026',
   description: 'Conoce cómo protegemos y tratamos tu información personal en Info Político 2026.',
+  alternates: {
+    canonical: `${SEO_CONFIG.siteUrl}/privacidad`,
+  },
 };
 
 export default function PrivacidadPage() {

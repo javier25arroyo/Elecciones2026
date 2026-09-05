@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import type { Party, QuizQuestion } from "@/lib/content";
 import { Badge } from "@/components/ui/Badge";
 import { Progress } from "@/components/ui/Progress";
+import { PoliticalCompass } from "@/components/ui/PoliticalCompass";
 import { cn } from "@/lib/utils";
 import {
   Leaf,
@@ -217,7 +218,21 @@ export function QuizSection({
       newUserVector.env += (axis.env || 0) * answer;
     });
 
-    setUserVector(newUserVector);
+    // Normaliza a [-1, 1] dividiendo por la magnitud máxima posible de cada eje
+    // (suma de |peso| de las preguntas realizadas), para que "Vos" caiga dentro
+    // del grid de la brújula, igual que los vectores de partido (clampeados).
+    const maxAbs = { econ: 0, social: 0, env: 0 };
+    shuffledQuestions.forEach((q) => {
+      const axis = q.axis || {};
+      maxAbs.econ += Math.abs(axis.econ || 0);
+      maxAbs.social += Math.abs(axis.social || 0);
+      maxAbs.env += Math.abs(axis.env || 0);
+    });
+    setUserVector({
+      econ: maxAbs.econ ? newUserVector.econ / maxAbs.econ : 0,
+      social: maxAbs.social ? newUserVector.social / maxAbs.social : 0,
+      env: maxAbs.env ? newUserVector.env / maxAbs.env : 0,
+    });
 
     const partyResults: PartyResult[] = parties.map((party) => {
       const partyVector = guessPartyVector(party);
@@ -273,6 +288,8 @@ export function QuizSection({
         {state === "results" && (
           <QuizResults
             results={results}
+            userVector={userVector}
+            parties={parties}
             onReset={handleReset}
             onRepeatToPicker={onRepeatToPicker}
           />
@@ -475,11 +492,12 @@ function QuizQuestions({ questions, currentIndex, onAnswer }: QuizQuestionsProps
 interface QuizResultsProps {
   results: Array<{ party: Party; percentage: number }>;
   userVector: UserVector;
+  parties: Party[];
   onReset: () => void;
   onRepeatToPicker: () => void;
 }
 
-function QuizResults({ results, onReset, onRepeatToPicker }: Omit<QuizResultsProps, 'userVector'>) {
+function QuizResults({ results, userVector, parties, onReset, onRepeatToPicker }: QuizResultsProps) {
   const winner = results[0];
   const top3 = results.slice(1, 4);
 
@@ -534,6 +552,13 @@ function QuizResults({ results, onReset, onRepeatToPicker }: Omit<QuizResultsPro
             </div>
           ))}
         </div>
+      </div>
+
+      <div className="mb-12">
+        <h3 className="mb-6 font-display text-2xl font-bold text-white sm:text-3xl">
+          Tu Brújula Política
+        </h3>
+        <PoliticalCompass parties={parties} userVector={userVector} results={results} />
       </div>
 
       <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">

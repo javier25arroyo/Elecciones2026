@@ -5,8 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getContent } from "@/lib/content";
+import { SEO_CONFIG } from "@/lib/seo.config";
 import { Badge } from "@/components/ui/Badge";
-import { Button, LinkButton } from "@/components/ui/Button";
+import { LinkButton } from "@/components/ui/Button";
 import { DeputiesSection } from "@/components/sections/DeputiesSection";
 import ConsoleDemocracyMessage from "@/components/ConsoleDemocracyMessage";
 import { 
@@ -49,6 +50,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${candidateName} | Candidato Elecciones Costa Rica 2026`,
     description: `Conoce las propuestas, biografía y plan de gobierno de ${candidateName}, candidato presidencial por el partido ${party.name} para las Elecciones 2026.`,
+    alternates: {
+      canonical: `${SEO_CONFIG.siteUrl}/candidatos/${id}`,
+    },
     openGraph: {
       title: `${candidateName} - Elecciones Costa Rica 2026`,
       description: `Todo sobre ${candidateName} y sus propuestas para la presidencia de Costa Rica.`,
@@ -297,7 +301,7 @@ export default async function CandidatePage({ params }: Props) {
 
             {/* Deputies Section */}
             {deputiesData && (
-              <DeputiesSection data={deputiesData} partyName={party.name} />
+              <DeputiesSection data={deputiesData} />
             )}
 
           </div>
