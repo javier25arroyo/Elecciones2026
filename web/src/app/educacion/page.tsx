@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { SEO_CONFIG } from "@/lib/seo.config";
+import { generateFAQPageSchema } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
   title: "Educación Cívica | Sistema Electoral Costa Rica 2026",
@@ -30,18 +31,22 @@ export default function EducacionPage() {
       content: "Costa Rica utiliza un sistema de voto secreto directo donde cada ciudadano puede ejercer su derecho al voto libremente.",
     },
     {
-      title: "Requisitos para votar",
+      title: "¿Cuáles son los requisitos para votar en Costa Rica?",
       content: "Ser ciudadano costarricense, mayor de 18 años y estar en el padrón electoral.",
     },
     {
-      title: "El sistema electoral costarricense",
+      title: "¿Cómo funciona el sistema electoral costarricense?",
       content: "Conoce cómo funciona nuestro sistema electoral, los requisitos para ser candidato y cómo se cuentan los votos.",
     },
     {
-      title: "Derechos y deberes del votante",
+      title: "¿Cuáles son los derechos y deberes del votante?",
       content: "Información sobre tus derechos como ciudadano y tu responsabilidad de participar activamente en el proceso democrático.",
     },
   ];
+
+  const faqSchema = generateFAQPageSchema(
+    topics.map((topic) => ({ question: topic.title, answer: topic.content }))
+  );
 
   return (
     <>
@@ -65,6 +70,10 @@ export default function EducacionPage() {
             },
           }),
         }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white">
         <div className="container mx-auto px-4 py-12">

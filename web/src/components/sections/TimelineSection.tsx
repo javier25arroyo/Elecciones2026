@@ -141,10 +141,10 @@ function TimelineItem({ event, index }: { event: TimelineEvent; index: number })
               </span>
             )}
           </span>
-          <h4 className="text-xl font-bold mb-2 flex items-center gap-2 group-hover:translate-x-1 transition-transform md:group-hover:translate-x-0">
+          <h3 className="text-xl font-bold mb-2 flex items-center gap-2 group-hover:translate-x-1 transition-transform md:group-hover:translate-x-0">
             {event.title}
             {event.isPast && <CheckCircle2 className="h-4 w-4 text-blue-500" />}
-          </h4>
+          </h3>
           <p className={`text-sm leading-relaxed ${event.isCurrent ? "text-slate-600" : "text-white/60"}`}>
             {event.description}
           </p>

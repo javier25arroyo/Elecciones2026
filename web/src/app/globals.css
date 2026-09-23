@@ -234,6 +234,22 @@
     content-visibility: auto;
     contain-intrinsic-size: 1px 500px; /* Approximate height to prevent scrollbar jumping */
   }
+
+  /* Oculto hasta recibir foco (teclado); visible encima del header fijo (z-50) */
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 0.5rem;
+    z-index: 60;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-md);
+    background-color: var(--color-primary);
+    color: white;
+  }
+
+  .skip-link:focus {
+    top: 0.5rem;
+  }
 }
 
 @media (max-width: 767px) {

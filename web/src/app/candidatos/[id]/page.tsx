@@ -6,6 +6,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getContent } from "@/lib/content";
 import { SEO_CONFIG } from "@/lib/seo.config";
+import { generateCandidateMetadata, generateBreadcrumbSchema } from "@/lib/structured-data";
 import { Badge } from "@/components/ui/Badge";
 import { LinkButton } from "@/components/ui/Button";
 import { DeputiesSection } from "@/components/sections/DeputiesSection";
@@ -58,6 +59,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: `Todo sobre ${candidateName} y sus propuestas para la presidencia de Costa Rica.`,
       images: party.presidential_candidate?.photo_url ? [party.presidential_candidate.photo_url] : [],
     },
+    twitter: {
+      card: "summary_large_image",
+      title: `${candidateName} - Elecciones Costa Rica 2026`,
+      description: `Todo sobre ${candidateName} y sus propuestas para la presidencia de Costa Rica.`,
+      images: party.presidential_candidate?.photo_url
+        ? [party.presidential_candidate.photo_url]
+        : [SEO_CONFIG.socialImage.url],
+    },
   };
 }
 
@@ -109,6 +118,19 @@ export default async function CandidatePage({ params }: Props) {
   const accentColor = party.accent_color || "#2563eb";
   const deputiesData = await getDeputiesData(party.name);
 
+  const candidateUrl = `${SEO_CONFIG.siteUrl}/candidatos/${id}`;
+  const personSchema = generateCandidateMetadata({
+    name: candidate?.name || party.name,
+    party: party.name,
+    image: candidate?.photo_url || party.logo_url || SEO_CONFIG.socialImage.url,
+    url: candidateUrl,
+  });
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Inicio", url: SEO_CONFIG.siteUrl },
+    { name: "Candidatos", url: `${SEO_CONFIG.siteUrl}/candidatos` },
+    { name: candidate?.name || party.name, url: candidateUrl },
+  ]);
+
   // Helper function to map social icons
   const getSocialIcon = (network: string) => {
     switch (network.toLowerCase()) {
@@ -124,6 +146,14 @@ export default async function CandidatePage({ params }: Props) {
 
   return (
     <div className="min-h-screen bg-slate-950 pt-20 pb-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <div className="container mx-auto max-w-5xl px-4 sm:px-6">
         <ConsoleDemocracyMessage />
         {/* Breadcrumb / Back Navigation */}
