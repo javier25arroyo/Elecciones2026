@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Link from "next/link";
 import { SEO_CONFIG } from "@/lib/seo.config";
 
 export const metadata: Metadata = {
@@ -77,6 +78,12 @@ export default function PropuestasPage() {
               <p className="text-gray-600">Estrategias de seguridad ciudadana de los candidatos.</p>
             </div>
           </div>
+          <Link
+            href="/candidatos"
+            className="mt-8 inline-block text-green-700 font-semibold hover:underline"
+          >
+            Ver propuestas completas por candidato →
+          </Link>
         </div>
       </div>
     </>
