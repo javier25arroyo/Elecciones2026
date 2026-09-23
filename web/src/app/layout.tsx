@@ -35,10 +35,6 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: normalizedSiteUrl,
-    languages: {
-      "es-CR": normalizedSiteUrl,
-      es: normalizedSiteUrl,
-    },
   },
   openGraph: {
     title: defaultTitle,
