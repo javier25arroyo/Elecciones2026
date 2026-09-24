@@ -15,6 +15,9 @@ module.exports = {
     if (path === '/') {
       priority = 1.0;
       changefreq = 'daily';
+    } else if (path === '/resultados') {
+      priority = 0.9;
+      changefreq = 'weekly';
     } else if (path === '/candidatos') {
       priority = 0.9;
       changefreq = 'daily';
