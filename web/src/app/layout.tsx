@@ -10,7 +10,7 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const defaultSiteUrl = "https://elecciones2026.lat";
 const normalizedSiteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? defaultSiteUrl).replace(/\/$/, "");
 const previewImage = `${normalizedSiteUrl}${basePath}/assets/others/flag-cr.jpg`;
-const defaultTitle = "Elecciones Costa Rica 2026 | Información Electoral y Candidatos";
+const defaultTitle = "Resultados Elecciones Costa Rica 2026 | Candidatos y Presidenta Laura Fernández";
 
 // Metadata API en vez de tags <head> manuales: así cada página puede
 // sobreescribir title/description/canonical/OG/etc. sin que Next duplique

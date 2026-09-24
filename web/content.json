@@ -871,6 +871,39 @@
   "elected_president": {
     "name": "Laura Fernández",
     "party": "Partido Pueblo soberano",
-    "date": "2026-02-03"
+    "date": "2026-02-03",
+    "inauguration": "2026-05-08"
+  },
+  "results": {
+    "source": "Tribunal Supremo de Elecciones (TSE), resultados provisionales, corte #12",
+    "source_url": "https://www.tse.go.cr/VR2026/#/presidenciales",
+    "cut_date": "2026-02-02",
+    "juntas_processed_pct": 96.87,
+    "votes_received": 2494611,
+    "valid_votes": 2467347,
+    "participation_pct": 69.08,
+    "abstention_pct": 30.92,
+    "parties": [
+      { "party": "Partido Pueblo Soberano (PPSO)", "votes": 1191727, "pct": 48.30 },
+      { "party": "Partido Liberación Nacional (PLN)", "votes": 825041, "pct": 33.44 },
+      { "party": "Coalición Agenda Ciudadana (CAC)", "votes": 119700, "pct": 4.85 },
+      { "party": "Partido Frente Amplio (FA)", "votes": 92826, "pct": 3.76 },
+      { "party": "Partido Unidad Social Cristiana (PUSC)", "votes": 68732, "pct": 2.79 },
+      { "party": "Partido Nueva República (PNR)", "votes": 53797, "pct": 2.18 },
+      { "party": "Partido Avanza", "votes": 43968, "pct": 1.78 },
+      { "party": "Partido Unidos Podemos (PUP)", "votes": 21126, "pct": 0.86 },
+      { "party": "Partido Liberal Progresista (PLP)", "votes": 11179, "pct": 0.45 },
+      { "party": "Partido Progreso Social Democrático (PPSD)", "votes": 8809, "pct": 0.36 },
+      { "party": "Partido Nueva Generación (PNG)", "votes": 5992, "pct": 0.24 },
+      { "party": "Partido Centro Democrático y Social (CDS)", "votes": 5659, "pct": 0.23 },
+      { "party": "Partido Integración Nacional (PIN)", "votes": 4433, "pct": 0.18 },
+      { "party": "Partido Justicia Social Costarricense (PJSC)", "votes": 3414, "pct": 0.14 },
+      { "party": "Partido De la Clase Trabajadora (PT)", "votes": 2737, "pct": 0.11 },
+      { "party": "Partido Unión Costarricense Democrática (PUCD)", "votes": 1995, "pct": 0.08 },
+      { "party": "Partido Esperanza Nacional (PEN)", "votes": 1801, "pct": 0.07 },
+      { "party": "Partido Esperanza y Libertad (PEL)", "votes": 1550, "pct": 0.06 },
+      { "party": "Partido Aquí Costa Rica Manda (ACRM)", "votes": 1442, "pct": 0.06 },
+      { "party": "Partido Alianza Costa Rica Primero (CR1)", "votes": 1419, "pct": 0.06 }
+    ]
   }
 }

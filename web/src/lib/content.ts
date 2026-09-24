@@ -40,8 +40,22 @@ export type DeepQuiz = {
   questions: QuizQuestion[];
 };
 
+export type Results = {
+  source: string;
+  source_url: string;
+  cut_date: string;
+  juntas_processed_pct: number;
+  votes_received: number;
+  valid_votes: number;
+  participation_pct: number;
+  abstention_pct: number;
+  parties: Array<{ party: string; votes: number; pct: number }>;
+};
+
 export type Content = {
   design?: unknown;
+  elected_president?: { name: string; party: string; date: string; inauguration: string };
+  results?: Results;
   parties: Party[];
   quiz?: {
     questions: QuizQuestion[];

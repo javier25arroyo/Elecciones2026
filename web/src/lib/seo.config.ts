@@ -16,6 +16,9 @@ export const SEO_CONFIG = {
   // Palabras clave principales (Long-tail keywords para SEO)
   keywords: {
     primary: [
+      "Resultados elecciones Costa Rica 2026",
+      "Laura Fernández presidenta",
+      "Presidenta de Costa Rica 2026-2030",
       "Elecciones 2026",
       "Candidatos 2026",
       "Candidatos Costa Rica",
@@ -43,7 +46,8 @@ export const SEO_CONFIG = {
 
   // Meta descriptions
   descriptions: {
-    home: "Tu guía oficial no gubernamental para las Elecciones 2026 en Costa Rica. Conoce a todos los Candidatos a Presidente, sus propuestas, el cronograma electoral y aprende cómo votar informado.",
+    home: "Resultados de las Elecciones 2026 en Costa Rica: Laura Fernández (PPSO), presidenta 2026-2030. Consulta los resultados por partido, los perfiles de los 20 candidatos a la presidencia, sus propuestas y el cronograma electoral.",
+    results: "Resultados de las Elecciones 2026 en Costa Rica: Laura Fernández (Pueblo Soberano) ganó la presidencia en primera ronda con 48,3 % de los votos. Votos y porcentaje por partido, según el TSE.",
     candidates: "Lista completa y actualizada de Candidatos Costa Rica 2026. Perfiles detallados, planes de gobierno y trayectoria de los aspirantes a la presidencia.",
     proposals: "Comparador de propuestas de gobierno Elecciones 2026. Economía, seguridad, educación y salud: ¿Qué proponen los candidatos en Costa Rica?",
     timeline: "Calendario oficial de las Elecciones Costa Rica 2026. Fechas clave, debates presidenciales y días de votación.",
@@ -72,6 +76,7 @@ export const SEO_CONFIG = {
   // Palabras clave por página/sección
   pageKeywords: {
     "/": "elecciones 2026 Costa Rica, información electoral, candidatos presidenciales, votación",
+    "/resultados": "resultados elecciones Costa Rica 2026, Laura Fernández presidenta, votos por partido, TSE, primera ronda",
     "/candidatos": "candidatos Costa Rica 2026, candidatos presidenciales, propuestas políticas",
     "/propuestas": "propuestas políticas Costa Rica, planes de gobierno 2026, programas electorales",
     "/cronograma": "cronograma electoral Costa Rica 2026, fechas elecciones, calendario electoral",

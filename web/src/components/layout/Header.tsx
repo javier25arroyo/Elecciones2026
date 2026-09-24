@@ -6,6 +6,7 @@ import { Flag, Menu, X, Github } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
+  { href: "/resultados/", label: "Resultados" },
   { href: "/#candidatos", label: "Candidatos" },
   { href: "/#timeline", label: "Cronograma" },
   { href: "/#educacion", label: "¿Cómo votar?" },

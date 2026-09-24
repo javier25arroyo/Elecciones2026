@@ -54,7 +54,7 @@ export function HeroSection() {
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/>
           </svg>
-          <span>1 de febrero de 2026</span>
+          <span>Presidenta 2026-2030: Laura Fernández</span>
         </span>
 
         <h1
@@ -70,9 +70,9 @@ export function HeroSection() {
         <p
           className="page-load-slide-up load-delay-3 mx-auto mb-12 max-w-[650px] text-[clamp(1.1rem,4vw,1.45rem)] leading-[1.6] text-white/95 drop-shadow-sm px-4"
         >
-          Tu guía completa para las elecciones presidenciales.
+          Resultados, candidatos y propuestas de las elecciones presidenciales.
           <br className="hidden sm:block" />
-          <strong className="font-extrabold text-white"> Informate, compará y decidí con criterio.</strong>
+          <strong className="font-extrabold text-white"> Consultá los votos por partido y descubrí tu afinidad.</strong>
         </p>
 
         {/* CTA Buttons - Mobile optimized */}
